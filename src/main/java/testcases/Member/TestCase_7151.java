@@ -52,7 +52,7 @@ public class TestCase_7151 {
 			.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
 					
 			//CAMS Flag = Yes
-			.changeCAMSFlag()
+			.changeCAMSFlagAsYes()
 			
 			//Direct Parent Entity Code = 673415
 			.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))

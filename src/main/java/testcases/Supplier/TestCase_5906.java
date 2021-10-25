@@ -81,6 +81,7 @@ public class TestCase_5906 {
 			
 		//7.Go to Membership  Entity and verify the Premier/National Membership *** The Premier/National Membership should be created with Start Date as  Premier Start Date	
 			.selectMembership()
+			//Double click on the Premier: National Membership   
 			.doubleClickOnNationalMembership(DataInputProvider.getCellData_ColName(iRowNumber, "premierStartDate", sDataSheetName))
 			
 		//9. Go to Membership  Entity and End the Premier/National Membership ***  The Premier Membership should be End Dated successfully

@@ -68,7 +68,7 @@ public class TestCase_7138 {
 			.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
 		
 			//CAMS Flag = Yes
-			.changeCAMSFlag()
+			.changeCAMSFlagAsYes()
 			
 			//Participation Type = Standard
 			.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))

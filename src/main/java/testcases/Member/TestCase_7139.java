@@ -96,7 +96,7 @@ public class TestCase_7139 {
 				.chooseApplicationDateMEF(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
 				
 				//CAMS Flag = Yes
-				.changeCAMSFlag()
+				.changeCAMSFlagAsYes()
 				
 				 //Click on Save 
 				.clickSave() 

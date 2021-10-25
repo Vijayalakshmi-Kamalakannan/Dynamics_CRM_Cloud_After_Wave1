@@ -848,9 +848,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// Provide value for Contact Communication as provided in the datasheet
 	public ContactsPage typeContactCommunication(String contactCommunication) throws InterruptedException {
 		Thread.sleep(5000);
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),
-				"Contact Communication Publication");
+		click(getDriver().findElement(By.xpath(	"//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),"Contact Communication Publication");
 		type(getDriver().findElement(By.xpath(
 				"//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),
 				contactCommunication, "Contact Communication Publication");

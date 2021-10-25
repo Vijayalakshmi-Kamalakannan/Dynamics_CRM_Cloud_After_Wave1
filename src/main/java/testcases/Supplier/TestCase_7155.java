@@ -50,6 +50,11 @@ public class TestCase_7155 {
 		.clickSave()	
 		
 		//Verify if Entity Code is generated.
-		.entityCodeIsDisplayed();	
+		.entityCodeIsDisplayed()	
+		
+		.recordStatusDraft()
+		
+		//Save the information
+		.clickSave();
 	}
 }

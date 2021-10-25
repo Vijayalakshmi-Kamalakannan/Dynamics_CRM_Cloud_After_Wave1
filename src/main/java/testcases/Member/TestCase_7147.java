@@ -68,7 +68,7 @@ public class TestCase_7147 {
 			.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
 			
 			//CAMS Flag = Yes
-			.changeCAMSFlag()
+			.changeCAMSFlagAsYes()
 			
 			//Direct Parent Relation = Managed
 			.selectDirectParentRelationManaged() 

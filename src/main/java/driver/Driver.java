@@ -29,12 +29,10 @@ public class Driver extends PreAndPost{
 	public static String sReleaseCategory;
 	public static int failCount=0;
 	
-		
-//	@Test(threadPoolSize=2 )
 	@Test()
 	public void executeTestcase(ITestContext testContext)throws Exception,ClassNotFoundException
 	{	
-		 failCount=0;
+		failCount=0;
 		properties.load(new FileInputStream(new File("./src/test/resources/environment.properties")));
  		int currentCount = testContext.getAllTestMethods()[0].getCurrentInvocationCount();	
  		

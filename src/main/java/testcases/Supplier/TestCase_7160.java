@@ -5,11 +5,12 @@ import utils.DataInputProvider;
 
 public class TestCase_7160 {
 	
-	//Automation - Create a supplier -Ship To Location Type -Save and Publish Supplier Supervisor Login
+	//TFS ID_ 7160 :Create a supplier -Ship To Location Type -Save and Publish Supplier Supervisor Login
+
 		
 	@Test()
 
-	public void createShipToAsSupplierSupervisor(int iRowNumber, String sDataSheetName) throws Exception {
+	public void createLocationTypeAsSupplierSupervisor(int iRowNumber, String sDataSheetName) throws Exception {
 		
 		//Access Login Page
 		new LoginPage()
@@ -20,6 +21,7 @@ public class TestCase_7160 {
   	    .clicSignin()
   	    .clicYesInStaySignedin()
 		
+  	//Ship to
 		//Select Accounts Entity
 		.selectAccountsTab()
 		
@@ -36,10 +38,10 @@ public class TestCase_7160 {
 		.defaultAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountType", sDataSheetName))		
 		
 		//Type the Account Name
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))		
+		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName)+"Ship To")		
 		
 		//Enter Premier Start Date
-		.pickPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "premierStartDate", sDataSheetName))		
+		//.pickPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "premierStartDate", sDataSheetName))		
 		
 		//Choose the Business Classification
 		.selectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification", sDataSheetName))
@@ -81,9 +83,12 @@ public class TestCase_7160 {
 		.entityCodeIsDisplayed()
 		
 		//Verify Entity Code remains the same after Publish
-		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "verifyEntityCode", sDataSheetName));
+		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "verifyEntityCode", sDataSheetName))
+	
+	
+		;
+	
 		
 	}
-
 
 }
