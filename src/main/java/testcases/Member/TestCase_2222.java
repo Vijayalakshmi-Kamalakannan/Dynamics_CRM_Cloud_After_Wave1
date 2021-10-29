@@ -3,8 +3,9 @@ package testcases.Member;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
-//TFS ID_7138:Create new member - New Member form through sub account and save it as prospect first
-public class TestCase_7138 {
+//TFS ID_2222:Create member hierarchy
+
+public class TestCase_2222 {
 
 	  	
 	@Test
@@ -140,49 +141,42 @@ public class TestCase_7138 {
 			//Verify Premier start date is auto populated
 			.verifyPremierStartDateIsAutoPopulated()
 			
-			.verifyAffiliateGroupIsNotNull()
-			.verifyAgEffectiveDateIsNotNull()
 			
-		//13. Verify "IS Corporate account" field
-			.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
-		
-		//14. Verify Corporate parent name in the form
-			.verifyCorporateParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-		
-		//15. Verify "Is Food Service parent" field 
-			.verifyIsFoodServiceParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFoodServiceParent", sDataSheetName))
-		
-		//16 Verify Food Service parent name in the form 
-			.verifyFoodServiceParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-		
-		//17 Verify Sponsor field 
-			.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-		
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
-		
-			//FBO details verification
-			//Verify "Is FBO" field 
-			.verifyIsFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFBO", sDataSheetName))
 			
-			//FBO
-			.verifyFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-					
-			//FBORD
-			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
-		
-		//18  Go to > and click on Membership entity and double click on the Top parent membership entity
-			.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-			//.doubleClickOnNationalMembership()
-	
-		//19 Click on > and go to Audit history 
-			.selectMembershipAuditHistory()
-	
-		//20 Verify "Is Member Add mail sent" flag turned from No to Yes 
-			.verifyIsMemberAddMailSent()
-		
-		//21 Verify the time-stamp on which the flag gets updated 
-			.verifyTimeStampInTPMembershipAuditHistory()
+			
+			
+//			.verifyAffiliateGroupIsNotNull()
+//			.verifyAgEffectiveDateIsNotNull()
+			
+//		//13. Verify "IS Corporate account" field
+//			.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
+//		
+//		//14. Verify Corporate parent name in the form
+//			.verifyCorporateParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+//		
+//		//15. Verify "Is Food Service parent" field 
+//			.verifyIsFoodServiceParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFoodServiceParent", sDataSheetName))
+//		
+//		//16 Verify Food Service parent name in the form 
+//			.verifyFoodServiceParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+//		
+//		//17 Verify Sponsor field 
+//			.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+//		
+//		//16 Verify "Is Sponsor" field 
+//		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
+//		
+//			//FBO details verification
+//			//Verify "Is FBO" field 
+//			.verifyIsFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFBO", sDataSheetName))
+//			
+//			//FBO
+//			.verifyFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+//					
+//			//FBORD
+//			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+//		
+//		
 					
 			;
 	}

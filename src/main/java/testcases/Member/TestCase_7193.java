@@ -98,7 +98,7 @@ public class TestCase_7193 {
 			.clickSave() 
 			
 			//"Member should have at least one Active Premier Membership " Error message should be displayed
-			.verifyAccountDoesNotHavePMError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+			.verifyAccountDoesNotHaveMPError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 			
 			//Change record status to Draft
 			.chooseRecordStatusDraft()
@@ -154,27 +154,7 @@ public class TestCase_7193 {
 			//Click on Save 
 			.clickSave() 
 			
-		//10.Add One or More Premier Membership. Observe Premier Start date. 
-			
-		//LOB -2
-//			// Click the + icon on the Line of Business Grid
-//			.clickLineOfBusiness()
-//			
-//			//Click New Line Of Business
-//			.clickAddNewLineOfBusiness()
-//		
-//			// Line of Business =General GPO
-//			.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
-//			
-//			// Classification Type = General GPO
-//			.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification2", sDataSheetName))
-//			
-//			// Start Date =Today's date
-//			.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
-//			
-//			// Click on LOB Save 
-//			.clickLOBSaveAndClose()
-			
+		//10.Add One or More Premier Membership. Observe Premier Start date. 			
 		//Membership Provider -2	
 			.clickMembershipAndAddNewMembership()
 			
@@ -190,25 +170,6 @@ public class TestCase_7193 {
 			//Click on membership save and close
 			.clickQuickCreateMembershipSaveAndClose()
 			
-		//LOB -3
-//			// Click the + icon on the Line of Business Grid
-//			.clickLineOfBusiness()
-//			
-//			//Click New Line Of Business
-//			.clickAddNewLineOfBusiness()
-//		
-//			// Line of Business =General GPO
-//			.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness3", sDataSheetName))
-//			
-//			// Classification Type = General GPO
-//			.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification3", sDataSheetName))
-//			
-//			// Start Date =Today's date
-//			.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate3", sDataSheetName))
-//			
-//			// Click on LOB Save 
-//			.clickLOBSaveAndClose()
-			
 		//Membership Provider -3	
 			.clickMembershipAndAddNewMembership()
 			//Click and Choose option list  :Membership Type - Premier,  
@@ -223,26 +184,7 @@ public class TestCase_7193 {
 			//Click on membership save and close
 			.clickQuickCreateMembershipSaveAndClose()
 			
-		//11.Try to add one more Membership Entity with Future date i.e.1/14/2021 .
-		//LOB -4
-//			// Click the + icon on the Line of Business Grid
-//			.clickLineOfBusiness()
-//			
-//			//Click New Line Of Business
-//			.clickAddNewLineOfBusiness()
-//		
-//			// Line of Business =General GPO
-//			.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness4", sDataSheetName))
-//			
-//			// Classification Type = General GPO
-//			.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification4", sDataSheetName))
-//			
-//			// Start Date =Today's date
-//			.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate4", sDataSheetName))
-//			
-//			// Click on LOB Save 
-//			.clickLOBSaveAndClose()
-			
+		//11.Try to add one more Membership Entity with Future date i.e.1/14/2021 .			
 		//Membership Provider -4	
 			.clickMembershipAndAddNewMembership()
 			//Click and Choose option list  :Membership Type - Premier,  
@@ -259,29 +201,10 @@ public class TestCase_7193 {
 			
 		
 		//Observe Premier Start date Field.
+			.pageRefresh()
 			.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate3", sDataSheetName))
 
-		//12.  Try to add one more Membership Entity with older date i.e.12/14/2020 
-			
-			//LOB -5
-//			// Click the + icon on the Line of Business Grid
-//			.clickLineOfBusiness()
-//			
-//			//Click New Line Of Business
-//			.clickAddNewLineOfBusiness()
-//		
-//			// Line of Business =General GPO
-//			.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness5", sDataSheetName))
-//			
-//			// Classification Type = General GPO
-//			.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification5", sDataSheetName))
-//			
-//			// Start Date =Today's date
-//			.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate5", sDataSheetName))
-//			
-//			// Click on LOB Save 
-//			.clickLOBSaveAndClose()
-			
+		//12.  Try to add one more Membership Entity with older date i.e.12/14/2020 			
 		//Membership Provider -5	
 			.clickMembershipAndAddNewMembership()
 			//Click and Choose option list  :Membership Type - Premier,  
@@ -303,7 +226,7 @@ public class TestCase_7193 {
 			.clickSave() 
 			
 			//Premier/National and Premier Choice Memberships cannot be active in the same account 
-			.verifyAccountDoesNotHavePMError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
+			.verifyAccountDoesNotHaveMPError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
 		;
 	}
 }

@@ -33,7 +33,7 @@ public class TestCase_8755 {
 
 				// 3.Try to enter blank Job function in the contact account association and save
 				// Select "" as Job function and click on Save
-				.typeJobFunction(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
+				.typeJobFunction1(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
 
 				// Click on save
 				.clickSaveInJobFunction()

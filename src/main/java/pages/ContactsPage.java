@@ -54,40 +54,12 @@ public class ContactsPage extends WebDriverServiceImpl {
 	}
 
 	// select the primary account
-	public ContactsPage selectPrimaryAccount(String primaryAccount) {
-		
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),
-				"Primary Account");
-		
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='department.fieldControl-text-box-text']")),
-				"Scrolling to Primary Account field");
-		
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),
-				"Primary Account");
-
-		try {
-			type(((getDriver().findElement(By.xpath(
-					"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),
-					primaryAccount, "Primary Account");
-
-			getDriver().findElement(By.xpath(
-					"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']"))
-					.sendKeys(Keys.TAB, Keys.TAB,Keys.TAB, Keys.TAB);
-			Thread.sleep(5000);
-			WebElement activeElement = getDriver().switchTo().activeElement();
-			activeElement.sendKeys(Keys.ENTER);
-			getDriver().findElement(By.xpath(
-					"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']"))
-					.sendKeys(Keys.TAB, Keys.TAB, Keys.TAB);
-			Thread.sleep(5000);
-			activeElement = getDriver().switchTo().activeElement();
-			activeElement.sendKeys(Keys.ENTER);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public ContactsPage selectPrimaryAccount(String primaryAccount) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),primaryAccount, "Primary Account");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),primaryAccount);
 		return this;
 	}
 
@@ -199,6 +171,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage clickGoBack() throws InterruptedException {
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[@title='Go back']")), "Go Back");
+		Thread.sleep(6000);
 		return this;
 	}
 
@@ -206,6 +179,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage clickSummaryTab() throws InterruptedException {
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='tablist-SUMMARY_TAB']")), "Summary tab");
+		Thread.sleep(5000);
 		return this;
 	}
 
@@ -228,69 +202,19 @@ public class ContactsPage extends WebDriverServiceImpl {
 	}
 
 	// update primary account with a new account details
-	public ContactsPage addAnotherPrimaryAccount(String PrimaryAccount1) throws InterruptedException, AWTException {
-		
-		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")), "Contact Account");
-		
-		Thread.sleep(7000);
-		
-	/*	click(getDriver().findElement(By.xpath(
-				"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_SelectedRecordList']")),
-				"Primary Account");
-		
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='department.fieldControl-text-box-text']")),
-				"Scrolling to Primary Account field");
-		
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag_delete']")),
-				"Primary Account");
-*/
-		  Point coordinates = getDriver().findElement(By.xpath(
-					"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag']")).getLocation();
-		  System.out.println("coordinates are : "+coordinates);
-		  System.out.println("get x coordinates  : "+coordinates.getX());
-		  System.out.println("get y coordinates  : "+coordinates.getY());
-		  
-		  
-		  Actions builder = new Actions(getDriver());
-
-		  builder.keyDown(Keys.CONTROL)
-		     .click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag']")))
-		     .moveByOffset( coordinates.getX(), coordinates.getY()+120 )
-		     .click(getDriver().findElement(By.xpath(
-						"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag']")))
-		     .keyUp(Keys.CONTROL).build().perform();
-		     
-		//  Robot robot = new Robot();
-		 // robot.mouseMove(coordinates.getX(),coordinates.getY()+120);
-		 
-		//WebDriver.FindElement(By.Xpath("//button[@data-id='{field}.fieldControl-LookupResultsDropdown_{field}_selected_tag_delete']")).Click
-		
-		try {			
-			type(((getDriver().findElement(By.xpath(
-					"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),
-					PrimaryAccount1, "Update Primary Account");
-
-			getDriver().findElement(By.xpath(
-					"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']"))
-					.sendKeys(Keys.TAB, Keys.TAB);
-			Thread.sleep(1000);
-			WebElement activeElement = getDriver().switchTo().activeElement();
-			activeElement.sendKeys(Keys.ENTER);
-	
-			getDriver().findElement(By.xpath(
-					"//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']"))
-					.sendKeys(Keys.TAB, Keys.TAB, Keys.TAB);
-			Thread.sleep(1000);
-			activeElement = getDriver().switchTo().activeElement();
-			activeElement.sendKeys(Keys.ENTER);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public ContactsPage addAnotherPrimaryAccount(String PrimaryAccount1) throws InterruptedException {
+		Thread.sleep(5000);
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag_text']"))).perform();
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag_delete']")),"Delete"); 
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),PrimaryAccount1, "Primary Account");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
 		return this;
 	}
-
+	
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Contact Account Association~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// Click Contact Account Association from Related header field
@@ -316,27 +240,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// type Account in CAA
 	public ContactsPage typeAccountInCAA(String account) throws InterruptedException {
-
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_textInputBox_with_filter_new']")),
-				"Account");
-		type(getDriver().findElement(By.xpath(
-				"//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_textInputBox_with_filter_new']")),
-				account, "Account");
-
-		try {
-			Thread.sleep(4000);
-			getDriver().findElement(By.xpath(
-					"//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_textInputBox_with_filter_new']"))
-					.sendKeys(Keys.TAB, Keys.TAB, Keys.TAB);
-			Thread.sleep(2000);
-			WebElement activeElement = getDriver().switchTo().activeElement();
-			activeElement.sendKeys(Keys.ENTER);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_textInputBox_with_filter_new']")),"Account");
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_textInputBox_with_filter_new']")),account, "Account");
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_account.fieldControl-name0_0_0')]")),account);
 		return this;
 	}
 
@@ -508,6 +415,13 @@ public class ContactsPage extends WebDriverServiceImpl {
 		} catch (WebDriverException e) {
 			e.printStackTrace();
 		}
+		try {
+			if (getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")).isDisplayed()) {
+				click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"SCRIPT ERROR");
+			}
+			}
+			catch(Exception e){
+			}
 		return this;
 	}
 
@@ -549,7 +463,12 @@ public class ContactsPage extends WebDriverServiceImpl {
 	
 	// double click on the old CAA record
 	public ContactsPage doubleClickOnOldCAARecord(String OldCAA) throws InterruptedException {
-		clickCAAFromRelated();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Account Associations')]")),
+				"Contact Account Associations");
+		Thread.sleep(2000);
 		Actions a = new Actions(getDriver());
 		String record1 = getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']")).getText();
 		//String record2 = getDriver().findElement(By.xpath("//*[@data-id='cell-1-4']")).getText();
@@ -618,7 +537,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage clickContactJobFunctionFromRelated() throws InterruptedException {
 		Thread.sleep(10000);
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related");
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Job Functions')]")),
 				"Contact Job Functions");
 		return this;
@@ -637,25 +556,17 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// Provide value for Job function as provided in the datasheet
 	public ContactsPage typeJobFunction(String jobFunction) throws InterruptedException {
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),
-				"Job Function");
-		type(getDriver().findElement(By.xpath(
-				"//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),
-				jobFunction, "Job Function");
-
-		try {
-			Thread.sleep(4000);
-			getDriver().findElement(By.xpath(
-					"//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']"))
-					.sendKeys(Keys.TAB, Keys.TAB);
-			Thread.sleep(2000);
-			WebElement activeElement = getDriver().switchTo().activeElement();
-			activeElement.sendKeys(Keys.ENTER);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),"Job Function");
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),jobFunction, "Job Function");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_jobfunctionnew.fieldControl-createdon1_0_0')]")),jobFunction);
+		return this;
+	}
+	
+	public ContactsPage typeJobFunction1(String jobFunction) throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),"Job Function");
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),jobFunction, "Job Function");
 		return this;
 	}
 
@@ -665,6 +576,23 @@ public class ContactsPage extends WebDriverServiceImpl {
 				"//*[@data-id='ix_contactjobfunction|NoRelationship|Form|Mscrm.Form.ix_contactjobfunction.Save']")),
 				"Save");
 		Thread.sleep(10000);
+		try {
+			if (getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")).isDisplayed()) {
+				click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"SCRIPT ERROR");
+			}
+		}
+		catch(Exception e){
+			
+		}
+		
+		return this;
+	}
+	
+	//Click on summary tab
+	public ContactsPage clickSummaryTab(String jobFunction) throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@title='Summary']")), "Summary");
+		Thread.sleep(5000);
 		return this;
 	}
 
@@ -730,6 +658,14 @@ public class ContactsPage extends WebDriverServiceImpl {
 			Driver.failCount++;
 			System.out.println("Duplicate job function is not created " + jobFunction);
 		}
+		
+		try {
+			if (getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")).isDisplayed()) {
+				click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"SCRIPT ERROR");
+			}
+			}
+			catch(Exception e){
+			}
 
 		return this;
 	}
@@ -849,23 +785,19 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage typeContactCommunication(String contactCommunication) throws InterruptedException {
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath(	"//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),"Contact Communication Publication");
-		type(getDriver().findElement(By.xpath(
-				"//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),
-				contactCommunication, "Contact Communication Publication");
-
-		try {
-			Thread.sleep(4000);
-			getDriver().findElement(By.xpath(
-					"//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']"))
-					.sendKeys(Keys.TAB, Keys.TAB);
-			Thread.sleep(2000);
-			WebElement activeElement = getDriver().switchTo().activeElement();
-			activeElement.sendKeys(Keys.ENTER);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),contactCommunication, "Contact Communication Publication");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_communicationpublication.fieldControl-createdon1_0_0')]")),contactCommunication);
 		return this;
 	}
+	
+	// Provide value for Contact Communication as provided in the datasheet
+		public ContactsPage typeContactCommunication1(String contactCommunication) throws InterruptedException {
+			Thread.sleep(5000);
+			click(getDriver().findElement(By.xpath(	"//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),"Contact Communication Publication");
+			type(getDriver().findElement(By.xpath("//*[@data-id='ix_communicationpublication.fieldControl-LookupResultsDropdown_ix_communicationpublication_textInputBox_with_filter_new']")),contactCommunication, "Contact Communication Publication");
+			return this;
+		}
 
 	// Click save button in the Contact Communication page
 	public ContactsPage clickSaveInContactCommunication() throws InterruptedException {
@@ -874,14 +806,20 @@ public class ContactsPage extends WebDriverServiceImpl {
 				"//*[@data-id='ix_contactcommunication|NoRelationship|Form|Mscrm.Form.ix_contactcommunication.Save']")),
 				"Save");
 		Thread.sleep(5000);
+		try {
+			if (getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")).isDisplayed()) {
+				click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"SCRIPT ERROR");
+			}
+			}
+			catch(Exception e){
+			}
 		return this;
 	}
 
 	// Verify if Contact Communication is created by validating the created date
 	// with the current date
 	public ContactsPage verifyContactCommunicationIsCreated() throws InterruptedException, ParseException {
-
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='ADMINISTRATION']")), "ADMINISTRATION");
 		Thread.sleep(2000);
 

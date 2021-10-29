@@ -111,6 +111,7 @@ public class TestCase_5906 {
 			.clickSave()
 			
 		//14.Verify Account Status *** Account Status will remain as "Terminated" 
+			.pageRefresh()
 			.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "accountStatusTerminated", sDataSheetName))
 			
 		//15. Go to Membership  Entity and  Click on +Add New Membership and Provide the below details *** New Premier/National Membership should be created Successfully with given date. 
@@ -131,6 +132,7 @@ public class TestCase_5906 {
 			
 			
 		//16.Verify the Account Status *** Account Status should be moved to Active 
+			.pageRefresh()
 			.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountStatus", sDataSheetName))
 			
 		//17.Verify Premier Start Date ***Premier Start Date should be updated to the start date of the newly added Premier/National Membership 

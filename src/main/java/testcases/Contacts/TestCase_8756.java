@@ -33,7 +33,7 @@ public class TestCase_8756 {
 
 				// 3.Try to enter blank Job function in the contact account association and save
 				// Select "" as Communication then save
-				.typeContactCommunication(
+				.typeContactCommunication1(
 						DataInputProvider.getCellData_ColName(iRowNumber, "communicationPublication", sDataSheetName))
 
 				// Click on Save

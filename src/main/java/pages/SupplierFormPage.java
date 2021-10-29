@@ -20,7 +20,7 @@ import utils.DataInputProvider;
 public class SupplierFormPage extends WebDriverServiceImpl{
 
 	public SupplierFormPage defaultAccountStatus(String defaultAccountStatus) throws InterruptedException {
-		driver.navigate().refresh();
+	//	driver.navigate().refresh();
 		Thread.sleep(5000);
 		verifyExactText((getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[2]"))),defaultAccountStatus,"Account Status");
 		return this;
@@ -67,7 +67,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 	//*****Method to verify Business Process Error when Supplier Account Status is made Inactive*****//	
 	public SupplierFormPage verifyInactiveAccountStatusError(String expectedAccountStatusErrorText) {
-		verifyExactText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"In Active Account Status Error");
+		verifyPartialText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"In Active Account Status Error");
 		click(getDriver().findElement(By.xpath("//*[@id='cancelButton']")),"Ok");
 		return this;
 	}
@@ -92,14 +92,18 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(4000);
 		return this;
 	}
+	
+	public SupplierFormPage pageRefresh() throws InterruptedException {
+		getDriver().navigate().refresh();
+		Thread.sleep(5000);
+		return this;
+	}
 
 	public SupplierFormPage addSupplierPrimaryContact(String addSupplierPrimaryContact) throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@title='DIVERSITY INFORMATION']")),"DIVERSITY INFORMATION");
-
 		click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")))),addSupplierPrimaryContact,"Primary Contact");
 		Thread.sleep(5000);
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+addSupplierPrimaryContact+"')]")),"Primary Contact search");
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'primarycontactid.fieldControl-firstname0_0_0')]")),addSupplierPrimaryContact);
 		return this;
 	}
 	
@@ -109,13 +113,15 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage clickSave() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
-		Thread.sleep(6000);
+		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
+		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
+		Thread.sleep(10000);
 		return this;
 
 	}
 	
-	public SupplierFormPage crmNumberIsDisplayed() {
+	public SupplierFormPage crmNumberIsDisplayed() throws InterruptedException {
+		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='NY INFORMATION']")),"My Information Label");
 		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
 		 try {
@@ -187,11 +193,6 @@ public SupplierFormPage pickTPRDClear() throws InterruptedException {
 		return this;
 	}
 	
-	public SupplierFormPage pickTPRDEdit(String selectTPRelationDate) throws InterruptedException {
-		Thread.sleep(3000);
-			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")))),selectTPRelationDate,"Top Parent Relation Date");
-			return this;
-		}
 	
 	
 
@@ -364,6 +365,7 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 	
 //Double click on national membership whis does not have end date
 	public SupplierFormPage doubleClickOnNewNationalMembership() throws InterruptedException {	
+		Thread.sleep(5000);
 		Actions a = new Actions(getDriver());
 	      a.moveToElement(getDriver().findElement(By.xpath("//*[contains(@id,'-5') and @title='---']"))).doubleClick().build().perform();
 		Thread.sleep(3000);
@@ -391,7 +393,8 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 
 //End reason can not be blank error validation
 	public SupplierFormPage verifyEndReasonCanNotBeBlankError(String expectedAccountStatusErrorText) {
-		verifyExactText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"End Reason can not be blank Error");
+	//	verifyExactText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"End Reason can not be blank Error");
+		verifyPartialText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"End Reason can not be blank Error");
 		click(getDriver().findElement(By.xpath("//*[@id='cancelButton']")),"Ok");
 
 		return this;
@@ -399,14 +402,14 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 	
 //Date validation error in premier memvalidationError
 	public SupplierFormPage verifyDateValidationError(String expectedAccountStatusErrorText) {
-		verifyExactText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"Date Validation Error");
+		verifyPartialText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"Date Validation Error");
 		click(getDriver().findElement(By.xpath("//*[@id='cancelButton']")),"Ok");
 		return this;
 	}
 	
 //Account can not be terminated error in premier memvalidationError
 	public SupplierFormPage verifyAccountCanNotBeTerminatedError(String expectedAccountStatusErrorText) {
-		verifyExactText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"Account Can not be terminated Error");
+		verifyPartialText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"Account Can not be terminated Error");
 		click(getDriver().findElement(By.xpath("//*[@id='cancelButton']")),"Ok");
 		return this;
 	}
@@ -532,12 +535,12 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 		return this;
 	}
 
-	public SupplierFormPage addMemberRecord(String MemberRecord) throws InterruptedException {
+	public SupplierFormPage addMemberRecord(String memberRecord) throws InterruptedException {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_memberrecordid.fieldControl-LookupResultsDropdown_ix_memberrecordid_textInputBox_with_filter_new']")),"Member Record");
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_memberrecordid.fieldControl-LookupResultsDropdown_ix_memberrecordid_textInputBox_with_filter_new']")))),MemberRecord,"Member Record");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_memberrecordid.fieldControl-LookupResultsDropdown_ix_memberrecordid_textInputBox_with_filter_new']")))),memberRecord,"Member Record");
 		Thread.sleep(4000);
-		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_memberrecordid.fieldControl-ix_istopparent')]")),"Business Classification");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+memberRecord+"')]")),"Business Classification");
 		return this;	
 	}
 	

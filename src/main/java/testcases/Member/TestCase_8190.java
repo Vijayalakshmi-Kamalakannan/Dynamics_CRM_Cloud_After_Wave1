@@ -20,7 +20,7 @@ public class TestCase_8190 {
 		
 		//2. Go to Accounts and identify any account with multiple active GPO memberships
 	  	    .selectAccountsTab()
-			.searchMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 			.selectAccountFromSearchResults()
 			
 //			//.Move the record status to draft then save

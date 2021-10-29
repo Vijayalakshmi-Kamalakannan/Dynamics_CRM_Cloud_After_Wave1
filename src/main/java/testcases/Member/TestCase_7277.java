@@ -94,7 +94,7 @@ public class TestCase_7277 {
 			.clickSave() 
 			
 			//"Member should have at least one Active Premier Membership " Error message should be displayed
-			.verifyAccountDoesNotHavePMError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+			.verifyAccountDoesNotHaveMPError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 			
 			//Change record status to Draft
 			.chooseRecordStatusDraft()

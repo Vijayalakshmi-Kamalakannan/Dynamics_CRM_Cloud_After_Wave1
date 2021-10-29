@@ -75,6 +75,7 @@ public class TestCase_8749 {
 		//3. Now change the primary account of the contact to a different member
 		
 			//Primary Account = 1000155094
+			.clickSummaryTab()
 			.addAnotherPrimaryAccount(DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
 			
 			 // Click on Save
@@ -82,7 +83,7 @@ public class TestCase_8749 {
 			
 			//4. Check for the old/other Contact account association record
 			 //Check the Contact record status
-			.doubleClickOnCAARecord()
+			//.doubleClickOnCAARecord()
 			
 			.doubleClickOnOldCAARecord(DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
 			

@@ -70,6 +70,7 @@ public class Driver extends PreAndPost{
 			test.assignCategory(sReleaseCategory);
 		if (sRunMode.equalsIgnoreCase("Yes"))
 		{	 
+			
 			// Get all methods of the class
 			aMethod=clsInstance.getClass().getDeclaredMethods();
 				beforeMethod();

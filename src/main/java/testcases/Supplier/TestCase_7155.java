@@ -24,7 +24,7 @@ public class TestCase_7155 {
 		.selectAccountsTab()
 		
 		//Search Existing Account using CRM#
-		.searchMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
 		
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()		
@@ -41,7 +41,7 @@ public class TestCase_7155 {
 		//Verify Default Account Type on Supplier Form
 		.defaultAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountType", sDataSheetName))
 		
-		.pickTPRDEdit(DataInputProvider.getCellData_ColName(iRowNumber, "selectTPRelationDate", sDataSheetName))				
+	//	.pickTPRD(DataInputProvider.getCellData_ColName(iRowNumber, "selectTPRelationDate", sDataSheetName))				
 		
 		//Verify if CRM# is generated.
 		.crmNumberIsDisplayed()

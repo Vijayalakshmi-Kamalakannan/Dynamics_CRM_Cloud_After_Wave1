@@ -9,7 +9,7 @@
 //Create supplier with all available fields		
 		@Test()
 
-		public void addSupplierPrimaryContact(int iRowNumber, String sDataSheetName) throws Exception {
+		public void createSupplierWithAllFields(int iRowNumber, String sDataSheetName) throws Exception {
 			
 			new LoginPage()
 			.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -124,17 +124,13 @@
 			.verifyDPValue(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDPValue", sDataSheetName))	
 
 			//DPRD
-			.selectDPParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "selectDPRelationDate", sDataSheetName))
-
-			
+			.selectDPParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "selectDPRelationDate", sDataSheetName))	
 			
 			//Is top parent
 			 .verifyIsTopParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsTopParent", sDataSheetName))
 			
 			//Top parent
 			.verifyTopParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyTopParent", sDataSheetName))
-			
-			
 			
 			
 			//Top parent relation date

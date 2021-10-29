@@ -85,7 +85,7 @@ public class TestCase_7474 {
 		
 		//13. Go to any member account and try to add new membership with the terminated membership provider
 			.selectAccountss()
-			.searchMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 			.selectAccountFromSearchResults()
 			
 			.clickMembershipAndAddNewMembership()

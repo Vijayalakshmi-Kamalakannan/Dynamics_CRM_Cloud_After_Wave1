@@ -213,7 +213,7 @@ public class TestCase_1111 {
 		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
 			
 		//14 Verify Sponsor field 
-		.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifySponsor", sDataSheetName))
+		.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
 		
 //Corporate Parent
 		

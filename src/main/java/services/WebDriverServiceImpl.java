@@ -101,7 +101,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	public void type(WebElement ele, String data, String fieldName)  {
+	public void type(WebElement ele, String data, String fieldName)   {
 		try {
 		
 			ele.sendKeys(Keys.CONTROL, Keys.chord("a"));

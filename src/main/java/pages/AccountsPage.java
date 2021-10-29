@@ -19,17 +19,24 @@ public class AccountsPage extends WebDriverServiceImpl {
 	}
 
 //Search accounts
-  	public  AccountsPage searchMemberAccount(String crmNumberInput) throws InterruptedException {	
-  		click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
+  	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
+  		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Parent & Independent Accounts')]")),"All Parent & Independent Accounts");
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 		typeAndEnter(getDriver().findElement(By.xpath("//*[@placeholder='Quick find']")),crmNumberInput,"Find Criteria" );
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		return this;
 	}
 
-//Select account from search results
+//Select member account from search results
   	public  MemberFormPage selectAccountFromSearchResults() throws InterruptedException {	
+		//Actions action = new Actions(getDriver());
+		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']/a")),"Search Results");
+		return new MemberFormPage();
+	}	
+  	
+	public  MemberFormPage selectDirectParentFromSearchResults() throws InterruptedException {	
 		Actions action = new Actions(getDriver());	
 		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a")));
 		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a"))).build().perform();	

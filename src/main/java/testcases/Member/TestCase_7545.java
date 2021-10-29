@@ -92,8 +92,10 @@ public class TestCase_7545 {
 			
 			 //Click on Save 
 			.clickSave() 
+			
 		//4.Verify Premier start date field
 		 	.verifyPremierStartDateIsNull()
+		 	
 		//5.Go to membership and add Premier membership say National with any start date then save
 			//Click add new membership
 			.clickMembershipAndAddNewMembership()
@@ -111,7 +113,6 @@ public class TestCase_7545 {
 			//Click on Save 
 			.clickSave() 
 	
-		
 		//6.Now verify the Premier start date
 			.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 		

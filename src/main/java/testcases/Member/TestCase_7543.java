@@ -20,7 +20,7 @@ public class TestCase_7543 {
 		
 		//2. Go to Accounts and identify any account with multiple active GPO memberships
 	  	    .selectAccountsTab()
-			.searchMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 			.selectAccountFromSearchResults()
 			
 		//3.Move the record status to draft then save
@@ -41,18 +41,20 @@ public class TestCase_7543 {
 			// then save
 			.clickMembershipSaveAndClose()
 			
-			
 		//5.Observe the Premier start date
-			.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+			.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 			
 			
 			
 		//	~~~~~~~~~~~~~~~~~~~~~~~~~~~Data reset~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			
-			//Delete end dated membership provider			
+			//Deactivate end dated membership provider			
 			.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 			
-			.clickDeleteMembershipProvider()		
+			.clickDeactivateMembershipProvider()	
+
+			// then save
+			.clickGoBack()
 				 
 		//Add national membership provider						 	
 			 //Click add new membership
@@ -89,7 +91,7 @@ public class TestCase_7543 {
 			//Click on Save 
 			 .clickSave() 
 				
-		//8.Move the record status to Published and save *****  Account should be published successfully, EIN number should be captured successfully
+		//.Move the record status to Published and save *****  Account should be published successfully, EIN number should be captured successfully
 			.chooseRecordStatusPublished()	
 			
 			//Click on Save 

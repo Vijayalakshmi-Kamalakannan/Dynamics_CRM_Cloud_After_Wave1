@@ -21,10 +21,10 @@ public class TestCase_7139 {
 			
 			//2.Go to Workplace > Accounts and search for EIN 673415 
 				.selectAccountsTab()
-				.searchMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+				.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 				
 			//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-				.selectAccountFromSearchResults()
+				.selectDirectParentFromSearchResults()
 				.selectSubaccount()
 				
 			//4. Click on Add new account 
@@ -89,7 +89,7 @@ public class TestCase_7139 {
 				.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 				
 				//Type Zip code
-				.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
+				.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
 				
 				
 				//Application Start Date = Today's Date
