@@ -34,6 +34,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import driver.Driver;
 import services.WebDriverServiceImpl;
+import testcases.Member.TestCase_2222;
 import utils.DataInputProvider;
 
 public class MemberFormPage extends WebDriverServiceImpl {
@@ -51,6 +52,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
 		 try {
 				DataInputProvider.setCellData(sCRMNumber.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return this;
+	}
+	
+	public MemberFormPage verifyCRMNumberIsDisplayedForChilAccount(int childAcccount) {
+		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
+		 try {
+				DataInputProvider.setCellData(sCRMNumber.toString(), Driver.iTestCaseRowNumDriver, "CRMNumberChildAccount"+childAcccount,Driver.properties.getProperty("DriverSheetName"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -865,7 +876,6 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~Member Entry Form~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public MemberFormPage selectAccountTypeMEF(String accountType) throws InterruptedException{
-		click(getDriver().findElement(By.xpath("//*[text()='Account Type']")),"ACCOUNT INFORMATION");
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")))),accountType,"Account type");
 		Thread.sleep(2000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 

@@ -29,6 +29,7 @@ public class TestCase_7139 {
 				
 			//4. Click on Add new account 
 				.clickNewAccountInSubAccount()
+				.chooseMemberEntryForm()
 		
 			//5. Verify Direct parent and Top parent are populated 
 		 		.verifyDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "VerifyTopParent", sDataSheetName))

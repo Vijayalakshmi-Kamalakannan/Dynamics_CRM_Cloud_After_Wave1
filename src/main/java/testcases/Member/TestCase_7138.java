@@ -92,7 +92,7 @@ public class TestCase_7138 {
 			.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 			
 			//Type Zip code
-			.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zippCode", sDataSheetName))
+			.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
 			
 			//Click on Save
 			 .clickSave() 

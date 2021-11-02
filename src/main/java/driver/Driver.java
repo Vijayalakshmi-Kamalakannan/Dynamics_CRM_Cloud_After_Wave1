@@ -28,6 +28,8 @@ public class Driver extends PreAndPost{
 	public static int iTestCaseRowNumDriver;
 	public static String sReleaseCategory;
 	public static int failCount=0;
+	public static int totalRowCount;
+	public static int currentCount;
 	
 	@Test()
 	public void executeTestcase(ITestContext testContext)throws Exception,ClassNotFoundException
@@ -69,8 +71,7 @@ public class Driver extends PreAndPost{
 			test.assignCategory(sCategory);
 			test.assignCategory(sReleaseCategory);
 		if (sRunMode.equalsIgnoreCase("Yes"))
-		{	 
-			
+		{	
 			// Get all methods of the class
 			aMethod=clsInstance.getClass().getDeclaredMethods();
 				beforeMethod();
