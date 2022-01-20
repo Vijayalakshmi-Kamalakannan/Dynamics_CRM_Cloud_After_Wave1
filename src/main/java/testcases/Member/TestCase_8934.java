@@ -108,6 +108,9 @@ public class TestCase_8934 {
 			// Click on LOB Save 
 			.clickLOBSaveAndClose()
 			
+			// Click on Save 
+			 .clickSave() 
+			 
 		//7.Observe the AG and AG effective date populated 
 			.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
 			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))

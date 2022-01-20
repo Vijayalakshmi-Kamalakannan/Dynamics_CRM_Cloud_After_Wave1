@@ -109,6 +109,9 @@ public class TestCase_8926 {
 			// Click on LOB Save 
 			.clickLOBSaveAndClose()			
 			
+			
+			// Click on Save 
+			 .clickSave() 
 		//7.Observe the AG and AG effective date populated 
 			.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
 			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
@@ -132,6 +135,9 @@ public class TestCase_8926 {
 			//Verify Premier end date **** Premier end date should be populated with the same date  as National membership end date 
 			.verifyPremierEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 			
+			// Click on Save 
+			 .clickSave() 
+			 
 		//9.Observe the AG and AG effective date populated 
 			.verifyAffiliateGroup("Non Premier NonAcute")
 			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))

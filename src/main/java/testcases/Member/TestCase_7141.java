@@ -41,7 +41,7 @@ public class TestCase_7141 {
 			.verifyDefaultAccountStatus()	
 			
 			//Application Start Date = Today's Date
-			.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
+			.chooseApplicationStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
 		
 			//CAMS Flag = Yes
 			.changeCAMSFlagAsYes()
@@ -153,18 +153,20 @@ public class TestCase_7141 {
 			//FBORD
 			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 		
-		//16  Go to Related and click on Membership entity and double click on the Top parent membership entity
-			.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-			//.doubleClickOnNationalMembership()
-		
-		//17 Click on Related and go to Audit history 
-			.selectMembershipAuditHistory()
-	
-		//18 Verify "Is Member Add mail sent" flag turned from No to Yes 
-			.verifyIsMemberAddMailSent()
-		
-		//19 Verify the time-stamp on which the flag gets updated 
-			.verifyTimeStampInTPMembershipAuditHistory()
+		/*
+		 * //16 Go to Related and click on Membership entity and double click on the Top
+		 * parent membership entity
+		 * .goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber,
+		 * "membershipProvider", sDataSheetName)) //.doubleClickOnNationalMembership()
+		 * 
+		 * //17 Click on Related and go to Audit history .selectMembershipAuditHistory()
+		 * 
+		 * //18 Verify "Is Member Add mail sent" flag turned from No to Yes
+		 * .verifyIsMemberAddMailSent()
+		 * 
+		 * //19 Verify the time-stamp on which the flag gets updated
+		 * .verifyTimeStampInTPMembershipAuditHistory()
+		 */
 		;
 	}
 }

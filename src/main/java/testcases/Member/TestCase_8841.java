@@ -29,7 +29,7 @@ public class TestCase_8841 {
 			//Is Top parent = Yes
 			.changeTopParentAsYes()
 			
-			//Top parent relation = Affiliate
+			//Top parent relation = OLM
 			.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
 			 
 			//Top parent relation date = Today's date

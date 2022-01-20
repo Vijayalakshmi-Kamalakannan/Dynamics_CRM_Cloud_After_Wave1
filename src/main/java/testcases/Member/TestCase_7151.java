@@ -119,8 +119,16 @@ public class TestCase_7151 {
 		
 		//14 Verify "Is Sponsor" field 
 			.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
+		
+			// Changing the Location type =Bill to  to Ship to Account
 			
+			//Store/Location type = Bill to
+			.chooseLocationType("Ship To")	
+			
+			//Click on Save 
+			.clickSave() 
 			;
+		
 
 	}
 }

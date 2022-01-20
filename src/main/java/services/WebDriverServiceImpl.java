@@ -43,24 +43,24 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	//public static int failCount=0;
 	public byte[] encodedPassword ;
 	public String encodedData;
-	
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public ExtentTest setReport()
 	{
 		this.reporter = Driver.test;
 		return reporter;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public static String getScreenshot() throws IOException
 	{
 		TakesScreenshot ts = (TakesScreenshot)getDriver();
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        screenshotPath = System.getProperty("user.dir") +"/Screenshots/"+java.time.LocalDate.now()+"/"+System.currentTimeMillis()+".png";
-        File destination = new File(screenshotPath);
-        FileUtils.copyFile(source, destination);  
-        return screenshotPath;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		screenshotPath = System.getProperty("user.dir") +"/Screenshots/"+java.time.LocalDate.now()+"/"+System.currentTimeMillis()+".png";
+		File destination = new File(screenshotPath);
+		FileUtils.copyFile(source, destination);  
+		return screenshotPath;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public static MediaEntityModelProvider screenshotCapture() 
 	{
 		try {
@@ -71,7 +71,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		}
 		return img;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public WebElement locateElement(String locator, String locValue)  {
 		try {
 			switch (locator) {
@@ -94,49 +94,49 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		}
 		return null;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public WebElement locateElement(String locValue) {
 		return getDriver().findElement(By.id(locValue));
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void type(WebElement ele, String data, String fieldName)   {
 		try {
-		
+
 			ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
 			ele.sendKeys(Keys.BACK_SPACE);
 			ele.sendKeys(data);
 			String sExpectedValue= ele.getAttribute("value");
-		
-		if (fieldName.equalsIgnoreCase("password"))
-		{
-			String data1=data;
-			encodedPassword = Base64.getEncoder().encode(data1.getBytes());
-			if (sExpectedValue.equalsIgnoreCase(data))
+
+			if (fieldName.equalsIgnoreCase("password"))
 			{
-				encodedData=new String(encodedPassword);
-				setReport().log(Status.PASS, "The data: "+encodedData+" successfully entered in  "+fieldName+ " field",screenshotCapture());
+				String data1=data;
+				encodedPassword = Base64.getEncoder().encode(data1.getBytes());
+				if (sExpectedValue.equalsIgnoreCase(data))
+				{
+					encodedData=new String(encodedPassword);
+					setReport().log(Status.PASS, "The data: "+encodedData+" successfully entered in  "+fieldName+ " field",screenshotCapture());
+				}
+				else
+				{
+					setReport().log(Status.FAIL, "The data: "+encodedData+" is NOT entered in : "+fieldName,screenshotCapture());
+					Driver.failCount++;
+				}
 			}
 			else
 			{
-				setReport().log(Status.FAIL, "The data: "+encodedData+" is NOT entered in : "+fieldName,screenshotCapture());
-				Driver.failCount++;
+				if (sExpectedValue.equalsIgnoreCase(data))
+				{
+					setReport().log(Status.PASS, "The data: "+data+" successfully entered in  "+fieldName+ " field",screenshotCapture());
+				}
+				else
+				{
+					setReport().log(Status.FAIL, "The data: "+data+" is NOT entered in : "+fieldName,screenshotCapture());
+					Driver.failCount++;
+				}
 			}
-		}
-		else
-		{
-			if (sExpectedValue.equalsIgnoreCase(data))
-			{
-				setReport().log(Status.PASS, "The data: "+data+" successfully entered in  "+fieldName+ " field",screenshotCapture());
-			}
-			else
-			{
-				setReport().log(Status.FAIL, "The data: "+data+" is NOT entered in : "+fieldName,screenshotCapture());
-				Driver.failCount++;
-			}
-		}
-	
+
 		} catch (InvalidElementStateException e) {
 			setReport().log(Status.FAIL, "The data: "+data+" could not be entered in  : "+fieldName, screenshotCapture());
 			Driver.failCount++;
@@ -148,12 +148,12 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-	
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
-	
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+
 	public void typeAndChoose(WebElement ele, String data,String field)  {
 		try {
-		//	ele.clear();
+			//	ele.clear();
 			ele.sendKeys(data, Keys.TAB);
 			setReport().log(Status.PASS, "The data: "+data+" entered successfully in  :"+field,screenshotCapture());
 		} catch (InvalidElementStateException e) {
@@ -166,8 +166,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void clickAndChoose(WebElement ele, String data, String field)  {
 		try {
 			ele.clear();
@@ -183,8 +183,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+
 	public void typeAndEnter(WebElement ele, String data,String field) {
 		try {
 			ele.clear();
@@ -201,12 +201,56 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+
+	public void Upload(WebElement ele, String data,String field) {
+		try {
+
+			ele.sendKeys(data);
+			setReport().log(Status.PASS, "The data: "+data+" entered successfully in the field :"+field,screenshotCapture());
+		} catch (InvalidElementStateException e) {
+			setReport().log(Status.FAIL, "The data: "+data+" could not be entered in the field :"+field,screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL, "Unknown exception occured while entering  "+data+" in the field :"+field,screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		}
+	}
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public void clickUsingJS(WebElement ele,String field)  {
+		try {
+			//WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+			//				wait.until(ExpectedConditions.elementToBeClickable(ele));			
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ele);
+			//	ele.click();
+			setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
+		}
+		catch (InvalidElementStateException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL,field+" could not be clicked", screenshotCapture());	
+			Driver.failCount++;
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+field,screenshotCapture());	
+			Driver.failCount++;
+		} 
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public void click(WebElement ele,String field)  {
 		try {
 			//WebDriverWait wait = new WebDriverWait(getDriver(), 15);
-//			wait.until(ExpectedConditions.elementToBeClickable(ele));			
+			//			wait.until(ExpectedConditions.elementToBeClickable(ele));			
 			ele.click();
 			setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
 		}
@@ -220,8 +264,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			Driver.failCount++;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
+
 	public void clickWithNoSnap(WebElement ele) {
 		String text = "";
 		try {
@@ -234,7 +278,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			setReport().log(Status.FAIL, text+" could not be clicked",screenshotCapture());
 			e.printStackTrace();
 			Driver.failCount++;
-			
+
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+text,screenshotCapture());		
 			e.printStackTrace();
@@ -245,7 +289,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public String getTextValueAttribute(WebElement ele, String field) {	
 		String bReturn = "";
 		try {
-			
+
 			bReturn = ele.getAttribute("value");
 			if(bReturn != null && !bReturn.isEmpty() && !bReturn.equalsIgnoreCase("---") ){
 				setReport().log(Status.PASS, bReturn+" is displayed in "+field,screenshotCapture());
@@ -261,34 +305,34 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		}
 		return bReturn;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	public String getTextValue(WebElement ele, String field) {	
-	String bReturn = "";
-	try {
-		
-		bReturn = ele.getText();
-		if(bReturn != null && !bReturn.isEmpty() && !bReturn.equalsIgnoreCase("---")){
-			setReport().log(Status.PASS, bReturn+" is displayed in "+field,screenshotCapture());
-		}
-		else {
-			setReport().log(Status.FAIL, field+" is Null or Empty ",screenshotCapture());
-			Driver.failCount++;
-		}
-	} catch (WebDriverException e) {
-		setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
-		Driver.failCount++;
-		throw e;
-	}
-	return bReturn;
-}
-	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		public String verifyNullValue(WebElement ele, String field) {	
+	public String getTextValue(WebElement ele, String field) {	
 		String bReturn = "";
 		try {
-			
+
+			bReturn = ele.getText();
+			if(bReturn != null && !bReturn.isEmpty() && !bReturn.equalsIgnoreCase("---")){
+				setReport().log(Status.PASS, bReturn+" is displayed in "+field,screenshotCapture());
+			}
+			else {
+				setReport().log(Status.FAIL, field+" is Null or Empty ",screenshotCapture());
+				Driver.failCount++;
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		}
+		return bReturn;
+	}
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public String verifyNullValue(WebElement ele, String field) {	
+		String bReturn = "";
+		try {
+
 			bReturn = ele.getAttribute("value");
 			if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
 				setReport().log(Status.PASS, field+" is Empty ",screenshotCapture());
@@ -305,30 +349,30 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		return bReturn;
 	}
 
-	
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
-		public String verifyNullValueWithGetText(WebElement ele, String field) {	
-			String bReturn = "";
-			try {
-				
-				bReturn = ele.getText();
-				if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
-					setReport().log(Status.PASS, field+" is Empty ",screenshotCapture());
-				}
-				else {
-					setReport().log(Status.FAIL, field+" contains "+bReturn,screenshotCapture());
-					Driver.failCount++;
-				}
-			} catch (WebDriverException e) {
-				setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
-				Driver.failCount++;
-				throw e;
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public String verifyNullValueWithGetText(WebElement ele, String field) {	
+		String bReturn = "";
+		try {
+
+			bReturn = ele.getText();
+			if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
+				setReport().log(Status.PASS, field+" is Empty ",screenshotCapture());
 			}
-			return bReturn;
+			else {
+				setReport().log(Status.FAIL, field+" contains "+bReturn,screenshotCapture());
+				Driver.failCount++;
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+			Driver.failCount++;
+			throw e;
 		}
-	
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		return bReturn;
+	}
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public String getTitle() {		
 		String bReturn = "";
@@ -342,8 +386,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		} 
 		return bReturn;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public String getAttribute(WebElement ele, String attribute,String field) {		
 		String bReturn = "";
 		try {
@@ -356,8 +400,24 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		} 
 		return bReturn;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		public void scrolldown() {
+	JavascriptExecutor js = (JavascriptExecutor) getDriver();
+	js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public void scrollUntilElementVisible(WebElement element) throws InterruptedException {
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		Thread.sleep(500); 
+
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void selectDropDownUsingVisibleText(WebElement ele, String value,String field) {
 		try {
 			new Select(ele).selectByVisibleText(value);
@@ -367,8 +427,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void selectDropDownUsingIndex(WebElement ele, int index,String field) {
 		try {
 			new Select(ele).selectByIndex(index);
@@ -379,8 +439,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public boolean verifyExactTitle(String title) {
 		boolean bReturn =false;
 		try {
@@ -398,8 +458,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		} 
 		return bReturn;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public boolean verifyPartialTitle(String title) {
 		boolean bReturn =false;
 		try {
@@ -417,7 +477,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		} 
 		return bReturn;		
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public void verifyExactValue(WebElement ele, String expectedText,String field) {
 		String bReturn=ele.getAttribute("value");
 		try {
@@ -437,7 +497,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		String bReturn=ele.getAttribute("title");
 		//String bReturn=ele.getText();
 		try {
-			if(bReturn.equalsIgnoreCase(expectedText)) {
+			if(bReturn.contains(expectedText)) {
 				setReport().log(Status.PASS, "The text :"+bReturn+" matches with the value in "+field+" field",screenshotCapture());
 			}else {
 				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value in "+field+" field",screenshotCapture());
@@ -450,8 +510,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		} 
 	}
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void verifyExactText(WebElement ele, String expectedText,String field) {
 		//String bReturn=ele.getAttribute("title");
 		String bReturn=ele.getText();
@@ -468,11 +528,11 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void verifyPartialText(WebElement ele, String expectedText,String field) {
 		String bReturn=ele.getText();
-	//	String s=ele.getAttribute("title");
+		//	String s=ele.getAttribute("title");
 		try {
 			if(bReturn.contains(expectedText)) {
 				setReport().log(Status.PASS, "The "+field+" contains "+expectedText,screenshotCapture());
@@ -486,8 +546,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void verifyExactAttribute(WebElement ele, String attribute, String value,String field) {
 		try {
 			if(getAttribute(ele, attribute,field).equals(value)) {
@@ -501,8 +561,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void verifyPartialAttribute(WebElement ele, String attribute, String value,String field) {
 		try {
 			if(getAttribute(ele, attribute,field).contains(value)) {
@@ -516,8 +576,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void verifySelected(WebElement ele) {
 		try {
 			if(ele.isSelected()) {
@@ -531,8 +591,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void verifyDisplayed(WebElement ele,String field) {
 		try {
 			if(ele.isDisplayed()) {
@@ -546,8 +606,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void switchToWindow(int index) {
 		try {
 			Set<String> allWindowHandles = getDriver().getWindowHandles();
@@ -562,11 +622,11 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void switchToFrame(WebElement ele) {
 		try {
-			
+
 			getDriver().switchTo().frame(ele);
 		} catch (NoSuchFrameException e) {
 			setReport().log(Status.FAIL, "WebDriverException"+e.getMessage(),screenshotCapture());
@@ -578,8 +638,28 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public void switchToFrame(int index) {
+		try {
+
+			getDriver().switchTo().frame(index);
+		} catch (NoSuchFrameException e) {
+			setReport().log(Status.FAIL, "WebDriverException"+e.getMessage(),screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "WebDriverException"+e.getMessage(),screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} 
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 	public void switchToDefaultContent() {
 		try {
 			getDriver().switchTo().defaultContent();
@@ -594,8 +674,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void acceptAlert() {
 		String text = "";		
 		try {
@@ -613,8 +693,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}  
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void dismissAlert() {
 		String text = "";		
 		try {
@@ -630,8 +710,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public String getAlertText() {
 		String text = "";		
 		try {
@@ -649,8 +729,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		return text;
 	}
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void closeActiveBrowser() {
 		try {
 			getDriver().close();
@@ -661,8 +741,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void closeAllBrowsers() {
 		try {
 			getDriver().quit();
@@ -674,8 +754,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		}
 	}
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	public void selectDropDownUsingValue(WebElement ele, String value) {
 		try {
 			new Select(ele).selectByValue(value);
@@ -686,26 +766,26 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		}
 	}
-	
-	
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	@Override
 	public void waitForLoaderToDisapper() {
 		// TODO Auto-generated method stub
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@Override
 	public String getText(WebElement ele) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public void verifyIsEnabled(WebElement ele,String field) {
 		boolean bReturn =true;
 		bReturn=ele.isDisplayed();
@@ -722,9 +802,28 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	public boolean verifyIsDisplayed(WebElement ele) {
+
+		boolean bReturn;
+		bReturn=ele.isDisplayed();
+
+		try {
+
+			return bReturn;
+
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} 
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 }
 

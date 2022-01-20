@@ -40,7 +40,7 @@ public class TestCase_1111 {
 			.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))		
 		
 		//12. Application Start Date = Today's Date
-		.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
+		.chooseApplicationStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
 				
 		// Group - Auto populates
 		.verifyGroup(DataInputProvider.getCellData_ColName(iRowNumber, "verifyGroup", sDataSheetName))

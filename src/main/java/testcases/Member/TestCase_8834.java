@@ -41,7 +41,7 @@ public class TestCase_8834 {
 			.verifyDefaultAccountStatus()	
 			
 			//Application Start Date = Today's Date
-			.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
+			.chooseApplicationStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
 			
 			//Participation Type = Standard
 			.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
@@ -219,6 +219,7 @@ public class TestCase_8834 {
 			.verifyDefaultAccountStatus()
 			
 		//20.Verify the Premier start date **** Premier start date should be Acurity's start date 
+			.pageRefresh()
 			.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 			
 		//21.Verify Premier end date ***** Premier end date should be blank 

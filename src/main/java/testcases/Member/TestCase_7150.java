@@ -80,6 +80,9 @@ public class TestCase_7150 {
 			
 			//Click on Save 
 			.clickSave() 
+			.pageRefresh()
+			.clickSave() 
+				
 			
 		//6. Verify Entity code is same as DP's entity code  
 			.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -182,8 +185,9 @@ public class TestCase_7150 {
 					
 			//FBORD
 				.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+				;
 		
-		//16  Go to > and click on Membership entity and double click on the Top parent membership entity
+	/*	//16  Go to > and click on Membership entity and double click on the Top parent membership entity
 			.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 			//.doubleClickOnNationalMembership()
 		
@@ -195,7 +199,7 @@ public class TestCase_7150 {
 		
 		//19 Verify the time-stamp on which the flag gets updated 
 			.verifyTimeStampInTPMembershipAuditHistory();
-		
+		*/
 		
 	}
 }

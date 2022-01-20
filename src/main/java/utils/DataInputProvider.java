@@ -138,6 +138,65 @@ public static void setCellData(String Result,  int RowNum, String sColName,Strin
        throw (e);
 	}
 }
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//This method is to write in the Excel cell, Row number and Column name are the parameters
+public  void setCellDataBulkImport(String Result, String sColName,String filePath, String sSheetName) throws Exception    {
+	try
+	{
+		int iColNum=0;
+		int rowCount=0;
+		XSSFWorkbook ExcelBook;
+		XSSFSheet ExcelSheet;
+		XSSFCell Cells;
+	    XSSFRow Rows;
+		//ExcelWSheet = ExcelWBook.getSheet(Driver.properties.getProperty("DriverSheetName"));
+	    FileInputStream ExcelFile = new FileInputStream(filePath);
+	    ExcelBook = new XSSFWorkbook(ExcelFile);
+		ExcelSheet = ExcelBook.getSheet(sSheetName);
+		
+		Rows=ExcelSheet.getRow(0);
+		int lastCellNum = Rows.getLastCellNum();
+		for(int j=0;j<lastCellNum;j++)
+		{
+			if (Rows.getCell(j).getStringCellValue().trim().equalsIgnoreCase(sColName.trim()))
+			{
+				iColNum=j;
+				break;
+			}
+		}
+		rowCount  = ExcelSheet.getLastRowNum();
+		
+		for(int i=1;i<=rowCount;i++) {
+			Rows=ExcelSheet.getRow(i);
+			Cells = Rows.getCell(iColNum);
+			 if (Cells == null)
+		     {
+				 Cells = Rows.createCell(iColNum);
+				 Cells.setCellValue(Result+i);
+		     } 
+		     else
+		     {
+		    	 Cells.setCellValue(Result+i);
+		     }
+			
+		}
+	     
+	    
+		// Constant variables Test Data path and Test Data file name
+		 FileOutputStream fileOut = new FileOutputStream(filePath);
+		 ExcelBook.write(fileOut);
+		 ExcelBook.close();
+       ExcelFile.close();
+       fileOut.close();
+       fileOut.flush();
+	}
+	catch(Exception e)
+	{
+     throw (e);
+	}
+}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 public static int getRowCount(String sheetName) throws Exception
 {

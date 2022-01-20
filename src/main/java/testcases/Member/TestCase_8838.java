@@ -92,6 +92,10 @@ public class TestCase_8838 {
 				
 			//Click on Save 
 			.clickSave() 
+
+			
+			.pageRefresh()
+			.clickSave() 
 				
 		//8. Verify Entity code is same as DP's entity code 
 			.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "DirectParent", sDataSheetName))

@@ -40,7 +40,7 @@ public class TestCase_7144 {
 		.verifyDefaultAccountStatus()	
 		
 		//Application Start Date = Today's Date
-		.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
+		.chooseApplicationStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
 		
 		//Is Top parent = Yes
 		.changeTopParentAsYes()

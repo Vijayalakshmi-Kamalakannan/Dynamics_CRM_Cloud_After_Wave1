@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import services.WebDriverServiceImpl;
 
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AccountsPage extends WebDriverServiceImpl {
 
@@ -22,9 +24,12 @@ public class AccountsPage extends WebDriverServiceImpl {
   	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
   		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
-		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Parent & Independent Accounts')]")),"All Parent & Independent Accounts");
-		Thread.sleep(7000);
-		typeAndEnter(getDriver().findElement(By.xpath("//*[@placeholder='Quick find']")),crmNumberInput,"Find Criteria" );
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
+		Thread.sleep(15000);
+		Thread.sleep(15000);
+		WebDriverWait wait= new WebDriverWait(getDriver(),20);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
+		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
 		Thread.sleep(5000);
 		return this;
 	}
@@ -32,22 +37,30 @@ public class AccountsPage extends WebDriverServiceImpl {
 //Select member account from search results
   	public  MemberFormPage selectAccountFromSearchResults() throws InterruptedException {	
 		//Actions action = new Actions(getDriver());
-		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']/a")),"Search Results");
+		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
 		return new MemberFormPage();
 	}	
   	
 	public  MemberFormPage selectDirectParentFromSearchResults() throws InterruptedException {	
 		Actions action = new Actions(getDriver());	
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a")));
-		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a"))).build().perform();	
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']/a")));
+		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']/a"))).build().perform();	
 		return new MemberFormPage();
 	}	
+	
+	public  MemberFormPage selectParentAccountFromSearchResults() throws InterruptedException {	
+		Actions action = new Actions(getDriver());	
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@aria-label='Data']/div[3]/a")));
+		action.doubleClick(getDriver().findElement(By.xpath("//div[@aria-label='Data']/div[3]/a"))).build().perform();	
+		return new MemberFormPage();
+	}
   	
  //Select supplier account from search result
   	public  SupplierFormPage selectSupplierAccountFromSearchResults() throws InterruptedException {	
 		Actions action = new Actions(getDriver());	
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']")));
-		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']"))).build().perform();
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
+		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
+		Thread.sleep(10000);
 		return new SupplierFormPage();
 	}
   	

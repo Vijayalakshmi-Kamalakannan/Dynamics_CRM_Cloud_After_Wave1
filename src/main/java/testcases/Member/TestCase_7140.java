@@ -5,7 +5,7 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 //TFS ID_7140: Create new member - New Member entry form and Save it as prospect first
 
-public class TestCase_7140 {
+public class TestCase_7140 { 
 
 	  	
 	@Test
@@ -162,18 +162,20 @@ public class TestCase_7140 {
 		//FBORD
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 		
-		//16  Go to > and click on Membership entity and double click on the Top parent membership entity
-		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-		//.doubleClickOnNationalMembership()
-		
-		//17 Click on > and go to Audit history 
-		.selectMembershipAuditHistory()
-	
-		//18 Verify "Is Member Add mail sent" flag turned from No to Yes 
-		.verifyIsMemberAddMailSent()
-		
-		//19 Verify the time-stamp on which the flag gets updated 
-		.verifyTimeStampInTPMembershipAuditHistory()
+		/*
+		 * //16 Go to > and click on Membership entity and double click on the Top
+		 * parent membership entity
+		 * .goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber,
+		 * "membershipProvider", sDataSheetName)) //.doubleClickOnNationalMembership()
+		 * 
+		 * //17 Click on > and go to Audit history .selectMembershipAuditHistory()
+		 * 
+		 * //18 Verify "Is Member Add mail sent" flag turned from No to Yes
+		 * .verifyIsMemberAddMailSent()
+		 * 
+		 * //19 Verify the time-stamp on which the flag gets updated
+		 * .verifyTimeStampInTPMembershipAuditHistory()
+		 */
 				
 		;
 

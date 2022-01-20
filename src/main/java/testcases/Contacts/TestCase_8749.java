@@ -74,7 +74,7 @@ public class TestCase_8749 {
 			//.clickGoBack()
 		//3. Now change the primary account of the contact to a different member
 		
-			//Primary Account = 1000155094
+			//Primary Account = 1000036259
 			.clickSummaryTab()
 			.addAnotherPrimaryAccount(DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
 			

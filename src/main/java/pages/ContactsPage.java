@@ -29,6 +29,20 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	
+	//select view type
+	
+	public ContactsPage selectAllContactView() throws InterruptedException {
+		Thread.sleep(3000);
+		// Click Drop down
+		click(getDriver().findElement(
+				By.xpath("//span/i[@data-icon-name='ChevronDown']")),
+				"Drop down");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'All Contacts')]")), "All Contacts");
+		Thread.sleep(10000);
+		return this;
+		
+	}
 	// type the contact first name and last name
 	public ContactsPage typeContactName(String firstName, String lastName) throws InterruptedException {
 		Thread.sleep(3000);
@@ -67,6 +81,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage clickSave() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Save']")),
 				"Save");
+		Thread.sleep(5000);
 		Thread.sleep(5000);
 		return this;
 	}
@@ -195,6 +210,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='quickFind_text_1']")), "Find Criteria");
 		typeAndEnter(getDriver().findElement(By.xpath("//*[@data-id='quickFind_text_1']")), CrmNumber1,
 				"Find Criteria");
+		Thread.sleep(6000);
 		Actions a = new Actions(getDriver());
 		a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']"))).doubleClick().build().perform();
 		Thread.sleep(6000);
@@ -470,7 +486,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 				"Contact Account Associations");
 		Thread.sleep(2000);
 		Actions a = new Actions(getDriver());
-		String record1 = getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']")).getText();
+		String record1 = getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']")).getText();
 		//String record2 = getDriver().findElement(By.xpath("//*[@data-id='cell-1-4']")).getText();
 		if (record1.equalsIgnoreCase(OldCAA)) {
 			a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']"))).doubleClick().build()

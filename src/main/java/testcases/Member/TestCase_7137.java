@@ -17,10 +17,12 @@ public class TestCase_7137 {
 		
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
+		
 			.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 			.clickNext()
 	  	    .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
 	  	    .clicSignin()
+	  	   
 	  	    .clicYesInStaySignedin()
 	
 		//2. From the left navigation column ,Go to Accounts > +New
@@ -58,6 +60,7 @@ public class TestCase_7137 {
 			//Participation Type = Standard
 			.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
 				
+			
 			//Direct Parent Entity Code = 673415
 			.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 			
@@ -164,8 +167,11 @@ public class TestCase_7137 {
 				
 		//FBORD
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+		;
 		
-		//16  Go to > and click on Membership entity and double click on the Top parent membership entity
+		//commenting below block since we are not verifying Is Member Add mail sent in the audit history due to the current changes in the application
+		
+	/*	//16  Go to > and click on Membership entity and double click on the Top parent membership entity
 		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 		//.doubleClickOnNationalMembership()
 		
@@ -177,6 +183,6 @@ public class TestCase_7137 {
 		
 		//19 Verify the time-stamp on which the flag gets updated 
 		.verifyTimeStampInTPMembershipAuditHistory()
-		;
+		;*/
 	}
 }

@@ -24,7 +24,7 @@ public class TestCase_7139 {
 				.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 				
 			//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-				.selectDirectParentFromSearchResults()
+				.selectParentAccountFromSearchResults()
 				.selectSubaccount()
 				
 			//4. Click on Add new account 
@@ -176,18 +176,20 @@ public class TestCase_7139 {
 			//FBORD
 			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 			
-			//19  Go to > and click on Membership entity and double click on the Top parent membership entity
-			.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-			//.doubleClickOnNationalMembership()
-			
-			//20 Click on > and go to Audit history 
-			.selectMembershipAuditHistory()
-		
-			//21 Verify "Is Member Add mail sent" flag turned from No to Yes 
-			.verifyIsMemberAddMailSent()
-			
-			//22 Verify the time-stamp on which the flag gets updated 
-			.verifyTimeStampInTPMembershipAuditHistory()
+				/*
+				 * //19 Go to > and click on Membership entity and double click on the Top
+				 * parent membership entity
+				 * .goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber,
+				 * "membershipProvider", sDataSheetName)) //.doubleClickOnNationalMembership()
+				 * 
+				 * //20 Click on > and go to Audit history .selectMembershipAuditHistory()
+				 * 
+				 * //21 Verify "Is Member Add mail sent" flag turned from No to Yes
+				 * .verifyIsMemberAddMailSent()
+				 * 
+				 * //22 Verify the time-stamp on which the flag gets updated
+				 * .verifyTimeStampInTPMembershipAuditHistory()
+				 */
 			
 				;
 	

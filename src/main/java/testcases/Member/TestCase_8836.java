@@ -71,7 +71,8 @@ public class TestCase_8836 {
 					 
 			//Click on Save 
 			 .clickSave() 
-					 
+			 .pageRefresh()
+			.clickSave()
 		//6. Street 1 = Any
 			 .typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
 				
@@ -120,6 +121,13 @@ public class TestCase_8836 {
 		//14 Verify "Is Sponsor" field 
 			.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
 			
+			// Changing the Location type =Mail to  to Ship to Account
+			
+						//Store/Location type = Bill to
+						.chooseLocationType("Ship To")	
+						
+						//Click on Save 
+						.clickSave() 
 			;
 	}
 }

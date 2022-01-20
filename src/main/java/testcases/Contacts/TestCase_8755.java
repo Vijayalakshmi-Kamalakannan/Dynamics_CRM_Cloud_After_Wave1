@@ -22,6 +22,9 @@ public class TestCase_8755 {
 				// Go to Contacts
 				.selectContacts()
 
+				//Navigate to All Account
+				
+				.selectAllContactView()
 				// 2. Go to any active contact which has an active contact account association
 				.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
 

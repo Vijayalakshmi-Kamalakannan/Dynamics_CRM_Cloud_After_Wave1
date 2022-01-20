@@ -47,9 +47,10 @@ public class TestCase_8837 {
 			//Account Status = Auto Populated to Active
 			.verifyDefaultAccountStatus()	
 			
-			//Store/Location type = Ship to
+			//Store/Location type = Bill To
 			.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
-					
+			
+			
 			//CAMS Flag = Yes
 			.changeCAMSFlagAsYes()
 			
@@ -91,6 +92,9 @@ public class TestCase_8837 {
 				
 			//Click on Save 
 			.clickSave() 
+			
+			.clickSave()
+			.pageRefresh()
 				
 		//8. Verify Entity code is same as DP's entity code 
 			.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -98,9 +102,9 @@ public class TestCase_8837 {
 		//Verify Premier start date is auto populated
 			.verifyPremierStartDateIsAutoPopulated()
 			
-			.verifyAgEffectiveDateIsNull()
-			.verifyAffiliateGroupIsNull()
-				
+//			.verifyAgEffectiveDateIsNull()
+//			.verifyAffiliateGroupIsNull()
+//				
 		//9. Verify "IS Corporate account" field
 			.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
 		
@@ -117,7 +121,14 @@ public class TestCase_8837 {
 			.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
 		
 		//14 Verify "Is Sponsor" field 
-			.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))			
+			.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))	
+			
+			
+			//Data Reset
+			
+			.chooseLocationType("Ship To")
+			
+			.clickSave()
 		;
 
 	}

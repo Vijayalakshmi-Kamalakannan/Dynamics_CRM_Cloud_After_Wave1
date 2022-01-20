@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert; 
 import org.openqa.selenium.By;
@@ -53,6 +54,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 	
 	public SupplierFormPage verifyDefaultRecordChangeStatus() {
+		System.out.println(getDriver().findElement(By.xpath("//*[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")).getAttribute("title"));
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='ix_recordchangestatus.fieldControl-option-set-select']"))),"Approved"," Record Change Status");
 		return this;
 	}
@@ -62,6 +64,13 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		click(getDriver().findElement(By.xpath("//*[@title='ADMINISTRATION']")),"ADMINISTRATION");
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']")),"Inactive","Account Status");
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']")),"Inactive","Account Status");
+		Thread.sleep(3000);
+		return this;
+	}
+	
+	public SupplierFormPage chooseRecordChangeStatus(String Status) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")),Status,"Record change Status");
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")),Status,"Account Status");
 		Thread.sleep(3000);
 		return this;
 	}
@@ -95,7 +104,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	
 	public SupplierFormPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		return this;
 	}
 
@@ -116,8 +125,20 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
 		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
 		Thread.sleep(10000);
+		Thread.sleep(10000);
 		return this;
 
+	}
+	
+	public SupplierFormPage clickVerticalButton() {
+		List<WebElement> count=getDriver().findElements(By.xpath("//span[contains(text(),'Refresh')]"));
+		if(count.size()>0)
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'Refresh')]")),"Click Refresh");
+		else {
+		click(getDriver().findElement(By.xpath("//span[contains(@class,'MoreVertical-symbol')]")),"Vertical Button");
+		click(getDriver().findElement(By.xpath("//button[contains(text(),'Refresh')]")),"Refresh");
+		}
+		return this;
 	}
 	
 	public SupplierFormPage crmNumberIsDisplayed() throws InterruptedException {
@@ -138,6 +159,19 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		String entityCode =getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code");
 		assertNotNull(entityCode);
 		return this;
+	}
+	
+	public LoginPage clickLogout() {
+		
+		click(getDriver().findElement(By.xpath("//*[@id='mectrl_headerPicture']")),"User Name button");
+		click(getDriver().findElement(By.xpath("//button[contains(text(),'Sign out')]")),"Sign Out button");
+		if(getDriver().findElements(By.xpath("//span[contains(text(),'Discard changes')]")).size()>0) {
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'Discard changes')]")),"Discard button");
+		}
+		
+		return new LoginPage();
+		
+		
 	}
 	
 	public SupplierFormPage verifyEntityCode(String verifyEntityCode) throws InterruptedException {
@@ -341,7 +375,7 @@ public SupplierFormPage selectMembershipProviderType(String membershipProviderTy
 	}
 
 public SupplierFormPage selectMembership() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
 		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
 		Thread.sleep(3000);
@@ -365,7 +399,7 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 	
 //Double click on national membership whis does not have end date
 	public SupplierFormPage doubleClickOnNewNationalMembership() throws InterruptedException {	
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 		Actions a = new Actions(getDriver());
 	      a.moveToElement(getDriver().findElement(By.xpath("//*[contains(@id,'-5') and @title='---']"))).doubleClick().build().perform();
 		Thread.sleep(3000);
@@ -554,7 +588,8 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 		return this;
 	}
 	
-	public SupplierFormPage typeMembershipEndDate(String membershipEndDate) {
+	public SupplierFormPage typeMembershipEndDate(String membershipEndDate) throws InterruptedException {
+		
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")))),membershipEndDate,"End Date");
 		return this;
 	}
