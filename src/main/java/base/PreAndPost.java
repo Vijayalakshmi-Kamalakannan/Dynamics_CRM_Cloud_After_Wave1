@@ -78,15 +78,12 @@ public class PreAndPost extends WebDriverEvents
 	public void beforeMethod() throws Exception { 		
 		properties.load(new FileInputStream(new File("./src/test/resources/environment.properties")));
 
-		
-		  System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe"); 
-		  ChromeOptions options = new  ChromeOptions();
-		  
-		  options.addExtensions(new	 File("E:\\vkamalak\\Dynamic_cloud\\Dynamics-CRM-Cloud\\src\\test\\resources\\extension_1_0_5_0.crx")); 
-		  webdriver = new ChromeDriver(options);
-		  
-		
-		  
+
+		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe"); 
+		webdriver = new ChromeDriver();
+
+
+
 		//System.setProperty("webdriver.edge.driver", "src\\test\\resources\\msedgedriver.exe");
 		/*
 		 * ChromeOptions options = new ChromeOptions();
