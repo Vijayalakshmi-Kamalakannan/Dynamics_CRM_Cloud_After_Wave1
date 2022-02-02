@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
@@ -43,7 +44,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	//public static int failCount=0;
 	public byte[] encodedPassword ;
 	public String encodedData;
-
+	public static HashMap<String,String> Dpdata=new HashMap<String, String>();
+public static final String Terminate_Status_Message="Please do not create account with Terminated Account status";
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public ExtentTest setReport()
 	{
@@ -349,6 +351,30 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		return bReturn;
 	}
 
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		public String verifIsNoTNullValue(WebElement ele, String field) {	
+			String bReturn = "";
+			try {
+
+				bReturn = ele.getAttribute("value");
+				if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
+					setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
+					Driver.failCount++;
+				}
+				else {
+					setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
+					
+				}
+			} catch (WebDriverException e) {
+				setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+				Driver.failCount++;
+				throw e;
+			}
+			return bReturn;
+		}
+
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -484,7 +510,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			if(bReturn.equalsIgnoreCase(expectedText)) {
 				setReport().log(Status.PASS, "The text :"+bReturn+" matches with the value in "+field+" field",screenshotCapture());
 			}else {
-				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value in "+field+" field",screenshotCapture());
+				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value "+expectedText+"in "+field+" field",screenshotCapture());
 				Driver.failCount++;
 			}
 		} catch (WebDriverException e) {
@@ -500,7 +526,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			if(bReturn.contains(expectedText)) {
 				setReport().log(Status.PASS, "The text :"+bReturn+" matches with the value in "+field+" field",screenshotCapture());
 			}else {
-				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value in "+field+" field",screenshotCapture());
+				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value "+expectedText+"in "+field+" field",screenshotCapture());
 				Driver.failCount++;
 			}
 		} catch (WebDriverException e) {
@@ -527,6 +553,24 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			Driver.failCount++;
 			throw e;
 		} 
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	
+	public void verifyElementisNotDisplayed(int count, String field) {
+		
+		try {
+			if(count>0) {
+				setReport().log(Status.FAIL, field+" is displayed",screenshotCapture());
+			}else {
+				setReport().log(Status.PASS, field+"is not displayed",screenshotCapture());
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} 
+		
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

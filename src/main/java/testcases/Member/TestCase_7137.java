@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import driver.Driver;
 import pages.LoginPage;
 import pages.MemberFormPage;
+import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
 
@@ -27,7 +28,13 @@ public class TestCase_7137 {
 	
 		//2. From the left navigation column ,Go to Accounts > +New
 	  	    .selectAccountsTab()
-	  	  	.clickNewOnAccountsPage()
+	
+	  	 
+			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+			.selectAccountFromSearchResults()
+			.getDPData()
+	  	    
+	  	    .clickNewOnAccountsPage()
 			.chooseMemberForm()
 		
 		//3. Account Name = Any
@@ -140,34 +147,35 @@ public class TestCase_7137 {
 		.verifyAffiliateGroupIsNotNull()
 		.verifyAgEffectiveDateIsNotNull()
 		
-		//10. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
-		
-		//11. Verify Corporate parent name in the form
-		.verifyCorporateParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-		
-		//12. Verify "Is Food Service parent" field 
-		.verifyIsFoodServiceParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFoodServiceParent", sDataSheetName))
-		
-		//13 Verify Food Service parent name in the form 
-		.verifyFoodServiceParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-		
-		//14 Verify Sponsor field 
-		.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-		
-		//15 Verify "Is Sponsor" field 
-		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
-		
+		//13. Verify "IS Corporate account" field
+		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
+	
+	//14. Verify Corporate parent name in the form
+		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
+	
+	//15. Verify "Is Food Service parent" field 
+		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
+	
+	//16 Verify Food Service parent name in the form 
+		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
+	
+	//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+	
+	//16 Verify "Is Sponsor" field 
+	.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+	
 		//FBO details verification
 		//Verify "Is FBO" field 
-		.verifyIsFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFBO", sDataSheetName))
+	
+		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
 		
 		//FBO
-		.verifyFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
 				
 		//FBORD
-		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
-		;
+		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName));
+		
 		
 		//commenting below block since we are not verifying Is Member Add mail sent in the audit history due to the current changes in the application
 		

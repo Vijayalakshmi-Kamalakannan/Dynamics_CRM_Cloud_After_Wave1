@@ -2,6 +2,8 @@ package testcases.Member;
 
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.MemberFormPage;
+import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_7138:Create new member - New Member form through sub account and save it as prospect first
 public class TestCase_7138 {
@@ -11,7 +13,8 @@ public class TestCase_7138 {
 	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
 	
-	//1. Login to CRM using member supervisor / member credentials 
+	new WebDriverServiceImpl();
+		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
@@ -24,15 +27,17 @@ public class TestCase_7138 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 		
 	//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectParentAccountFromSearchResults()
+		.selectAccountFromSearchResults()
+		.getDPData()
 		.selectSubaccount()
+		
 		
 	//4. Click on Add new account 
 		.clickNewAccountInSubAccount()
 	
 	//5. Verify Direct parent and Top parent are populated 
-		.verifyDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyTopParent", sDataSheetName))
-		.verifyTopParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		.verifyDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		.verifyTopParent(WebDriverServiceImpl.Dpdata.get("TopParent_Name"))
 			
 	//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
@@ -144,33 +149,34 @@ public class TestCase_7138 {
 			.verifyAgEffectiveDateIsNotNull()
 			
 		//13. Verify "IS Corporate account" field
-			.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
+			.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 		
 		//14. Verify Corporate parent name in the form
-			.verifyCorporateParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+			.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
 		
 		//15. Verify "Is Food Service parent" field 
-			.verifyIsFoodServiceParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFoodServiceParent", sDataSheetName))
+			.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
 		
 		//16 Verify Food Service parent name in the form 
-			.verifyFoodServiceParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+			.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
 		
 		//17 Verify Sponsor field 
-			.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+			.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
 		
 		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 		
 			//FBO details verification
 			//Verify "Is FBO" field 
-			.verifyIsFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFBO", sDataSheetName))
+		
+			.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
 			
 			//FBO
-			.verifyFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+			.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
 					
 			//FBORD
 			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
-		
+			
 			//Commenting the below block since "Is Member Add mail sent" verification is not happening in the Audit history page
 		/*
 		 * //18 Go to > and click on Membership entity and double click on the Top
