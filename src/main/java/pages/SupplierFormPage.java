@@ -145,7 +145,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='NY INFORMATION']")),"My Information Label");
 		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
-		 try {
+		verifyDisplayed(getDriver().findElement(By.xpath("//div[@data-id='accountnumber-locked-iconWrapper']")), "CRM Lock symbol");
+		try {
 				DataInputProvider.setCellData(sCRMNumber.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName"));
 				assertNotNull(sCRMNumber);
 		 } catch (Exception e) {

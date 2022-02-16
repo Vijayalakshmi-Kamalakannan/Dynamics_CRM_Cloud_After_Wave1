@@ -45,7 +45,10 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public byte[] encodedPassword ;
 	public String encodedData;
 	public static HashMap<String,String> Dpdata=new HashMap<String, String>();
-public static final String Terminate_Status_Message="Please do not create account with Terminated Account status";
+	public static final String Terminate_Status_Message="Please do not create account with Terminated Account status";
+	public static String CRMNumber;
+	public static String entityCode;
+	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public ExtentTest setReport()
 	{
@@ -106,9 +109,18 @@ public static final String Terminate_Status_Message="Please do not create accoun
 	public void type(WebElement ele, String data, String fieldName)   {
 		try {
 
-			ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
-			ele.sendKeys(Keys.BACK_SPACE);
-			ele.sendKeys(data);
+			try {
+				Thread.sleep(2000);
+				ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
+				ele.sendKeys(Keys.BACK_SPACE);
+				Thread.sleep(2000);
+				ele.sendKeys(data);
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			String sExpectedValue= ele.getAttribute("value");
 
 			if (fieldName.equalsIgnoreCase("password"))
@@ -351,29 +363,29 @@ public static final String Terminate_Status_Message="Please do not create accoun
 		return bReturn;
 	}
 
-	
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		public String verifIsNoTNullValue(WebElement ele, String field) {	
-			String bReturn = "";
-			try {
+	public String verifIsNoTNullValue(WebElement ele, String field) {	
+		String bReturn = "";
+		try {
 
-				bReturn = ele.getAttribute("value");
-				if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
-					setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
-					Driver.failCount++;
-				}
-				else {
-					setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
-					
-				}
-			} catch (WebDriverException e) {
-				setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+			bReturn = ele.getAttribute("value");
+			if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
+				setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
 				Driver.failCount++;
-				throw e;
 			}
-			return bReturn;
+			else {
+				setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
+
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+			Driver.failCount++;
+			throw e;
 		}
+		return bReturn;
+	}
 
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -427,13 +439,13 @@ public static final String Terminate_Status_Message="Please do not create accoun
 		return bReturn;
 	}
 
-	
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		public void scrolldown() {
-	JavascriptExecutor js = (JavascriptExecutor) getDriver();
-	js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-}
+	public void scrolldown() {
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public void scrollUntilElementVisible(WebElement element) throws InterruptedException {
@@ -556,9 +568,9 @@ public static final String Terminate_Status_Message="Please do not create accoun
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	
+
 	public void verifyElementisNotDisplayed(int count, String field) {
-		
+
 		try {
 			if(count>0) {
 				setReport().log(Status.FAIL, field+" is displayed",screenshotCapture());
@@ -570,7 +582,7 @@ public static final String Terminate_Status_Message="Please do not create accoun
 			Driver.failCount++;
 			throw e;
 		} 
-		
+
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

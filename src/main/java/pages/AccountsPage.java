@@ -39,6 +39,7 @@ public class AccountsPage extends WebDriverServiceImpl {
   	public  MemberFormPage selectAccountFromSearchResults() throws InterruptedException {	
 		//Actions action = new Actions(getDriver());
 		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
+		Thread.sleep(4000);
 		return new MemberFormPage();
 	}	
   	
