@@ -106,19 +106,39 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
+
 	//Verify LOB required Error message
-		public MemberFormPage verifyLOBRequiredForMemberShipErrorMessage(String errorMessage) throws InterruptedException {
+	public MemberFormPage verifyLOBRequiredForMemberShipErrorMessage(String errorMessage) throws InterruptedException {
 
-			Thread.sleep(5000);
-			verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"Deactivate Error");
-			click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Ok Button");
-			return this;
+		Thread.sleep(5000);
+		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"Deactivate Error");
+		click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Ok Button");
+		return this;
 
+	}
+
+	//select Account Type
+	public MemberFormPage verifyselectAccountTypeIsReadOnly(String accountType) throws InterruptedException{
+		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Account Type");
+		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")))),accountType,"Account type");
+		Thread.sleep(2000);
+		verifyTextDoesNotMatchTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
+		return this;
+	}
+
+
+public LoginPage clickLogout() {
+		
+		click(getDriver().findElement(By.xpath("//*[@id='mectrl_headerPicture']")),"User Name button");
+		click(getDriver().findElement(By.xpath("//button[contains(text(),'Sign out')]")),"Sign Out button");
+		if(getDriver().findElements(By.xpath("//span[contains(text(),'Discard changes')]")).size()>0) {
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'Discard changes')]")),"Discard button");
 		}
-	
-	
-
+		
+		return new LoginPage();
+		
+		
+	}
 	//select Account Type
 	public MemberFormPage selectAccountType(String accountType) throws InterruptedException{
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Account Type");
@@ -555,10 +575,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	// Verify Save and New button is not displayed
-	
+
 	public MemberFormPage verifySaveAndNewButtonNotDisplayed() {
 		List<WebElement> saveAndNewButton= getDriver().findElements(By.xpath("//span[contains(text(),'Save & New')]"));
-		
+
 		verifyElementisNotDisplayed(saveAndNewButton.size(), "Save and New Button");
 		return this;
 	}
@@ -603,20 +623,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage deactivateLOB() throws InterruptedException {
-	click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Button");
-	verifyDisplayed(getDriver().findElement(By.xpath("//h1[@aria-label='Confirm Deactivation']")), "Deactivation Dialog Box");
-	click((getDriver().findElement(By.xpath("//span[contains(@id,'dialogButtonText') and contains(text(),'Deactivate')]"))),"Deactivate button");
-	Thread.sleep(5000);
-	return this;
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Button");
+		verifyDisplayed(getDriver().findElement(By.xpath("//h1[@aria-label='Confirm Deactivation']")), "Deactivation Dialog Box");
+		click((getDriver().findElement(By.xpath("//span[contains(@id,'dialogButtonText') and contains(text(),'Deactivate')]"))),"Deactivate button");
+		Thread.sleep(5000);
+		return this;
 	}
-	
+
 	public MemberFormPage verifyErrorMessageLOBDeactivate() throws InterruptedException{
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[@aria-label='Published Member Account must have at least one active LOB']")), "Deactivation Dialog Box");
 		click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Okay button");
 		Thread.sleep(5000);
 		return this;
 	}
-	
+
 	public MemberFormPage activateLOB() {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Activate')]")),"Activate LOB");
 		verifyDisplayed(getDriver().findElement(By.xpath("//h1[@aria-label='Confirm Line of Business Activation']")), "Dialog Box");
@@ -631,12 +651,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage selectDeactivatedLOB() throws InterruptedException {
-		
+
 		click(getDriver().findElement(By.xpath("//span[contains(@id,'ViewSelector')]")),"Select View");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Deactivated Portfolio Category')]")),"Deactivated Portfolio");
 		Thread.sleep(2000);
 		return this;
-		
+
 	}
 	public MemberFormPage verifyEndDate(String endDate) {
 
@@ -770,9 +790,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}	
 
 	//Verify the Error message to end a membership when there is active child
-	
+
 	public MemberFormPage verifyCantTerminateMembershipError() {
-		
+
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[@aria-label='Account with active child accounts cannot be terminated']")), "Error message");
 		click(getDriver().findElement(By.xpath("//*[@id='cancelButton']")),"Ok Button");
 		return this;
@@ -827,6 +847,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Click Deactivate button in the membership Page
+	public MemberFormPage clickMembershipDeactivateButton() throws InterruptedException {
+	
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Button");
+		verifyDisplayed(getDriver().findElement(By.xpath("//h1[@aria-label='Confirm Deactivation']")), "Deactivation Dialog Box");
+		Thread.sleep(5000);
+		return this;
+	}
 
 
 

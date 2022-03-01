@@ -26,8 +26,8 @@ public class AccountsPage extends WebDriverServiceImpl {
   		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
-		Thread.sleep(15000);
-		Thread.sleep(15000);
+		Thread.sleep(10000);
+		Thread.sleep(10000);
 		WebDriverWait wait= new WebDriverWait(getDriver(),20);
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
 		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );

@@ -42,7 +42,7 @@ public class LoginPage extends WebDriverServiceImpl{
 	//Enter Email Id to Login
 	public LoginPage typeEmail(String email) throws InterruptedException, AWTException {
 		verifyNotificationpage();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		type(getDriver().findElement(By.xpath("//*[@name='loginfmt']")),email,"Email");
 		Thread.sleep(3000);
 		return this;
@@ -51,7 +51,7 @@ public class LoginPage extends WebDriverServiceImpl{
 	//Enter Password 
 	public LoginPage typePassword(String password) throws InterruptedException {
 		type(getDriver().findElement(By.xpath("//*[@name='passwd']")),password,"Password");
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		return this;
 	}
 
@@ -64,7 +64,7 @@ public class LoginPage extends WebDriverServiceImpl{
 	//Click on Signin
 	public LoginPage clicSignin() throws InterruptedException {
 		click(getDriver().findElement(By.id("idSIButton9")),"Signin");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		return new LoginPage();
 	}	
 

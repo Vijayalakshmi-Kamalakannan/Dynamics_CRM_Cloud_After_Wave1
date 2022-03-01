@@ -26,7 +26,7 @@ public class DashboardPage extends WebDriverServiceImpl {
 	
 	public BulkImportPage selectDataImports() throws InterruptedException {	
 		click(getDriver().findElement(By.xpath("//span[text()='Data Imports']")),"Accounts");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		return new BulkImportPage();
 		}
 }

@@ -531,6 +531,27 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
+	
+	
+	public void verifyTextDoesNotMatchTitleAttribute(WebElement ele, String expectedText,String field) {
+		String bReturn=ele.getAttribute("title");
+		//String bReturn=ele.getText();
+		try {
+			if(bReturn.contains(expectedText)) {
+				setReport().log(Status.FAIL, "The text :"+bReturn+" matches with the value in "+field+" field",screenshotCapture());
+				Driver.failCount++;
+			}else {
+				setReport().log(Status.PASS, "The text :"+bReturn+" did not match with the value "+expectedText+"in "+field+" field",screenshotCapture());
+				
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} 
+	}
+	
+	
 	public void verifyExactTextWithTitleAttribute(WebElement ele, String expectedText,String field) {
 		String bReturn=ele.getAttribute("title");
 		//String bReturn=ele.getText();

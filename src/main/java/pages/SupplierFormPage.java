@@ -94,6 +94,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	
 	 
 	public SupplierFormPage selectBusinessClassification(String businessClassification) throws InterruptedException {
+		Thread.sleep(4000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_textInputBox_with_filter_new']")),"Business Classification");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_textInputBox_with_filter_new']")))),businessClassification,"Business Classification");
 		Thread.sleep(4000);
@@ -101,6 +102,15 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(4000);
 		return this;
 	}
+	
+	//select Account Type
+		public SupplierFormPage verifyselectAccountTypeIsReadOnly(String accountType) throws InterruptedException{
+			click(getDriver().findElement(By.xpath("//select[@aria-label='Account Type']")),"Account Type");
+			selectDropDownUsingVisibleText((((getDriver().findElement(By.xpath("//select[@aria-label='Account Type']"))))),accountType,"Account Type") ;Thread.sleep(2000);
+			verifyTextDoesNotMatchTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
+			return this;
+		}
+
 	
 	public SupplierFormPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
@@ -454,6 +464,13 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='statecode.fieldControl-option-set-select']")),"Account Type");
 		selectDropDownUsingValue((((getDriver().findElement(By.xpath("//*[@data-id='cancelButton']"))))),"Account Type");
 		return this;
+	}
+	
+	// Existing Bug :  Not Defaulting  to Supplier .Hence Choose Manually.
+		public SupplierFormPage selectAccountType(String accounttype) {
+			click(getDriver().findElement(By.xpath("//select[@aria-label='Account Type']")),"Account Type");
+			selectDropDownUsingVisibleText((((getDriver().findElement(By.xpath("//select[@aria-label='Account Type']"))))),accounttype,"Account Type") ;
+			return this;
 	}
 
 //Verify Premier start date
