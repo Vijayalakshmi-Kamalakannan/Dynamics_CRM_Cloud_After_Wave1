@@ -75,30 +75,16 @@ public class PreAndPost extends WebDriverEvents
 	}
 
 	//Initiate webdriver
-	public void beforeMethod() throws Exception { 		
+	public void beforeMethod() throws Exception { 
+		
 		properties.load(new FileInputStream(new File("./src/test/resources/environment.properties")));
-
-
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe"); 
 		webdriver = new ChromeDriver();
-
-
-
-		//System.setProperty("webdriver.edge.driver", "src\\test\\resources\\msedgedriver.exe");
-		/*
-		 * ChromeOptions options = new ChromeOptions();
-		 * if(properties.getProperty("Headless").equalsIgnoreCase("true"))
-		 * options.setHeadless(true); options.addExtensions(new
-		 * File("src\\test\\resources\\extension_1_0_5_0.crx")); 
-		 * webdriver = new ChromeDriver(options);
-		 */
-
 		driver = new EventFiringWebDriver(webdriver);
 		driver.register(this);
 		tlDriver.set(driver);		
 		getDriver().manage().window().maximize();
 		getDriver().get(URL);
-
 		getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 	}
 
