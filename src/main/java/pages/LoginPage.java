@@ -41,6 +41,7 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Enter Email Id to Login
 	public LoginPage typeEmail(String email) throws InterruptedException, AWTException {
+		System.out.println("Entering the User Id");
 		verifyNotificationpage();
 		Thread.sleep(2000);
 		type(getDriver().findElement(By.xpath("//*[@name='loginfmt']")),email,"Email");
