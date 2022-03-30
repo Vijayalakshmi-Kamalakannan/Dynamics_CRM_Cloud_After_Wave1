@@ -106,6 +106,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	public MemberFormPage verifyMemberPermissionError(String errorMessage) throws InterruptedException {
+
+		Thread.sleep(5000);
+		System.out.println("//h2[contains(@aria-label,'"+errorMessage+"')]");
+		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"LOB Required");
+		click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Ok Button");
+		return this;
+
+	}
 
 	//Verify LOB required Error message
 	public MemberFormPage verifyLOBRequiredForMemberShipErrorMessage(String errorMessage) throws InterruptedException {
@@ -526,6 +536,18 @@ public LoginPage clickLogout() {
 		return this;
 	}
 
+	
+	public MemberFormPage selectFBOOverride(String selectMemberOverride) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//h2[@title='DIRECT PARENT']")),"Direct Parent");
+		click(getDriver().findElement(By.xpath("//h2[@title='TOP PARENT']")),"Top Parent");
+		click(getDriver().findElement(By.xpath("//h2[@title='Sponsor']")),"Sponsor");
+		click(getDriver().findElement(By.xpath("//h2[@title='CORPORATE PARENT']")),"Corporate PArent");
+		click(getDriver().findElement(By.xpath("//h2[@title='FOOD SERVICE PARENT']")),"FOOD SERVICE PARENT");
+		click(getDriver().findElement(By.xpath("//h2[@title='FBO']")),"FBO");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='FBO Manual Override']")),selectMemberOverride,"MemberOverride");
+		Thread.sleep(2000);
+		return this;
+	}
 	//Verify Is FBO
 	public MemberFormPage verifyIsFBO(String verifyIsFBO) { 
 
@@ -636,6 +658,15 @@ public LoginPage clickLogout() {
 		Thread.sleep(5000);
 		return this;
 	}
+	
+	
+	public MemberFormPage verifyErrorMessageLOBisNotDeactivate() throws InterruptedException{
+		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'deactivate the LOB from published account')]")), "Deactivation Dialog Box");
+		click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Okay button");
+		Thread.sleep(5000);
+		return this;
+	}
+
 
 	public MemberFormPage activateLOB() {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Activate')]")),"Activate LOB");
@@ -961,12 +992,28 @@ public LoginPage clickLogout() {
 		//	verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_fbotype.fieldControl-option-set-select']")),FBOType,"FBO GPO Type"); 
 		return this;
 	}
+	
+	public MemberFormPage selectFBO(String FBO) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//input[contains(@id,'ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo')]")),"FBO");
+		Thread.sleep(5000);
+		type(((getDriver().findElement(By.xpath("//input[contains(@id,'ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo')]")))),FBO,"FBO");
+		Thread.sleep(5000);
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'fbo.fieldControl-ix_premierein')]")),"FBO");
+		return this;
+	}
 
 	//Select FBO Effective date
 	public MemberFormPage selectFBOEffectiveDate(String FBOEffectiveDate) {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_fbotypeeffectivedate.fieldControl-date-time-input']")))),FBOEffectiveDate,"FBO Effective Date");
 		return this;
 	}
+	
+	//Select FBO Effective date
+		public MemberFormPage selectFBORelationDate(String FBORelationDate) {
+			type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")))),FBORelationDate,"FBO Effective Date");
+			return this;
+		}
 	//Verify Error Message
 
 	public MemberFormPage verifyBusinessError(String errorMessage) {
@@ -1007,6 +1054,15 @@ public LoginPage clickLogout() {
 		verifyDisplayed(getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo-locked-icon']")), "FBO lock");
 		return this;
 	}
+	
+	//Verify Is FBO is Locked	
+		public MemberFormPage selectisFBO(String selectMemberOverride) {
+			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Is FBO']")),selectMemberOverride,"MemberOverride");
+			
+			
+			
+			return this;
+		}
 
 	//Verify Sponsor is Locked
 	public MemberFormPage verifySponsorLocked() {
@@ -1633,6 +1689,14 @@ public LoginPage clickLogout() {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_fbogpo.fieldControl-checkbox-container']")),FBOGPO,"FBO GPO"); 
 		return this;
 	}
+	
+	
+	//Verify FBO GPO
+		public MemberFormPage selectFBOGPO(String FBOGPO) {
+			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='FBO GPO']")),FBOGPO,"FBOGPO");
+			
+			return this;
+		}
 
 	public MemberFormPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
