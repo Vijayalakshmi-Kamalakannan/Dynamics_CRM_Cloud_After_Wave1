@@ -151,7 +151,7 @@ public class TestCase_8784 {
 		.clickLineOfBusiness()
 		.selectLOB(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.deactivateLOB()
-		.verifyErrorMessageLOBDeactivate()
+		.verifyErrorMessageLOBisNotDeactivate()
 		.clickGoBackButton()
 		.clickGeneralTab()
 		.chooseRecordStatusDraft()

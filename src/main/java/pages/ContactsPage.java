@@ -12,6 +12,8 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.Status;
 
@@ -30,6 +32,29 @@ public class ContactsPage extends WebDriverServiceImpl {
 	}
 
 	
+	//select existing contact
+		public ContactsPage selectExistingContact(String CRMNumber) throws InterruptedException {
+			Thread.sleep(3000);
+			// Click Drop down
+			click(getDriver().findElement(By.xpath("//span/i[@data-icon-name='ChevronDown']")),"Drop down");
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'All Contacts')]")), "All Contacts");
+			Thread.sleep(10000);
+			Thread.sleep(15000);
+			WebDriverWait wait= new WebDriverWait(getDriver(),20);
+			wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
+			typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),CRMNumber,"Find Criteria" );
+			Thread.sleep(5000);
+			return this;
+
+		}
+		
+		//Select Contact from search results
+		public  ContactsPage selectAccountFromContactSearchResults() throws InterruptedException {	
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a")),"Search Results");
+			return this;
+		}	
+		
 	//select view type
 	
 	public ContactsPage selectAllContactView() throws InterruptedException {
@@ -569,6 +594,54 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	// Verify Business Process Error Message
+		public ContactsPage verifyErrorMessage(String errormessage) throws InterruptedException {
+			Thread.sleep(5000);
+			verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")),errormessage,"Job Function Error Message");
+			Thread.sleep(3000);
+			return this;	
+		}
+		
+		//Click OK on Error Message
+		public ContactsPage clickOKOnErrorMessage() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"OK");
+			Thread.sleep(5000);
+			return this;	
+		}
+
+		//Click On Discard Changes
+		public ContactsPage clickDiscardChanges() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+			Thread.sleep(5000);
+			return this;	
+		}
+	//click save button in Job Function without Script Error Check
+
+		public ContactsPage clickSaveInJobFunctionWithoutScriptError() throws InterruptedException {
+			click(getDriver().findElement(By.xpath(
+					"//*[@data-id='ix_contactjobfunction|NoRelationship|Form|Mscrm.Form.ix_contactjobfunction.Save']")),
+					"Save");
+			Thread.sleep(10000);
+			//Duplicate Job Function Ignore and Save
+			try {
+				if (getDriver().findElement(By.xpath("//*[@data-id='ignore_save']")).isDisplayed()) {
+					click(getDriver().findElement(By.xpath("//*[@data-id='ignore_save']")),"Duplicate Job Function- Ignore and Save");
+				}
+			}
+			catch(Exception e){
+
+			}
+			return this;}
+		//Select Contact from search results
+				public  ContactsPage deactivateContactAllContactsView() throws InterruptedException {	
+					Thread.sleep(3000);
+					click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-1']")),"Contact");
+					click(getDriver().findElement(By.xpath("//span[text()='Deactivate']")),"Deactivate");
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")), "Confirm");
+					Thread.sleep(10000);
+					return this;
+				}	
 	// Provide value for Job function as provided in the datasheet
 	public ContactsPage typeJobFunction(String jobFunction) throws InterruptedException {
 		Thread.sleep(3000);
@@ -604,6 +677,17 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 	
+	//Click Log out
+		public LoginPage clickLogout()
+		{
+			click(getDriver().findElement(By.xpath("//*[@id='mectrl_headerPicture']")),"User Name button");
+			click(getDriver().findElement(By.xpath("//button[contains(text(),'Sign out')]")),"Sign Out button");
+			if(getDriver().findElements(By.xpath("//span[contains(text(),'Discard changes')]")).size()>0) {
+				click(getDriver().findElement(By.xpath("//span[contains(text(),'Discard changes')]")),"Discard button");
+			}
+
+			return new LoginPage();
+		}
 	//Click on summary tab
 	public ContactsPage clickSummaryTab(String jobFunction) throws InterruptedException {
 		Thread.sleep(3000);
@@ -807,6 +891,14 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 	
+	// Click save button in the Contact Communication page Without Script Error
+		public ContactsPage clickSaveInContactCommunicationWithoutScriptError() throws InterruptedException {
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_contactcommunication|NoRelationship|Form|Mscrm.Form.ix_contactcommunication.Save']")),"Save");
+			Thread.sleep(5000);
+			return this;
+		}
+
 	// Provide value for Contact Communication as provided in the datasheet
 		public ContactsPage typeContactCommunication1(String contactCommunication) throws InterruptedException {
 			Thread.sleep(5000);
@@ -965,5 +1057,22 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.id("mectrl_body_signOut")), "Signout button");
 		return this;
 	}
+	
+	// Click Save and Close button in contact summary page
+		public MemberFormPage clickSaveAndClose() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");
+			Thread.sleep(5000);
+			return new MemberFormPage();
+
+		}
 		
+		// Click back from Contact To Member Form
+		public MemberFormPage clickGoBackToMemberForm() throws InterruptedException {
+			Thread.sleep(4000);
+			click(getDriver().findElement(By.xpath("//*[@title='Go back']")), "Go Back");
+			Thread.sleep(6000);
+			return new MemberFormPage();
+		}
+
+	
 }

@@ -12,7 +12,8 @@ public class TestCase_7139 {
 	@Test
 	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
-			//1. Login to CRM using member supervisor / member credentials 
+			//1. Login to CRM using member supervisor / member credentials
+			WebDriverServiceImpl.isMemberForm=true;
 				new LoginPage()
 				.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 				.clickNext()
@@ -33,6 +34,7 @@ public class TestCase_7139 {
 			//4. Click on Add new account 
 				.clickNewAccountInSubAccount()
 				.chooseMemberEntryForm()
+				
 		
 			//5. Verify Direct parent and Top parent are populated 
 		 		.verifyDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "VerifyDirectParent", sDataSheetName))
@@ -40,6 +42,8 @@ public class TestCase_7139 {
 					
 			//6. Account Name = Any
 		 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+		 		
+		 		
 			
 				//Top Parent Relation =  OLM
 				 .selectTopParentRelationMEF(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))

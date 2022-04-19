@@ -4,6 +4,8 @@ import static org.testng.Assert.assertNotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +15,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import com.aventstack.extentreports.Status;
 
 import driver.Driver;
 import services.WebDriverServiceImpl;
@@ -27,6 +32,326 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		return this;
 	}
 	
+	//Verify Diversity Info fields
+		public SupplierFormPage verifyDiversityInfoFields() throws InterruptedException {
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"Account Name");	
+			Thread.sleep(2000);
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_tollfreeno.fieldControl-text-box-text']")),"Toll Free");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("(//span[contains(@class,'pa-cs pa-cr')]//span)[3]")), "Diversity Information");
+			Thread.sleep(5000);
+			Actions a = new Actions(getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='ix_diversityinformation|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_diversityinformation.AddNewStandard']"))).click().build().perform();				
+			Thread.sleep(4000);
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Account']")), "Account", "Account");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Diversity Type']")), "Diversity Type", "Diversity Type");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Certifying Agency']")), "Certifying Agency", "Certifying Agency");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Start Date']")), "Start Date", "Start Date");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='End Date']")), "End Date", "End Date");
+			Thread.sleep(2000);
+			return this;		
+		}
+		
+		//Add New Diversity Info
+		public SupplierFormPage addNewDiversityInfo(String certifyingAgency,String diversityType, String diversityStartDate) throws InterruptedException {
+			Thread.sleep(3000);
+			type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+			Thread.sleep(2000);
+			type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+			Thread.sleep(5000);
+			selectDropDownUsingValue(getDriver().findElement(By.xpath("//select[@data-id='ix_diversitytype.fieldControl-option-set-select']")), diversityType);
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");	
+			return this;
+		}
+		
+		//*********************************Diversity Information*****************
+
+		//Verify New Diversity Type Options 
+
+		public SupplierFormPage verifyNewDiversityTypesAndFields() throws InterruptedException {
+
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"Account Name");	
+			Thread.sleep(2000);
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_tollfreeno.fieldControl-text-box-text']")),"Toll Free");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("(//span[contains(@class,'pa-cs pa-cr')]//span)[3]")), "Diversity Information");
+			Thread.sleep(5000);
+			Actions a = new Actions(getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='ix_diversityinformation|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_diversityinformation.AddNewStandard']"))).click().build().perform();				
+			Thread.sleep(5000);		
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Account']")), "Account", "Account");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Diversity Type']")), "Diversity Type", "Diversity Type");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Certifying Agency']")), "Certifying Agency", "Certifying Agency");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='Start Date']")), "Start Date", "Start Date");
+			verifyExactText(getDriver().findElement(By.xpath("//label[text()='End Date']")), "End Date", "End Date");
+			Thread.sleep(3000);
+			Select diversity= new  Select(getDriver().findElement(By.xpath("//*[@data-id='ix_diversitytype.fieldControl-option-set-select']")));		
+			// Create Expected Array List
+			List<String> expectedDiversityType = Arrays.asList("---","Minority Owned","Women Owned","Veteran Owned","Small Business","LGBT Owned");		
+			//Create Actual blank Array List
+			List<String> actualDiversityType=new ArrayList<String>();	
+			//Create temp Array List > add  actual options  from DOM for comparison
+			List<WebElement> mylist =diversity.getOptions();		
+			//loop through DOM and add dropdown values into mylist for comparison
+			for (WebElement ele:mylist) {			
+				String data =ele.getText();
+				actualDiversityType.add(data);			
+				System.out.println("The Actual Diversity Type is : "  + " " +data);				
+				Thread.sleep(3000);
+				if(expectedDiversityType.containsAll(actualDiversityType))
+				{		
+					Thread.sleep(3000);
+					setReport().log(Status.PASS, "Diversity Typ e- " + "   " + data + "  " +  "-  Option is available to choose from the list" + " "+ expectedDiversityType,	screenshotCapture());
+
+				} 
+				else {
+					setReport().log(Status.FAIL, "Diversity Type - "+   "   " + data + "  " + "- Option is not available in the list"  + " "+ expectedDiversityType ,	screenshotCapture());
+					Driver.failCount++;
+				}
+
+			}
+
+			return this;
+		}
+		
+		//Verify Diversity Information Associated view
+		public SupplierFormPage diversityInfoAssociatedView() throws InterruptedException {
+
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			click(getDriver().findElement(By.xpath("(//span[text()='Diversity Information'])[2]")),"Related > Diversity Information");
+			Thread.sleep(10000);
+			
+				List<WebElement> colmns = getDriver().findElements(By.xpath("//div[@class='wj-colheaders']/div[@class='wj-row']/div/div/div/div/div[1]"));
+				List<String> expectedcolumns =Arrays.asList("Diversity Type","Start Date","End Date");
+				List<String> actualcolumns=new ArrayList<String>();
+				for(WebElement col : colmns)
+				{
+					String data = col.getText();
+					actualcolumns.add(data);
+					System.out.println(data);
+				}
+				if(actualcolumns.equals(expectedcolumns))
+				{ 
+					setReport().log(Status.PASS, " 'Diveristy Information Associated View' matches all the expected columns" + " " + actualcolumns,	screenshotCapture()); }
+
+				else {
+					setReport().log(Status.FAIL, "' Diveristy Information Associated View' doesn't match all the expected columns" + " " + actualcolumns,	screenshotCapture()); }
+		
+			return this;
+		}
+		
+		//Verify Active Diversity Information Views
+		public SupplierFormPage activeDiversityView() throws InterruptedException {
+
+			if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+				{
+				click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Diversity Information Associated View -Down Arrow");
+				Thread.sleep(5000);
+				click(getDriver().findElement(By.xpath("//span[text()='Active Diversity Informations']")),"Active Diversity Information View");
+				Thread.sleep(3000);
+				List<WebElement> colmns = getDriver().findElements(By.xpath("//div[@class='wj-colheaders']/div[@class='wj-row']/div/div/div/div/div[1]"));
+				List<String> expectedcolumns =Arrays.asList("Diversity Type","Start Date","End Date","Account", "Entity Code (Account)", "CRM Account # (Account)","Account Name (Account)","Account Status (Account)","Store/Location Type (Account)");
+				List<String> actualcolumns=new ArrayList<String>();
+				for(WebElement col : colmns)
+				{
+					String data = col.getText();
+					actualcolumns.add(data);
+					System.out.println(data);
+
+				}
+				if(actualcolumns.equals(expectedcolumns))
+				{ 
+					setReport().log(Status.PASS, " 'Active Diveristy Information View' matches all the expected columns" + " " + actualcolumns,	screenshotCapture()); }
+
+				else {
+					setReport().log(Status.FAIL, "'Active Diveristy Information View' doesn't match all the expected columns" + " " + actualcolumns,	screenshotCapture()); }
+
+			}
+			return this;
+		}
+		
+		//Choose CAA Click on deactivate button
+		public SupplierFormPage clickOnCAAandDeactivate() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//div[@data-id='cell-0-1']")), " CAA ");
+			Thread.sleep(5000);
+			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button");
+			return this;
+		}
+
+		// Confirm deactivate button
+		public SupplierFormPage clickConfirmCAADeactivation() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+			Thread.sleep(10000);
+			return this;
+		}
+		
+		//Verify  Inactive Diversity Information Views
+				public SupplierFormPage inactiveDiversityView() throws InterruptedException {
+
+									
+					if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+						{
+						click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Active Diversity Information Associated View -Down Arrow");
+						Thread.sleep(5000);
+						click(getDriver().findElement(By.xpath("//span[text()='Inactive Diversity Informations']")),"InActive Diversity Information View");
+						Thread.sleep(3000);
+						List<WebElement> colmns = getDriver().findElements(By.xpath("//div[@class='wj-colheaders']/div[@class='wj-row']/div/div/div/div/div[1]"));
+						List<String> expectedcolumns =Arrays.asList("Diversity Type","Start Date","End Date","Account", "Entity Code (Account)", "CRM Account # (Account)","Account Name (Account)","Account Status (Account)","Store/Location Type (Account)");
+						List<String> actualcolumns=new ArrayList<String>();
+						for(WebElement col : colmns)
+						{
+							String data = col.getText();
+							actualcolumns.add(data);
+							System.out.println(data);
+
+						}
+						if(actualcolumns.equals(expectedcolumns))
+						{ 
+							setReport().log(Status.PASS, " 'InActive Diveristy Information View' matches all the expected columns" + " " + actualcolumns,	screenshotCapture()); }
+
+						else {
+							setReport().log(Status.FAIL, "'InActive Diveristy Information View' doesn't match all the expected columns" + " " + actualcolumns,	screenshotCapture()); }
+
+					}
+					return this;
+				}
+
+				
+				//Certifying Agency field validation
+				public SupplierFormPage verifyCertifyingAgency(String verifyCertifyingAgencyError,String certifyingAgency) throws InterruptedException {
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+					click(getDriver().findElement(By.xpath("(//span[text()='Diversity Information'])[2]")),"Related > Diversity Information");
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//span[text()='New Diversity Information']"))," + New Diversity Information");
+					Thread.sleep(1500);
+					click(getDriver().findElement(By.xpath("//span[text()='Save']")),"Save Button");
+					Thread.sleep(2000);
+					verifyExactText(getDriver().findElement(By.xpath("//span[text()='Certifying Agency: Required fields must be filled in.']")), verifyCertifyingAgencyError, "Certifying Agency Mandatory Error");
+					Thread.sleep(5000);
+					type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+					Thread.sleep(3000);
+					click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");	
+					Thread.sleep(10000);
+					return this;
+				}
+				
+				//Deactivate Diversity Info from Diversity Info Associated View
+				public SupplierFormPage deactivateDiversityInfoDivAssociatedView() throws InterruptedException {
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//div[@data-id='cell-0-1']")), "Check Mark on Diversity Info");
+					Thread.sleep(3000);
+					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button");
+					Thread.sleep(6000);
+					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Confirm Deactivate");
+					Thread.sleep(3000);
+					return this;
+
+				}
+				
+				//Verify Diversity Type's Sub Classification options
+				public SupplierFormPage verifyMinorityOwndSubClassificationOptions() throws InterruptedException {
+					Select subClass= new  Select(getDriver().findElement(By.xpath("//*[@data-id='ix_subclassification.fieldControl-option-set-select']")));		
+					// Create Expected Array List
+					List<String> expectedMinOwnSubClass = Arrays.asList("---","Asian-Indian","Asian-Pacific","Black","Hispanic","Native American");		
+					//Create Actual blank Array List
+					List<String> actualMinOwnSubClass=new ArrayList<String>();	
+					//Create temp Array List > add  actual options  from DOM for comparison
+					List<WebElement> mylist =subClass.getOptions();		
+					//loop through DOM and add dropdown values into mylist for comparison
+					for (WebElement ele:mylist) {			
+						String data =ele.getText();
+						actualMinOwnSubClass.add(data);			
+						System.out.println("The Actual Diversity Type is : "  + " " +data);				
+						Thread.sleep(3000);
+						if(expectedMinOwnSubClass.containsAll(actualMinOwnSubClass))
+						{		
+							Thread.sleep(3000);
+							setReport().log(Status.PASS, "Diversity Type- " + "   " + data + "  " +  "-  Option is available to choose from the list" + " "+ expectedMinOwnSubClass,	screenshotCapture());
+
+						} 
+						else {
+							setReport().log(Status.FAIL, "Diversity Type - "+   "   " + data + "  " + "- Option is not available in the list"  + " "+ expectedMinOwnSubClass ,	screenshotCapture());
+							Driver.failCount++;
+						}
+
+					
+					}
+					return this;
+								
+		}
+
+				//Select Diversity type
+				public SupplierFormPage selectDiversityType(String diversityType) throws InterruptedException {
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+					click(getDriver().findElement(By.xpath("(//span[text()='Diversity Information'])[2]")),"Related > Diversity Information");
+					Thread.sleep(6000);
+					click(getDriver().findElement(By.xpath("//span[text()='New Diversity Information']")),"+ New Diversity Information");
+					Thread.sleep(3000);
+					selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_diversitytype.fieldControl-option-set-select']")),diversityType,"Diversity Type");
+					Thread.sleep(2000);
+					verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_diversitytype.fieldControl-option-set-select']")),diversityType,"Diversity Type");
+					return this;
+				}
+			
+			
+		//Verify Duplicate Diversity Info Error
+		public SupplierFormPage verifyduplicateDiversityInfoError(String dupDiversityErrorText) throws InterruptedException {
+			Thread.sleep(2000);
+			verifyExactText(getDriver().findElement(By.id("subtitle")), dupDiversityErrorText, "Duplicate Diversity Info Error");
+			click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")), "OK Button");				
+			click(getDriver().findElement(By.xpath("//span[contains(@class,'symbolFont BackButton-symbol')]")), "Back <-- Button");
+			click(getDriver().findElement(By.id("cancelButtonTextName")), "Discard Changes");
+			return this;
+		}
+		
+		//Deactivate Minority Owned Diversity Info through Supplier Form
+		public SupplierFormPage deactivateDiversityInfo() throws InterruptedException {
+			Thread.sleep(2000);
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"Account Name");	
+			Thread.sleep(2000);
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
+			clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_tollfreeno.fieldControl-text-box-text']")),"Toll Free");
+			click(getDriver().findElement(By.xpath("//span[text()='Minority Owned']")), "Minority Owned");
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//span[text()='Deactivate']")), "Deactivate Button");
+			Thread.sleep(7000);
+			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Confirm Deactivate");
+			return this;
+
+		}
+		
+		//Add New Primary Contact on Supplier Form
+		public SupplierFormPage addNewSupplierPrimaryContact(String contactFirstName , String contactLastName) throws InterruptedException {	
+			//clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"Account Name");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
+			Thread.sleep(5000);
+			Actions a = new Actions(getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("//label[text()='New Contact']"))).click().build().perform();
+			Thread.sleep(5000);
+			click(getDriver().findElement(By.xpath("//label[text()='First Name']/following::input[@aria-label='First Name']")),"Contact First Name");
+			type(((getDriver().findElement(By.xpath("//label[text()='First Name']/following::input[@aria-label='First Name']")))),contactFirstName,"Contact First Name");
+			click(getDriver().findElement(By.xpath("//input[@data-id='lastname.fieldControl-text-box-text']")),"Contact Last Name");
+			type(((getDriver().findElement(By.xpath("//input[@data-id='lastname.fieldControl-text-box-text']")))),contactLastName,"Contact Last Name");
+			click(getDriver().findElement(By.xpath("//span[text()='Save and Close']")),"Save and Close");
+			Thread.sleep(2500);
+			return this;
+		} 
+
+		
+		//+New Diversity Info
+		public SupplierFormPage addNewDiversityInfo() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//span[text()='New Diversity Information']")),"+ New Diversity Information");
+		Thread.sleep(4000);	
+		return this;
+		}
+		
 	public SupplierFormPage typeAccountName(String accountName) {
 		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")),"Account Name");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")))),accountName,"Account Name");
@@ -130,6 +455,35 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_text']")), verifyPrimaryContactValue,"Primary Contact");
 		return this;
 	}
+	
+	//Select Related and then CAA
+		public SupplierFormPage selectCAA() throws InterruptedException {	
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//span[text()='Contact Account Associations']")),"Contact Account Associations");
+			Thread.sleep(2000);
+			return this;
+		}
+
+		//Choose Old Primary Contact's  CAA				
+		public ContactsPage chooseOldPrimaryContactCAA(String verifyPrimaryContactValue) throws InterruptedException {
+
+			Thread.sleep(2000);
+			Actions a = new Actions(getDriver());
+			String oldCAA = getDriver().findElement(By.linkText("Madrigal, Zachary")).getText();
+			if (oldCAA.equalsIgnoreCase(verifyPrimaryContactValue)) 
+			{
+
+				a.moveToElement(getDriver().findElement(By.xpath("//span[text()='7000049844']"))).doubleClick().build().perform();				
+				//--commenting due to open issue-Inactive CAA//	click(getDriver().findElement(By.id("confirmButtonText")),"Save and Continue");
+				Thread.sleep(3000);
+			} else {
+				Thread.sleep(2000);
+			}
+
+			return new ContactsPage();
+		}
 
 	public SupplierFormPage clickSave() throws InterruptedException {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
@@ -611,6 +965,190 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")))),membershipEndDate,"End Date");
 		return this;
 	}
+	
+	//Add Minority Owned Diversity Type
+			public SupplierFormPage addMinorityOwndDiversityType(String diversityType,String certifyingAgency, String diversityStartDate,String subClassification) throws InterruptedException {
+										
+						Thread.sleep(3000);
+						selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_diversitytype.fieldControl-option-set-select']")), diversityType ,"Diversity Type");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+						Thread.sleep(5000);
+						verifySubClassficationIsOptional();
+						selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_subclassification.fieldControl-option-set-select']")), subClassification,"Sub Classification");
+						Thread.sleep(2000);
+						click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");					
+						Thread.sleep(4000);									
+						setReport().log(Status.PASS, "Diversity Type- " + "   " + diversityType + "  " +  "- is added successfully" + " "+ 	screenshotCapture());
+						return this;
+					} 
+		//Add Veteran Owned Diversity Type			
+			public SupplierFormPage addVeteranOwndDiversityType(String diversityType1,String certifyingAgency, String diversityStartDate,String subClassification1) throws InterruptedException {
+						Thread.sleep(3000);
+						selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_diversitytype.fieldControl-option-set-select']")), diversityType1,"Diversity Type");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+						Thread.sleep(5000);
+						verifySubClassficationIsOptional();
+						selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_subclassification.fieldControl-option-set-select']")), subClassification1,"Sub Classification");
+						Thread.sleep(2000);
+						click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");
+						Thread.sleep(3000);
+						setReport().log(Status.PASS, "Diversity Type- " + "   " + diversityType1 + "  " +  "-  is added successfully" + " "+ 	screenshotCapture());
+					return this;	
+						
+					}
+			
+			//Sub-Classification Field is Optional
+			public SupplierFormPage verifySubClassficationIsOptional() {
+				List<WebElement> optionalSubClass= getDriver().findElements(By.xpath("//*[@data-id='ix_subclassification-required-icon']"));
+				verifyElementisNotDisplayed(optionalSubClass.size()," ' * ' Required Asterisk next to Sub-Classification Field ");
+				return this;
+			}
+			//Add LGBT Owned		
+			public SupplierFormPage addLGBTOwndDiversityType(String certifyingAgency, String diversityStartDate) throws InterruptedException {
+						selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_diversitytype.fieldControl-option-set-select']")), "LGBT Owned","LGBT Owned");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+						Thread.sleep(5000);
+						verifySubClassficationIsNotPresent();
+						click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");
+						Thread.sleep(3000);
+						setReport().log(Status.PASS, "Diversity Type- " + "   " +  " LGBT Owned " +  "- is added successfully" + " "+ 	screenshotCapture());
+						return this;					
+			}
+			
+			//Add Women Owned Diversity Info
+			
+			public SupplierFormPage addWomenOwndDiversityType(String certifyingAgency, String diversityStartDate) throws InterruptedException {		
+					
+						selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_diversitytype.fieldControl-option-set-select']")), "Women Owned","Women Owned");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+						Thread.sleep(5000);
+						verifySubClassficationIsNotPresent();
+						click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");
+						Thread.sleep(3000);
+						setReport().log(Status.PASS, "Diversity Type- " + "   " + "Women Owned" + "  " +  "-  is added successfully" + " "+ 	screenshotCapture());
+					return this;	
+						
+					}
+
+			//Sub-Classification Field is not present
+			public SupplierFormPage verifySubClassficationIsNotPresent() {
+				List<WebElement> subClass= getDriver().findElements(By.xpath("//label[contains(text(),'Sub-Classification')]"));
+				verifyElementisNotDisplayed(subClass.size()," ' Sub-Classification  ' Field ");
+				return this;
+			}
+			//Verify Diversity Type's Veteran Owned Sub Classification options
+			public SupplierFormPage verifyVeteranOwndSubClassificationOptions(String diversityType1) throws InterruptedException {
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_diversitytype.fieldControl-option-set-select']")),diversityType1,"Diversity Type");
+				Select subClass= new  Select(getDriver().findElement(By.xpath("//*[@data-id='ix_subclassification.fieldControl-option-set-select']")));	
+				
+				// Create Expected Array List
+				List<String> expectedVetOwnSubClass = Arrays.asList("---","Service Disabled");		
+				//Create Actual blank Array List
+				List<String> actualVetOwnSubClass=new ArrayList<String>();	
+				//Create temp Array List > add  actual options  from DOM for comparison
+				List<WebElement> mylist =subClass.getOptions();		
+				//loop through DOM and add dropdown values into mylist for comparison
+				for (WebElement ele:mylist) {			
+					String data =ele.getText();
+					actualVetOwnSubClass.add(data);			
+					System.out.println("The Actual Diversity Type is : "  + " " +data);				
+					Thread.sleep(3000);
+					if(expectedVetOwnSubClass.containsAll(actualVetOwnSubClass))
+					{		
+						Thread.sleep(3000);
+						setReport().log(Status.PASS, "Sub Classification - " + "   " + data + "  " +  "-  Option is available to choose from the list" + " "+ expectedVetOwnSubClass,	screenshotCapture());
+
+					} 
+					else {
+						setReport().log(Status.FAIL, "Sub Classification - "+   "   " + data + "  " + "- Option is not available in the list"  + " "+ expectedVetOwnSubClass ,	screenshotCapture());
+						Driver.failCount++;
+					}
+
+				
+				}
+				return this;
+							
+	}
+		
+			
+			
+			//Add Minority Owned subClassification
+			public SupplierFormPage selectMinOwnSubClassification(String certifyingAgency,String subClassification, String diversityStartDate) throws InterruptedException {
+				Thread.sleep(3000);
+				type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+				Thread.sleep(2000);
+				type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+				Thread.sleep(5000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_subclassification.fieldControl-option-set-select']")), subClassification,"Sub Classification");
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");	
+				return this;
+
+			}
+			
+			//Add Veteran Owned subClassification
+			public SupplierFormPage selectVetOwnSubClassification(String certifyingAgency,String subClassification1, String diversityStartDate) throws InterruptedException {
+				Thread.sleep(3000);
+				type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+				Thread.sleep(2000);
+				type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+				Thread.sleep(5000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_subclassification.fieldControl-option-set-select']")), subClassification1,"Sub Classification");
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");	
+				return this;
+
+			}
+
+			//Add Small Business Diversity Info
+			
+			public SupplierFormPage addSmallBusinesDiversityType(String certifyingAgency, String diversityStartDate) throws InterruptedException {		
+				
+						selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_diversitytype.fieldControl-option-set-select']")), "Small Business","Small Business");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_certifyingagency.fieldControl-text-box-text']")))),certifyingAgency,"Certifying Agency");
+						Thread.sleep(2000);
+						type(((getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),diversityStartDate,"Start Date");
+						Thread.sleep(5000);
+						verifySubClassficationIsNotPresent();
+						click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");
+						Thread.sleep(3000);
+						setReport().log(Status.PASS, "Diversity Type- " + "   " + "Small Business" + "  " +  "-  is added successfully" + " "+ 	screenshotCapture());
+					return this;					
+					}
+												
+//Deactivate All Diversity Info
+			
+			public SupplierFormPage deactivateAllDiversityInfo() throws InterruptedException {
+				click(getDriver().findElement(By.xpath("//div[@data-id='btnheaderselectcolumn']//div[1]")), " Select All check mark ");
+				Thread.sleep(5000);
+				click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+				return this;
+			}
+			
+
+			// Confirm deactivate button
+			public SupplierFormPage clickConfirmDiversityDeactivation() throws InterruptedException {
+				click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+				Thread.sleep(10000);
+				return this;
+			}
+			
+		
+
+	
 }
 
 

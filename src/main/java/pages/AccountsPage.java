@@ -2,9 +2,11 @@ package pages;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import services.WebDriverServiceImpl;
 
@@ -21,13 +23,33 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return new NewAccountPage();
 	}
 
+	//select All Suppliers view
+  	public AccountsPage selectAllSupplierView() throws InterruptedException {
+  		Thread.sleep(2000);
+  		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
+  		Thread.sleep(5000);
+  		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Suppliers')]")),"All Suppliers View");
+  		Thread.sleep(10000);
+  		return this;
+  	}
+  	
+  //select Active Member view
+  	public AccountsPage selectActiveMembers() throws InterruptedException {
+  		Thread.sleep(2000);
+  		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
+  		Thread.sleep(5000);
+  		click(getDriver().findElement(By.xpath("//*[contains(text(),'Active Members')]")),"Active Members View");
+  		Thread.sleep(10000);
+  		Thread.sleep(11000);
+  		return this;
+  	} 
 //Search accounts
   	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
   		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
 		Thread.sleep(10000);
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 		WebDriverWait wait= new WebDriverWait(getDriver(),20);
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
 		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
@@ -43,6 +65,42 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return new MemberFormPage();
 	}	
   	
+  	 //Select All Prospects view
+  	public AccountsPage selectAllProspects() throws InterruptedException {
+  		Thread.sleep(2000);
+  		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
+  		Thread.sleep(5000);
+  		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Prospects')]")),"All Prospects View");
+  		Thread.sleep(10000);
+  		return this;
+  	} 	
+  	
+  //Select an Account from All Prospects view
+  	public  MemberFormPage selectAccountFromAllProspectsView() throws InterruptedException {	
+		doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']")),"Account from All Prospects View");
+		return new MemberFormPage();
+	}
+  	
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Base Read Only~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //+New Button
+    	public AccountsPage verifyNewButtonIsNotPresent() {
+    		List<WebElement> newButton= getDriver().findElements(By.xpath("//span[contains(text(),'New')]"));
+    		verifyElementisNotDisplayed(newButton.size()," ' + New' Button ");
+    		return this;
+    	}
+    	
+    
+    	
+    	
+    	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End Base Read Only~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    	//Signout
+      	public AccountsPage clickSignout() throws InterruptedException {
+      		click(getDriver().findElement(By.xpath("//div[@class='mectrl_profilepic mectrl_profilepic_initials']")),"User Icon");
+      		Thread.sleep(3000);	 
+      		click(getDriver().findElement(By.id("mectrl_body_signOut")),"Signout");
+      		return new AccountsPage();
+      	}
 	public  MemberFormPage selectDirectParentFromSearchResults() throws InterruptedException {	
 		Actions action = new Actions(getDriver());	
 		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']/a")));
@@ -50,7 +108,21 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return new MemberFormPage();
 	}	
 	
-
+	//select Draft Members view
+  	public AccountsPage selectDraftMembers() throws InterruptedException {
+  		Thread.sleep(2000);
+  		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
+  		Thread.sleep(5000);
+  		click(getDriver().findElement(By.xpath("//*[contains(text(),'Draft Members')]")),"Draft Members View");
+  		Thread.sleep(10000);
+  		return this;
+  	} 	
+  	
+  //Select an Account from Draft Members view
+  	public  MemberFormPage selectAccountFromDraftMembersView() throws InterruptedException {	
+		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a")),"Account from Draft Members View");
+		return new MemberFormPage();
+	}
 	public  MemberFormPage selectParentAccountFromSearchResults() throws InterruptedException {	
 		Actions action = new Actions(getDriver());	
 		action.moveToElement(getDriver().findElement(By.xpath("//div[@aria-label='Data']/div[3]/a")));
