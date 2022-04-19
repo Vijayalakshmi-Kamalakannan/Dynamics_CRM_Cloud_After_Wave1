@@ -53,7 +53,7 @@ public class PreAndPost extends WebDriverEvents
 	public static String URL;
 
 	//Extent Report Initialization
-	//Before Suite- GIT Update
+	
 	@BeforeSuite
 	public static void setUp() throws Exception
 	{
