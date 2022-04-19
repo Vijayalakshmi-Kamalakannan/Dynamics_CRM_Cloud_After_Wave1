@@ -40,6 +40,7 @@ import utils.DataInputProvider;
 
 public class PreAndPost extends WebDriverEvents
 {
+	
 	public static ExtentHtmlReporter htmlReporter;
 	public static ExtentReports extent;
 	public static ExtentTest test;
@@ -52,6 +53,7 @@ public class PreAndPost extends WebDriverEvents
 	public static String URL;
 
 	//Extent Report Initialization
+	//Before Suite- GIT Update
 	@BeforeSuite
 	public static void setUp() throws Exception
 	{
