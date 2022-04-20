@@ -692,6 +692,26 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+		public void verifyElementisDisplayed(int count, String field) {
+
+			try {
+				if(count>0) {
+					setReport().log(Status.PASS, field+" is displayed",screenshotCapture());
+					Driver.failCount++;
+				}else {
+					setReport().log(Status.FAIL, field+"is not displayed",screenshotCapture());
+				}
+			} catch (WebDriverException e) {
+				setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
+				Driver.failCount++;
+				throw e;
+			} 
+
+		}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

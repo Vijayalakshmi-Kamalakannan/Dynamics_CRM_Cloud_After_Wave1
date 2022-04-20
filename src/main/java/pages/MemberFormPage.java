@@ -106,7 +106,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
+
 	public MemberFormPage verifyMemberPermissionError(String errorMessage) throws InterruptedException {
 
 		Thread.sleep(5000);
@@ -137,17 +137,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-public LoginPage clickLogout() {
-		
+	public LoginPage clickLogout() {
+
 		click(getDriver().findElement(By.xpath("//*[@id='mectrl_headerPicture']")),"User Name button");
 		click(getDriver().findElement(By.xpath("//button[contains(text(),'Sign out')]")),"Sign Out button");
 		if(getDriver().findElements(By.xpath("//span[contains(text(),'Discard changes')]")).size()>0) {
 			click(getDriver().findElement(By.xpath("//span[contains(text(),'Discard changes')]")),"Discard button");
 		}
-		
+
 		return new LoginPage();
-		
-		
+
+
 	}
 	//select Account Type
 	public MemberFormPage selectAccountType(String accountType) throws InterruptedException{
@@ -314,190 +314,190 @@ public LoginPage clickLogout() {
 
 		return this;
 	}
-	
+
 	//Click Related and Contacts
-		public MemberFormPage clickRelatedContacts() throws InterruptedException   {
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("(//span[text()='Contacts'])[2]")),"Contacts");
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		//NY Information Tab
-		public MemberFormPage clickNYInformationTab() throws InterruptedException {
+	public MemberFormPage clickRelatedContacts() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Contacts'])[2]")),"Contacts");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//NY Information Tab
+	public MemberFormPage clickNYInformationTab() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//li[text()='NY INFORMATION']")),"NY Information");	
 		Thread.sleep(2000);				
 		return this;
-		}
-		
-		//Click Related and Activities
-		public MemberFormPage clickRelatedActivities() throws InterruptedException   {
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("(//span[text()='Activities'])[2]")),"Activities");
-			Thread.sleep(2000);
-			return this;
-		}
+	}
 
-		//Click New Activity- Task
-		public MemberFormPage clickNewTaskActivity() throws InterruptedException   {
-			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenu']")),"New Activity");
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//span[text()='Task']")),"Task");
-			Thread.sleep(2000);
-			return this;
-		}
+	//Click Related and Activities
+	public MemberFormPage clickRelatedActivities() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Activities'])[2]")),"Activities");
+		Thread.sleep(2000);
+		return this;
+	}
 
-
-		//Verify Open Activity Associated View
-		public MemberFormPage verifyOpenActivityAssocView() throws InterruptedException   {
-			verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Open Activity Associated View']")), "Open Activity Associated View");
-			Thread.sleep(2000);
-			return this;
-		}
-
-		//Click and Enter Due date on Task Activity
-		public MemberFormPage typeDueDate() throws InterruptedException   {
-			DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
-			Date date = new Date();
-			String due = dateFormat.format(date);
-			click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Down Arrow to fill due date on the right hand top corner");
-			Thread.sleep(2000);
-			type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),due,"Due");
-			Thread.sleep(2000);
-			return this;
-		}
-
-		//Enter Subject on Task Activity
-		public MemberFormPage typeSubjectOnTask(String accountname) throws InterruptedException   {
-			click(getDriver().findElement(By.xpath("//input[@data-id='subject.fieldControl-text-box-text']")),"Subject Field on Task Activity");
-			Thread.sleep(2000);
-			type(getDriver().findElement(By.xpath("//input[@data-id='subject.fieldControl-text-box-text']")),accountname,"Subject");
-			Thread.sleep(2000);
-			return this;
-		}
-
-		//Verify added  Task's Subject value in Open Activity Associated View 
-		public MemberFormPage verifyTaskSubjectOnOpenActivityAssocView(String accountname) throws InterruptedException   {
-			Thread.sleep(4000);
-			verifyExactText(getDriver().findElement(By.xpath("//div[@data-id='cell-0-5']")), accountname, "Task Suject on Open Activity Associatged View");
-			Thread.sleep(2000);
-			return this;
-		}
+	//Click New Activity- Task
+	public MemberFormPage clickNewTaskActivity() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenu']")),"New Activity");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//span[text()='Task']")),"Task");
+		Thread.sleep(2000);
+		return this;
+	}
 
 
-		// Select and Mark Complete	a Open Task Activity			
-		public MemberFormPage selectAndMarkComplete() throws InterruptedException   {
-			click(getDriver().findElement(By.xpath("//div[@data-id='cell-0-1']")),"Description Field on Task Activity");
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//span[text()='Mark Complete']")),"Mark Complete");
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//span[text()='Close Task']")),"Close Task");
-			Thread.sleep(3000);
-			return this;
-		}
+	//Verify Open Activity Associated View
+	public MemberFormPage verifyOpenActivityAssocView() throws InterruptedException   {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Open Activity Associated View']")), "Open Activity Associated View");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Click and Enter Due date on Task Activity
+	public MemberFormPage typeDueDate() throws InterruptedException   {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String due = dateFormat.format(date);
+		click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Down Arrow to fill due date on the right hand top corner");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),due,"Due");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Enter Subject on Task Activity
+	public MemberFormPage typeSubjectOnTask(String accountname) throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//input[@data-id='subject.fieldControl-text-box-text']")),"Subject Field on Task Activity");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='subject.fieldControl-text-box-text']")),accountname,"Subject");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Verify added  Task's Subject value in Open Activity Associated View 
+	public MemberFormPage verifyTaskSubjectOnOpenActivityAssocView(String accountname) throws InterruptedException   {
+		Thread.sleep(4000);
+		verifyExactText(getDriver().findElement(By.xpath("//div[@data-id='cell-0-5']")), accountname, "Task Suject on Open Activity Associatged View");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	// Select and Mark Complete	a Open Task Activity			
+	public MemberFormPage selectAndMarkComplete() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//div[@data-id='cell-0-1']")),"Description Field on Task Activity");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[text()='Mark Complete']")),"Mark Complete");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//span[text()='Close Task']")),"Close Task");
+		Thread.sleep(3000);
+		return this;
+	}
 
 
 
-		//Enter Description on Task Activity
-		public MemberFormPage typeDescriptionOnTask(String accountname) throws InterruptedException   {
-			click(getDriver().findElement(By.xpath("//textarea[@data-id='description.fieldControl-text-box-text']")),"Description Field on Task Activity");
-			Thread.sleep(2000);
-			type(getDriver().findElement(By.xpath("//textarea[@data-id='description.fieldControl-text-box-text']")),accountname,"Description");
-			Thread.sleep(2000);			
-			return this;
-		}
+	//Enter Description on Task Activity
+	public MemberFormPage typeDescriptionOnTask(String accountname) throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//textarea[@data-id='description.fieldControl-text-box-text']")),"Description Field on Task Activity");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//textarea[@data-id='description.fieldControl-text-box-text']")),accountname,"Description");
+		Thread.sleep(2000);			
+		return this;
+	}
 
 
-		//Click Save And Close on Activity			
-		public MemberFormPage clickSaveAndCloseOnActivity() throws InterruptedException   {
-			click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close on Task Activity");
-			Thread.sleep(4000);
-			return this;
-		}
+	//Click Save And Close on Activity			
+	public MemberFormPage clickSaveAndCloseOnActivity() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close on Task Activity");
+		Thread.sleep(4000);
+		return this;
+	}
 
-		//~~~~~~~~~~~~~~~~~~~END  Activity~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
-		//Enter End Date in Account Numbers
-		public MemberFormPage typeStaticEndDateInAccountNumbers(String accNumEndDate) {
-			click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
-			click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-			type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),accNumEndDate,"End Date"); 
-			return this;
-		}
+	//~~~~~~~~~~~~~~~~~~~END  Activity~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		//Clear End Date in Account Numbers
-		public MemberFormPage  clearEndDateInAccountNumbers() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-			click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-			clear(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 				
-			return this;
-		}
+	//Enter End Date in Account Numbers
+	public MemberFormPage typeStaticEndDateInAccountNumbers(String accNumEndDate) {
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),accNumEndDate,"End Date"); 
+		return this;
+	}
 
-
+	//Clear End Date in Account Numbers
+	public MemberFormPage  clearEndDateInAccountNumbers() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		clear(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 				
+		return this;
+	}
 
 
 
 
 
-	
-		
-		//disabled Account Number Type				
-		public MemberFormPage verifyAccountNumberTypeInAccountNumbersIsNotEditable() throws InterruptedException {
-			Thread.sleep(2000);
-			verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type");
-			return this;
-		}
-		
-		//Read Only Number in Account Numbers Entity
-		public MemberFormPage verifyNumberInAccountNumbersIsNotEditable() throws InterruptedException {
-			Thread.sleep(2000);
-			verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text'][@readonly]")),"Number");
-			return this;
-		}
-		
-		//Read Only Name in Account Numbers Entity
-		public MemberFormPage verifyNameInAccountNumbersIsNotEditable() throws InterruptedException {
-			Thread.sleep(2000);
-			verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbername.fieldControl-text-box-text'][@readonly]")),"Name");
-				return this;
-		}
-		
-		//Read Only Calculated Name in Account Numbers Entity
-		public MemberFormPage verifyCalculatedNameInAccountNumbersIsNotEditable() throws InterruptedException {
-			Thread.sleep(2000);
-			verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_calculatedname.fieldControl-text-box-text'][@readonly]")),"Calculated Name");
-			return this;
-		}
-		
-		//Disabled Start Date in Account Numbers Entity
-		public MemberFormPage verifyStartDateInAccountNumbersIsNotEditable() throws InterruptedException {
-			Thread.sleep(2000);
-			verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
-			return this;
-		}
-		
-		//Disabled End Date in Account Numbers Entity
-		public MemberFormPage verifyEndDateInAccountNumbersIsNotEditable() throws InterruptedException {
-			Thread.sleep(2000);
-			verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-			return this;
-		}
-		
-		
-		// Read Only Account Entity Error Info Message for Base Read Only
-		public MemberFormPage verifyAccountEntityIsNotEditable(String errorMessage) throws InterruptedException {
-			Thread.sleep(2000);
-			verifyExactText((getDriver().findElement(By.xpath("//span[@data-id='warningNotification']"))),errorMessage,"Account Entity- Member Form");
-			return this;
-		}
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End Base Read Only~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		
+
+
+	//disabled Account Number Type				
+	public MemberFormPage verifyAccountNumberTypeInAccountNumbersIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type");
+		return this;
+	}
+
+	//Read Only Number in Account Numbers Entity
+	public MemberFormPage verifyNumberInAccountNumbersIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text'][@readonly]")),"Number");
+		return this;
+	}
+
+	//Read Only Name in Account Numbers Entity
+	public MemberFormPage verifyNameInAccountNumbersIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbername.fieldControl-text-box-text'][@readonly]")),"Name");
+		return this;
+	}
+
+	//Read Only Calculated Name in Account Numbers Entity
+	public MemberFormPage verifyCalculatedNameInAccountNumbersIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_calculatedname.fieldControl-text-box-text'][@readonly]")),"Calculated Name");
+		return this;
+	}
+
+	//Disabled Start Date in Account Numbers Entity
+	public MemberFormPage verifyStartDateInAccountNumbersIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
+		return this;
+	}
+
+	//Disabled End Date in Account Numbers Entity
+	public MemberFormPage verifyEndDateInAccountNumbersIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		return this;
+	}
+
+
+	// Read Only Account Entity Error Info Message for Base Read Only
+	public MemberFormPage verifyAccountEntityIsNotEditable(String errorMessage) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyExactText((getDriver().findElement(By.xpath("//span[@data-id='warningNotification']"))),errorMessage,"Account Entity- Member Form");
+		return this;
+	}
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End Base Read Only~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 	//Select TPR
 	public MemberFormPage selectTopParentRelation(String topParentRelation) throws InterruptedException {
 		Thread.sleep(1000);
@@ -589,6 +589,11 @@ public LoginPage clickLogout() {
 		Thread.sleep(6000);
 		entityCode =getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code");
 		//assertNotNull(entityCode);
+		return this;
+	}
+
+	public MemberFormPage navigatetoAccountnumberPage() throws InterruptedException {
+
 		return this;
 	}
 
@@ -720,7 +725,7 @@ public LoginPage clickLogout() {
 		return this;
 	}
 
-	
+
 	public MemberFormPage selectFBOOverride(String selectMemberOverride) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//h2[@title='DIRECT PARENT']")),"Direct Parent");
 		click(getDriver().findElement(By.xpath("//h2[@title='TOP PARENT']")),"Top Parent");
@@ -771,18 +776,18 @@ public LoginPage clickLogout() {
 		return this;
 	}
 	//Verify Line of Business  Associated View
-			public MemberFormPage verifyLineOfBusinesAssocView() throws InterruptedException   {
-				verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Line of Business Associated View']")), "Line of Business Associated View");
-				Thread.sleep(2000);
-				return this;
-			}
+	public MemberFormPage verifyLineOfBusinesAssocView() throws InterruptedException   {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Line of Business Associated View']")), "Line of Business Associated View");
+		Thread.sleep(2000);
+		return this;
+	}
 
-		//Add New Line Of Business Button
-			public MemberFormPage verifyNewLineOfBusinessIsNotPresent() {
-				List<WebElement> lob= getDriver().findElements(By.xpath("//span[contains(text(),'New Line of Business')]"));
-				verifyElementisNotDisplayed(lob.size()," ' + New Line of Business  ' Button ");
-				return this;
-			}
+	//Add New Line Of Business Button
+	public MemberFormPage verifyNewLineOfBusinessIsNotPresent() {
+		List<WebElement> lob= getDriver().findElements(By.xpath("//span[contains(text(),'New Line of Business')]"));
+		verifyElementisNotDisplayed(lob.size()," ' + New Line of Business  ' Button ");
+		return this;
+	}
 
 	//Verify LOB is not present in the list
 	public MemberFormPage verifyLOBIsNotPresent(String LineOfBusiness) {
@@ -855,8 +860,8 @@ public LoginPage clickLogout() {
 		Thread.sleep(5000);
 		return this;
 	}
-	
-	
+
+
 	public MemberFormPage verifyErrorMessageLOBisNotDeactivate() throws InterruptedException{
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'deactivate the LOB from published account')]")), "Deactivation Dialog Box");
 		click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Okay button");
@@ -1077,7 +1082,7 @@ public LoginPage clickLogout() {
 
 	//Click Deactivate button in the membership Page
 	public MemberFormPage clickMembershipDeactivateButton() throws InterruptedException {
-	
+
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Button");
 		verifyDisplayed(getDriver().findElement(By.xpath("//h1[@aria-label='Confirm Deactivation']")), "Deactivation Dialog Box");
 		Thread.sleep(5000);
@@ -1189,7 +1194,7 @@ public LoginPage clickLogout() {
 		//	verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_fbotype.fieldControl-option-set-select']")),FBOType,"FBO GPO Type"); 
 		return this;
 	}
-	
+
 	public MemberFormPage selectFBO(String FBO) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//input[contains(@id,'ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo')]")),"FBO");
 		Thread.sleep(5000);
@@ -1205,12 +1210,12 @@ public LoginPage clickLogout() {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_fbotypeeffectivedate.fieldControl-date-time-input']")))),FBOEffectiveDate,"FBO Effective Date");
 		return this;
 	}
-	
+
 	//Select FBO Effective date
-		public MemberFormPage selectFBORelationDate(String FBORelationDate) {
-			type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")))),FBORelationDate,"FBO Effective Date");
-			return this;
-		}
+	public MemberFormPage selectFBORelationDate(String FBORelationDate) {
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")))),FBORelationDate,"FBO Effective Date");
+		return this;
+	}
 	//Verify Error Message
 
 	public MemberFormPage verifyBusinessError(String errorMessage) {
@@ -1251,15 +1256,15 @@ public LoginPage clickLogout() {
 		verifyDisplayed(getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo-locked-icon']")), "FBO lock");
 		return this;
 	}
-	
+
 	//Verify Is FBO is Locked	
-		public MemberFormPage selectisFBO(String selectMemberOverride) {
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Is FBO']")),selectMemberOverride,"MemberOverride");
-			
-			
-			
-			return this;
-		}
+	public MemberFormPage selectisFBO(String selectMemberOverride) {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Is FBO']")),selectMemberOverride,"MemberOverride");
+
+
+
+		return this;
+	}
 
 	//Verify Sponsor is Locked
 	public MemberFormPage verifySponsorLocked() {
@@ -1886,14 +1891,14 @@ public LoginPage clickLogout() {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_fbogpo.fieldControl-checkbox-container']")),FBOGPO,"FBO GPO"); 
 		return this;
 	}
-	
-	
+
+
 	//Verify FBO GPO
-		public MemberFormPage selectFBOGPO(String FBOGPO) {
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='FBO GPO']")),FBOGPO,"FBOGPO");
-			
-			return this;
-		}
+	public MemberFormPage selectFBOGPO(String FBOGPO) {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='FBO GPO']")),FBOGPO,"FBOGPO");
+
+		return this;
+	}
 
 	public MemberFormPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
@@ -1905,17 +1910,15 @@ public LoginPage clickLogout() {
 	public MemberFormPage clickAddNewAccountNumberInAccountNumbers() throws InterruptedException {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumber|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_accountnumber.AddNewStandard']")),"Add");
-		try
-		{
-			if ( getDriver().findElement(By.xpath("//*[@data-id='confirmButton']")).isDisplayed())
-			{
-				click(getDriver().findElement(By.xpath("//*[@data-id='confirmButton']")),"Save and continue");
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();	
-		}
+		
+		  try { List <WebElement>
+		  confirmButton=getDriver().findElements(By.xpath("//*[@data-id='confirmButton']"));
+		  if(confirmButton.size()>0) { if (
+		  getDriver().findElement(By.xpath("//*[@data-id='confirmButton']")).
+		  isDisplayed()) {
+		  click(getDriver().findElement(By.xpath("//*[@data-id='confirmButton']"))
+		  ,"Save and continue"); } } } catch(Exception e) { e.printStackTrace(); }
+		 
 		Thread.sleep(6000);
 		return this;
 	}
@@ -1973,6 +1976,25 @@ public LoginPage clickLogout() {
 		return this;
 	}
 
+	public MemberFormPage typeDEANumber(String DEANum) {
+
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),DEANum,"DEA Account Number");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Name')]")),"Name Label");
+		
+		return this;
+
+	}
+	
+	
+	public MemberFormPage verifyExpirationDate() throws InterruptedException {
+		Thread.sleep(4000);
+		List<WebElement> ExpirationDateLabel=getDriver().findElements(By.xpath("//label[contains(text(),'Expiration Date')]"));
+		verifyElementisDisplayed(ExpirationDateLabel.size(), "Expiration Date");
+		List<WebElement> ExpirationDate=getDriver().findElements(By.xpath("//input[contains(@data-id,'ix_expirationdate.fieldControl-date-time-input')]"));
+		verifyElementisDisplayed(ExpirationDate.size(), "Expiration Date");
+		return this;
+	}
 	//Enter DEA account number
 	public MemberFormPage typeAccountNumberDEA() {
 		int min=1111111;
@@ -2308,34 +2330,34 @@ public LoginPage clickLogout() {
 		verifyExactTextWithTextContentAttribute((getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-Lookup_ix_account']/div/div/div[1]"))),errorMessage1,"Account Name in Account Numbers Entity");
 		return this;
 	}
-	
+
 	//Account Representative Associated View
 	public MemberFormPage verifyAccountRepAssocView() throws InterruptedException   {
-	verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Account Representative Associated View']")), "Account Representative Associated View");
-	Thread.sleep(2000);
-	return this;
-}
+		verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Account Representative Associated View']")), "Account Representative Associated View");
+		Thread.sleep(2000);
+		return this;
+	}
 
 	//Verify DEA is null in member form
-			public MemberFormPage verifyDEAIsNull() {
-				verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_dea.fieldControl-text-box-text']")),"DEA"); 
-				return this;
-			}
-		
-			//Click on deactivate in Account Number Entity
-			public MemberFormPage clickDeactivateInAccountNumbers() throws InterruptedException {
-				click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Deactivate']")),"Deactivate");
-				Thread.sleep(3000);
-				click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Confirm Deactivate");
-				Thread.sleep(3000);
-				return this;	
-			}
-			
-			//Verify HIN in  Account number Entity
-			public MemberFormPage verifyHINInAccountNumbers(String HIN) {
-				verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_number.fieldControl-text-box-text']"))),HIN,"HIN");
-				return this;
-			}
+	public MemberFormPage verifyDEAIsNull() {
+		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_dea.fieldControl-text-box-text']")),"DEA"); 
+		return this;
+	}
+
+	//Click on deactivate in Account Number Entity
+	public MemberFormPage clickDeactivateInAccountNumbers() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Deactivate']")),"Deactivate");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Confirm Deactivate");
+		Thread.sleep(3000);
+		return this;	
+	}
+
+	//Verify HIN in  Account number Entity
+	public MemberFormPage verifyHINInAccountNumbers(String HIN) {
+		verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_number.fieldControl-text-box-text']"))),HIN,"HIN");
+		return this;
+	}
 	//+ New Account Representative
 	public MemberFormPage verifyAddNewAccountRepresentativeIsNotPresent() throws InterruptedException {
 		Thread.sleep(3000);
@@ -2346,1195 +2368,1195 @@ public LoginPage clickLogout() {
 		return this;
 	}
 	//Choose Existing Account Number -DEA
-			public MemberFormPage doubleClickExistingAccountNumberHIN() throws InterruptedException   {
-				Thread.sleep(4000);
-				WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
-				List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
-				System.out.println("# of Rows Including Header:"+ rowList.size());
-				for (int i = 0; i <rowList.size(); i++) {
-					String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")).getAttribute("title");
-					System.out.println(title);					
-					if (title.equals("HIN")) {
-						Thread.sleep(3000);
-						doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")), "HIN");
-						Thread.sleep(3000);
-						break;								
-					}
-					else if (title.equals("---"))
-					{
-						
-					}
-					
-				}		
-				
-				return this;					
-			}
-
-			public MemberFormPage clickSaveInAccountNumbersEntity() throws InterruptedException {
-				click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Save']")),"Save");
-				Thread.sleep(10000);
-				Thread.sleep(5000);
-				return this;
-			}
-
-			//Click New Contact
-			public MemberFormPage clickNewContact() throws InterruptedException   {
-				Thread.sleep(2000);
-				click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|SubGridAssociated|Mscrm.SubGrid.contact.AddNewStandard']")),"New Contact");
+	public MemberFormPage doubleClickExistingAccountNumberHIN() throws InterruptedException   {
+		Thread.sleep(4000);
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 0; i <rowList.size(); i++) {
+			String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")).getAttribute("title");
+			System.out.println(title);					
+			if (title.equals("HIN")) {
 				Thread.sleep(3000);
-				return this;
+				doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")), "HIN");
+				Thread.sleep(3000);
+				break;								
+			}
+			else if (title.equals("---"))
+			{
+
 			}
 
-			//DeActivate Contact
-			public MemberFormPage deactivateContact(String contactFirstName) throws InterruptedException {
-				WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
-				List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
-				System.out.println("# of Rows Including Header:"+ rowList.size());
-				for (int i = 0; i <rowList.size(); i++) {
-					String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")).getAttribute("title");
-					System.out.println(title);					
-					if (title.equals(contactFirstName)) {
-						Thread.sleep(5000);
-						click(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")), "Contact First Name");
-						Thread.sleep(3000);
-						click(getDriver().findElement(By.xpath("//span[text()='Deactivate']")),"Deactivate");
-						Thread.sleep(2000);
-						click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")), "Confirm");
-						Thread.sleep(4000);
-						break;				
-					}
-				}
-				return this;
-				}
-			//Create Contact : Quick Create
-			public MemberFormPage addNewContactToMember(String contactFirstName,String contactLastName, String email2, String mainPhone) throws InterruptedException {
-				type(((getDriver().findElement(By.xpath("//label[text()='First Name']/following::input[@aria-label='First Name']")))),contactFirstName,"Contact First Name");
-				type(((getDriver().findElement(By.xpath("//input[@data-id='lastname.fieldControl-text-box-text']")))),contactLastName,"Contact Last Name");
-				type(((getDriver().findElement(By.xpath("//input[@data-id='emailaddress1.fieldControl-mail-text-input']")))),email2,"Email");
-				type(((getDriver().findElement(By.xpath("//input[@data-id='mobilephone.fieldControl-phone-text-input']")))),mainPhone,"Mobile Phone");
-				click(getDriver().findElement(By.xpath("//span[text()='Save and Close']")),"Save and Close");
-				Thread.sleep(11000);
-				return this;
+		}		
+
+		return this;					
+	}
+
+	public MemberFormPage clickSaveInAccountNumbersEntity() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Save']")),"Save");
+		Thread.sleep(10000);
+		Thread.sleep(5000);
+		return this;
+	}
+
+	//Click New Contact
+	public MemberFormPage clickNewContact() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|SubGridAssociated|Mscrm.SubGrid.contact.AddNewStandard']")),"New Contact");
+		Thread.sleep(3000);
+		return this;
+	}
+
+	//DeActivate Contact
+	public MemberFormPage deactivateContact(String contactFirstName) throws InterruptedException {
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 0; i <rowList.size(); i++) {
+			String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")).getAttribute("title");
+			System.out.println(title);					
+			if (title.equals(contactFirstName)) {
+				Thread.sleep(5000);
+				click(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")), "Contact First Name");
+				Thread.sleep(3000);
+				click(getDriver().findElement(By.xpath("//span[text()='Deactivate']")),"Deactivate");
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")), "Confirm");
+				Thread.sleep(4000);
+				break;				
 			}
-			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~COMPETITORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//Click Related and Competitors
-				public MemberFormPage clickCompetitors() throws InterruptedException   {
-					Thread.sleep(2000);
-					click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-					Thread.sleep(3000);
-					click(getDriver().findElement(By.xpath("//*[contains(text(),'Competitors')]")),"Competitors");
-					Thread.sleep(2000);
-					return this;
-				}
-				
-				
-				//Verify Competitor Name Associated  Associated View
-					public MemberFormPage verifyCompetitorNameAssocView() throws InterruptedException   {
-						verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Competitor Name Associated View']")), "Competitor Name Associated View");
-						Thread.sleep(2000);
-						return this;
-					}
-
-				//Add New Competitor
-					public MemberFormPage verifyNewCompetitorIsNotPresent() {
-						List<WebElement> comp= getDriver().findElements(By.xpath("//span[contains(text(),'New Competitor')]"));
-						verifyElementisNotDisplayed(comp.size()," ' + New Competitor  ' Button ");
-						return this;
-					}
-
-
-			
-
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END  Competitors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-					//Click Membership on existing Member Form Page
-					public MemberFormPage clickExistingMembershipOnMemberForm() throws InterruptedException   {
-						Thread.sleep(2000);
-						click(getDriver().findElement(By.xpath("//span[text()='Premier']/following-sibling::span")),"Existing Membership");
-						Thread.sleep(3000);
-						return this;
-					}		
-					//Click Go Back across all member form pages
-					public MemberFormPage clickGoBackOnMemberForm() throws InterruptedException {
-						Thread.sleep(5000);
-						click(getDriver().findElement(By.xpath("//*[@title='Go back']")), "Go Back");
-						Thread.sleep(5000);
-						return this;
-					}
-					
-
-					//Choose Existing Contact from Contact Associated View
-					
-					public ContactsPage doubleClickExistingContact(String contactFirstName) throws InterruptedException   {
-						Thread.sleep(4000);
-						WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
-						List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
-						System.out.println("# of Rows Including Header:"+ rowList.size());
-						for (int i = 0; i <rowList.size(); i++) {
-							String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")).getAttribute("title");
-							System.out.println(title);					
-							if (title.equals(contactFirstName)) {
-								Thread.sleep(5000);
-								doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")), "Contact First Name");
-								Thread.sleep(4000);
-								break;				
-							}
-						}		
-						
-						return new ContactsPage();
-					}
-					
-					
-					//To add existing DEA
-					public MemberFormPage typeStaticDEA(String DEANumber) {
-						click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
-						type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),DEANumber,"DEA Account Number");
-						return this;
-					}
-					
-					//Enter End Date as Today's Date in Account Numbers
-					public MemberFormPage typeEndDateInAccountNumbers() {
-						DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
-						Date date = new Date();
-						String enddate= dateFormat.format(date);			
-						click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
-						click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-						type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),enddate,"End Date"); 
-						return this;
-					}
-
-					//Enter Start Date as Today's Date in Account Numbers
-					public MemberFormPage typeStartDateInAccountNumbers() {
-						DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
-						Date date = new Date();
-						String startdate= dateFormat.format(date);
-						click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date"); 
-						click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
-						type(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),startdate,"Start Date"); 
-						return this;
-					}
-					
-					//To add existing HIN
-					public MemberFormPage typeStaticHIN(String HIN) {
-						click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
-						type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),HIN,"HIN Account Number");
-						return this;
-					}
-					
-					//Verify Account Number Error Message
-					public MemberFormPage verifyAccountNumberErrorMessage(String errormessage) throws InterruptedException {
-						Thread.sleep(7000);
-						verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")),errormessage,"Account Number Error Message");
-						Thread.sleep(2000);
-						return this;	
-					}
-					//Click OK on Account Number Error Message
-					public MemberFormPage clickOKOnAccountNumberErrorMessage() throws InterruptedException {
-						click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"OK");
-						Thread.sleep(5000);
-						return this;	
-					}
-					
-					//Click Related > Account Member Attributes > Check+ New Account Member Attributes is not available
-					public MemberFormPage selectRelatedMemberAttributesForLimMem() throws InterruptedException   {
-						Thread.sleep(2000);
-						click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-						click(getDriver().findElement(By.xpath("//*[text()='Account Members Attributes']")),"Account Members Attributes");
-						Thread.sleep(2000);
-						return this;
-					}
-					
-					//Account Member Attributes Associated View
-					public MemberFormPage verifyAccountMemberAttributesAssocView() throws InterruptedException   {
-					verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Account Member Attributes Associated View']")), "Account Member Attributes Associated View");
-					Thread.sleep(2000);
-					return this;
-				}
-					
-					//Verify Account Name in  Account number Entity
-					public MemberFormPage verifyAccountNameInAccountNumbers(String accountName2) {
-						verifyExactTextWithTextContentAttribute((getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']"))),accountName2,"Account Name in Account Numbers Entity");
-						return this;
-					}
-					
-					// LIMITED MEMBER Editable Fields check	
-
-					//Editable account name		
-					public MemberFormPage verifyAccountNameIsEditable(String accountName) throws InterruptedException {
-						verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"Account Name");
-						click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-container']")),"Account name");
-						Thread.sleep(2000);
-						type(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),accountName,"Account Name");
-						Thread.sleep(2000);
-						return this;
-					}
-
-					//Editable Account name 2
-					public MemberFormPage verifyAccountName2IsEditable(String accountName2) throws InterruptedException {
-						verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"Account Name2");
-						click(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"Account Name2");
-						Thread.sleep(2000);
-						type(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),accountName2,"Account Name2");
-						Thread.sleep(3000);			
-						return this;
-					}
-
-					//Editable Primary Contact
-					public MemberFormPage verifyPrimaryContactIsEditable(String primaryContact) throws InterruptedException {
-						verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
-						click(getDriver().findElement(By.xpath("//input[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
-						Thread.sleep(2000);
-						type(getDriver().findElement(By.xpath("//input[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),primaryContact,"Primary Contact");
-						Thread.sleep(2000);	
-						click(getDriver().findElement(By.xpath("//span[contains(@id,'primarycontactid.fieldControl-firstname0_0_0')]")),"Primary Contact search");
-						return this;
-					}	
-
-
-					//Read Only Account Name
-					public MemberFormPage verifyAccountNameIsNotEditable(String accountName) throws InterruptedException {
-					Thread.sleep(2000);
-					verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text'][@readonly]")),"Account Name");
-					typeLocked(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text'][@readonly]")),accountName,"Account Name");
-					return this;
-					}
-				
-					//Read Only Account Name2
-					public MemberFormPage verifyAccountName2IsNotEditable(String accountName2) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_hiscirostername.fieldControl-text-box-text'][@readonly]")),"Account Name2");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_hiscirostername.fieldControl-text-box-text'][@readonly]")),accountName2,"Account Name2");
-						
-						return this;
-				}
-				
-					//Read Only Primary Contact	
-					public MemberFormPage verifyPrimaryContactIsNotEditable(String primaryContact) throws InterruptedException {
-					Thread.sleep(2000);
-					verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new'][@readonly]")),"Primary Contact");
-					typeLocked(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new'][@readonly]")),primaryContact,"Primary Contact");
-					return this;
-					}
-					
-					//+ New Account Number Button
-					public MemberFormPage verifyAddNewAccountNumberIsNotPresent() throws InterruptedException {
-						Thread.sleep(3000);
-						click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-						click(getDriver().findElement(By.xpath("(//*[contains(text(),'Account Numbers')])[2]")),"Account Numbers");
-						List<WebElement> accNum= getDriver().findElements(By.xpath("//span[contains(text(),'New Account Number')]"));
-						verifyElementisNotDisplayed(accNum.size()," '+ New Account Number  ' Button ");
-						return this;
-					}
-					
-			//Choose Existing Account Number -DEA
-					public MemberFormPage doubleClickExistingAccountNumberDEA() throws InterruptedException   {
-						Thread.sleep(4000);
-						WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
-						List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
-						System.out.println("# of Rows Including Header:"+ rowList.size());
-						for (int i = 0; i <rowList.size(); i++) {
-							String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")).getAttribute("title");
-							System.out.println(title);					
-							if (title.equals("DEA")) {
-								Thread.sleep(3000);
-								doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")), "DEA");
-								Thread.sleep(3000);
-								break;				
-							}
-						}		
-						
-						return this;					
-					}
-					
-					//Click Related Membership
-					public MemberFormPage selectRelatedMembership() throws InterruptedException   {
-						Thread.sleep(2000);
-						click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-						click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
-						Thread.sleep(3000);
-						return this;
-					}
-					
-					//Disabled # Estimated Locations
-					public MemberFormPage verifyEstimatedNumLocationsIsNotEditable() throws InterruptedException {
-					verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
-					return this;
-					}
-					
-						//Read Only NAICS		
-						public MemberFormPage verifyNAICSIsNotEditable(String nAICS) throws InterruptedException {
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),"NAICS");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new'][@readonly]")),nAICS,"NAICS");
-						return this;
-						}
-						
-						//Verify HIN is null in member form
-						public MemberFormPage verifyHINIsNull() {
-							verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_dea.fieldControl-text-box-text']")),"HIN"); 
-							return this;
-						}
-				
-						//Membership Associated View
-						public MemberFormPage verifyMembershipAssocView() throws InterruptedException   {
-						verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Membership Associated View']")), "Membership Associated View");
-						Thread.sleep(2000);
-						return this;
-					}
-								
-						//+ New Membership Button
-						public MemberFormPage verifyAddNewMembershipIsNotPresent() throws InterruptedException {
-							Thread.sleep(3000);
-							click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-							click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
-							List<WebElement> newMShip= getDriver().findElements(By.xpath("//span[contains(text(),'New Membership')]"));
-							verifyElementisNotDisplayed(newMShip.size()," '+ New Membership  ' Button ");
-							return this;
-						}				
-						
-						// Read Only Membership Entity Error Info Message for Limited Member
-						public MemberFormPage verifyMembershipEntityIsNotEditable(String errorMessage) throws InterruptedException {
-							Thread.sleep(2000);
-							verifyExactText((getDriver().findElement(By.xpath("//span[@data-id='warningNotification']"))),errorMessage,"Membership Entity Read Only Error Message");
-							return this;
-						}
-
-									
-						
-						//Click on Membership save and close and Verify Membership Error Message
-						public MemberFormPage verifyMembershipErrorMessage(String errormessage) throws InterruptedException {
-							click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
-							Thread.sleep(5000);
-							verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")),errormessage,"Membership Error Message");
-							Thread.sleep(2000);
-							return this;	
-						}
-
-						//Click OK on Membership Error Message
-						public MemberFormPage clickOKOnMembershipErrorMessage() throws InterruptedException {
-							click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"OK");
-							Thread.sleep(5000);
-							return this;	
-						}	
-						//Verify Name and Calculated Name in  Account number Entity
-						public MemberFormPage verifyNameAndCalculatedNameInAccountNumbers() throws InterruptedException {
-							String account =(getDriver().findElement(By.xpath("//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")).getAttribute("title"));
-							System.out.println("Account field's value in Account Number Entity is  : " + account);
-
-							String accNumType =(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")).getAttribute("title"));
-							System.out.println("Account Number Type field's value in Account Number Entity is  : " + accNumType);
-
-							String accNum =(getDriver().findElement(By.xpath("//input[@data-id='ix_number.fieldControl-text-box-text']")).getAttribute("value"));
-							System.out.println("Account Number field's value in Account Number Entity is  : " + accNum);
-
-							String name =account.concat(" - ").concat(accNumType).concat(" - ").concat(accNum);
-							System.out.println(name);
-							Thread.sleep(6000);
-							verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_calculatedname.fieldControl-text-box-text']"))),name,"Calculated Name in Account Numbers Entity");
-							verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_accountnumbername.fieldControl-text-box-text']"))),name,"Name in Account Numbers Entity");
-							return this;
-						}
-						
-						//Add New Account Members Attributes Button
-						public MemberFormPage verifyNewAccountMembersAttributesIsNotPresent() {
-							List<WebElement> MA= getDriver().findElements(By.xpath("//span[contains(text(),'New Account Member Attributes')]"));
-							verifyElementisNotDisplayed(MA.size()," '+ New Account Members Attributes  ' Button ");
-							return this;
-						}
-
-						//~~~~Limited Member Non Editable fields~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~XX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-						// Disabled Store Premier Start Date  -Type verification cannot be made as the element is not interactable/disabled.
-						public MemberFormPage verifyPremierStartDateIsNotEditable(String membershipProviderStartDate ) {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date");
-							return this;
-						}
-
-						// Disabled Store Premier End Date -Type verification cannot be made as the element is not interactable/disabled.
-						public MemberFormPage verifyPremierEndDateIsNotEditable(String membershipEndDate ) {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")),"Premier End Date");
-							return this;
-						}
-
-						// Read Only Store Location # -Type verification possible on read only fields as they are interactable
-						public MemberFormPage verifyStoreLocNumIsNotEditable(String storeLocNum ) {
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_locationnumber.fieldControl-text-box-text'][@readonly]")),"Store Location#");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_locationnumber.fieldControl-text-box-text']")),storeLocNum, "Store Location #");
-							return this;
-						}
-
-						// Disabled Store Location Type -Type verification cannot be made as the element is not interactable/disabled.
-						public MemberFormPage verifyStoreLocTypeIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Store Location Type");
-							return this;
-						}
-						//Disabled Direct Parent details
-						public MemberFormPage verifyDirectParentDetailsIsNotEditable(String directParent,String crmNumber1, String dPReason) throws InterruptedException {
-							//DP
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-Lookup_parentaccountid']/div/div/div[1]")),directParent,"Direct Parent");
-							//EIN
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='DPQuickViewForm.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='DPQuickViewForm.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
-							//DPR
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_parentrelationship.fieldControl-option-set-select']")),"Direct Parent Relation");
-							//DPRD
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")),"Direct Parent Relation Date");
-							//DP Exception Reason
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_dpexceptionreason.fieldControl-text-box-text'][@readonly]")),"Direct Parent Exception Reason");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_dpexceptionreason.fieldControl-text-box-text']")),dPReason, "DP Exception Reason");
-							return this;
-						}
-
-						//Disabled Top Parent details
-						public MemberFormPage verifyTopParentDetailsIsNotEditable(String topParent,String crmNumber1, String tPReason) throws InterruptedException {
-							//TP
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_topparent.fieldControl-Lookup_ix_topparent']/div/div/div[1]")),topParent,"Top Parent");
-							//EIN
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='TPQuickViewForm.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='TPQuickViewForm.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
-							//IsTP
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"Is Top Parent");
-							//TPR
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")),"Top Parent Relation");
-							//TPRD
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),"Top Parent Relation Date");
-							//TP Exception Reason
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_tpexceptionreason.fieldControl-text-box-text'][@readonly]")),"Top Parent Exception Reason");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_tpexceptionreason.fieldControl-text-box-text']")),tPReason, "TP Exception Reason");
-							//TP Classification
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_topparentclassification.fieldControl-option-set-select']")),"Top Parent Classification");
-							return this;
-						}
-
-						//Disabled Group field
-						public MemberFormPage verifyGroupIsNotEditable(String verifyGroup) throws InterruptedException {
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_group.fieldControl-Lookup_ix_group']/div/div/div[1]")),verifyGroup,"Group");
-							return this;
-						}
-
-						//Disabled Class of Trade field
-						public MemberFormPage verifyClassOfTradeIsNotEditable(String classOfTrade ) throws InterruptedException {
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_classoftradedetail.fieldControl-Lookup_ix_classoftradedetail']/div/div/div[1]")),classOfTrade,"Class Of Trade");
-							Thread.sleep(3000);
-							return this;
-						}				
-
-						//Disabled Facility type with value populated in the field
-						public MemberFormPage verifyFacilityTypeIsNotEditable(String verifyFacilityType) throws InterruptedException {
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_facilitytype.fieldControl-Lookup_ix_facilitytype']/div/div/div[1]")),verifyFacilityType,"Facility type"); 
-							return this;
-						}
-
-
-						//Disabled Business Classification
-						public MemberFormPage verifyBusinessClassificationIsNotEditable(String verifyBusinessClassification) throws InterruptedException {
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_businessclassification.fieldControl-Lookup_ix_businessclassification']/div/div/div[1]")),verifyBusinessClassification,"Business Classification"); 
-							return this;
-						}
-
-						//Disabled Premier Owner
-						public MemberFormPage verifyPremierOwnerIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_premierowner.fieldControl-checkbox-select']")),"Premier Owner"); 
-							return this;
-						}
-
-						//Disabled Account Status
-						public MemberFormPage verifyAccountStatusIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_accountstatus.fieldControl-option-set-select']")),"Account Status"); 
-							return this;
-						}
-
-						//Disabled Application Date
-						public MemberFormPage verifyApplicationDateIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")),"Application Date"); 
-							return this;
-						}
-
-						//Disabled CAMS flag
-						public MemberFormPage verifyCAMSFlagIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"CAMS Flag"); 
-							return this;
-						}
-
-						//Disabled Exclude from Roster
-						public MemberFormPage verifyExcludeFromRosterIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_donotroster.fieldControl-checkbox-select']")),"Exclude from Roster"); 
-							return this;
-						}
-
-						//Disabled Participation Type
-						public MemberFormPage verifyParticipationTypeIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_participationtype.fieldControl-option-set-select']")),"Participation Type"); 
-							return this;
-						}
-
-
-						//Disabled Provider Select: MD
-						public MemberFormPage verifyProviderSelectMDIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),"Provider Select:MD "); 
-							return this;
-						}
-
-						// Read Only Business Key
-						public MemberFormPage verifyBusinessKeyIsNotEditable(String verifyBKActive ) {
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_businesskey.fieldControl-text-box-text'][@readonly]")),"Business Key");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_businesskey.fieldControl-text-box-text']")),verifyBKActive, "Business Key");
-							return this;
-						}
-
-
-						//Disabled BK Active
-						public MemberFormPage verifyBKActiveIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_bkactive.fieldControl-checkbox-select']")),"BK Active "); 
-							return this;
-						}				
-
-						// Read Only Siebel ID
-						public MemberFormPage verifySiebelIDIsNotEditable(String siebelID ) {
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_siebel_id.fieldControl-text-box-text'][@readonly]")),"Siebel ID");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_siebel_id.fieldControl-text-box-text']")),siebelID, "Siebel ID");
-							return this;
-						}
-
-						// Disabled Region
-						public MemberFormPage verifyRegionIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_regionnew.fieldControl-option-set-select']")),"Region");
-							return this;
-						}
-
-						// Disabled Sponsor Details
-						public MemberFormPage verifySponsorDetailsIsNotEditable(String sponsor) {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_issponsor.fieldControl-checkbox-select']")),"Is Sponsor");
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_sponsor.fieldControl-Lookup_ix_sponsor']/div/div/div[1]")),sponsor,"Sponsor");
-							return this;
-						}
-
-						// Read Only Supplier Record  
-						public MemberFormPage verifySupplierRecordIsNotEditable(String supplierRecord) {
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_supplierrecordid.fieldControl-LookupResultsDropdown_ix_supplierrecordid_textInputBox_with_filter_new'][@readonly]")),"Supplier Record");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_supplierrecordid.fieldControl-LookupResultsDropdown_ix_supplierrecordid_textInputBox_with_filter_new']")),supplierRecord, "Supplier Record");
-							return this;
-						}
-
-
-						// Disabled Ownership
-						public MemberFormPage verifyOwnershipIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_ownership.fieldControl-option-set-select']")),"Ownership");
-							click(getDriver().findElement(By.xpath("//select[@data-id='ix_ownership.fieldControl-option-set-select']")),"Ownership");
-							return this;
-						}
-
-
-						// Read Only Stock Symbol
-						public MemberFormPage verifyStockSymbolIsNotEditable(String stockSymbol) {
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_stocksymbol.fieldControl-text-box-text'][@readonly]")),"Stock Symbol");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_stocksymbol.fieldControl-text-box-text']")),stockSymbol, "Stock Symbol");
-							return this;
-						}
-
-
-						// Read Only Exchange
-						public MemberFormPage verifyExchangeIsNotEditable(String exchange) {
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_exchange.fieldControl-text-box-text'][@readonly]")),"Exchange");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_exchange.fieldControl-text-box-text']")),exchange, "Exchange");
-							return this;
-						}
-
-						// Disabled/Readonly Payment Entity Details
-						public MemberFormPage verifyPaymentEntityDetailsIsNotEditable(String paymentEntity) {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_ispaymententity.fieldControl-checkbox-select']")),"Is Payment Entity");
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_paymententityid.fieldControl-LookupResultsDropdown_ix_paymententityid_textInputBox_with_filter_new'][@readonly]")),"Payment Entity");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_paymententityid.fieldControl-LookupResultsDropdown_ix_paymententityid_textInputBox_with_filter_new']")),paymentEntity, "Payment Entity");
-							return this;
-						}
-
-						// Disabled Corporate Parent  Details
-						public MemberFormPage verifyCorporateParentDetailsIsNotEditable(String corporateParent,String crmNumber1) {
-							//CP
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-Lookup_ix_corporateparentname']/div/div/div[1]")),corporateParent,"Corporate Parent");
-							//EIN
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
-							//Is CP
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_iscorporateaccount.fieldControl-checkbox-select']")),"Is Corporate Parent");
-							//CP Start Date
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentstartdate.fieldControl-date-time-input']")),"Corporate Parent Start Date");
-							//FSP Override
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_corporateparentoverride.fieldControl-checkbox-select']")),"Corporate Parent Override");
-							return this;
-						}
-
-						// Disabled Corporate Rebate Details
-						public MemberFormPage verifyCorporateRebateDetailsIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_corporaterebate.fieldControl-option-set-select']")),"Corporate Rebate");
-							click(getDriver().findElement(By.xpath("//select[@data-id='ix_corporaterebate.fieldControl-option-set-select']")),"Corporate Rebate");
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_corporaterebatefeedate.fieldControl-date-time-input']")),"Corporate Rebate Fee Date");
-							return this;
-						}
-
-						// Disabled Food Service Parent  Details
-						public MemberFormPage verifyFoodServiceParentDetailsIsNotEditable(String foodServiceParent,String crmNumber1) {
-							//FSP
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_foodserviceparentname.fieldControl-Lookup_ix_foodserviceparentname']/div/div/div[1]")),foodServiceParent,"Food Service Parent");
-							//EIN
-							verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='FSPEntityCode.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
-							typeLocked(getDriver().findElement(By.xpath("//input[@data-id='FSPEntityCode.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
-							//Is FSP
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-select']")),"Is Food Service Parent");
-							//FSP Start Date
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_foodserviceparentstartdate.fieldControl-date-time-input']")),"Food Service Parent Start Date");
-							//FSP Override
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_foodserviceparentoverride.fieldControl-checkbox-select']")),"Food Service Parent Override");
-							return this;
-						}
-
-						// Disabled Require Manual AG Assignment
-						public MemberFormPage verifyRequireManualAGAssignmentIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_requiremanualagassignment.fieldControl-checkbox-select']")),"Require Manual AG Assignment");
-							return this;
-						}
-
-
-						// Read Only Affiliate Group
-						public MemberFormPage verifyAffiliateGroupIsNotEditable(String affiliateGroup) {
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_affiliategroup.fieldControl-Lookup_ix_affiliategroup']/div/div/div[1]")), affiliateGroup,"Affiliate Group");
-							return this;
-						}
-
-						// Disabled Affiliate Group Effective Date
-						public MemberFormPage verifyAffiliateGroupEffectiveDateIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_affiliategroupeffectivedate.fieldControl-date-time-input']")),"Affiliate Group Efective Date ");
-							return this;
-						}
-
-						// Disabled Record Status
-						public MemberFormPage verifyRecordStatusIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Record Status");
-							return this;
-						}
-
-						// Disabled Record Change Status
-						public MemberFormPage verifyRecordChangeStatusIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")),"Record Change Status");
-							return this;
-						}
-
-						// Disabled Account Type
-						public MemberFormPage verifyAccountTypeIsNotEditable() {
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='customertypecode.fieldControl-option-set-select']")),"Account Type");
-							return this;
-						}
-
-						// Read Only Premier Roster
-						public MemberFormPage verifyPremierRosterIsNotEditable(String premierRoster) {
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_premierrosterid.fieldControl-Lookup_ix_premierrosterid']/div/div/div[1]")), premierRoster,"Premier Roster");
-							return this;
-						}	
-
-
-						// Disabled FBO  Details
-						public MemberFormPage verifyFBOtDetailsIsNotEditable(String fBO) {
-							//FBO
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_fbo.fieldControl-Lookup_ix_fbo']/div/div/div[1]")),fBO,"FBO");
-							//Is FBO
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfbo.fieldControl-checkbox-select']")),"Is FBO");
-							//FBO Relation Date
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_fborelationdate.fieldControl-date-time-input']")),"FBO Relation Date");
-							//FBO Manual Override
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_fbomanualoverride.fieldControl-checkbox-select']")),"FBO Manual Override");
-							//FBO GPO
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_fbogpo.fieldControl-checkbox-select']")),"FBO GPO");
-							//FBO Type
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_fbotype.fieldControl-option-set-select']")),"FBO Type");
-							//FBO Effective Date
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_fbotypeeffectivedate.fieldControl-date-time-input']")),"FBO Effective Date");
-							return this;
-						}
-
-
-						// Disabled Current Internal Rep  
-						public MemberFormPage verifyCurrentInternalRepIsNotEditable(String currentInternalRep) {
-							//FBO
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_currentinternalrep.fieldControl-Lookup_ix_currentinternalrep']/div/div/div[1]")),currentInternalRep,"Current Internal Rep");
-							return this;
-						}
-
-						// Disabled Current Field Rep  
-						public MemberFormPage verifyCurrentFieldRepIsNotEditable(String currentFieldRep) {
-							//FBO
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_currentfieldrep.fieldControl-Lookup_ix_currentfieldrep']/div/div/div[1]")),currentFieldRep,"Current Field Rep");
-							return this;
-						}
-
-						//Disabled Fee Share Details
-						public MemberFormPage verifyFeeShareDetailsIsNotEditable() {
-							//Fee Share
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_feeshareeligible.fieldControl-checkbox-select']")),"Fee Share");
-							//Fee Share Eligible Date
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshareeligibledate.fieldControl-date-time-input']")),"Fee Share Eligible Date");
-							return this;
-						}
-
-						
-						//Read Only Referred By
-						public MemberFormPage verifyReferredByIsNotEditable(String referredBy) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new'][@readonly]")),"Referred By");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new'][@readonly]")),referredBy,"Referred By");
-						return this;
-						}
-						// Editable Do Not Verify Address
-						public MemberFormPage verifyDoNotVerifyAddresIsEditable(String doNotVerifyAddress ) throws InterruptedException {
-							//verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Do Not Verify Address");
-							Thread.sleep(3000);
-							click(getDriver().findElement(By.xpath("//select[@data-id='ix_donotverifyaddress.fieldControl-checkbox-select']")),"Do Not Verify Address");
-							Thread.sleep(5000);
-							selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_donotverifyaddress.fieldControl-checkbox-select']")),doNotVerifyAddress, "Do Not Verify Address");
-							Thread.sleep(2000);		
-							return this;
-						}
-	
-
-						//Disabled Membership Provider field on Membership Entity 		
-						public MemberFormPage verifyMPOnMembershipIsNotEditable(String errorMessage2) throws InterruptedException {
-							Thread.sleep(2000);
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_membershipprovider.fieldControl-Lookup_ix_membershipprovider']/div/div/div[1]")), errorMessage2, "Account field in Membership Entity");
-							return this;
-						}
-						// Disabled Account field on Membership Entity
-						public MemberFormPage verifyAccountOnMembershipIsNotEditable(String errorMessage1) throws InterruptedException {
-							Thread.sleep(2000);
-							verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_accountname.fieldControl-Lookup_ix_accountname']/div/div/div[1]")), errorMessage1, "Account field in Membership Entity");				
-							return this;
-						}
-
-						// Disabled Membership Type on Membership Entity
-						public MemberFormPage verifyMembershipTypeIsNotEditable() throws InterruptedException {
-							Thread.sleep(2000);
-							verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_membershiptype.fieldControl-option-set-select']")),"Membership Type");
-							return this;
-						}
-
-						//Disabled Stop Cascade on Membership Entity
-						public MemberFormPage verifyStopCascadeIsNotEditable() throws InterruptedException {
-							Thread.sleep(2000);
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_stopcascadeaanode.fieldControl-checkbox-select']")),"Stop Cascade");
-							return this;
-						}
-
-						// Disabled Start Date on Membership Entity
-						public MemberFormPage verifyStartDateIsNotEditable() throws InterruptedException {
-							Thread.sleep(2000);
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
-							return this;
-						}
-
-						// Disabled End Date on Membership Entity
-						public MemberFormPage verifyEndDateIsNotEditable() throws InterruptedException {
-							Thread.sleep(2000);
-							verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-							return this;
-						}
-
-						// Disabled Membership Level on Membership Entity
-						public MemberFormPage verifyMembershipLevelIsNotEditable() throws InterruptedException {
-							Thread.sleep(2000);
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_membershiplevel.fieldControl-option-set-select']")),"Membership Level");
-							return this;
-						}
-
-
-						// Disabled End Reason on Membership Entity
-						public MemberFormPage verifyEndReasonIsNotEditable() throws InterruptedException {
-							Thread.sleep(2000);
-							verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_endreason.fieldControl-option-set-select']")),"End Reason");
-							return this;
-						}
-						//Editable Type street1
-						public MemberFormPage verifyStreet1IsEditable(String street1 ) throws InterruptedException {
-							verifyIsEnabled(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
-							click(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")),"Street1");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")),street1,"Street1");
-							Thread.sleep(2000);			
-							return this;
-						}
-
-						// Editable Type street 2
-						public MemberFormPage verifyStreet2IsEditable(String street2 ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),"Street2");
-							click(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),"Street2");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),street2,"Street2");
-							Thread.sleep(2000);			
-
-							return this;
-						}
-
-						//Editable delivery information
-						public MemberFormPage verifyDeliveryInfoIsEditable(String deliveryInfo ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='address1_line3.fieldControl-text-box-text']")),"Delivery Info");
-							click(getDriver().findElement(By.xpath("//input[@data-id='address1_line3.fieldControl-text-box-text']")),"Delivery Info");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='address1_line3.fieldControl-text-box-text']")),deliveryInfo,"Delivery Info");
-							Thread.sleep(2000);				
-							return this;
-						}
-
-						//Editable City
-						public MemberFormPage verifyCityIsEditable(String city ) throws InterruptedException {
-							verifyIsEnabled((getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']"))),"City");
-							click(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']")),"City");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']")),city,"City");
-							Thread.sleep(2000);				
-							return this;
-						}
-
-						//Editable State
-						public MemberFormPage verifyStateIsEditable(String state ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),"State");
-							click(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),"State");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),state,"State");
-							Thread.sleep(2000);				
-							return this;
-						}
-
-						//Editable County
-						public MemberFormPage verifyCountyIsEditable(String county ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),"County");
-							click(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),"County");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),county,"County");
-							Thread.sleep(2000);
-							return this;
-						}
-
-						//Editable country
-						public MemberFormPage verifyCountryIsEditable(String country ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
-							click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),country,"Country");
-							Thread.sleep(2000);			
-							return this;
-						}
-
-						//Editable Zip code	
-						public MemberFormPage verifyZipIsEditable(String zipCode ) throws InterruptedException {
-							verifyIsEnabled((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
-							click(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']")),zipCode,"Zip Code");
-							Thread.sleep(2000);			
-							return this;
-						}
-
-						// Editable Override Name
-						public MemberFormPage verifyOverrideNameIsEditable( String overrideName) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='address1_name.fieldControl-text-box-text']")),"Override Name");
-							click(getDriver().findElement(By.xpath("//input[@data-id='address1_name.fieldControl-text-box-text']")),"Override Name");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='address1_name.fieldControl-text-box-text']")),overrideName,"Override Name");
-							Thread.sleep(2000);				
-							return this;
-						}
-
-						// Editable Other Phone
-						public MemberFormPage verifyOtherPhoneIsEditable(String otherPhone ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='telephone2.fieldControl-phone-text-input']")),"Other Phone");
-							click(getDriver().findElement(By.xpath("//input[@data-id='telephone2.fieldControl-phone-text-input']")),"Other Phone");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='telephone2.fieldControl-phone-text-input']")),otherPhone,"Other Phone");
-							Thread.sleep(2000);
-							return this;
-						}
-						public MemberFormPage verifyFaxIsEditable(String fax ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='fax.fieldControl-text-box-text']")),"Fax");
-							click(getDriver().findElement(By.xpath("//input[@data-id='fax.fieldControl-text-box-text']")),"Fax");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='fax.fieldControl-text-box-text']")),fax,"Fax");
-							Thread.sleep(2000);		
-							return this;
-
-						}
-
-						// Editable Main Phone
-						public MemberFormPage verifyMainPhoneIsEditable(String mainPhone ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Main Phone");
-							click(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Main Phone");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),mainPhone,"Main Phone");
-							Thread.sleep(2000);		
-							return this;
-						}
-
-						// Editable Website
-						public MemberFormPage verifyWebsiteIsEditable(String website ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='websiteurl.fieldControl-url-text-input']")),"Website");
-							click(getDriver().findElement(By.xpath("//input[@data-id='websiteurl.fieldControl-url-text-input']")),"Website");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='websiteurl.fieldControl-url-text-input']")),website,"Website");
-							Thread.sleep(2000);		
-							return this;
-						}
-
-						// Editable Receive Direct Mail
-						public MemberFormPage verifyReceiveDirectMailIsEditable(String receiveDirectMail ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//select[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),"Receive Direct Mail");
-							Thread.sleep(3000);
-							click(getDriver().findElement(By.xpath("//select[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),"Receive Direct Mail");
-							Thread.sleep(5000);
-							selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),receiveDirectMail,"Receive Direct Mail");
-							Thread.sleep(2000);
-							return this;
-						}
-
-
-						// Editable External Address ID
-						public MemberFormPage verifyExternalAddressIDIsEditable(String externalAddressID ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_externaladdressid.fieldControl-text-box-text']")),"External Address ID");
-							click(getDriver().findElement(By.xpath("//input[@data-id='ix_externaladdressid.fieldControl-text-box-text']")),"External Address ID");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='ix_externaladdressid.fieldControl-text-box-text']")),externalAddressID,"External Address ID");
-							Thread.sleep(2000);
-							return this;
-						}
-
-						//Editable #Estimated Locations phone- NY Information Tab
-						public MemberFormPage verifyEstLocIsEditable(String numEstLoc ) throws InterruptedException {
-							click(getDriver().findElement(By.xpath("//li[text()='NY INFORMATION']")),"NY Information");	
-							Thread.sleep(2000);
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
-							click(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
-							Thread.sleep(2000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),numEstLoc,"# of Estimated Locations");
-							return this;
-						}
-						
-						// Editable NAICS -NY Information Tab
-						public MemberFormPage verifyNAICSIsEditable(String nAICS,String industryTitle) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),"NAICS");
-							click(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),"NAICS");
-							Thread.sleep(3000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),nAICS,"NAICS");
-							Thread.sleep(7000);
-							click(getDriver().findElement(By.xpath("//span[@data-id='ix_naicscode.fieldControl-Lookup_ix_naicscode_microsoftIcon_searchButton']")),"NAICS");
-							Thread.sleep(5000);	
-							click(getDriver().findElement(By.xpath("//span[@data-id='ix_naicscode.fieldControl-ix_industrytitle1_0_0']")),"NAICS Code in menu");
-							Thread.sleep(4000);
-							clickAndArrowDown(getDriver().findElement(By.xpath("//input[@data-id='NAICSCode.ix_industrytitle.fieldControl-text-box-text']")), "Arrow Down");
-							click(getDriver().findElement(By.xpath("//input[@data-id='NAICSCode.ix_industrytitle.fieldControl-text-box-text']")),"Industry Title");
-							Thread.sleep(3000);
-							verifyExactValue(getDriver().findElement(By.xpath("//input[@data-id='NAICSCode.ix_industrytitle.fieldControl-text-box-text']")),industryTitle,"industryTitle");
-							return this;
-						}
-
-						//Save And Close
-						public MemberFormPage clickNyTabSave() throws InterruptedException {
-							Thread.sleep(2000);	
-							click(getDriver().findElement(By.xpath("//span[text()='Save']")),"NY Info Tab Save");
-							Thread.sleep(5000);
-							try {
-								if(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")).isDisplayed());
-								click(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")),"Ignore and Save");	
-							} catch (Exception e) {
-								e.getMessage();
-							}
-								
-							Thread.sleep(3000);	
-							return this;
-
-						}
-
-						//Remove Primary Contact on Member Form
-						public MemberFormPage removeMemberPrimaryContact() throws InterruptedException {
-							Thread.sleep(5000);
-							Actions action = new Actions(getDriver());
-							action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_SelectedRecordList']"))).perform();
-							click(getDriver().findElement(By.xpath("//button[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_delete']")),"Clear Icon on Existing Primary Contact"); 
-							Thread.sleep(3000);
-							return this;
-						}
-						//Read Only Street1
-						public MemberFormPage verifyStreet1IsNotEditable(String street1) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text'][@readonly]")),"Street1");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text'][@readonly]")),street1,"Street1");
-						return this;
-						}
-
-						//remove NAICS
-						public MemberFormPage removeNAICS() throws InterruptedException {
-							Thread.sleep(2000);
-							Actions action = new Actions(getDriver());
-							action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_SelectedRecordList']"))).perform();
-							Thread.sleep(2000);
-							click(getDriver().findElement(By.xpath("//button[@data-id ='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_selected_tag_delete']")), "Clear X icon on Existing NAICS");
-							Thread.sleep(2000);
-							click(getDriver().findElement(By.xpath("//span[text()='Save']")),"NY Info Tab Save");
-							Thread.sleep(5000);
-							return this;
-						}
-
-
-
-						//remove Referred By
-						public MemberFormPage removeReferredBy() throws InterruptedException {
-							Thread.sleep(2000);
-							Actions action = new Actions(getDriver());
-							action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_SelectedRecordList']"))).perform();
-							Thread.sleep(2000);
-							click(getDriver().findElement(By.xpath("//button[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_selected_tag_delete']")), "Clear X icon on Existing Referred By");
-							Thread.sleep(2000);
-							click(getDriver().findElement(By.xpath("//span[text()='Save']")),"NY Info Tab Save");
-							Thread.sleep(5000);
-							return this;
-						}
-
-						// Editable Referred By -NY Information Tab
-						public MemberFormPage verifyReferredByIsEditable(String referredBy ) throws InterruptedException {
-							verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")),"Referred By");
-							Thread.sleep(3000);
-							click(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")),"Referred By");
-							Thread.sleep(3000);
-							type(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")), referredBy,"Referred By");
-							Thread.sleep(5000);
-							click(getDriver().findElement(By.xpath("//span[@data-id='ix_referredby.fieldControl-address1_composite1_0_0']")),"Referred By Account");
-							Thread.sleep(2000);	
-							return this;
-						}
-						//save and close from NY Information Tab
-						public MemberFormPage clickNyTabSaveAndClose() throws InterruptedException {
-							Thread.sleep(2000);	
-							click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"NY Info Tab Save and Close");
-							Thread.sleep(4000);
-							return this;
-
-						}
-						
-						//Read Only Street2
-						public MemberFormPage verifyStreet2IsNotEditable(String street2) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text'][@readonly]")),"Street2");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text'][@readonly]")),street2,"Street2");
-						return this;
-						}
-			
-						//Read Only Delivery Info
-						public MemberFormPage verifyDeliveryInfoIsNotEditable(String deliveryInfo) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_line3.fieldControl-text-box-text'][@readonly]")),"Delivery Info");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_line3.fieldControl-text-box-text'][@readonly]")),deliveryInfo,"Delivery Info");
-						return this;
-						}	
-						
-						//Read Only City
-						public MemberFormPage verifyCityIsNotEditable(String city) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text'][@readonly]")),"City");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text'][@readonly]")),city,"City");
-						return this;
-						}	
-						
-						//Read Only County
-						public MemberFormPage verifyCountyIsNotEditable(String county) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text'][@readonly]")),"County");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text'][@readonly]")),county,"County");
-						return this;
-						}
-						
-						//Read Only State
-						public MemberFormPage verifyStateIsNotEditable(String state) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text'][@readonly]")),"State");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text'][@readonly]")),state,"State");
-						return this;
-						}
-			
-						//Read Only ZipCode
-						public MemberFormPage verifyZipCodeIsNotEditable(String zipcode) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text'][@readonly]")),"Zip Code");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text'][@readonly]")),zipcode,"Zip Code");
-						return this;
-						}
-						
-						//Read Only Country
-						public MemberFormPage verifyCountryIsNotEditable(String country) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text'][@readonly]")),"Country");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text'][@readonly]")),country,"Country");
-						return this;
-						}
-				
-						
-						//Read Only Override Name
-						public MemberFormPage verifyOverrideNameIsNotEditable(String overrideName) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_name.fieldControl-text-box-text'][@readonly]")),"Override Name");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_name.fieldControl-text-box-text'][@readonly]")),overrideName,"Override Name");
-						return this;
-						}
-						
-						
-						//Read Only Main Phone
-						public MemberFormPage verifyMainPhoneIsNotEditable(String mainPhone) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='telephone1.fieldControl-phone-text-input'][@readonly]")),"Main Phone");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='telephone1.fieldControl-phone-text-input'][@readonly]")),mainPhone,"Main Phone");
-						return this;
-						}
-						
-						//Read Only Other Phone
-						public MemberFormPage verifyOtherPhoneIsNotEditable(String otherPhone) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='telephone2.fieldControl-phone-text-input'][@readonly]")),"Other Phone");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='telephone2.fieldControl-phone-text-input'][@readonly]")),otherPhone,"Other Phone");
-						return this;
-						}
-						
-						//Read Only Fax
-						public MemberFormPage verifyFaxIsNotEditable(String fax) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='fax.fieldControl-text-box-text'][@readonly]")),"Fax");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='fax.fieldControl-text-box-text'][@readonly]")),fax,"Fax");
-						return this;
-						}
-						
-						//Read Only Website
-						public MemberFormPage verifyWebsiteIsNotEditable(String website) throws InterruptedException {
-						Thread.sleep(2000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='websiteurl.fieldControl-url-text-input'][@readonly]")),"Website");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='websiteurl.fieldControl-url-text-input'][@readonly]")),website,"Website");
-						return this;
-						}
-						
-						//Read Only Receive Direct Mail
-						public MemberFormPage verifyReceiveDirectMailIsNotEditable() throws InterruptedException {
-						Thread.sleep(2000);
-						verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),"Receive Direct Mail");
-						return this;
-						}
-						
-						//Read Only Do Not Verify address
-						public MemberFormPage verifyDoNotVerifyAddressIsNotEditable() throws InterruptedException {
-						Thread.sleep(2000);
-						verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_donotverifyaddress.fieldControl-checkbox-empty']")),"Do Not Verify Address");
-						return this;
-						}
-						
-						//Read Only External Address ID
-						public MemberFormPage verifyExternalAddressIDIsNotEditable(String externalAddressID) throws InterruptedException {
-						Thread.sleep(3000);
-						verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_externaladdressid.fieldControl-text-box-text'][@readonly]")),"External Address ID");
-						typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_externaladdressid.fieldControl-text-box-text'][@readonly]")),externalAddressID,"External Address ID");
-						return this;
-						}
-						
-						
-				
-					}
+		}
+		return this;
+	}
+	//Create Contact : Quick Create
+	public MemberFormPage addNewContactToMember(String contactFirstName,String contactLastName, String email2, String mainPhone) throws InterruptedException {
+		type(((getDriver().findElement(By.xpath("//label[text()='First Name']/following::input[@aria-label='First Name']")))),contactFirstName,"Contact First Name");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='lastname.fieldControl-text-box-text']")))),contactLastName,"Contact Last Name");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='emailaddress1.fieldControl-mail-text-input']")))),email2,"Email");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='mobilephone.fieldControl-phone-text-input']")))),mainPhone,"Mobile Phone");
+		click(getDriver().findElement(By.xpath("//span[text()='Save and Close']")),"Save and Close");
+		Thread.sleep(11000);
+		return this;
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~COMPETITORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Click Related and Competitors
+	public MemberFormPage clickCompetitors() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Competitors')]")),"Competitors");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	//Verify Competitor Name Associated  Associated View
+	public MemberFormPage verifyCompetitorNameAssocView() throws InterruptedException   {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Competitor Name Associated View']")), "Competitor Name Associated View");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Add New Competitor
+	public MemberFormPage verifyNewCompetitorIsNotPresent() {
+		List<WebElement> comp= getDriver().findElements(By.xpath("//span[contains(text(),'New Competitor')]"));
+		verifyElementisNotDisplayed(comp.size()," ' + New Competitor  ' Button ");
+		return this;
+	}
+
+
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END  Competitors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Click Membership on existing Member Form Page
+	public MemberFormPage clickExistingMembershipOnMemberForm() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[text()='Premier']/following-sibling::span")),"Existing Membership");
+		Thread.sleep(3000);
+		return this;
+	}		
+	//Click Go Back across all member form pages
+	public MemberFormPage clickGoBackOnMemberForm() throws InterruptedException {
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[@title='Go back']")), "Go Back");
+		Thread.sleep(5000);
+		return this;
+	}
+
+
+	//Choose Existing Contact from Contact Associated View
+
+	public ContactsPage doubleClickExistingContact(String contactFirstName) throws InterruptedException   {
+		Thread.sleep(4000);
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 0; i <rowList.size(); i++) {
+			String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")).getAttribute("title");
+			System.out.println(title);					
+			if (title.equals(contactFirstName)) {
+				Thread.sleep(5000);
+				doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"][@aria-label='Data']/div[@title]")), "Contact First Name");
+				Thread.sleep(4000);
+				break;				
+			}
+		}		
+
+		return new ContactsPage();
+	}
+
+
+	//To add existing DEA
+	public MemberFormPage typeStaticDEA(String DEANumber) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),DEANumber,"DEA Account Number");
+		return this;
+	}
+
+	//Enter End Date as Today's Date in Account Numbers
+	public MemberFormPage typeEndDateInAccountNumbers() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String enddate= dateFormat.format(date);			
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),enddate,"End Date"); 
+		return this;
+	}
+
+	//Enter Start Date as Today's Date in Account Numbers
+	public MemberFormPage typeStartDateInAccountNumbers() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String startdate= dateFormat.format(date);
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date"); 
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),startdate,"Start Date"); 
+		return this;
+	}
+
+	//To add existing HIN
+	public MemberFormPage typeStaticHIN(String HIN) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),HIN,"HIN Account Number");
+		return this;
+	}
+
+	//Verify Account Number Error Message
+	public MemberFormPage verifyAccountNumberErrorMessage(String errormessage) throws InterruptedException {
+		Thread.sleep(7000);
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")),errormessage,"Account Number Error Message");
+		Thread.sleep(2000);
+		return this;	
+	}
+	//Click OK on Account Number Error Message
+	public MemberFormPage clickOKOnAccountNumberErrorMessage() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"OK");
+		Thread.sleep(5000);
+		return this;	
+	}
+
+	//Click Related > Account Member Attributes > Check+ New Account Member Attributes is not available
+	public MemberFormPage selectRelatedMemberAttributesForLimMem() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		click(getDriver().findElement(By.xpath("//*[text()='Account Members Attributes']")),"Account Members Attributes");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Account Member Attributes Associated View
+	public MemberFormPage verifyAccountMemberAttributesAssocView() throws InterruptedException   {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Account Member Attributes Associated View']")), "Account Member Attributes Associated View");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Verify Account Name in  Account number Entity
+	public MemberFormPage verifyAccountNameInAccountNumbers(String accountName2) {
+		verifyExactTextWithTextContentAttribute((getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']"))),accountName2,"Account Name in Account Numbers Entity");
+		return this;
+	}
+
+	// LIMITED MEMBER Editable Fields check	
+
+	//Editable account name		
+	public MemberFormPage verifyAccountNameIsEditable(String accountName) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"Account Name");
+		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-container']")),"Account name");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),accountName,"Account Name");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Editable Account name 2
+	public MemberFormPage verifyAccountName2IsEditable(String accountName2) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"Account Name2");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"Account Name2");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),accountName2,"Account Name2");
+		Thread.sleep(3000);			
+		return this;
+	}
+
+	//Editable Primary Contact
+	public MemberFormPage verifyPrimaryContactIsEditable(String primaryContact) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
+		click(getDriver().findElement(By.xpath("//input[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),primaryContact,"Primary Contact");
+		Thread.sleep(2000);	
+		click(getDriver().findElement(By.xpath("//span[contains(@id,'primarycontactid.fieldControl-firstname0_0_0')]")),"Primary Contact search");
+		return this;
+	}	
+
+
+	//Read Only Account Name
+	public MemberFormPage verifyAccountNameIsNotEditable(String accountName) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text'][@readonly]")),"Account Name");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text'][@readonly]")),accountName,"Account Name");
+		return this;
+	}
+
+	//Read Only Account Name2
+	public MemberFormPage verifyAccountName2IsNotEditable(String accountName2) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_hiscirostername.fieldControl-text-box-text'][@readonly]")),"Account Name2");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_hiscirostername.fieldControl-text-box-text'][@readonly]")),accountName2,"Account Name2");
+
+		return this;
+	}
+
+	//Read Only Primary Contact	
+	public MemberFormPage verifyPrimaryContactIsNotEditable(String primaryContact) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new'][@readonly]")),"Primary Contact");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new'][@readonly]")),primaryContact,"Primary Contact");
+		return this;
+	}
+
+	//+ New Account Number Button
+	public MemberFormPage verifyAddNewAccountNumberIsNotPresent() throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		click(getDriver().findElement(By.xpath("(//*[contains(text(),'Account Numbers')])[2]")),"Account Numbers");
+		List<WebElement> accNum= getDriver().findElements(By.xpath("//span[contains(text(),'New Account Number')]"));
+		verifyElementisNotDisplayed(accNum.size()," '+ New Account Number  ' Button ");
+		return this;
+	}
+
+	//Choose Existing Account Number -DEA
+	public MemberFormPage doubleClickExistingAccountNumberDEA() throws InterruptedException   {
+		Thread.sleep(4000);
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 0; i <rowList.size(); i++) {
+			String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")).getAttribute("title");
+			System.out.println(title);					
+			if (title.equals("DEA")) {
+				Thread.sleep(3000);
+				doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")), "DEA");
+				Thread.sleep(3000);
+				break;				
+			}
+		}		
+
+		return this;					
+	}
+
+	//Click Related Membership
+	public MemberFormPage selectRelatedMembership() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
+		Thread.sleep(3000);
+		return this;
+	}
+
+	//Disabled # Estimated Locations
+	public MemberFormPage verifyEstimatedNumLocationsIsNotEditable() throws InterruptedException {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
+		return this;
+	}
+
+	//Read Only NAICS		
+	public MemberFormPage verifyNAICSIsNotEditable(String nAICS) throws InterruptedException {
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),"NAICS");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new'][@readonly]")),nAICS,"NAICS");
+		return this;
+	}
+
+	//Verify HIN is null in member form
+	public MemberFormPage verifyHINIsNull() {
+		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_dea.fieldControl-text-box-text']")),"HIN"); 
+		return this;
+	}
+
+	//Membership Associated View
+	public MemberFormPage verifyMembershipAssocView() throws InterruptedException   {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//span[text()='Membership Associated View']")), "Membership Associated View");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//+ New Membership Button
+	public MemberFormPage verifyAddNewMembershipIsNotPresent() throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
+		List<WebElement> newMShip= getDriver().findElements(By.xpath("//span[contains(text(),'New Membership')]"));
+		verifyElementisNotDisplayed(newMShip.size()," '+ New Membership  ' Button ");
+		return this;
+	}				
+
+	// Read Only Membership Entity Error Info Message for Limited Member
+	public MemberFormPage verifyMembershipEntityIsNotEditable(String errorMessage) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyExactText((getDriver().findElement(By.xpath("//span[@data-id='warningNotification']"))),errorMessage,"Membership Entity Read Only Error Message");
+		return this;
+	}
+
+
+
+	//Click on Membership save and close and Verify Membership Error Message
+	public MemberFormPage verifyMembershipErrorMessage(String errormessage) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
+		Thread.sleep(5000);
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")),errormessage,"Membership Error Message");
+		Thread.sleep(2000);
+		return this;	
+	}
+
+	//Click OK on Membership Error Message
+	public MemberFormPage clickOKOnMembershipErrorMessage() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"OK");
+		Thread.sleep(5000);
+		return this;	
+	}	
+	//Verify Name and Calculated Name in  Account number Entity
+	public MemberFormPage verifyNameAndCalculatedNameInAccountNumbers() throws InterruptedException {
+		String account =(getDriver().findElement(By.xpath("//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")).getAttribute("title"));
+		System.out.println("Account field's value in Account Number Entity is  : " + account);
+
+		String accNumType =(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")).getAttribute("title"));
+		System.out.println("Account Number Type field's value in Account Number Entity is  : " + accNumType);
+
+		String accNum =(getDriver().findElement(By.xpath("//input[@data-id='ix_number.fieldControl-text-box-text']")).getAttribute("value"));
+		System.out.println("Account Number field's value in Account Number Entity is  : " + accNum);
+
+		String name =account.concat(" - ").concat(accNumType).concat(" - ").concat(accNum);
+		System.out.println(name);
+		Thread.sleep(6000);
+		verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_calculatedname.fieldControl-text-box-text']"))),name,"Calculated Name in Account Numbers Entity");
+		verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_accountnumbername.fieldControl-text-box-text']"))),name,"Name in Account Numbers Entity");
+		return this;
+	}
+
+	//Add New Account Members Attributes Button
+	public MemberFormPage verifyNewAccountMembersAttributesIsNotPresent() {
+		List<WebElement> MA= getDriver().findElements(By.xpath("//span[contains(text(),'New Account Member Attributes')]"));
+		verifyElementisNotDisplayed(MA.size()," '+ New Account Members Attributes  ' Button ");
+		return this;
+	}
+
+	//~~~~Limited Member Non Editable fields~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~XX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	// Disabled Store Premier Start Date  -Type verification cannot be made as the element is not interactable/disabled.
+	public MemberFormPage verifyPremierStartDateIsNotEditable(String membershipProviderStartDate ) {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date");
+		return this;
+	}
+
+	// Disabled Store Premier End Date -Type verification cannot be made as the element is not interactable/disabled.
+	public MemberFormPage verifyPremierEndDateIsNotEditable(String membershipEndDate ) {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")),"Premier End Date");
+		return this;
+	}
+
+	// Read Only Store Location # -Type verification possible on read only fields as they are interactable
+	public MemberFormPage verifyStoreLocNumIsNotEditable(String storeLocNum ) {
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_locationnumber.fieldControl-text-box-text'][@readonly]")),"Store Location#");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_locationnumber.fieldControl-text-box-text']")),storeLocNum, "Store Location #");
+		return this;
+	}
+
+	// Disabled Store Location Type -Type verification cannot be made as the element is not interactable/disabled.
+	public MemberFormPage verifyStoreLocTypeIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Store Location Type");
+		return this;
+	}
+	//Disabled Direct Parent details
+	public MemberFormPage verifyDirectParentDetailsIsNotEditable(String directParent,String crmNumber1, String dPReason) throws InterruptedException {
+		//DP
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-Lookup_parentaccountid']/div/div/div[1]")),directParent,"Direct Parent");
+		//EIN
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='DPQuickViewForm.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='DPQuickViewForm.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
+		//DPR
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_parentrelationship.fieldControl-option-set-select']")),"Direct Parent Relation");
+		//DPRD
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")),"Direct Parent Relation Date");
+		//DP Exception Reason
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_dpexceptionreason.fieldControl-text-box-text'][@readonly]")),"Direct Parent Exception Reason");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_dpexceptionreason.fieldControl-text-box-text']")),dPReason, "DP Exception Reason");
+		return this;
+	}
+
+	//Disabled Top Parent details
+	public MemberFormPage verifyTopParentDetailsIsNotEditable(String topParent,String crmNumber1, String tPReason) throws InterruptedException {
+		//TP
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_topparent.fieldControl-Lookup_ix_topparent']/div/div/div[1]")),topParent,"Top Parent");
+		//EIN
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='TPQuickViewForm.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='TPQuickViewForm.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
+		//IsTP
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"Is Top Parent");
+		//TPR
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")),"Top Parent Relation");
+		//TPRD
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),"Top Parent Relation Date");
+		//TP Exception Reason
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_tpexceptionreason.fieldControl-text-box-text'][@readonly]")),"Top Parent Exception Reason");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_tpexceptionreason.fieldControl-text-box-text']")),tPReason, "TP Exception Reason");
+		//TP Classification
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_topparentclassification.fieldControl-option-set-select']")),"Top Parent Classification");
+		return this;
+	}
+
+	//Disabled Group field
+	public MemberFormPage verifyGroupIsNotEditable(String verifyGroup) throws InterruptedException {
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_group.fieldControl-Lookup_ix_group']/div/div/div[1]")),verifyGroup,"Group");
+		return this;
+	}
+
+	//Disabled Class of Trade field
+	public MemberFormPage verifyClassOfTradeIsNotEditable(String classOfTrade ) throws InterruptedException {
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_classoftradedetail.fieldControl-Lookup_ix_classoftradedetail']/div/div/div[1]")),classOfTrade,"Class Of Trade");
+		Thread.sleep(3000);
+		return this;
+	}				
+
+	//Disabled Facility type with value populated in the field
+	public MemberFormPage verifyFacilityTypeIsNotEditable(String verifyFacilityType) throws InterruptedException {
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_facilitytype.fieldControl-Lookup_ix_facilitytype']/div/div/div[1]")),verifyFacilityType,"Facility type"); 
+		return this;
+	}
+
+
+	//Disabled Business Classification
+	public MemberFormPage verifyBusinessClassificationIsNotEditable(String verifyBusinessClassification) throws InterruptedException {
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_businessclassification.fieldControl-Lookup_ix_businessclassification']/div/div/div[1]")),verifyBusinessClassification,"Business Classification"); 
+		return this;
+	}
+
+	//Disabled Premier Owner
+	public MemberFormPage verifyPremierOwnerIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_premierowner.fieldControl-checkbox-select']")),"Premier Owner"); 
+		return this;
+	}
+
+	//Disabled Account Status
+	public MemberFormPage verifyAccountStatusIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_accountstatus.fieldControl-option-set-select']")),"Account Status"); 
+		return this;
+	}
+
+	//Disabled Application Date
+	public MemberFormPage verifyApplicationDateIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")),"Application Date"); 
+		return this;
+	}
+
+	//Disabled CAMS flag
+	public MemberFormPage verifyCAMSFlagIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"CAMS Flag"); 
+		return this;
+	}
+
+	//Disabled Exclude from Roster
+	public MemberFormPage verifyExcludeFromRosterIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_donotroster.fieldControl-checkbox-select']")),"Exclude from Roster"); 
+		return this;
+	}
+
+	//Disabled Participation Type
+	public MemberFormPage verifyParticipationTypeIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_participationtype.fieldControl-option-set-select']")),"Participation Type"); 
+		return this;
+	}
+
+
+	//Disabled Provider Select: MD
+	public MemberFormPage verifyProviderSelectMDIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),"Provider Select:MD "); 
+		return this;
+	}
+
+	// Read Only Business Key
+	public MemberFormPage verifyBusinessKeyIsNotEditable(String verifyBKActive ) {
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_businesskey.fieldControl-text-box-text'][@readonly]")),"Business Key");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_businesskey.fieldControl-text-box-text']")),verifyBKActive, "Business Key");
+		return this;
+	}
+
+
+	//Disabled BK Active
+	public MemberFormPage verifyBKActiveIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_bkactive.fieldControl-checkbox-select']")),"BK Active "); 
+		return this;
+	}				
+
+	// Read Only Siebel ID
+	public MemberFormPage verifySiebelIDIsNotEditable(String siebelID ) {
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_siebel_id.fieldControl-text-box-text'][@readonly]")),"Siebel ID");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_siebel_id.fieldControl-text-box-text']")),siebelID, "Siebel ID");
+		return this;
+	}
+
+	// Disabled Region
+	public MemberFormPage verifyRegionIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_regionnew.fieldControl-option-set-select']")),"Region");
+		return this;
+	}
+
+	// Disabled Sponsor Details
+	public MemberFormPage verifySponsorDetailsIsNotEditable(String sponsor) {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_issponsor.fieldControl-checkbox-select']")),"Is Sponsor");
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_sponsor.fieldControl-Lookup_ix_sponsor']/div/div/div[1]")),sponsor,"Sponsor");
+		return this;
+	}
+
+	// Read Only Supplier Record  
+	public MemberFormPage verifySupplierRecordIsNotEditable(String supplierRecord) {
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_supplierrecordid.fieldControl-LookupResultsDropdown_ix_supplierrecordid_textInputBox_with_filter_new'][@readonly]")),"Supplier Record");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_supplierrecordid.fieldControl-LookupResultsDropdown_ix_supplierrecordid_textInputBox_with_filter_new']")),supplierRecord, "Supplier Record");
+		return this;
+	}
+
+
+	// Disabled Ownership
+	public MemberFormPage verifyOwnershipIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_ownership.fieldControl-option-set-select']")),"Ownership");
+		click(getDriver().findElement(By.xpath("//select[@data-id='ix_ownership.fieldControl-option-set-select']")),"Ownership");
+		return this;
+	}
+
+
+	// Read Only Stock Symbol
+	public MemberFormPage verifyStockSymbolIsNotEditable(String stockSymbol) {
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_stocksymbol.fieldControl-text-box-text'][@readonly]")),"Stock Symbol");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_stocksymbol.fieldControl-text-box-text']")),stockSymbol, "Stock Symbol");
+		return this;
+	}
+
+
+	// Read Only Exchange
+	public MemberFormPage verifyExchangeIsNotEditable(String exchange) {
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_exchange.fieldControl-text-box-text'][@readonly]")),"Exchange");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_exchange.fieldControl-text-box-text']")),exchange, "Exchange");
+		return this;
+	}
+
+	// Disabled/Readonly Payment Entity Details
+	public MemberFormPage verifyPaymentEntityDetailsIsNotEditable(String paymentEntity) {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_ispaymententity.fieldControl-checkbox-select']")),"Is Payment Entity");
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='ix_paymententityid.fieldControl-LookupResultsDropdown_ix_paymententityid_textInputBox_with_filter_new'][@readonly]")),"Payment Entity");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_paymententityid.fieldControl-LookupResultsDropdown_ix_paymententityid_textInputBox_with_filter_new']")),paymentEntity, "Payment Entity");
+		return this;
+	}
+
+	// Disabled Corporate Parent  Details
+	public MemberFormPage verifyCorporateParentDetailsIsNotEditable(String corporateParent,String crmNumber1) {
+		//CP
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-Lookup_ix_corporateparentname']/div/div/div[1]")),corporateParent,"Corporate Parent");
+		//EIN
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
+		//Is CP
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_iscorporateaccount.fieldControl-checkbox-select']")),"Is Corporate Parent");
+		//CP Start Date
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentstartdate.fieldControl-date-time-input']")),"Corporate Parent Start Date");
+		//FSP Override
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_corporateparentoverride.fieldControl-checkbox-select']")),"Corporate Parent Override");
+		return this;
+	}
+
+	// Disabled Corporate Rebate Details
+	public MemberFormPage verifyCorporateRebateDetailsIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_corporaterebate.fieldControl-option-set-select']")),"Corporate Rebate");
+		click(getDriver().findElement(By.xpath("//select[@data-id='ix_corporaterebate.fieldControl-option-set-select']")),"Corporate Rebate");
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_corporaterebatefeedate.fieldControl-date-time-input']")),"Corporate Rebate Fee Date");
+		return this;
+	}
+
+	// Disabled Food Service Parent  Details
+	public MemberFormPage verifyFoodServiceParentDetailsIsNotEditable(String foodServiceParent,String crmNumber1) {
+		//FSP
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_foodserviceparentname.fieldControl-Lookup_ix_foodserviceparentname']/div/div/div[1]")),foodServiceParent,"Food Service Parent");
+		//EIN
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='FSPEntityCode.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
+		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='FSPEntityCode.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
+		//Is FSP
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-select']")),"Is Food Service Parent");
+		//FSP Start Date
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_foodserviceparentstartdate.fieldControl-date-time-input']")),"Food Service Parent Start Date");
+		//FSP Override
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_foodserviceparentoverride.fieldControl-checkbox-select']")),"Food Service Parent Override");
+		return this;
+	}
+
+	// Disabled Require Manual AG Assignment
+	public MemberFormPage verifyRequireManualAGAssignmentIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_requiremanualagassignment.fieldControl-checkbox-select']")),"Require Manual AG Assignment");
+		return this;
+	}
+
+
+	// Read Only Affiliate Group
+	public MemberFormPage verifyAffiliateGroupIsNotEditable(String affiliateGroup) {
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_affiliategroup.fieldControl-Lookup_ix_affiliategroup']/div/div/div[1]")), affiliateGroup,"Affiliate Group");
+		return this;
+	}
+
+	// Disabled Affiliate Group Effective Date
+	public MemberFormPage verifyAffiliateGroupEffectiveDateIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_affiliategroupeffectivedate.fieldControl-date-time-input']")),"Affiliate Group Efective Date ");
+		return this;
+	}
+
+	// Disabled Record Status
+	public MemberFormPage verifyRecordStatusIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Record Status");
+		return this;
+	}
+
+	// Disabled Record Change Status
+	public MemberFormPage verifyRecordChangeStatusIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")),"Record Change Status");
+		return this;
+	}
+
+	// Disabled Account Type
+	public MemberFormPage verifyAccountTypeIsNotEditable() {
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='customertypecode.fieldControl-option-set-select']")),"Account Type");
+		return this;
+	}
+
+	// Read Only Premier Roster
+	public MemberFormPage verifyPremierRosterIsNotEditable(String premierRoster) {
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_premierrosterid.fieldControl-Lookup_ix_premierrosterid']/div/div/div[1]")), premierRoster,"Premier Roster");
+		return this;
+	}	
+
+
+	// Disabled FBO  Details
+	public MemberFormPage verifyFBOtDetailsIsNotEditable(String fBO) {
+		//FBO
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_fbo.fieldControl-Lookup_ix_fbo']/div/div/div[1]")),fBO,"FBO");
+		//Is FBO
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfbo.fieldControl-checkbox-select']")),"Is FBO");
+		//FBO Relation Date
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_fborelationdate.fieldControl-date-time-input']")),"FBO Relation Date");
+		//FBO Manual Override
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_fbomanualoverride.fieldControl-checkbox-select']")),"FBO Manual Override");
+		//FBO GPO
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_fbogpo.fieldControl-checkbox-select']")),"FBO GPO");
+		//FBO Type
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_fbotype.fieldControl-option-set-select']")),"FBO Type");
+		//FBO Effective Date
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_fbotypeeffectivedate.fieldControl-date-time-input']")),"FBO Effective Date");
+		return this;
+	}
+
+
+	// Disabled Current Internal Rep  
+	public MemberFormPage verifyCurrentInternalRepIsNotEditable(String currentInternalRep) {
+		//FBO
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_currentinternalrep.fieldControl-Lookup_ix_currentinternalrep']/div/div/div[1]")),currentInternalRep,"Current Internal Rep");
+		return this;
+	}
+
+	// Disabled Current Field Rep  
+	public MemberFormPage verifyCurrentFieldRepIsNotEditable(String currentFieldRep) {
+		//FBO
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_currentfieldrep.fieldControl-Lookup_ix_currentfieldrep']/div/div/div[1]")),currentFieldRep,"Current Field Rep");
+		return this;
+	}
+
+	//Disabled Fee Share Details
+	public MemberFormPage verifyFeeShareDetailsIsNotEditable() {
+		//Fee Share
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_feeshareeligible.fieldControl-checkbox-select']")),"Fee Share");
+		//Fee Share Eligible Date
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshareeligibledate.fieldControl-date-time-input']")),"Fee Share Eligible Date");
+		return this;
+	}
+
+
+	//Read Only Referred By
+	public MemberFormPage verifyReferredByIsNotEditable(String referredBy) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new'][@readonly]")),"Referred By");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new'][@readonly]")),referredBy,"Referred By");
+		return this;
+	}
+	// Editable Do Not Verify Address
+	public MemberFormPage verifyDoNotVerifyAddresIsEditable(String doNotVerifyAddress ) throws InterruptedException {
+		//verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Do Not Verify Address");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//select[@data-id='ix_donotverifyaddress.fieldControl-checkbox-select']")),"Do Not Verify Address");
+		Thread.sleep(5000);
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_donotverifyaddress.fieldControl-checkbox-select']")),doNotVerifyAddress, "Do Not Verify Address");
+		Thread.sleep(2000);		
+		return this;
+	}
+
+
+	//Disabled Membership Provider field on Membership Entity 		
+	public MemberFormPage verifyMPOnMembershipIsNotEditable(String errorMessage2) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_membershipprovider.fieldControl-Lookup_ix_membershipprovider']/div/div/div[1]")), errorMessage2, "Account field in Membership Entity");
+		return this;
+	}
+	// Disabled Account field on Membership Entity
+	public MemberFormPage verifyAccountOnMembershipIsNotEditable(String errorMessage1) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_accountname.fieldControl-Lookup_ix_accountname']/div/div/div[1]")), errorMessage1, "Account field in Membership Entity");				
+		return this;
+	}
+
+	// Disabled Membership Type on Membership Entity
+	public MemberFormPage verifyMembershipTypeIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_membershiptype.fieldControl-option-set-select']")),"Membership Type");
+		return this;
+	}
+
+	//Disabled Stop Cascade on Membership Entity
+	public MemberFormPage verifyStopCascadeIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_stopcascadeaanode.fieldControl-checkbox-select']")),"Stop Cascade");
+		return this;
+	}
+
+	// Disabled Start Date on Membership Entity
+	public MemberFormPage verifyStartDateIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
+		return this;
+	}
+
+	// Disabled End Date on Membership Entity
+	public MemberFormPage verifyEndDateIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		return this;
+	}
+
+	// Disabled Membership Level on Membership Entity
+	public MemberFormPage verifyMembershipLevelIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_membershiplevel.fieldControl-option-set-select']")),"Membership Level");
+		return this;
+	}
+
+
+	// Disabled End Reason on Membership Entity
+	public MemberFormPage verifyEndReasonIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_endreason.fieldControl-option-set-select']")),"End Reason");
+		return this;
+	}
+	//Editable Type street1
+	public MemberFormPage verifyStreet1IsEditable(String street1 ) throws InterruptedException {
+		verifyIsEnabled(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")),"Street1");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")),street1,"Street1");
+		Thread.sleep(2000);			
+		return this;
+	}
+
+	// Editable Type street 2
+	public MemberFormPage verifyStreet2IsEditable(String street2 ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),"Street2");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),"Street2");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),street2,"Street2");
+		Thread.sleep(2000);			
+
+		return this;
+	}
+
+	//Editable delivery information
+	public MemberFormPage verifyDeliveryInfoIsEditable(String deliveryInfo ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='address1_line3.fieldControl-text-box-text']")),"Delivery Info");
+		click(getDriver().findElement(By.xpath("//input[@data-id='address1_line3.fieldControl-text-box-text']")),"Delivery Info");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='address1_line3.fieldControl-text-box-text']")),deliveryInfo,"Delivery Info");
+		Thread.sleep(2000);				
+		return this;
+	}
+
+	//Editable City
+	public MemberFormPage verifyCityIsEditable(String city ) throws InterruptedException {
+		verifyIsEnabled((getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']"))),"City");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']")),"City");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']")),city,"City");
+		Thread.sleep(2000);				
+		return this;
+	}
+
+	//Editable State
+	public MemberFormPage verifyStateIsEditable(String state ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),"State");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),"State");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),state,"State");
+		Thread.sleep(2000);				
+		return this;
+	}
+
+	//Editable County
+	public MemberFormPage verifyCountyIsEditable(String county ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),"County");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),"County");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),county,"County");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Editable country
+	public MemberFormPage verifyCountryIsEditable(String country ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),country,"Country");
+		Thread.sleep(2000);			
+		return this;
+	}
+
+	//Editable Zip code	
+	public MemberFormPage verifyZipIsEditable(String zipCode ) throws InterruptedException {
+		verifyIsEnabled((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']")),zipCode,"Zip Code");
+		Thread.sleep(2000);			
+		return this;
+	}
+
+	// Editable Override Name
+	public MemberFormPage verifyOverrideNameIsEditable( String overrideName) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='address1_name.fieldControl-text-box-text']")),"Override Name");
+		click(getDriver().findElement(By.xpath("//input[@data-id='address1_name.fieldControl-text-box-text']")),"Override Name");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='address1_name.fieldControl-text-box-text']")),overrideName,"Override Name");
+		Thread.sleep(2000);				
+		return this;
+	}
+
+	// Editable Other Phone
+	public MemberFormPage verifyOtherPhoneIsEditable(String otherPhone ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='telephone2.fieldControl-phone-text-input']")),"Other Phone");
+		click(getDriver().findElement(By.xpath("//input[@data-id='telephone2.fieldControl-phone-text-input']")),"Other Phone");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='telephone2.fieldControl-phone-text-input']")),otherPhone,"Other Phone");
+		Thread.sleep(2000);
+		return this;
+	}
+	public MemberFormPage verifyFaxIsEditable(String fax ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='fax.fieldControl-text-box-text']")),"Fax");
+		click(getDriver().findElement(By.xpath("//input[@data-id='fax.fieldControl-text-box-text']")),"Fax");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='fax.fieldControl-text-box-text']")),fax,"Fax");
+		Thread.sleep(2000);		
+		return this;
+
+	}
+
+	// Editable Main Phone
+	public MemberFormPage verifyMainPhoneIsEditable(String mainPhone ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Main Phone");
+		click(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Main Phone");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),mainPhone,"Main Phone");
+		Thread.sleep(2000);		
+		return this;
+	}
+
+	// Editable Website
+	public MemberFormPage verifyWebsiteIsEditable(String website ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='websiteurl.fieldControl-url-text-input']")),"Website");
+		click(getDriver().findElement(By.xpath("//input[@data-id='websiteurl.fieldControl-url-text-input']")),"Website");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='websiteurl.fieldControl-url-text-input']")),website,"Website");
+		Thread.sleep(2000);		
+		return this;
+	}
+
+	// Editable Receive Direct Mail
+	public MemberFormPage verifyReceiveDirectMailIsEditable(String receiveDirectMail ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//select[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),"Receive Direct Mail");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//select[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),"Receive Direct Mail");
+		Thread.sleep(5000);
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),receiveDirectMail,"Receive Direct Mail");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	// Editable External Address ID
+	public MemberFormPage verifyExternalAddressIDIsEditable(String externalAddressID ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_externaladdressid.fieldControl-text-box-text']")),"External Address ID");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_externaladdressid.fieldControl-text-box-text']")),"External Address ID");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_externaladdressid.fieldControl-text-box-text']")),externalAddressID,"External Address ID");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Editable #Estimated Locations phone- NY Information Tab
+	public MemberFormPage verifyEstLocIsEditable(String numEstLoc ) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//li[text()='NY INFORMATION']")),"NY Information");	
+		Thread.sleep(2000);
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
+		Thread.sleep(2000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),numEstLoc,"# of Estimated Locations");
+		return this;
+	}
+
+	// Editable NAICS -NY Information Tab
+	public MemberFormPage verifyNAICSIsEditable(String nAICS,String industryTitle) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),"NAICS");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),"NAICS");
+		Thread.sleep(3000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_textInputBox_with_filter_new']")),nAICS,"NAICS");
+		Thread.sleep(7000);
+		click(getDriver().findElement(By.xpath("//span[@data-id='ix_naicscode.fieldControl-Lookup_ix_naicscode_microsoftIcon_searchButton']")),"NAICS");
+		Thread.sleep(5000);	
+		click(getDriver().findElement(By.xpath("//span[@data-id='ix_naicscode.fieldControl-ix_industrytitle1_0_0']")),"NAICS Code in menu");
+		Thread.sleep(4000);
+		clickAndArrowDown(getDriver().findElement(By.xpath("//input[@data-id='NAICSCode.ix_industrytitle.fieldControl-text-box-text']")), "Arrow Down");
+		click(getDriver().findElement(By.xpath("//input[@data-id='NAICSCode.ix_industrytitle.fieldControl-text-box-text']")),"Industry Title");
+		Thread.sleep(3000);
+		verifyExactValue(getDriver().findElement(By.xpath("//input[@data-id='NAICSCode.ix_industrytitle.fieldControl-text-box-text']")),industryTitle,"industryTitle");
+		return this;
+	}
+
+	//Save And Close
+	public MemberFormPage clickNyTabSave() throws InterruptedException {
+		Thread.sleep(2000);	
+		click(getDriver().findElement(By.xpath("//span[text()='Save']")),"NY Info Tab Save");
+		Thread.sleep(5000);
+		try {
+			if(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")).isDisplayed());
+			click(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")),"Ignore and Save");	
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+		Thread.sleep(3000);	
+		return this;
+
+	}
+
+	//Remove Primary Contact on Member Form
+	public MemberFormPage removeMemberPrimaryContact() throws InterruptedException {
+		Thread.sleep(5000);
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_SelectedRecordList']"))).perform();
+		click(getDriver().findElement(By.xpath("//button[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_delete']")),"Clear Icon on Existing Primary Contact"); 
+		Thread.sleep(3000);
+		return this;
+	}
+	//Read Only Street1
+	public MemberFormPage verifyStreet1IsNotEditable(String street1) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text'][@readonly]")),"Street1");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text'][@readonly]")),street1,"Street1");
+		return this;
+	}
+
+	//remove NAICS
+	public MemberFormPage removeNAICS() throws InterruptedException {
+		Thread.sleep(2000);
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_SelectedRecordList']"))).perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//button[@data-id ='ix_naicscode.fieldControl-LookupResultsDropdown_ix_naicscode_selected_tag_delete']")), "Clear X icon on Existing NAICS");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[text()='Save']")),"NY Info Tab Save");
+		Thread.sleep(5000);
+		return this;
+	}
+
+
+
+	//remove Referred By
+	public MemberFormPage removeReferredBy() throws InterruptedException {
+		Thread.sleep(2000);
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_SelectedRecordList']"))).perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_selected_tag_delete']")), "Clear X icon on Existing Referred By");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[text()='Save']")),"NY Info Tab Save");
+		Thread.sleep(5000);
+		return this;
+	}
+
+	// Editable Referred By -NY Information Tab
+	public MemberFormPage verifyReferredByIsEditable(String referredBy ) throws InterruptedException {
+		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")),"Referred By");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")),"Referred By");
+		Thread.sleep(3000);
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")), referredBy,"Referred By");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//span[@data-id='ix_referredby.fieldControl-address1_composite1_0_0']")),"Referred By Account");
+		Thread.sleep(2000);	
+		return this;
+	}
+	//save and close from NY Information Tab
+	public MemberFormPage clickNyTabSaveAndClose() throws InterruptedException {
+		Thread.sleep(2000);	
+		click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"NY Info Tab Save and Close");
+		Thread.sleep(4000);
+		return this;
+
+	}
+
+	//Read Only Street2
+	public MemberFormPage verifyStreet2IsNotEditable(String street2) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text'][@readonly]")),"Street2");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text'][@readonly]")),street2,"Street2");
+		return this;
+	}
+
+	//Read Only Delivery Info
+	public MemberFormPage verifyDeliveryInfoIsNotEditable(String deliveryInfo) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_line3.fieldControl-text-box-text'][@readonly]")),"Delivery Info");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_line3.fieldControl-text-box-text'][@readonly]")),deliveryInfo,"Delivery Info");
+		return this;
+	}	
+
+	//Read Only City
+	public MemberFormPage verifyCityIsNotEditable(String city) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text'][@readonly]")),"City");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text'][@readonly]")),city,"City");
+		return this;
+	}	
+
+	//Read Only County
+	public MemberFormPage verifyCountyIsNotEditable(String county) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text'][@readonly]")),"County");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text'][@readonly]")),county,"County");
+		return this;
+	}
+
+	//Read Only State
+	public MemberFormPage verifyStateIsNotEditable(String state) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text'][@readonly]")),"State");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text'][@readonly]")),state,"State");
+		return this;
+	}
+
+	//Read Only ZipCode
+	public MemberFormPage verifyZipCodeIsNotEditable(String zipcode) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text'][@readonly]")),"Zip Code");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text'][@readonly]")),zipcode,"Zip Code");
+		return this;
+	}
+
+	//Read Only Country
+	public MemberFormPage verifyCountryIsNotEditable(String country) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text'][@readonly]")),"Country");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text'][@readonly]")),country,"Country");
+		return this;
+	}
+
+
+	//Read Only Override Name
+	public MemberFormPage verifyOverrideNameIsNotEditable(String overrideName) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='address1_name.fieldControl-text-box-text'][@readonly]")),"Override Name");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='address1_name.fieldControl-text-box-text'][@readonly]")),overrideName,"Override Name");
+		return this;
+	}
+
+
+	//Read Only Main Phone
+	public MemberFormPage verifyMainPhoneIsNotEditable(String mainPhone) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='telephone1.fieldControl-phone-text-input'][@readonly]")),"Main Phone");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='telephone1.fieldControl-phone-text-input'][@readonly]")),mainPhone,"Main Phone");
+		return this;
+	}
+
+	//Read Only Other Phone
+	public MemberFormPage verifyOtherPhoneIsNotEditable(String otherPhone) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='telephone2.fieldControl-phone-text-input'][@readonly]")),"Other Phone");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='telephone2.fieldControl-phone-text-input'][@readonly]")),otherPhone,"Other Phone");
+		return this;
+	}
+
+	//Read Only Fax
+	public MemberFormPage verifyFaxIsNotEditable(String fax) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='fax.fieldControl-text-box-text'][@readonly]")),"Fax");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='fax.fieldControl-text-box-text'][@readonly]")),fax,"Fax");
+		return this;
+	}
+
+	//Read Only Website
+	public MemberFormPage verifyWebsiteIsNotEditable(String website) throws InterruptedException {
+		Thread.sleep(2000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='websiteurl.fieldControl-url-text-input'][@readonly]")),"Website");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='websiteurl.fieldControl-url-text-input'][@readonly]")),website,"Website");
+		return this;
+	}
+
+	//Read Only Receive Direct Mail
+	public MemberFormPage verifyReceiveDirectMailIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_receivedirectmail.fieldControl-checkbox-select']")),"Receive Direct Mail");
+		return this;
+	}
+
+	//Read Only Do Not Verify address
+	public MemberFormPage verifyDoNotVerifyAddressIsNotEditable() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_donotverifyaddress.fieldControl-checkbox-empty']")),"Do Not Verify Address");
+		return this;
+	}
+
+	//Read Only External Address ID
+	public MemberFormPage verifyExternalAddressIDIsNotEditable(String externalAddressID) throws InterruptedException {
+		Thread.sleep(3000);
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_externaladdressid.fieldControl-text-box-text'][@readonly]")),"External Address ID");
+		typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_externaladdressid.fieldControl-text-box-text'][@readonly]")),externalAddressID,"External Address ID");
+		return this;
+	}
+
+
+
+}
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
