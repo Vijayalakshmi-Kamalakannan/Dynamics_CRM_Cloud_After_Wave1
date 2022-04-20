@@ -136,6 +136,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
 		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
 		Thread.sleep(10000);
+		Thread.sleep(4000);
 		return new SupplierFormPage();
 	}
   	

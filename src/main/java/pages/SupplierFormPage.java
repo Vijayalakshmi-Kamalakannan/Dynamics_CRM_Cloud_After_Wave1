@@ -1146,8 +1146,146 @@ public SupplierFormPage selectMembership() throws InterruptedException {
 				return this;
 			}
 			
-		
+			
+			//ACCOUNT NUMBERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			//Select related and account numbers
+			public SupplierFormPage selectAccountNumbers() throws InterruptedException {	
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+				Thread.sleep(3000);
+				click(getDriver().findElement(By.xpath("(//*[contains(text(),'Account Numbers')])[2]")),"Account Numbers");
+				Thread.sleep(2000);
+				return this;
+			}
+			
+			//Click on related and select account numbers
+			public SupplierFormPage clickAddNewAccountNumberInAccountNumbers() throws InterruptedException {
+				Thread.sleep(3000);
+				click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumber|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_accountnumber.AddNewStandard']")),"Add");
+				try
+				{
+					List<WebElement> confirmBtn= getDriver().findElements(By.xpath("//*[@data-id='confirmButton']"));
+					if(confirmBtn.size()>0) {
+						click(getDriver().findElement(By.xpath("//*[@data-id='confirmButton']")),"Save and continue");
+					}
+					else {
+						
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();	
+				}
+				Thread.sleep(6000);
+				return this;
+			}
+			
+			//Select Account type as Federal Tax ID
+					public SupplierFormPage chooseAccountNumberTypeFedTaxID() {
+						try {
+							Thread.sleep(2000);
+							selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Federal Tax ID","Account Number Type");
+							Thread.sleep(2000);
+							verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Federal Tax ID","Account Numbers Type"); 
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						return this;
+					}
 
+					//To add existing FedTaxID
+					public SupplierFormPage typeStaticFedTaxID(String fedTaxID) {
+						click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+						type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),fedTaxID,"Fed Tax ID Account Number");
+						return this;
+					}	
+					
+					//Enter Start Date as Today's Date in Account Numbers
+					public SupplierFormPage typeStartDateInAccountNumbers() {
+						DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+						Date date = new Date();
+						String startdate= dateFormat.format(date);
+						click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date"); 
+						click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
+						type(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),startdate,"Start Date"); 
+						return this;
+					}
+					
+					
+					public SupplierFormPage clickSaveInAccountNumbersEntity() throws InterruptedException {
+						click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Save']")),"Save");
+						Thread.sleep(10000);
+						Thread.sleep(5000);
+						return this;
+					}
+					
+					
+					//Verify Account Name in  Account number Entity
+					public SupplierFormPage verifyAccountNameInAccountNumbers(String accountName2) {
+						verifyExactTextWithTextContentAttribute((getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']"))),accountName2,"Account Name in Account Numbers Entity");
+						return this;
+					}
+
+					
+					//Verify Name and Calculated Name in  Account number Entity
+					public SupplierFormPage verifyNameAndCalculatedNameInAccountNumbers() throws InterruptedException {
+						String account =(getDriver().findElement(By.xpath("//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")).getAttribute("title"));
+						System.out.println("Account field's value in Account Number Entity is  : " + account);
+
+						String accNumType =(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")).getAttribute("title"));
+						System.out.println("Account Number Type field's value in Account Number Entity is  : " + accNumType);
+
+						String accNum =(getDriver().findElement(By.xpath("//input[@data-id='ix_number.fieldControl-text-box-text']")).getAttribute("value"));
+						System.out.println("Account Number field's value in Account Number Entity is  : " + accNum);
+
+						String name =account.concat(" - ").concat(accNumType).concat(" - ").concat(accNum);
+						System.out.println(name);
+						Thread.sleep(6000);
+						verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_calculatedname.fieldControl-text-box-text']"))),name,"Calculated Name in Account Numbers Entity");
+						verifyExactValue((getDriver().findElement(By.xpath("//input[@data-id='ix_accountnumbername.fieldControl-text-box-text']"))),name,"Name in Account Numbers Entity");
+						return this;
+					}
+					
+					
+					//Click on deactivate in Account Number Entity
+					public SupplierFormPage clickDeactivateInAccountNumbers() throws InterruptedException {
+						Thread.sleep(3000);
+						click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Deactivate']")),"Deactivate");
+						Thread.sleep(3000);
+						click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Confirm Deactivate");
+						Thread.sleep(3000);
+						return this;	
+					}
+					
+					
+					//Go to Accounts Page
+				  	public  AccountsPage selectAccountsTabFromSupplierPage() throws InterruptedException {	
+				  		Thread.sleep(3000);
+				  		click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
+						Thread.sleep(2000);
+						return new AccountsPage();
+					}	
+				  	
+				  //Choose Existing Account Number -FedTax ID
+					public SupplierFormPage doubleClickExistingAccountNumberFedTaxID() throws InterruptedException   {
+						Thread.sleep(4000);
+						WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
+						List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
+						System.out.println("# of Rows Including Header:"+ rowList.size());
+						for (int i = 0; i <rowList.size(); i++) {
+							String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")).getAttribute("title");
+							System.out.println(title);					
+							if (title.equals("Federal Tax ID")) {
+								Thread.sleep(3000);
+								doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")), "Federal Tax ID");
+								Thread.sleep(3000);
+								break;				
+							}
+						}		
+
+						return this;					
+					}
 	
 }
 

@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testcases.Member.TestCase_8806">
+      <class name="testcases.Supplier.TestCase_10527">
         <methods>
-          <include name="createMemberTP"/>
+          <include name="verifyNewDiversityTypeOptions"/>
         </methods>
-      </class> <!-- testcases.Member.TestCase_8806 -->
+      </class> <!-- testcases.Supplier.TestCase_10527 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
