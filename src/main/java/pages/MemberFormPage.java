@@ -3576,10 +3576,21 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			typeLocked(getDriver().findElement(By.xpath("//*[@data-id='ix_externaladdressid.fieldControl-text-box-text'][@readonly]")),externalAddressID,"External Address ID");
 			return this;
 		}
-
-
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		//Select Accounts Tab from Member Form
+		public AccountsPage selectAccountsTabFromMemberFormPage() throws InterruptedException {	
+			click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
+			Thread.sleep(2000);
+			return new AccountsPage();
 
 	}
+		
+		
+		
+}
 
 
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	
+	
