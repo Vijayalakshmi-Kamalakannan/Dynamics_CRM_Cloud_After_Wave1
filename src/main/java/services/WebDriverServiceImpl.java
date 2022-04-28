@@ -49,6 +49,11 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public static String CRMNumber;
 	public static String entityCode;
 	public static boolean isMemberForm=false;
+	public String AccountName;
+	public String AccNumNPI;
+	public String randomString;
+	public String DEA;
+	public String HIN;
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public ExtentTest setReport()
@@ -100,6 +105,53 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		}
 		return null;
 	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+			public void verifyElementisDisplayed(int count, String field) {
+
+				try {
+					if(count>0) {
+						setReport().log(Status.PASS, field+" is displayed",screenshotCapture());
+						
+					}else {
+						setReport().log(Status.FAIL, field+"is not displayed",screenshotCapture());
+						Driver.failCount++;
+					}
+				} catch (WebDriverException e) {
+					setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
+					Driver.failCount++;
+					throw e;
+				} 
+
+			}
+			
+			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+			public String verifIsNoTNullWithTitleAttribute(WebElement ele, String field) {	
+				String bReturn = "";
+				try {
+
+					bReturn = ele.getAttribute("title");
+					if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
+						setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
+						Driver.failCount++;
+					}
+					else {
+						setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
+
+					}
+				} catch (WebDriverException e) {
+					setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+					Driver.failCount++;
+					throw e;
+				}
+				return bReturn;
+			}
+
+			
+			
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public WebElement locateElement(String locValue) {

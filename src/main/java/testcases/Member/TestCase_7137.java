@@ -30,7 +30,7 @@ public class TestCase_7137 {
 	  	    .selectAccountsTab()
 	
 	  	 
-			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 			.selectAccountFromSearchResults()
 			.getDPData()
 	  	    

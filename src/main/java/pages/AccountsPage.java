@@ -1,6 +1,9 @@
 package pages;
 
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -90,10 +93,47 @@ public class AccountsPage extends WebDriverServiceImpl {
     	}
     	
     
+    	public  AccountsPage searchString(String String) throws InterruptedException {	
+
+    		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),String,"Find Criteria" );
+    		Thread.sleep(5000);
+    		return this;
+
+    	}
     	
+    	public  AccountsPage clickclearButton() throws InterruptedException {	
+    		click(getDriver().findElement(By.xpath("//span[@id='quickFind_button_icon_1']")),"clear Button");
+    		Thread.sleep(10000);
+    		Thread.sleep(10000);
+    		return this;
+    	}
+    	
+    	//select Draft Members view
+    	public AccountsPage verifyAccountisDisplayed() throws InterruptedException {
+    		Thread.sleep(2000);
+    		verifIsNoTNullWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")), "Account Number");
+    		return this;
+    	} 
     	
     	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End Base Read Only~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
+    	//Verify DEA and HIN Column
+    	public AccountsPage verifyAccountnumberColumns() throws InterruptedException, AWTException {
+    		Thread.sleep(5000);
+    		Robot robot;
+    		for(int i=0;i<21;i++) {
+    			robot = new Robot();
+    			Thread.sleep(4000);
+    			robot.keyPress((KeyEvent.VK_TAB));
+    			Thread.sleep(4000);
+
+    		}
+    		verifyDisplayed(getDriver().findElement(By.xpath("//div[contains(@id,'headerButtonix_dea')]")), "DEA Number Header");
+    		verifyDisplayed(getDriver().findElement(By.xpath("//div[contains(@id,'headerButtonix_hin')]")), "HIN Header");
+
+    		return this;
+    	}
+    	
     	//Signout
       	public AccountsPage clickSignout() throws InterruptedException {
       		click(getDriver().findElement(By.xpath("//div[@class='mectrl_profilepic mectrl_profilepic_initials']")),"User Icon");

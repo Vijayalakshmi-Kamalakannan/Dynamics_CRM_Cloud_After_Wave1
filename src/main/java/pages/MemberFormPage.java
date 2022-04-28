@@ -1,6 +1,8 @@
 package pages;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,12 +18,15 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.aventstack.extentreports.Status;
+
 import static org.testng.Assert.assertNotNull;
 
 //Test Case 7312:Add and update Primary contact to a Member account
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -31,8 +36,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import driver.Driver;
+
 import services.WebDriverServiceImpl;
 import testcases.Member.TestCase_2222;
 import utils.DataInputProvider;
@@ -1017,6 +1024,81 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;	
 	}	
 
+	//Verify LOB required Error message
+			public MemberFormPage verifyReactivateErrorMessage() throws InterruptedException {
+				String errorMessage="Please re-activate the account by creating the membership";
+				Thread.sleep(5000);
+				verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"LOB Required");
+				click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Ok Button");
+				return this;
+
+			}
+			
+			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			//Verify Account Status
+			public MemberFormPage verifyAccountStatusValue(String verifyAcountStatus) throws InterruptedException {
+				Thread.sleep(5000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//select[@data-id='ix_accountstatus.fieldControl-option-set-select']")),verifyAcountStatus,"Account Status");
+				return this;
+			}
+			
+			
+			//click New Account representative button
+			public MemberFormPage clickNewAccountRepresentativeButton() throws InterruptedException {
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//span[contains(text(),'New Account Representative')]")),"New Account Representative");
+				return this;
+			}
+
+			//verify Representative Type dropdown
+			public MemberFormPage verifyRepresentativeDropDown() throws InterruptedException {
+				Select RepresentativeType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_representativetype.fieldControl-option-set-select']")));		
+				// Create Expected Array List
+				List<String> expectedRepresentativeType = Arrays.asList("Employee Discounts Coordinator","Executive","Field","Internal","Manager");		
+				//Create Actual blank Array List
+				List<String> actualRepresentativeType=new ArrayList<String>();	
+				//Create temp Array List > add  actual options  from DOM for comparison
+				List<WebElement> mylist =RepresentativeType.getOptions();		
+				//loop through DOM and add dropdown values into mylist for comparison
+				for (WebElement ele:mylist) {			
+					String data =ele.getText();
+					actualRepresentativeType.add(data);			
+					System.out.println("The Actual RepresentativeType is : "  + " " +data);				
+					Thread.sleep(3000);
+					if(expectedRepresentativeType.containsAll(actualRepresentativeType))
+					{		
+						Thread.sleep(3000);
+						setReport().log(Status.PASS, "RepresentativeType- " + "   " + data + "  " +  "-  Option is available to choose from the list" + " "+ expectedRepresentativeType,	screenshotCapture());
+
+					} 
+					else {
+						setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + data + "  " + "- Option is not available in the list"  + " "+ expectedRepresentativeType ,	screenshotCapture());
+						Driver.failCount++;
+					}
+
+				}
+				return this;
+				
+			}
+
+			
+			//Select related and account numbers
+			public MemberFormPage selectAccountRepresentative() throws InterruptedException {	
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+				Thread.sleep(3000);
+				click(getDriver().findElement(By.xpath("//*[contains(text(),'Account Representatives')]")),"Account Representatives");
+				Thread.sleep(2000);
+				return this;
+			}
+			
+			//Click on Discard changes
+			public AccountsPage clickOnDiscardChangesNavigatetoAccountsPage() throws InterruptedException {
+				click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+				Thread.sleep(3000);
+				return new AccountsPage();
+			}
+
 	//Verify the Error message to end a membership when there is active child
 
 	public MemberFormPage verifyCantTerminateMembershipError() {
@@ -1964,60 +2046,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 					return this;					
 				}
 
-		//Select Account number type HIN in account numbers window
-		public MemberFormPage chooseAccountNumberTypeHIN() {
-			try {
-				Thread.sleep(2000);
-				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"HIN","Account Number Type");
-				Thread.sleep(2000);
-				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"HIN","Account Numbers Type"); 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			return this;
-		}
+				
 
-		//Type Hin account number
-		public MemberFormPage typeAccountNumberHIN() {
-			int min=111111111;
-			int max=999999999;
-			//Random randomGenerator = new Random();
-			int randomInt = (int)(Math.random() * (max - min + 1) + min);
-			System.out.println(randomInt);
-			String AccNumHIN=String.valueOf(randomInt);
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
-			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),AccNumHIN,"HIN Account Number");
-			try {
-				DataInputProvider.setCellData(AccNumHIN.toString(), Driver.iTestCaseRowNum, "HIN",Driver.sCategory);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return this;
-		}
-
-
-		public MemberFormPage clickSaveAndClosInAccountNumbers() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.SaveAndClose']")),"Save and Close");
-			Thread.sleep(5000);
-			//	click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
-			//Thread.sleep(5000);
-			return this;	
-		}	
-
-		//Select Account type as DEA
-		public MemberFormPage chooseAccountNumberTypeDEA() {
-			try {
-				Thread.sleep(2000);
-				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Number Type");
-				Thread.sleep(2000);
-				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Numbers Type"); 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			return this;
-		}
-
-
+		
 		//Enter DEA account number
 		public MemberFormPage typeAccountNumberDEA() {
 			int min=1111111;
@@ -3586,7 +3617,333 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	}
 		
+	
+
+		//get the Account Name
+		public MemberFormPage getAccountName() {
+
+			AccountName=getDriver().findElement(By.xpath("//h1[@data-id='header_title']")).getAttribute("title");
+			return this;
+		}
+
+		//Verify the Account Name
+		public MemberFormPage verifyAccountName() {
+
+			verifyExactText(getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")), AccountName, "Account Name");
+			return this;
+		}
+
+		//Select Account number type in account numbers window
+		public MemberFormPage chooseAccountNumberTypeHIN() {
+			try {
+				Thread.sleep(2000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"HIN","Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"HIN","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
+
+		//Select Account number type in account numbers window
+		public MemberFormPage chooseAccountNumberTypeGLN() {
+			try {
+				Thread.sleep(2000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"GLN","Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"GLN","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
+
+
+		//Type Hin account number
+		public MemberFormPage typeAccountNumberHIN() {
+			int min=111111111;
+			int max=999999999;
+			//Random randomGenerator = new Random();
+			int randomInt = (int)(Math.random() * (max - min + 1) + min);
+			System.out.println(randomInt);
+			String AccNumHIN=String.valueOf(randomInt);
+			randomString=AccNumHIN;
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),AccNumHIN,"HIN Account Number");
+			try {
+				DataInputProvider.setCellData(AccNumHIN.toString(), Driver.iTestCaseRowNum, "HIN",Driver.sCategory);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
+
+
+		public MemberFormPage clickSaveAndClosInAccountNumbers() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.SaveAndClose']")),"Save and Close");
+			Thread.sleep(5000);
+			//	click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
+			//Thread.sleep(5000);
+			return this;	
+		}	
+
+		//Select Account type as DEA
+		public MemberFormPage chooseAccountNumberTypeDEA() {
+			try {
+				Thread.sleep(2000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
+
+		//Select Account type as NPI
+		public MemberFormPage chooseAccountNumberTypeNPI() {
+			try {
+				Thread.sleep(2000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NPI","Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NPI","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
+
+		//Select Account type as NCPDP
+		public MemberFormPage chooseAccountNumberTypeNCPDP() {
+			try {
+				Thread.sleep(2000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NCPDP","Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NCPDP","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
+
+
+		//Click Save Button
+		public MemberFormPage clickSaveAccountNumber() throws InterruptedException {
+
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'Save')]")),"Click Save button");
+			Thread.sleep(10000);
+			Thread.sleep(10000);
+			return this;
+		}
 		
+		
+		public MemberFormPage typeAccountNumberNPI() {
+			int min=111111111;
+			int max=999999999;
+			//Random randomGenerator = new Random();
+			int randomInt = (int)(Math.random() * (max - min + 1) + min);
+			System.out.println(randomInt);
+			AccNumNPI=String.valueOf(randomInt);
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),AccNumNPI,"NPI Account Number");
+			try {
+				DataInputProvider.setCellData(AccNumNPI.toString(), Driver.iTestCaseRowNum, "NPI",Driver.sCategory);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
+		
+		
+		//Click save and Close button
+		public MemberFormPage clickSaveAndCloseButton() {
+
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Click Save and Closed");
+			return this;
+		}
+
+		//Verify Invalid DEA Number
+		public MemberFormPage verifyInvalidDEANumberMessage() {
+
+			getDriver().findElement(By.xpath("//div[@id='modalDialogContentContainer']")).isDisplayed();
+			List<WebElement> InvalidDEA_Message=getDriver().findElements(By.xpath("//h2[@aria-label='Invalid DEA Number - Check Digit Algorithm Failed!']"));
+			verifyElementisDisplayed(InvalidDEA_Message.size(), "Invalid Number Message");
+			click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Click Ok Button");
+			return this;
+		}
+
+		//verify New Accountnumber button is displayed
+		public MemberFormPage verifyAccountnumberButton() throws InterruptedException {
+			Thread.sleep(3000);
+			getDriver().findElement(By.xpath("//span[contains(text(),'New Account Number')]")).isDisplayed();
+			return this;
+
+		}
+		
+		//Verify newly added Acciunt number is displayed in the Account Number page
+		public MemberFormPage verifyNewlyCreatedAccountNumber() {
+			boolean isTrue=false;
+			String accountnumber=null;
+			List<WebElement> accountNumber=getDriver().findElements(By.xpath("//div[contains(@data-id,'-2')]/a"));
+			for(int i=0;1<accountNumber.size();i++) {
+				 accountnumber=getDriver().findElement(By.xpath("//div[@data-id='cell-"+i+"-2']/a")).getAttribute("title");
+				 System.out.println("Expected:"+randomString+"Actual:"+accountnumber);
+				if(accountnumber.contains(randomString)) {
+					isTrue=true;
+					break;
+				}
+			}
+			if(isTrue==true) {
+				setReport().log(Status.PASS, "The text :"+accountnumber+" matches with the value in "+"Account Number"+" field",screenshotCapture());
+
+			}else {
+				setReport().log(Status.FAIL, "The text :"+accountnumber+" did not match with the value "+randomString+"in"+"Account Number"+" field",screenshotCapture());
+				Driver.failCount++;
+			}
+			
+		return this;
+	}
+		
+		//get the DEA Number
+		public MemberFormPage getDEA() throws InterruptedException {
+			DEA=randomString;
+			return this;
+		}
+
+		//get the DEA Number
+		public MemberFormPage getHIN() throws InterruptedException {
+			HIN=randomString;
+			return this;
+		}
+		
+		//Verify DEA account number
+		public MemberFormPage verifyDEAInMemberForm() throws InterruptedException {
+			verifyExactValue((getDriver().findElement(By.xpath("//input[@aria-label='DEA']"))),DEA,"DEA");
+			return this;
+		}
+
+		public MemberFormPage randomString() {
+			// create a string of all characters
+			String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+			// create random string builder
+			StringBuilder sb = new StringBuilder();
+
+			// create an object of Random class
+			Random random = new Random();
+
+			// specify length of random string
+			int length = 9;
+
+			for(int i = 0; i < length; i++) {
+
+				// generate random index number
+				int index = random.nextInt(alphabet.length());
+
+				// get character specified by index
+				// from the string
+				char randomChar = alphabet.charAt(index);
+
+				// append the character to string builder
+				sb.append(randomChar);
+			}
+
+			randomString = sb.toString();
+
+			return this;
+		}
+
+		public MemberFormPage randomStringWithNumber() {
+			// create a string of all characters
+			String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ12345678";
+
+			// create random string builder
+			StringBuilder sb = new StringBuilder();
+
+			// create an object of Random class
+			Random random = new Random();
+
+			// specify length of random string
+			int length = 9;
+
+			for(int i = 0; i < length; i++) {
+
+				// generate random index number
+				int index = random.nextInt(alphabet.length());
+
+				// get character specified by index
+				// from the string
+				char randomChar = alphabet.charAt(index);
+
+				// append the character to string builder
+				sb.append(randomChar);
+			}
+
+			randomString = sb.toString();
+
+			return this;
+		}
+
+		public MemberFormPage typeAccountNumberRandomString() {
+
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),randomString,"DEA Account Number");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Name')]")),"Name Label");
+
+			return this;
+
+		}
+		//Verify HIN Account number
+		public MemberFormPage verifyHINInMemberForm() {
+			verifyExactValue((getDriver().findElement(By.xpath("//input[@aria-label='HIN']"))),HIN,"HIN");
+			return this;
+		}
+		
+		public MemberFormPage verifyExpirationDateisNotEmpty() {
+			List<WebElement> DEAExpirationDatelabel=getDriver().findElements(By.xpath("//div[contains(text(),'Expiration Date')]"));
+			verifyElementisDisplayed(DEAExpirationDatelabel.size(), "DEA Expiration Date");
+			List<WebElement> DEAExpirationDate=getDriver().findElements(By.xpath("//div[@aria-rowindex='2']/div[@data-id='cell-0-6']/span"));
+			verifyElementisDisplayed(DEAExpirationDate.size(), "DEA Expiration Date");
+			getTextValue(getDriver().findElement(By.xpath("//div[@aria-rowindex='2']/div[@data-id='cell-0-6']/span")), "DEA Expiration Date");
+			return this;
+
+		}
+
+		//Serach DEA number
+		public MemberFormPage searchDEANumber(String DEA) {
+			type(getDriver().findElement(By.xpath("//input[@aria-label='Account Number Search this view']")),DEA,"DEA Number");
+			return this;
+		}
+
+		public MemberFormPage typeDAccountNumber(String DEANum) {
+
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),DEANum,"DEA Account Number");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Name')]")),"Name Label");
+
+			return this;
+
+		}
+
+		//Verify CalculatedName in the Account number page
+		public MemberFormPage verifyCaclculatedName( String accountNumberType) throws IOException {
+
+			String accountname=getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")).getText();
+			System.out.println();
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Calculated Name']")), accountname+" - "+accountNumberType+" - "+AccNumNPI, "Cacluclate Nane");
+			return this;
+		}
+
+		//Verify Invalid GLN Number
+		public MemberFormPage verifyInvalidGLNNumberMessage() {
+
+			getDriver().findElement(By.xpath("//div[@id='modalDialogContentContainer']")).isDisplayed();
+			List<WebElement> InvalidDEA_Message=getDriver().findElements(By.xpath("//h2[@aria-label='Invalid GLN Number - Length should be 13 chars!']"));
+			verifyElementisDisplayed(InvalidDEA_Message.size(), "Invalid Number Message");
+			click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Click Ok Button");
+			return this;
+		}
 		
 }
 
