@@ -293,14 +293,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		Dpdata.put("IsCorporate", getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")).getAttribute("title"));
 
-		Dpdata.put("CorporateName", getDriver().findElement(By.xpath("//*[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_selected_tag_text']")).getAttribute("title"));
+		Dpdata.put("CorporateName", getDriver().findElement(By.xpath("//*[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_textInputBox_with_filter_new']")).getAttribute("title"));
 
 		click(getDriver().findElement(By.xpath("//div[@data-id='CPEntityCode.ix_premierein-FieldSectionItemContainer']")),"CP entity");
 		click(getDriver().findElement(By.xpath("//h2[@title='FOOD SERVICE PARENT']")),"Food Service");
 
 		Dpdata.put("isFoodService", getDriver().findElement(By.xpath("//*[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-container']")).getAttribute("title"));
 
-		Dpdata.put("FoodServiceName", getDriver().findElement(By.xpath("//*[@data-id='ix_foodserviceparentname.fieldControl-LookupResultsDropdown_ix_foodserviceparentname_selected_tag_text']")).getAttribute("title"));
+		Dpdata.put("FoodServiceName", getDriver().findElement(By.xpath("//*[@data-id='ix_foodserviceparentname.fieldControl-LookupResultsDropdown_ix_foodserviceparentname_textInputBox_with_filter_new']")).getAttribute("title"));
 
 		Dpdata.put("isSponsor", getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-checkbox-container']")).getAttribute("title"));
 
@@ -311,7 +311,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		Dpdata.put("IsFBO", getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo.fieldControl-checkbox-container']")).getAttribute("title"));
 
-		Dpdata.put("FBO", getDriver().findElement(By.xpath("//*[@data-id='ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo_selected_tag_text']")).getAttribute("title"));
+		Dpdata.put("FBO", getDriver().findElement(By.xpath("//*[@data-id='ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo_textInputBox_with_filter_new']")).getAttribute("title"));
 
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_fborelationdate.fieldControl-date-time-input']")),"FBO");
 
@@ -3945,6 +3945,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			return this;
 		}
 		
+		public MemberFormPage verifyExpirationDate() throws InterruptedException {
+			Thread.sleep(4000);
+			List<WebElement> ExpirationDateLabel=getDriver().findElements(By.xpath("//label[contains(text(),'Expiration Date')]"));
+			verifyElementisDisplayed(ExpirationDateLabel.size(), "Expiration Date");
+			List<WebElement> ExpirationDate=getDriver().findElements(By.xpath("//input[contains(@data-id,'ix_expirationdate.fieldControl-date-time-input')]"));
+			verifyElementisDisplayed(ExpirationDate.size(), "Expiration Date");
+			return this;
+		}
 }
 
 

@@ -60,14 +60,14 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-//Select member account from search results
+  //Select member account from search results
   	public  MemberFormPage selectAccountFromSearchResults() throws InterruptedException {	
-		//Actions action = new Actions(getDriver());
-		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
-		Thread.sleep(4000);
-		return new MemberFormPage();
-	}	
-  	
+  		//Actions action = new Actions(getDriver());
+  		click(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Search Results");
+  		//click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
+  		Thread.sleep(4000);
+  		return new MemberFormPage();
+  	}	
   	 //Select All Prospects view
   	public AccountsPage selectAllProspects() throws InterruptedException {
   		Thread.sleep(2000);
@@ -141,12 +141,22 @@ public class AccountsPage extends WebDriverServiceImpl {
       		click(getDriver().findElement(By.id("mectrl_body_signOut")),"Signout");
       		return new AccountsPage();
       	}
-	public  MemberFormPage selectDirectParentFromSearchResults() throws InterruptedException {	
-		Actions action = new Actions(getDriver());	
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']/a")));
-		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']/a"))).build().perform();	
-		return new MemberFormPage();
-	}	
+      	public  MemberFormPage selectDirectParentFromSearchResults() throws InterruptedException {	
+    		Actions action = new Actions(getDriver());	
+    		
+    		/*
+    		 * action.moveToElement(getDriver().findElement(By.xpath(
+    		 * "//*[@data-id='cell-0-4']/a")));
+    		 * action.doubleClick(getDriver().findElement(By.xpath(
+    		 * "//*[@data-id='cell-0-4']/a"))).build().perform();
+    		 */
+    		
+    		  action.moveToElement(getDriver().findElement(By.xpath(
+    		  "//div[@col-id='parentaccountid']//a")));
+    		  action.doubleClick(getDriver().findElement(By.xpath(
+    		  "//div[@col-id='parentaccountid']//a"))).build().perform();
+    		 	return new MemberFormPage();
+    	}
 	
 	//select Draft Members view
   	public AccountsPage selectDraftMembers() throws InterruptedException {
