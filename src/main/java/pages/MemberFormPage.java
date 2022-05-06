@@ -293,14 +293,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		Dpdata.put("IsCorporate", getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")).getAttribute("title"));
 
-		Dpdata.put("CorporateName", getDriver().findElement(By.xpath("//*[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_textInputBox_with_filter_new']")).getAttribute("title"));
+		Dpdata.put("CorporateName", getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_selected_tag_text']")).getAttribute("title"));
 
 		click(getDriver().findElement(By.xpath("//div[@data-id='CPEntityCode.ix_premierein-FieldSectionItemContainer']")),"CP entity");
 		click(getDriver().findElement(By.xpath("//h2[@title='FOOD SERVICE PARENT']")),"Food Service");
 
 		Dpdata.put("isFoodService", getDriver().findElement(By.xpath("//*[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-container']")).getAttribute("title"));
 
-		Dpdata.put("FoodServiceName", getDriver().findElement(By.xpath("//*[@data-id='ix_foodserviceparentname.fieldControl-LookupResultsDropdown_ix_foodserviceparentname_textInputBox_with_filter_new']")).getAttribute("title"));
+		Dpdata.put("FoodServiceName", getDriver().findElement(By.xpath("//div[@data-id='ix_foodserviceparentname.fieldControl-LookupResultsDropdown_ix_foodserviceparentname_selected_tag_text']")).getAttribute("title"));
 
 		Dpdata.put("isSponsor", getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-checkbox-container']")).getAttribute("title"));
 
@@ -1054,7 +1054,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			public MemberFormPage verifyRepresentativeDropDown() throws InterruptedException {
 				Select RepresentativeType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_representativetype.fieldControl-option-set-select']")));		
 				// Create Expected Array List
-				List<String> expectedRepresentativeType = Arrays.asList("Employee Discounts Coordinator","Executive","Field","Internal","Manager");		
+				List<String> expectedRepresentativeType = Arrays.asList("---","Employee Discounts Coordinator","Executive","Field","Internal","Manager");		
 				//Create Actual blank Array List
 				List<String> actualRepresentativeType=new ArrayList<String>();	
 				//Create temp Array List > add  actual options  from DOM for comparison
@@ -1687,7 +1687,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Top Parent')]")),"Is top Parent");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Top Parent Relation')]")),"Top Parent Relation");
 
-		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),verifyTopParentRelationDate,"Top Parent Relation Date");
+		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),verifyTopParentRelationDate,"Top Parent Relation Date");
 		return this;
 	}
 
@@ -1695,6 +1695,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//verify affiliate group
 	public MemberFormPage verifyAffiliateGroup(String verifyAffiliateGroup) {
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-SUMMARY_TAB_section_9']")),"FBO");
+		String Text=getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group");
+		System.out.println(Text);
 		Assert.assertTrue((getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group")).equals(verifyAffiliateGroup));
 		return this;
 	}
@@ -2029,15 +2031,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//Choose Existing Account Number -FedTax ID
 				public MemberFormPage doubleClickExistingAccountNumberFedTaxID() throws InterruptedException   {
 					Thread.sleep(4000);
-					WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
-					List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
+					WebElement table =getDriver().findElement(By.xpath("//div[@class='ag-center-cols-container']"));
+					List<WebElement> rowList = table.findElements(By.xpath("//div[@class='ag-center-cols-container']/div"));
 					System.out.println("# of Rows Including Header:"+ rowList.size());
-					for (int i = 0; i <rowList.size(); i++) {
-						String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")).getAttribute("title");
+					for (int i = 1; i <=rowList.size(); i++) {
+						String title = getDriver().findElement(By.xpath("//div[@class='ag-center-cols-container']/div["+i+"]/div[3]//label")).getAttribute("title");
 						System.out.println(title);					
 						if (title.equals("Federal Tax ID")) {
 							Thread.sleep(3000);
-							doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")), "Federal Tax ID");
+							doubleClick(getDriver().findElement(By.xpath("//div[@class='ag-center-cols-container']/div["+i+"]/div[3]//label")), "Federal Tax ID");
 							Thread.sleep(3000);
 							break;				
 						}
@@ -2423,16 +2425,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		//Choose Existing Account Number -DEA
 		public MemberFormPage doubleClickExistingAccountNumberHIN() throws InterruptedException   {
+			
 			Thread.sleep(4000);
-			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']"));
-			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']"));
+			WebElement table =getDriver().findElement(By.xpath("//div[@class='ag-center-cols-container']"));
+			List<WebElement> rowList = table.findElements(By.xpath("//div[@class='ag-center-cols-container']/div"));
 			System.out.println("# of Rows Including Header:"+ rowList.size());
-			for (int i = 0; i <rowList.size(); i++) {
-				String title = getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")).getAttribute("title");
+			for (int i = 1; i <rowList.size(); i++) {
+				String title = getDriver().findElement(By.xpath("//div[@class='ag-center-cols-container']/div["+i+"]/div[3]//label")).getAttribute("title");
 				System.out.println(title);					
 				if (title.equals("HIN")) {
 					Thread.sleep(3000);
-					doubleClick(getDriver().findElement(By.xpath("//*[@data-id='grid-cell-container']/div[@class='wj-row']["+(i+2)+"]/div[@tabindex='-1'][@aria-colindex='3']")), "HIN");
+					doubleClick(getDriver().findElement(By.xpath("//div[@class='ag-center-cols-container']/div["+i+"]/div[3]//label")), "HIN");
 					Thread.sleep(3000);
 					break;								
 				}
@@ -3785,9 +3788,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		public MemberFormPage verifyNewlyCreatedAccountNumber() {
 			boolean isTrue=false;
 			String accountnumber=null;
-			List<WebElement> accountNumber=getDriver().findElements(By.xpath("//div[contains(@data-id,'-2')]/a"));
-			for(int i=0;1<accountNumber.size();i++) {
-				 accountnumber=getDriver().findElement(By.xpath("//div[@data-id='cell-"+i+"-2']/a")).getAttribute("title");
+			List<WebElement> accountNumber=getDriver().findElements(By.xpath("(//div[@role='rowgroup']//div[contains(@class,'ag-row-') and @role='row'])//a[contains(@href,'accountnumber')]/span"));
+			for(int i=1;1<=accountNumber.size();i++) {
+				 accountnumber=getDriver().findElement(By.xpath("(//div[@role='rowgroup']//div[contains(@class,'ag-row-') and @role='row'])["+i+"]//a[contains(@href,'accountnumber')]/span")).getText();
 				 System.out.println("Expected:"+randomString+"Actual:"+accountnumber);
 				if(accountnumber.contains(randomString)) {
 					isTrue=true;

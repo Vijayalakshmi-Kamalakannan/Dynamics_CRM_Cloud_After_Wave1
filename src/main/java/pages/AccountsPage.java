@@ -183,8 +183,8 @@ public class AccountsPage extends WebDriverServiceImpl {
  //Select supplier account from search result
   	public  SupplierFormPage selectSupplierAccountFromSearchResults() throws InterruptedException {	
 		Actions action = new Actions(getDriver());	
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
-		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
+		action.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']")));
+		action.doubleClick(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).build().perform();
 		Thread.sleep(10000);
 		Thread.sleep(4000);
 		return new SupplierFormPage();

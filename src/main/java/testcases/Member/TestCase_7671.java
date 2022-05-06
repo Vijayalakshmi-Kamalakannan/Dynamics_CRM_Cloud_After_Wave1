@@ -14,7 +14,7 @@ public class TestCase_7671 {
 
 	  	
 	@Test
-	public void createMember(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyPremierStatrDate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 		
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
