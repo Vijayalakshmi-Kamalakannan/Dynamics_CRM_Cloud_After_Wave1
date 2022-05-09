@@ -8,7 +8,7 @@ import pages.LoginPage;
 import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
+//Test Case 8790:Automation: Cloud - Verify FBO calculated correctly after prospect become a member
 
 public class TestCase_8790 {
 
@@ -30,7 +30,7 @@ public class TestCase_8790 {
 		.selectAccountsTab()
 
 
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromSearchResults()
 		.getDPData()
 

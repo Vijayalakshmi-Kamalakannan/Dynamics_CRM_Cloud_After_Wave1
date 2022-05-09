@@ -163,7 +163,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		try {
 
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
 				ele.sendKeys(Keys.BACK_SPACE);
 				Thread.sleep(2000);

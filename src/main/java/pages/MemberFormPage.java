@@ -566,6 +566,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
 		Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
+		Thread.sleep(3000);
 		return this;
 	}
 
@@ -881,7 +882,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage selectLOB(String lineOfBusiness) {
 
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(text(),'"+lineOfBusiness+"')]"))).doubleClick().build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//label[contains(text(),'"+lineOfBusiness+"')]"))).doubleClick().build().perform();
 		return this;
 	}
 
@@ -1008,7 +1009,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Click on Membership SAve and close //Quick create
 	public MemberFormPage clickQuickCreateMembershipSaveAndClose() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
-		Thread.sleep(5000);
+		Thread.sleep(8000);
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 		Thread.sleep(5000);
 		return this;	
@@ -1152,7 +1153,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//select Specific Membership Entity
 	public MemberFormPage selectMemberShipEntity(String membershipProvider) throws InterruptedException {
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("//ul[@aria-label='Premier Memberships']//span[contains(text(),'"+membershipProvider+"')]")),membershipProvider);
+		click(getDriver().findElement(By.xpath("//div[contains(@data-id,'MembershipSubGrid')]//span[contains(text(),'"+membershipProvider+"')]")),membershipProvider);
 		Thread.sleep(3000);
 		return this;
 	}
@@ -3904,11 +3905,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		
 		public MemberFormPage verifyExpirationDateisNotEmpty() {
-			List<WebElement> DEAExpirationDatelabel=getDriver().findElements(By.xpath("//div[contains(text(),'Expiration Date')]"));
+			List<WebElement> DEAExpirationDatelabel=getDriver().findElements(By.xpath("//label[contains(text(),'Expiration Date')]"));
 			verifyElementisDisplayed(DEAExpirationDatelabel.size(), "DEA Expiration Date");
-			List<WebElement> DEAExpirationDate=getDriver().findElements(By.xpath("//div[@aria-rowindex='2']/div[@data-id='cell-0-6']/span"));
+			List<WebElement> DEAExpirationDate=getDriver().findElements(By.xpath("(//div[contains(@col-id,'ix_expirationdate')]//label)[2]"));
 			verifyElementisDisplayed(DEAExpirationDate.size(), "DEA Expiration Date");
-			getTextValue(getDriver().findElement(By.xpath("//div[@aria-rowindex='2']/div[@data-id='cell-0-6']/span")), "DEA Expiration Date");
+			getTextValue(getDriver().findElement(By.xpath("(//div[contains(@col-id,'ix_expirationdate')]//label)[2]")), "DEA Expiration Date");
 			return this;
 
 		}
