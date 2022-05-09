@@ -1,5 +1,7 @@
 package testcases.Supplier;
 import org.testng.annotations.Test;
+
+import driver.Driver;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
@@ -9,9 +11,8 @@ public class TestCase_9183 {
 	
 	@Test()
 	public void createSupplierTPAsSupplier(int iRowNumber, String sDataSheetName)throws Exception,InterruptedException {
-		//Access Login Page
+		//Access Login Page and login as Supplier
 		new LoginPage()
-
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
   	    .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
@@ -58,7 +59,37 @@ public class TestCase_9183 {
 		.clickSave()
 		
 		//Verify Record Status field is not editable for Supplier Login
-		.recordStatusLock();
+		.recordStatusLock()
+		
+		//Verify if CRM# is generated.
+		.crmNumberIsDisplayed()
+		
+		//Log out as a Supplier
+		.clickLogout()
+		.refreshPage()
+		
+		//Login as Supplier Supervisor
+		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
+		.clickNext()
+  	    .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
+  	    .clicSignin()
+  	    .clicYesInStaySignedin()
+		
+		//Select Accounts Entity
+		.selectAccountsTab()
+		
+		//Access the  same Supplier record created by the Supplier
+		.searchAccount(DataInputProvider.getCellData_ColName(Driver.iTestCaseRowNumDriver, "CRMNumber", "Driver"))		
+		.selectSupplierAccountFromSearchResults()	
+		
+		//Publish the SUpplier record as a Supplier Supervisor
+		.recordStatusPublished(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatusPublished", sDataSheetName))
+		.clickSave()
+		
+		//Verify Entity Code is generated.		
+		.entityCodeIsDisplayed();	
+			
+		
 		
 	}
 	

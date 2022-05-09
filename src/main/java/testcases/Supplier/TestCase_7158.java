@@ -96,9 +96,7 @@ public class TestCase_7158 {
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()	
 		.chooseRecordChangeStatus("Approved")
-		.clickSave()
-		
-		;
+		.clickSave();
 	}
 
 
