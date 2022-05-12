@@ -37,7 +37,7 @@ public class TestCase_10516 {
 				.verifyPrimaryContactValue(DataInputProvider.getCellData_ColName(iRowNumber,"verifyPrimaryContactValue",sDataSheetName))
 				
 				
-				//Add New Primary Contact on a Supplier Form -commenting due to data reset issue -Inactive CAA
+				//Add New Primary Contact on a Supplier Form -commenting due to data reset issue -Inactive CAA -Bug 10528
 				
 			//	.replaceSupplierPrimaryContact(DataInputProvider.getCellData_ColName(iRowNumber, "replaceSupplierPrimaryContact"+ "",sDataSheetName),(DataInputProvider.getCellData_ColName(iRowNumber, "verifyReplacedPrimaryContactValue"+ "",sDataSheetName)))
 				

@@ -45,23 +45,23 @@ public class TestCase_9200 {
 		.verifyVeteranOwndSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType1", sDataSheetName))
 		.addVeteranOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType1", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
-			DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
-			(DataInputProvider.getCellData_ColName(iRowNumber, "subClassification1", sDataSheetName)))
+				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
+				(DataInputProvider.getCellData_ColName(iRowNumber, "subClassification1", sDataSheetName)))
 		.addNewDiversityInfo()
 		.addLGBTOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
-			DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
+				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
 		.addNewDiversityInfo()
 		.addSmallBusinesDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
 		.addNewDiversityInfo()
 		.addWomenOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
-			
-			
-				//Data Reset
-				.deactivateAllDiversityInfo()
-				.clickConfirmDiversityDeactivation();
-	
+
+
+		//Data Reset
+		.deactivateAllDiversityInfo()
+		.clickConfirmDiversityDeactivation();
+
 
 
 	}

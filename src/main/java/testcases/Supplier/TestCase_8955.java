@@ -41,6 +41,7 @@ public class TestCase_8955 {
 				
 				//Data Reset -Deactivate the created Primary Contact
 				.selectCAA()
+				.gridRefresh()
 				.clickOnCAAandDeactivate()
 				.clickConfirmCAADeactivation();
 				

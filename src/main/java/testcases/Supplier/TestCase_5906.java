@@ -84,7 +84,7 @@ public class TestCase_5906 {
 			//Double click on the Premier: National Membership   
 			.doubleClickOnNationalMembership(DataInputProvider.getCellData_ColName(iRowNumber, "premierStartDate", sDataSheetName))
 			
-		//9. Go to Membership  Entity and End the Premier/National Membership ***  The Premier Membership should be End Dated successfully
+			//9. Go to Membership  Entity and End the Premier/National Membership ***  The Premier Membership should be End Dated successfully
 			.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 			
 			// End reason = Anything from dropdown,
@@ -146,8 +146,6 @@ public class TestCase_5906 {
 			//Save the Record
 			.clickSave()
 			
-			.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountStatus", sDataSheetName))
-
-		;	
+			.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountStatus", sDataSheetName));	
 	}
 }

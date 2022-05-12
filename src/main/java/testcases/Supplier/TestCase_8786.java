@@ -8,7 +8,8 @@ import pages.LoginPage;
 import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
+// TFS ID_8786:Cloud - Validate (Member/Supplier) Account Type once set to value other than Prospect cannot change.
+
 
 public class TestCase_8786 {
 
