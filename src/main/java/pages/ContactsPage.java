@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -512,20 +513,23 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Account Associations')]")),
 				"Contact Account Associations");
 		Thread.sleep(2000);
-		Actions a = new Actions(getDriver());
-		String record1 = getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']")).getText();
-		//String record2 = getDriver().findElement(By.xpath("//*[@data-id='cell-1-4']")).getText();
-		if (record1.equalsIgnoreCase(OldCAA)) {
-			a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']"))).doubleClick().build()
-			.perform();
-			Thread.sleep(3000);
-		} else {
-			a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-1-3']"))).doubleClick().build()
-			.perform();
-			Thread.sleep(3000);
-		}
-		return this;
+			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label"));
+			System.out.println("# of Rows Including Header:"+ rowList.size());
+			for (int i = 2; i <=rowList.size(); i++) {
+			String title = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label)["+i+"]")).getText();
+			System.out.println(title);
+					if (title.equals(OldCAA)) {
+					Thread.sleep(3000);
+					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label)["+i+"]")), OldCAA);
+					Thread.sleep(3000);
+					break;				
+				}
+			}		
+
+			return this;					
 	}
+	
 
 	// choose contact termination reason
 	public ContactsPage verifyNullinCaaTerminationReason(String contactTerminationReason) throws InterruptedException {
@@ -751,11 +755,19 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage verifyDuplicateJobFunctionIsCreated(String jobFunction) throws InterruptedException {
 		clickGoBack();
 
-		String jobFunc1 = getAttribute(getDriver().findElement(By.xpath("(//div[contains(@class,'ag-row-')]//div[@col-id='ix_jobfunctionnew']//a)[1]")), "title",
-				"Job Function");
+		//		String jobFunc1 = getAttribute(getDriver().findElement(By.xpath("(//div[contains(@class,'ag-row-')]//div[@col-id='ix_jobfunctionnew']//a)[1]")), "title",
+		//				"Job Function");
+		//
+		//		String jobFunc2 = getAttribute(getDriver().findElement(By.xpath("(//div[contains(@class,'ag-row-')]//div[@col-id='ix_jobfunctionnew']//a)[2]")), "title",
+		//				"Job Function");
+		Thread.sleep(5000);
+		String jobFunc1 = getTextValue(getDriver().findElement(By.xpath("//*[@col-id ='ix_jobfunctionnew']//span")), "Job Function");
 
-		String jobFunc2 = getAttribute(getDriver().findElement(By.xpath("(//div[contains(@class,'ag-row-')]//div[@col-id='ix_jobfunctionnew']//a)[2]")), "title",
-				"Job Function");
+		String jobFunc2 = getTextValue(getDriver().findElement(By.xpath("(//*[@col-id ='ix_jobfunctionnew']//span)[2]")),"Job Function");
+
+
+		System.out.println(jobFunc1);
+		System.out.println(jobFunc2);
 
 		if (jobFunc1.equalsIgnoreCase(jobFunc2) && jobFunc1.equalsIgnoreCase(jobFunction)) {
 
@@ -978,21 +990,33 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage verifyDuplicateContactCommunicationIsCreated(String communicationPublication)
 			throws InterruptedException {
 		clickGoBack();
-		String commPubli1 = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']/a")), "title",
-				"Communication Publication");
+		//String commPubli1 = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']/a")), "title",
+		//		"Communication Publication");
 
-		String commPubli2 = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='cell-1-3']/a")), "title",
-				"Communication Publication");
+		//String commPubli2 = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='cell-1-3']/a")), "title",
+		//		"Communication Publication");
+		Thread.sleep(3000);
+		String commPubli1 = getTextValue(getDriver().findElement(By.xpath("//*[@col-id ='ix_communicationpublication']//span")),"Communication Publication");
+
+
+		String commPubli2 = getTextValue(getDriver().findElement(By.xpath("(//*[@col-id ='ix_communicationpublication']//span)[2]")),"Communication Publication");
+
+		System.out.println(commPubli1);
+		System.out.println(commPubli2);
+
 
 		if (commPubli1.equalsIgnoreCase(commPubli2) && commPubli1.equalsIgnoreCase(communicationPublication)) {
 
 			setReport().log(Status.PASS, "Duplicate communication Publication created " + communicationPublication,
 					screenshotCapture());
+			System.out.println("Duplicate communication Publication created " + communicationPublication);
 
 		} else {
 			setReport().log(Status.FAIL,
 					"Duplicate communication Publication is not created " + communicationPublication,
 					screenshotCapture());
+			System.out.println("Duplicate communication Publication NOT created " + communicationPublication);
+
 			Driver.failCount++;
 		}
 		return this;

@@ -68,7 +68,7 @@ public class TestCase_10662 {
 		.clickDeactivateInAccountNumbers()
 
 		//Select Accounts Entity from the Left Panel
-		.selectAccountsTabFromSupplierPage()
+		.selectAccountsTabFromSupplierPage()	
 
 		//Search and Select Supplier Account 1 using CRM#
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
