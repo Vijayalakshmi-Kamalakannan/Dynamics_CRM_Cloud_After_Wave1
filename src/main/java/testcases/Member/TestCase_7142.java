@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.MemberFormPage;
+import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
 //TFS ID_7142: Create new member - New Member entry form and Save it as member first
@@ -22,7 +23,10 @@ public class TestCase_7142 {
 		
 		//2. Go to Workplace > Accounts > +New 
 		    .selectAccountsTab()
-	  	  	.clickNewOnAccountsPage()
+		    .searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		    .selectAccountFromSearchResults()
+		    .getDPData()
+		    .clickNewOnAccountsPage()
 			.chooseMemberEntryForm()
 				
 		//3. Account  Type = Member
@@ -125,34 +129,33 @@ public class TestCase_7142 {
 			.verifyAffiliateGroupIsNotNullMEF()
 			.verifyAgEffectiveDateIsNotNull()
 		
-		//10. Verify "IS Corporate account" field
-			.verifyIsCorporateAccountMEF(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
+			//13. Verify "IS Corporate account" field
+			.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 		
-		//11. Verify Corporate parent name in the form
-			.verifyCorporateParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		//14. Verify Corporate parent name in the form
+			.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
 		
-		//12. Verify "Is Food Service parent" field 
-			.verifyIsFoodServiceParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFoodServiceParent", sDataSheetName))
+		//15. Verify "Is Food Service parent" field 
+			.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
 		
-		//13 Verify Food Service parent name in the form 
-			.verifyFoodServiceParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		//16 Verify Food Service parent name in the form 
+			.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
 		
-		//14 Verify Sponsor field 
-			.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		//17 Verify Sponsor field 
+			.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
 		
-		//15 Verify "Is Sponsor" field 
-			.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 		
 			//FBO details verification
 			//Verify "Is FBO" field 
-			.verifyIsFBOMEF(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFBO", sDataSheetName))
 		
+			.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
+			
 			//FBO
-			.verifyFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-				
+			.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
+					
 			//FBORD
-			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
-		
 		/*
 		 * //16 Go to > and click on Membership entity and double click on the Top
 		 * parent membership entity

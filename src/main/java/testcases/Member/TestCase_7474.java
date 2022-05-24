@@ -90,7 +90,7 @@ public class TestCase_7474 {
 			
 			.clickMembershipAndAddNewMembership()
 		 	.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-			.selectMembershipProvider(DataInputProvider.getCellData_ColName(Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName")))
+			.TyprMembershipProvider(DataInputProvider.getCellData_ColName(Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName")))
 			.verifyNoRecordsFoundMsgInAddMP()
 			;
 	

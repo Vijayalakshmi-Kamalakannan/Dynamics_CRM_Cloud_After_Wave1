@@ -51,11 +51,14 @@ public class ContactsPage extends WebDriverServiceImpl {
 	}
 
 	//Select Contact from search results
-	public  ContactsPage selectAccountFromContactSearchResults() throws InterruptedException {	
-		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a")),"Search Results");
-		return this;
-	}	
+		public  ContactsPage selectAccountFromContactSearchResults() throws InterruptedException {	
+
+			Thread.sleep(3000);
+			Actions a = new Actions(getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("(//div[contains(@col-id,'accountnumber')]//label)[2]"))).doubleClick().build().perform();
+			Thread.sleep(6000);
+			return this;
+		}	
 
 	//select view type
 
@@ -513,23 +516,23 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Account Associations')]")),
 				"Contact Account Associations");
 		Thread.sleep(2000);
-			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
-			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label"));
-			System.out.println("# of Rows Including Header:"+ rowList.size());
-			for (int i = 2; i <=rowList.size(); i++) {
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 2; i <=rowList.size(); i++) {
 			String title = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label)["+i+"]")).getText();
 			System.out.println(title);
-					if (title.equals(OldCAA)) {
-					Thread.sleep(3000);
-					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label)["+i+"]")), OldCAA);
-					Thread.sleep(3000);
-					break;				
-				}
-			}		
+			if (title.equals(OldCAA)) {
+				Thread.sleep(3000);
+				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label)["+i+"]")), OldCAA);
+				Thread.sleep(3000);
+				break;				
+			}
+		}		
 
-			return this;					
+		return this;					
 	}
-	
+
 
 	// choose contact termination reason
 	public ContactsPage verifyNullinCaaTerminationReason(String contactTerminationReason) throws InterruptedException {
@@ -641,7 +644,9 @@ public class ContactsPage extends WebDriverServiceImpl {
 	//Select Contact from search results
 	public  ContactsPage deactivateContactAllContactsView() throws InterruptedException {	
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-1']")),"Contact");
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).click().build().perform();
+		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//span[text()='Deactivate']")),"Deactivate");
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")), "Confirm");
@@ -684,6 +689,13 @@ public class ContactsPage extends WebDriverServiceImpl {
 		}
 		catch(Exception e){
 
+		}
+
+		try {
+			if(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")).isDisplayed());
+			click(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")),"Ignore and Save");	
+		} catch (Exception e) {
+			e.getMessage();
 		}
 
 		return this;
@@ -1095,8 +1107,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// Click Save and Close button in contact summary page
 	public MemberFormPage clickSaveAndClose() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close");
-		Thread.sleep(5000);
+		Thread.sleep(7000);
+		try {
+			if(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")).isDisplayed());
+			click(getDriver().findElement(By.xpath("//span[text()='Ignore and save']")),"Ignore and Save");	
+		} catch (Exception e) {
+			e.getMessage();
+		}
 		return new MemberFormPage();
+
 
 	}
 

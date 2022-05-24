@@ -15,6 +15,7 @@ public class TestCase_8820 {
 	
 	new WebDriverServiceImpl();
 		//1. Login to CRM using member supervisor / member credentials 
+	WebDriverServiceImpl.rownumber=iRowNumber;
 		new LoginPage()
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
@@ -24,7 +25,7 @@ public class TestCase_8820 {
 	
 	//2.Go to Workplace > Accounts and search for EIN 673415 
 		.selectAccountsTab()
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		
 	//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromSearchResults()
@@ -151,13 +152,11 @@ public class TestCase_8820 {
 			//FBO details verification
 			//Verify "Is FBO" field 
 		
-			.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
+			
+		 	.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
 			
 			//FBO
-			.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-					
-			//FBORD
-			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+		 	
 			
 			//Commenting the below block since "Is Member Add mail sent" verification is not happening in the Audit history page
 		/*

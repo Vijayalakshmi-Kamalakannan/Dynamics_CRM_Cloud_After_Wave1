@@ -24,8 +24,9 @@ public class TestCase_7420 {
 		
 		//2. Go to Workplace > Accounts > +New 
 	  	    .selectAccountsTab()
+	  	    .selectActiveMembers()
 	  	  	.clickNewOnAccountsPage()
-			.chooseMemberForm()		
+	  	  	.chooseMemberForm()		
 			
 		//3. Verify Membership provider field is defaulted to No 
 			.verifyDefaultMembershipProvider()

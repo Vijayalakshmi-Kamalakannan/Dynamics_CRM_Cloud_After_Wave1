@@ -166,7 +166,8 @@ public class TestCase_7137 {
 		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 
 
-
+		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
+		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
 		//FBORD
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName));
 

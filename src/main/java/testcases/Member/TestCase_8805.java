@@ -35,7 +35,7 @@ public class TestCase_8805 {
 
 		.selectFBO(DataInputProvider.getCellData_ColName(iRowNumber, "fBO", sDataSheetName))
 		
-		.selectisFBO(DataInputProvider.getCellData_ColName(iRowNumber, "isFBO", sDataSheetName))
+		.selectisFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFBO", sDataSheetName))
 		
 		.selectFBOEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "FBOEffectiveDate", sDataSheetName))
 		

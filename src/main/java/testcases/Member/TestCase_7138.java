@@ -36,7 +36,7 @@ public class TestCase_7138 {
 		.clickNewAccountInSubAccount()
 
 		//5. Verify Direct parent and Top parent are populated 
-		.verifyDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		.verifyDirectParent(WebDriverServiceImpl.Dpdata.get("DP_Name"))
 		.verifyTopParent(WebDriverServiceImpl.Dpdata.get("TopParent_Name"))
 
 		//6. Account Name = Any

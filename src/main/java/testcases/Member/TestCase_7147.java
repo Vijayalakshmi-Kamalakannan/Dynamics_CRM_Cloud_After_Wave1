@@ -3,6 +3,7 @@ package testcases.Member;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
+import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_7147:Create new Shipto account - New Member form through sub account and save it as prospect first
 
@@ -21,18 +22,19 @@ public class TestCase_7147 {
 
 		//2.Go to Workplace > Accounts and search for EIN 673415 
 		.selectAccountsTab()
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectDirectParentFromSearchResults()
+		.selectAccountFromSearchResults()
+		.getDPData()
 		.selectSubaccount()
 
 		//4. Click on Add new account 
 		.clickNewAccountInSubAccount()
 
 		//5. Verify Direct parent and Top parent are populated 
-		.verifyDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyTopParent", sDataSheetName))
-		.verifyTopParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
+		.verifyDirectParent(WebDriverServiceImpl.Dpdata.get("DP_Name"))
+ 		.verifyTopParent(WebDriverServiceImpl.Dpdata.get("TopParent_Name"))
 
 		//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
@@ -114,24 +116,23 @@ public class TestCase_7147 {
 		 * .verifyAgEffectiveDateIsNull() .verifyAffiliateGroupIsNull()
 		 */
 
-		//12. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
-
-		//13. Verify Corporate parent name in the form
-		.verifyCorporateParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-
-		//14. Verify "Is Food Service parent" field 
-		
-		.verifyIsFoodServiceParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFoodServiceParent", sDataSheetName))
-
-		//15 Verify Food Service parent name in the form 
-		.verifyFoodServiceParentName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-
-		//16 Verify Sponsor field 
-		.verifySponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyDirectParent", sDataSheetName))
-
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))	
+		//13. Verify "IS Corporate account" field
+		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
+	
+	//14. Verify Corporate parent name in the form
+		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
+	
+	//15. Verify "Is Food Service parent" field 
+		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
+	
+	//16 Verify Food Service parent name in the form 
+		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
+	
+	//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+	
+	//16 Verify "Is Sponsor" field 
+	.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 		.verifySponsorLocked();
 
 	}

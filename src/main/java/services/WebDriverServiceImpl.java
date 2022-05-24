@@ -54,7 +54,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public String randomString;
 	public String DEA;
 	public String HIN;
-	
+	public static int rownumber;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public ExtentTest setReport()
 	{
@@ -71,6 +71,30 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		FileUtils.copyFile(source, destination);  
 		return screenshotPath;
 	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public String verifIsNoTNullWithText(WebElement ele, String field) {	
+		String bReturn = "";
+		try {
+
+			bReturn = ele.getText();
+			if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
+				setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
+				Driver.failCount++;
+			}
+			else {
+				setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
+
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		}
+		return bReturn;
+	}
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public static MediaEntityModelProvider screenshotCapture() 
 	{
@@ -800,10 +824,11 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 
 	public void verifyPartialAttribute(WebElement ele, String attribute, String value,String field) {
 		try {
-			if(getAttribute(ele, attribute,field).contains(value)) {
+			String actual=getAttribute(ele, attribute,field);
+			if(actual.contains(value)) {
 				setReport().log(Status.PASS, "The "+field+ " contains "+ ": "+value,screenshotCapture());
 			}else {
-				setReport().log(Status.FAIL, "The "+field+ "doen not contains "+ ": "+value,screenshotCapture());
+				setReport().log(Status.FAIL, "The "+field+ "doen not contains "+ ": "+value+" instead contains "+actual,screenshotCapture());
 			}
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL, "Unknown exception occured while verifying the attribute",screenshotCapture());
@@ -1025,7 +1050,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		boolean bReturn =true;
 		bReturn=ele.isDisplayed();
 		try {
-			if(bReturn==false) {
+			if(bReturn==true) {
 				setReport().log(Status.PASS, "The "+field+" is enabled",screenshotCapture());
 			}else {
 				setReport().log(Status.FAIL, "The "+field+" is disabled",screenshotCapture());

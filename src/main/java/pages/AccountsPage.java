@@ -80,7 +80,7 @@ public class AccountsPage extends WebDriverServiceImpl {
   	
   //Select an Account from All Prospects view
   	public  MemberFormPage selectAccountFromAllProspectsView() throws InterruptedException {	
-		doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']")),"Account from All Prospects View");
+		doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Account from All Prospects View");
 		return new MemberFormPage();
 	}
   	
@@ -111,7 +111,7 @@ public class AccountsPage extends WebDriverServiceImpl {
     	//select Draft Members view
     	public AccountsPage verifyAccountisDisplayed() throws InterruptedException {
     		Thread.sleep(2000);
-    		verifIsNoTNullWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")), "Account Number");
+    		verifIsNoTNullWithText(getDriver().findElement(By.xpath("//div[contains(@class,'ag-cell-value') and @col-id='name']")), "Account Number");
     		return this;
     	} 
     	
@@ -119,18 +119,14 @@ public class AccountsPage extends WebDriverServiceImpl {
     
     	//Verify DEA and HIN Column
     	public AccountsPage verifyAccountnumberColumns() throws InterruptedException, AWTException {
+    	
     		Thread.sleep(5000);
-    		Robot robot;
-    		for(int i=0;i<21;i++) {
-    			robot = new Robot();
-    			Thread.sleep(4000);
-    			robot.keyPress((KeyEvent.VK_TAB));
-    			Thread.sleep(4000);
-
-    		}
-    		verifyDisplayed(getDriver().findElement(By.xpath("//div[contains(@id,'headerButtonix_dea')]")), "DEA Number Header");
-    		verifyDisplayed(getDriver().findElement(By.xpath("//div[contains(@id,'headerButtonix_hin')]")), "HIN Header");
-
+    		click(getDriver().findElement(By.xpath("//span[contains(@class,'ms-Button-label') and contains(text(),'Edit columns')]")),"Edit ColumnsButton");
+    		Thread.sleep(3000);
+    		verifyDisplayed(getDriver().findElement(By.xpath("(//span[contains(@class,'pa-') and contains(text(),'DEA')])[2]")), "DEA");
+    		verifyDisplayed(getDriver().findElement(By.xpath("//span[contains(@class,'pa-') and contains(text(),'HIN')]")), "HIN");
+    		click(getDriver().findElement(By.xpath("//button[@aria-label='Close']")),"Close Button");
+    		
     		return this;
     	}
     	
@@ -168,11 +164,7 @@ public class AccountsPage extends WebDriverServiceImpl {
   		return this;
   	} 	
   	
-  //Select an Account from Draft Members view
-  	public  MemberFormPage selectAccountFromDraftMembersView() throws InterruptedException {	
-		click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-5']/a")),"Account from Draft Members View");
-		return new MemberFormPage();
-	}
+  
 	public  MemberFormPage selectParentAccountFromSearchResults() throws InterruptedException {	
 		Actions action = new Actions(getDriver());	
 		action.moveToElement(getDriver().findElement(By.xpath("//div[@aria-label='Data']/div[3]/a")));
@@ -212,7 +204,11 @@ public class AccountsPage extends WebDriverServiceImpl {
 	}
 
  
-
+  	 //Select an Account from Draft Members view
+  	public  MemberFormPage selectAccountFromDraftMembersView() throws InterruptedException {	
+		click(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Account from Draft Members View");
+		return new MemberFormPage();
+	}
   	
 
   	

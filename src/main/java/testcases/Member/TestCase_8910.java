@@ -146,7 +146,7 @@ public class TestCase_8910 {
 		.clickSaveAndCloseButton()
 		.verifyInvalidGLNNumberMessage()
 		.chooseAccountNumberTypeHIN()
-		.typeDAccountNumber(DataInputProvider.getCellData_ColName(iRowNumber, "HIN", sDataSheetName))
+		.typeAccountNumberHIN()
 		.clickSaveAndCloseButton()
 		.verifyAccountnumberButton()
 		.clickAddNewAccountNumberInAccountNumbers()

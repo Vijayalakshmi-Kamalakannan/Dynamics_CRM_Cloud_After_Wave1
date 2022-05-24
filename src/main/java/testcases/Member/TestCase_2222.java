@@ -24,7 +24,7 @@ public class TestCase_2222 {
 		
 		//Go to Workplace > Accounts and search for EIN 673415 
 			.selectAccountsTab()
-			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		
 		//Double click on the account and go to Sub accounts entity by clicking > on the top 
 			.selectDirectParentFromSearchResults()
@@ -139,8 +139,6 @@ public class TestCase_2222 {
 			//Verify Premier start date is auto populated
 			.verifyPremierStartDateIsAutoPopulated()
 
-			
-			
 			
 			//Go to Workplace > Accounts and search for EIN 673415 
 			.selectAccountss()

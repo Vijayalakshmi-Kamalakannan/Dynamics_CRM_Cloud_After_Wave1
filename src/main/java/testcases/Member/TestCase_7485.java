@@ -24,8 +24,10 @@ public class TestCase_7485 {
 		
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
-		.chooseActiveMember(DataInputProvider.getCellData_ColName(Driver.iTestCaseRowNumDriver-1, "CRMNumber",Driver.properties.getProperty("DriverSheetName")))     		
-
+		
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromSearchResults()
+		
 		//3.Verify following Fields are editable in Opened Member Account 
 			//Account Name
 			.verifyAccountNameIsEnabled()
