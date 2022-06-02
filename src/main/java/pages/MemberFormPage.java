@@ -45,8 +45,9 @@ import testcases.Member.TestCase_2222;
 import utils.DataInputProvider;
 
 public class MemberFormPage extends WebDriverServiceImpl {
-
-
+	String attributevalue;
+	String Classificationbefore;
+	String Classificationafter;
 
 	//Enter account name
 	public MemberFormPage typeAccountName(String accountName) throws InterruptedException {
@@ -98,7 +99,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			e.getMessage();
 		}
 		Thread.sleep(15000);
-		
+
 		Thread.sleep(20000);
 		return this;	
 	}
@@ -181,6 +182,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_classoftradedetail.fieldControl-ix_parent')]")),"Class of Trade");
 		return this;
 	}
+	
+	//Select Class of trade
+		public MemberFormPage clearClassOfTrade() throws InterruptedException, AWTException {
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_classoftradedetail.fieldControl-LookupResultsDropdown_ix_classoftradedetail_SelectedRecordList']"))).perform();
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Delete"); 
+		return this;
+		}
+	
+	
 
 	//Verify business classification is auto populated
 	public MemberFormPage verifyBusinessClassification(String verifyBusinessClassification) throws InterruptedException {
@@ -259,17 +271,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-ix_premierein')]")),"Direct Parent");
 		return this;
 	}
-	
+
 	//select Direct parent
-		public MemberFormPage selectDirectParentWithoutEnitiy(String directParent) throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
-			Thread.sleep(6000);
-			type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-			Thread.sleep(5000);
-			Thread.sleep(5000);
-			click(getDriver().findElement(By.xpath("(//div[contains(@id,'parentaccountid.fieldControl-LookupResultsDropdown')])[7]")),"Direct Parent");
-			return this;
-		}
+	public MemberFormPage selectDirectParentWithoutEnitiy(String directParent) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
+		Thread.sleep(6000);
+		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
+		Thread.sleep(5000);
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("(//div[contains(@id,'parentaccountid.fieldControl-LookupResultsDropdown')])[7]")),"Direct Parent");
+		return this;
+	}
 
 	//Select DPR
 	public MemberFormPage selectDirectParentRelationManaged() throws InterruptedException {
@@ -857,6 +869,42 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Verify the food service LOB
+	public MemberFormPage verifyFoodServiceLOB() {
+
+		verifyDisplayed(getDriver().findElement(By.xpath("//label[@aria-label='Food Services']")), "Food Service LOB");
+		attributevalue=getAttribute(getDriver().findElement(By.xpath("//label[contains(text(),'Food Services')]/ancestor::div[@col-id='ix_portfolio']/following-sibling::div[@col-id='ix_classificationtypenew']//a")), "aria-label", "Classtification type");
+		return this;
+	}
+
+	public MemberFormPage getClassificationType() {
+
+		Classificationbefore=attributevalue;
+		return this;
+	}
+	
+	public MemberFormPage getClassificationTypeAfter() {
+
+		Classificationafter=attributevalue;
+		return this;
+	}
+	
+	public MemberFormPage compareClassificationtype() {
+
+		Assert.assertTrue(!((Classificationbefore.contains(Classificationafter))));
+		return this;
+	}
+	 
+
+	//Verify the food service LOB is not displayed
+	public MemberFormPage verifyFoodServiceLOBisNotDisplayed() {
+		List<WebElement> lob= getDriver().findElements(By.xpath("//label[@aria-label='Food Services']"));
+
+		verifyElementisNotDisplayed(rownumber, "FoodServiceLOB");
+
+		return this;
+	}
+
 	//Add New Line Of Business Button
 	public MemberFormPage verifyNewLineOfBusinessIsNotPresent() {
 		List<WebElement> lob= getDriver().findElements(By.xpath("//span[contains(text(),'New Line of Business')]"));
@@ -951,14 +999,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//span[contains(@id,'dialogButton') and contains(text(),'Activate')]")),"Activate Button");
 		return this;
 	}
-	
+
 	public MemberFormPage selectLOB(String lineOfBusiness) {
 
 		Actions a = new Actions(getDriver());
 		a.moveToElement(getDriver().findElement(By.xpath("//label[contains(text(),'"+lineOfBusiness+"')]"))).doubleClick().build().perform();
 		return this;
 	}
-	
+
 	public MemberFormPage selectDeactivatedLOB() throws InterruptedException {
 
 		click(getDriver().findElement(By.xpath("//span[contains(@id,'ViewSelector')]")),"Select View");
@@ -1072,14 +1120,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")),"Membership Provider");
 		return this;
 	}
-	
+
 	//Select Membership provider
-		public MemberFormPage TyprMembershipProvider(String membershipProvider) throws InterruptedException   {	
-			//click(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),"Membership Provider");
-			type(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),membershipProvider,"Membership Provider");
-			Thread.sleep(3000);
-			return this;
-		}
+	public MemberFormPage TyprMembershipProvider(String membershipProvider) throws InterruptedException   {	
+		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),"Membership Provider");
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),membershipProvider,"Membership Provider");
+		Thread.sleep(3000);
+		return this;
+	}
 
 	//Type Membership Start Date
 	public MemberFormPage typeMembershipStartDate(String membershipStartDate) {
@@ -1090,7 +1138,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Click on Membership SAve and close //Quick create
 	public MemberFormPage clickQuickCreateMembershipSaveAndClose() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
-		Thread.sleep(8000);
+		Thread.sleep(10000);
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 		Thread.sleep(5000);
 		return this;	
@@ -1291,6 +1339,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return new MemberFormPage();
 	}
 
+
+	//Choose Location Type
+	public MemberFormPage chooseLocationTypewithOutVerifying(String locationType) throws InterruptedException   {	
+		Thread.sleep(3000);
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
+		return new MemberFormPage();
+	}
+
 	//Location type null
 	public MemberFormPage chooseLocationTypeNull() throws InterruptedException   {	
 		Thread.sleep(1000);
@@ -1306,16 +1362,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-container']")),"Yes","Is Top Parent"); 
 		return this;
 	}
-	
-	
+
+
 	//Change Top parent
-		public MemberFormPage changeTopParentAsNo() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//h2[@title='TOP PARENT']")),"Top Parent Label");
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"No","Is Top Parent"); 
-			Thread.sleep(2000);
-			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-container']")),"No","Is Top Parent"); 
-			return this;
-		}
+	public MemberFormPage changeTopParentAsNo() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//h2[@title='TOP PARENT']")),"Top Parent Label");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"No","Is Top Parent"); 
+		Thread.sleep(2000);
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-container']")),"No","Is Top Parent"); 
+		return this;
+	}
 
 	//Verify direct parent relation
 	public MemberFormPage verifyDirectParentRelation(String verifyDirectParentRelation) throws InterruptedException { 
@@ -2218,24 +2274,24 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		return this;
 	}
-	
-	
-	//Verify account does not have one active premier membership error
-		public MemberFormPage verifyDPWithoutEntityMessage(String errMsg) throws InterruptedException {
-			Thread.sleep(3000);
-			verifyPartialText(getDriver().findElement(By.xpath("//h2[@id='subtitle']")),errMsg,"Business Process Error");
-			click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"Ok");
-			Thread.sleep(2000);
-			return this;
-		}
 
-		
-		public AccountsPage selectAccountsTab() throws InterruptedException {	
-			click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
-			Thread.sleep(2000);
-			return new AccountsPage();
-		}
-		
+
+	//Verify account does not have one active premier membership error
+	public MemberFormPage verifyDPWithoutEntityMessage(String errMsg) throws InterruptedException {
+		Thread.sleep(3000);
+		verifyPartialText(getDriver().findElement(By.xpath("//h2[@id='subtitle']")),errMsg,"Business Process Error");
+		click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"Ok");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	public AccountsPage selectAccountsTab() throws InterruptedException {	
+		click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
+		Thread.sleep(2000);
+		return new AccountsPage();
+	}
+
 
 	//Verify Can not have duplicate membership provider error message
 	public MemberFormPage verifyAccountCanNotCreateDuplicatePMError(String errMsg) throws InterruptedException {

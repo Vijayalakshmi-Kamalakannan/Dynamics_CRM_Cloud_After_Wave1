@@ -60,6 +60,12 @@ public class ContactsPage extends WebDriverServiceImpl {
 			return this;
 		}	
 
+		//verify Contact End date
+		public ContactsPage verifyContactEndDate() throws InterruptedException {
+			Thread.sleep(3000);
+			verifyDisplayed(getDriver().findElement(By.xpath("//label[@title='Contact End Date']")), "Contact End Date");
+			return this;
+		}
 	//select view type
 
 	public ContactsPage selectAllContactView() throws InterruptedException {
