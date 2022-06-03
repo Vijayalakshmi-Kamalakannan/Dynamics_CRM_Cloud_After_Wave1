@@ -31,7 +31,6 @@ public class TestCase_6961 {
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
 
-
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
@@ -62,12 +61,8 @@ public class TestCase_6961 {
 		//CAMS Flag = Yes
 		.changeCAMSFlagAsYes()
 
-		//Store/Location type = Shipto
-		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
-
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
-
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -123,10 +118,6 @@ public class TestCase_6961 {
 
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
-
-
-		//Store/Location type = Blank
-		.chooseLocationTypewithOutVerifying("---")	
 
 		//8. Record Status = Published
 		.chooseRecordStatusDraft()
@@ -227,9 +218,6 @@ public class TestCase_6961 {
 		//CAMS Flag = Yes
 		.changeCAMSFlagAsYes()
 
-		//Store/Location type = Shipto
-		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
-
 		//Participation Type = Standard
 		.selectParticipationType("Cellular Services Only")
 
@@ -267,65 +255,93 @@ public class TestCase_6961 {
 		.clickSave() 
 
 		//Click add new membership
-		.clickMembershipAndAddNewMembership()
+				.clickMembershipAndAddNewMembership()
 
-		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-		.selectMembershipProvider("National")
+				// Choose Membership type 
+				.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+				.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
-		//Provide any start date and click on save
-		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+				//Provide any start date and click on save
+				.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 
-		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
+				//Click on membership save and close
+				.clickQuickCreateMembershipSaveAndClose()
+
+				//8. Record Status = Published
+				.chooseRecordStatusPublished()
+
+				//Click on Save 
+				.clickSave() 
+
+				//9. Verify Entity code is generated 
+				.entityCodeIsDisplayed()
+
+				//8. Record Status = Published
+				.chooseRecordStatusDraft()
+
+				//Click on Save 
+				.clickSave() 
+
+				//Click add new membership
+				.clickMembershipAndAddNewMembership()
+
+				// Choose Membership type 
+				.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+				.selectMembershipProvider("National")
+
+				//Provide any start date and click on save
+				.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+
+				//Click on membership save and close
+				.clickQuickCreateMembershipSaveAndClose()
+
+				//7.  Click the + icon on the Line of Business Grid
+				.clickLineOfBusiness()
+
+				//Click New Line Of Business
+				.clickAddNewLineOfBusiness()
+
+				// Line of Business =General GPO
+				.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+
+				// Classification Type = General GPO
+				.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
+
+				// Start Date =Today's date
+				.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
+
+				// Click on LOB Save 
+				.clickLOBSaveAndClose()
+
+				//8. Record Status = Published
+				.chooseRecordStatusPublished()
+
+				//Click on Save 
+				.clickSave() 
 
 
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+				.clickLineOfBusiness()
 
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
+				.verifyFoodServiceLOBisNotDisplayed()
 
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+				//Click New Line Of Business
+				.clickAddNewLineOfBusiness()
 
-		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
+				// Line of Business =General GPO
+				.selectLineOfBusiness("General GPO")
 
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
+				// Classification Type = General GPO
+				.selectLOBfClassificationType("General GPO")
 
-		// Click on LOB Save 
-		.clickLOBSaveAndClose()
-		
-		.clickGeneralTab()
+				// Start Date =Today's date
+				.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
 
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+				// Click on LOB Save 
+				.clickLOBSaveAndClose()
 
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
+				.clickLineOfBusiness()
 
-		// Line of Business =General GPO
-		.selectLineOfBusiness("General GPO")
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationType("General GPO")
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		.clickLOBSaveAndClose()
-
-		//8. Record Status = Published
-		.chooseRecordStatusPublished()
-
-		//Click on Save 
-		.clickSave() 
-
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
-		.verifyFoodServiceLOBisNotDisplayed()
+				.verifyFoodServiceLOBisNotDisplayed()
 
 		;
 	}

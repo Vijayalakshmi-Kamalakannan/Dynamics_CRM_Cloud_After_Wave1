@@ -12,7 +12,7 @@ import utils.DataInputProvider;
 //Test Case 6971:Verify Food Services LOB is NOT added automatically when LOB is not General GPO and Prospect is converted to Member
 
 
-public class TestCase_6971 {
+public class TestCase_6971_2 {
 
 
 	@Test

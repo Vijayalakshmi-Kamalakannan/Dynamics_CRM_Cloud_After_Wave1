@@ -1,7 +1,6 @@
 package testcases.LOBFSC;
 
 import org.openqa.selenium.By;
-
 import org.testng.annotations.Test;
 
 import driver.Driver;
@@ -9,14 +8,16 @@ import pages.LoginPage;
 import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//Test Case 6971:Verify Food Services LOB is NOT added automatically when LOB is not General GPO and Prospect is converted to Member
 
 
-public class TestCase_6971 {
+//Test Case 6969:Verify Food Services LOB is added automatically when LOB Update is made after Prospect is converted to Member
+
+
+public class TestCase_6969 {
 
 
 	@Test
-	public void verifyFSLOBNotAdded(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyFSLOBAdded(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -31,8 +32,8 @@ public class TestCase_6971 {
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
 
-
 		.clickNewOnAccountsPage()
+
 		.chooseMemberForm()
 
 		//3. Account Name = Any
@@ -142,6 +143,28 @@ public class TestCase_6971 {
 
 		.verifyFoodServiceLOBisNotDisplayed()
 
+		.clickGeneralTab()
+
+		.clickLineOfBusiness()
+		//Click New Line Of Business
+		.clickAddNewLineOfBusiness()
+
+		// Line of Business =General GPO
+		.selectLineOfBusiness("General GPO")
+
+		// Classification Type = General GPO
+		.selectLOBfClassificationType("General GPO")
+
+		// Start Date =Today's date
+		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
+
+		// Click on LOB Save 
+		.clickLOBSaveAndClose()
+
+		.clickLineOfBusiness()
+
+		.verifyFoodServiceLOB()
+
 		.clickNewOnAccountsPage()
 
 
@@ -210,7 +233,6 @@ public class TestCase_6971 {
 		//Click on Save 
 		.clickSave() 
 
-
 		.selectAccountType("Member")
 
 		//Click add new membership
@@ -255,6 +277,24 @@ public class TestCase_6971 {
 
 		.verifyFoodServiceLOBisNotDisplayed()
 
+		//Click New Line Of Business
+		.clickAddNewLineOfBusiness()
+
+		// Line of Business =General GPO
+		.selectLineOfBusiness("General GPO")
+
+		// Classification Type = General GPO
+		.selectLOBfClassificationType("General GPO")
+
+		// Start Date =Today's date
+		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
+
+		// Click on LOB Save 
+		.clickLOBSaveAndClose()
+
+		.clickLineOfBusiness()
+
+		.verifyFoodServiceLOBisNotDisplayed()
 
 		;
 	}
