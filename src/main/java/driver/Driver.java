@@ -70,6 +70,9 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("LOBFSC"))
 			{
 				sTestClassName="testcases.LOBFSC.".concat(sTestClassName);
+			}else if(sCategory.equalsIgnoreCase("ConvertingAccounts"))
+			{
+				sTestClassName="testcases.ConvertingAccounts.".concat(sTestClassName);
 			}
 			
 			

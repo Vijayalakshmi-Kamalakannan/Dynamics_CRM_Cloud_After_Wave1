@@ -21,6 +21,7 @@ import org.w3c.dom.NodeList;
 import com.aventstack.extentreports.Status;
 
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 //Test Case 7312:Add and update Primary contact to a Member account
 import java.awt.AWTException;
@@ -665,7 +666,36 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//assertNotNull(entityCode);
 		return this;
 	}
+	
+	public MemberFormPage verifyParentEntityCode(String parentEntity) throws IOException {
+		String entityCode =getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code");
+		System.out.println(parentEntity);
+		assertTrue(entityCode.contentEquals(parentEntity), "Parent Entity code is not displayed");
+		return this;
+		
+	}
+	
+	
+	public MemberFormPage verifyParentEntityCodeisNotMatched(String parentEntity) throws IOException {
+		String entityCode =getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code");
+		System.out.println(parentEntity);
+		assertTrue(!(entityCode.contentEquals(parentEntity)), "Parent Entity code is displayed");
+		return this;
+		
+	}
 
+	//verify the LOB Enda date has todays Date
+	
+public MemberFormPage verifyLOBEndDate() throws IOException {
+	
+	DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+	Date date = new Date();
+	String date1= dateFormat.format(date); 
+	String endate=getAttribute(getDriver().findElement(By.xpath("(//*[@col-id='ix_enddate']//label)[2]")),"aria-label","End Date");
+	System.out.println(date1+endate);
+	assertTrue(date1.contentEquals(endate),"LOB End date does not match with current date");
+	return this;
+}
 	//Verify entity code
 	public MemberFormPage verifyEntityCodeIsNotDPEntityCode(String verifyEntityCode) throws InterruptedException {
 		Assert.assertFalse((getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code").toString()).equals(verifyEntityCode));
