@@ -14,7 +14,7 @@ public class TestCase_5342 {
 	@Test
 	public void verifyLimitedMemberEditablefields(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 		
-		//1. Login to CRM as Limited member 
+		//1. Login to CRM as Member with Pipeline Steward Role
 		new LoginPage()
 			.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 			.clickNext()
