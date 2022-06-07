@@ -126,14 +126,16 @@ public class TestCase_4533 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
+		//CAMS Flag = No
+		.changeCAMSFlagAsNo()
+
+
 		//8. Record Status = Published
 		.chooseRecordStatusPublished()
 
 		//Click on Save 
 		.clickSave() 
 
-		//CAMS Flag = No
-		.changeCAMSFlagAsNo()
 
 		.clickSave() 
 		//9. Verify Entity code is generated 
