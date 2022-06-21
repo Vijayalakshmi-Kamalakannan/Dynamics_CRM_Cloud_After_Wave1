@@ -183,6 +183,9 @@ public class TestCase_7139 {
 					
 			//FBORD
 			.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+			.clickGoBackButton()
+			.chooseMemberForm()
+			.clickSave()
 			
 				/*
 				 * //19 Go to > and click on Membership entity and double click on the Top

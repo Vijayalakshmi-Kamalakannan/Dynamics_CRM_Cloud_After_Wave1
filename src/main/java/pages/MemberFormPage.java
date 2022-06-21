@@ -123,6 +123,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	//Verify LOB required Error message
+		public MemberFormPage verifyErrorMessage(String errorMessage) throws InterruptedException {
+
+			Thread.sleep(5000);
+			verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"Error message");
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
+			return this;
+
+		}
 
 	public MemberFormPage verifyMemberPermissionError(String errorMessage) throws InterruptedException {
 
@@ -1600,6 +1610,17 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		Thread.sleep(2000);
 		return new MemberFormPage();
 	}
+	
+	
+	//Choose member form
+		public MemberFormPage chooseMemberForm() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
+			click(getDriver().findElement(By.xpath("//*[@title='Member Form']")),"Member Form");
+			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+			Thread.sleep(2000);
+			return new MemberFormPage();
+		}
+			
 
 	//Verify default account status in header
 	public MemberFormPage defaultAccountStatusHeader() {
@@ -1945,6 +1966,14 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-container']")),verifyCAMSFlag,"CAMS Flag"); 
 		return this;
 	}
+	
+	
+	//Verify CAMS flag
+		public MemberFormPage verifyCAMSFlagNotMatch(String verifyCAMSFlag) {
+			String CamsFlag=getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-container']")).getText();
+			Assert.assertTrue("CAMS flag value is not matched",!(CamsFlag.contentEquals(verifyCAMSFlag)));
+			return this;
+		}
 
 	//Verify exclude from roaster
 	public MemberFormPage verifyExcludeFromRoaster(String ExcludeFromRoaster) {
@@ -1975,6 +2004,25 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_bkactive.fieldControl-checkbox-select']")),"No","BK Active");		
 		return this; 
 	}
+	
+	
+	//select BK Active  as yes
+		public MemberFormPage VerifyBKActive(String active) throws InterruptedException {
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor"); //This is for scroll down the page to make the BK active field visible
+			Thread.sleep(2000);
+			verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_bkactive.fieldControl-checkbox-select']/option[@data-selected='true']")), active, "BK Field");
+			return this; 
+		}
+		
+		
+		//Verify Business Key
+		public MemberFormPage verifyBusinessKeyvalue() throws InterruptedException {
+			Thread.sleep(2000);
+			
+			getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Business Key']")), "BK Field");
+			return this;
+		}
 
 	//input supplier record
 	public MemberFormPage typeSupplierRecord(String supplierRecord) throws InterruptedException {
@@ -3075,7 +3123,16 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_dpexceptionreason.fieldControl-text-box-text']")),dPReason, "DP Exception Reason");
 		return this;
 	}
+	
+	
+	//Select Direct Parent details
+		public MemberFormPage selectDriectParent() throws InterruptedException {
+			//DP
+			click(getDriver().findElement(By.xpath("//div[contains(text(),'Direct Parent')]/preceding-sibling::div")), "Direct Parent");
+			return this;
+		}
 
+	
 	//Disabled Top Parent details
 	public MemberFormPage verifyTopParentDetailsIsNotEditable(String topParent,String crmNumber1, String tPReason) throws InterruptedException {
 		//TP

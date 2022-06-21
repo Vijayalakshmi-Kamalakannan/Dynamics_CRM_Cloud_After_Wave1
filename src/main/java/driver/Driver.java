@@ -76,6 +76,12 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("Pipeline"))
 			{
 				sTestClassName="testcases.Pipeline.".concat(sTestClassName);
+			}else if(sCategory.equalsIgnoreCase("CAMSFlag"))
+			{
+				sTestClassName="testcases.CAMSFlag.".concat(sTestClassName);
+			}else if(sCategory.equalsIgnoreCase("BusinessKey"))
+			{
+				sTestClassName="testcases.BusinessKey.".concat(sTestClassName);
 			}
 			
 			
