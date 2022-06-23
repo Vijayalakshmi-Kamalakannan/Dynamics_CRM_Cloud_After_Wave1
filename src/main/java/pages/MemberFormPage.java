@@ -194,6 +194,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 	
+	
+	//Select Business Classification
+		public MemberFormPage selectBusinessClassification(String classOfTrade) throws InterruptedException, AWTException {
+			click(getDriver().findElement(By.xpath("//div[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_InputSearch']")),"Business Classification");
+			type(((getDriver().findElement(By.xpath("//input[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_textInputBox_with_filter_new']")))),classOfTrade,"Business Classification");
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//li[contains(@id,'ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification')]")),"Business Classification");
+			return this;
+		}
+	
 	//Select Class of trade
 		public MemberFormPage clearClassOfTrade() throws InterruptedException, AWTException {
 			Actions action = new Actions(getDriver());
@@ -203,7 +213,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 		}
 	
-	
+		//Select Class of trade
+				public MemberFormPage clearBusineesClassification() throws InterruptedException, AWTException {
+					Actions action = new Actions(getDriver());
+					action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_SelectedRecordList']"))).perform();
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Delete"); 
+				return this;
+				}
+			
 
 	//Verify business classification is auto populated
 	public MemberFormPage verifyBusinessClassification(String verifyBusinessClassification) throws InterruptedException {
@@ -1309,6 +1327,19 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 
 		return this;	
 	}
+	
+	public MemberFormPage clickGoBackandDiscardChanges() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='navigateBackButtontab-id-0']")),"Go back");
+		Thread.sleep(6000);
+		List<WebElement> discarChanges=getDriver().findElements(By.xpath("//*[contains(@id,'cancelButtonTextName')]"));
+		if(discarChanges.size()>0) {
+			click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButtonTextName')]")),"Discard Changes");
+		}
+		
+		Thread.sleep(5000);
+		return this;	
+	}
+
 
 
 	//select Membership Entity

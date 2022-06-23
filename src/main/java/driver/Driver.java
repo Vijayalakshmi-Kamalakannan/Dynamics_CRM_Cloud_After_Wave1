@@ -82,6 +82,9 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("BusinessKey"))
 			{
 				sTestClassName="testcases.BusinessKey.".concat(sTestClassName);
+			}else if(sCategory.equalsIgnoreCase("BusinessClassification"))
+			{
+				sTestClassName="testcases.BusinessClassification.".concat(sTestClassName);
 			}
 			
 			
