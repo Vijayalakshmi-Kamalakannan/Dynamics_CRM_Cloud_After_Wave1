@@ -123,16 +123,30 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
+
 	//Verify LOB required Error message
-		public MemberFormPage verifyErrorMessage(String errorMessage) throws InterruptedException {
+	public MemberFormPage verifyErrorMessage(String errorMessage) throws InterruptedException {
 
-			Thread.sleep(5000);
-			verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"Error message");
-			click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
-			return this;
+		Thread.sleep(5000);
+		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"Error message");
+		click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
+		return this;
 
-		}
+	}
+
+
+	//Verify LOB required Error message
+	public MemberFormPage verifyErrorMessage_contains_Sinlgequote(String errorMessage) throws InterruptedException {
+
+		Thread.sleep(5000);
+		verifyDisplayed(getDriver().findElement(By.xpath("//h2[@aria-label=\""+errorMessage+"\"]")),"Error message");
+		click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
+		return this;
+
+	}
+
+
+
 
 	public MemberFormPage verifyMemberPermissionError(String errorMessage) throws InterruptedException {
 
@@ -193,35 +207,35 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_classoftradedetail.fieldControl-ix_parent')]")),"Class of Trade");
 		return this;
 	}
-	
-	
+
+
 	//Select Business Classification
-		public MemberFormPage selectBusinessClassification(String classOfTrade) throws InterruptedException, AWTException {
-			click(getDriver().findElement(By.xpath("//div[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_InputSearch']")),"Business Classification");
-			type(((getDriver().findElement(By.xpath("//input[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_textInputBox_with_filter_new']")))),classOfTrade,"Business Classification");
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//li[contains(@id,'ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification')]")),"Business Classification");
-			return this;
-		}
-	
-	//Select Class of trade
-		public MemberFormPage clearClassOfTrade() throws InterruptedException, AWTException {
-			Actions action = new Actions(getDriver());
-			action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_classoftradedetail.fieldControl-LookupResultsDropdown_ix_classoftradedetail_SelectedRecordList']"))).perform();
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Delete"); 
+	public MemberFormPage selectBusinessClassification(String classOfTrade) throws InterruptedException, AWTException {
+		click(getDriver().findElement(By.xpath("//div[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_InputSearch']")),"Business Classification");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_textInputBox_with_filter_new']")))),classOfTrade,"Business Classification");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//li[contains(@id,'ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification')]")),"Business Classification");
 		return this;
-		}
-	
-		//Select Class of trade
-				public MemberFormPage clearBusineesClassification() throws InterruptedException, AWTException {
-					Actions action = new Actions(getDriver());
-					action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_SelectedRecordList']"))).perform();
-					Thread.sleep(2000);
-					click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Delete"); 
-				return this;
-				}
-			
+	}
+
+	//Select Class of trade
+	public MemberFormPage clearClassOfTrade() throws InterruptedException, AWTException {
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_classoftradedetail.fieldControl-LookupResultsDropdown_ix_classoftradedetail_SelectedRecordList']"))).perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Delete"); 
+		return this;
+	}
+
+	//Select Class of trade
+	public MemberFormPage clearBusineesClassification() throws InterruptedException, AWTException {
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_SelectedRecordList']"))).perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Delete"); 
+		return this;
+	}
+
 
 	//Verify business classification is auto populated
 	public MemberFormPage verifyBusinessClassification(String verifyBusinessClassification) throws InterruptedException {
@@ -694,36 +708,36 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//assertNotNull(entityCode);
 		return this;
 	}
-	
+
 	public MemberFormPage verifyParentEntityCode(String parentEntity) throws IOException {
 		String entityCode =getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code");
 		System.out.println(parentEntity);
 		assertTrue(entityCode.contentEquals(parentEntity), "Parent Entity code is not displayed");
 		return this;
-		
+
 	}
-	
-	
+
+
 	public MemberFormPage verifyParentEntityCodeisNotMatched(String parentEntity) throws IOException {
 		String entityCode =getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code");
 		System.out.println(parentEntity);
 		assertTrue(!(entityCode.contentEquals(parentEntity)), "Parent Entity code is displayed");
 		return this;
-		
+
 	}
 
 	//verify the LOB Enda date has todays Date
-	
-public MemberFormPage verifyLOBEndDate() throws IOException {
-	
-	DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
-	Date date = new Date();
-	String date1= dateFormat.format(date); 
-	String endate=getAttribute(getDriver().findElement(By.xpath("(//*[@col-id='ix_enddate']//label)[2]")),"aria-label","End Date");
-	System.out.println(date1+endate);
-	assertTrue(date1.contentEquals(endate),"LOB End date does not match with current date");
-	return this;
-}
+
+	public MemberFormPage verifyLOBEndDate() throws IOException {
+
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String date1= dateFormat.format(date); 
+		String endate=getAttribute(getDriver().findElement(By.xpath("(//*[@col-id='ix_enddate']//label)[2]")),"aria-label","End Date");
+		System.out.println(date1+endate);
+		assertTrue(date1.contentEquals(endate),"LOB End date does not match with current date");
+		return this;
+	}
 	//Verify entity code
 	public MemberFormPage verifyEntityCodeIsNotDPEntityCode(String verifyEntityCode) throws InterruptedException {
 		Assert.assertFalse((getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code").toString()).equals(verifyEntityCode));
@@ -940,19 +954,19 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		Classificationbefore=attributevalue;
 		return this;
 	}
-	
+
 	public MemberFormPage getClassificationTypeAfter() {
 
 		Classificationafter=attributevalue;
 		return this;
 	}
-	
+
 	public MemberFormPage compareClassificationtype() {
 
 		Assert.assertTrue(!((Classificationbefore.contains(Classificationafter))));
 		return this;
 	}
-	 
+
 
 	//Verify the food service LOB is not displayed
 	public MemberFormPage verifyFoodServiceLOBisNotDisplayed() {
@@ -1024,6 +1038,22 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		click(getDriver().findElement(By.xpath("(//*[normalize-space()='"+lineOfClassification+"'])[2]")),lineOfClassification);
 
 
+		return this;
+	}
+
+
+
+	//Select LOB Classification type
+	public MemberFormPage selectLOBfClassificationTypeAcurity(String lineOfClassification) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")),"Line of classification");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")))),lineOfClassification,"Line of classification");
+		Thread.sleep(3000);
+		Actions a = new Actions(getDriver());
+		for(int i=0;i<3;i++) {
+		a.sendKeys(Keys.TAB).build().perform();
+		Thread.sleep(3000);
+		}
+		a.sendKeys(Keys.ENTER).build().perform();
 		return this;
 	}
 
@@ -1327,7 +1357,7 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 
 		return this;	
 	}
-	
+
 	public MemberFormPage clickGoBackandDiscardChanges() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='navigateBackButtontab-id-0']")),"Go back");
 		Thread.sleep(6000);
@@ -1335,7 +1365,7 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		if(discarChanges.size()>0) {
 			click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButtonTextName')]")),"Discard Changes");
 		}
-		
+
 		Thread.sleep(5000);
 		return this;	
 	}
@@ -1641,17 +1671,17 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		Thread.sleep(2000);
 		return new MemberFormPage();
 	}
-	
-	
+
+
 	//Choose member form
-		public MemberFormPage chooseMemberForm() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
-			click(getDriver().findElement(By.xpath("//*[@title='Member Form']")),"Member Form");
-			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
-			Thread.sleep(2000);
-			return new MemberFormPage();
-		}
-			
+	public MemberFormPage chooseMemberForm() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
+		click(getDriver().findElement(By.xpath("//*[@title='Member Form']")),"Member Form");
+		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+		Thread.sleep(2000);
+		return new MemberFormPage();
+	}
+
 
 	//Verify default account status in header
 	public MemberFormPage defaultAccountStatusHeader() {
@@ -1831,6 +1861,21 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		return this;
 	}
 
+
+	//click additional criteria
+	public MemberFormPage clickAdditionalCriteria() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='ADDITIONAL CRITERIA']")),"ADDITIONAL CRITERIA");
+		Thread.sleep(5000);
+		return this;
+	}
+
+	//General Demographic
+	public MemberFormPage clickgeneralDemographic() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")),"GENERAL DEMOGRAPHIC");
+		Thread.sleep(5000);
+		return this;	
+	}
+
 	//Click on LOB SAve and close
 	public MemberFormPage clickLOBSaveAndCloseMEF() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save and Close')]")),"Save and Close");
@@ -1997,14 +2042,14 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-container']")),verifyCAMSFlag,"CAMS Flag"); 
 		return this;
 	}
-	
-	
+
+
 	//Verify CAMS flag
-		public MemberFormPage verifyCAMSFlagNotMatch(String verifyCAMSFlag) {
-			String CamsFlag=getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-container']")).getText();
-			Assert.assertTrue("CAMS flag value is not matched",!(CamsFlag.contentEquals(verifyCAMSFlag)));
-			return this;
-		}
+	public MemberFormPage verifyCAMSFlagNotMatch(String verifyCAMSFlag) {
+		String CamsFlag=getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-container']")).getText();
+		Assert.assertTrue("CAMS flag value is not matched",!(CamsFlag.contentEquals(verifyCAMSFlag)));
+		return this;
+	}
 
 	//Verify exclude from roaster
 	public MemberFormPage verifyExcludeFromRoaster(String ExcludeFromRoaster) {
@@ -2035,25 +2080,25 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_bkactive.fieldControl-checkbox-select']")),"No","BK Active");		
 		return this; 
 	}
-	
-	
+
+
 	//select BK Active  as yes
-		public MemberFormPage VerifyBKActive(String active) throws InterruptedException {
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor"); //This is for scroll down the page to make the BK active field visible
-			Thread.sleep(2000);
-			verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_bkactive.fieldControl-checkbox-select']/option[@data-selected='true']")), active, "BK Field");
-			return this; 
-		}
-		
-		
-		//Verify Business Key
-		public MemberFormPage verifyBusinessKeyvalue() throws InterruptedException {
-			Thread.sleep(2000);
-			
-			getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Business Key']")), "BK Field");
-			return this;
-		}
+	public MemberFormPage VerifyBKActive(String active) throws InterruptedException {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor"); //This is for scroll down the page to make the BK active field visible
+		Thread.sleep(2000);
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_bkactive.fieldControl-checkbox-select']/option[@data-selected='true']")), active, "BK Field");
+		return this; 
+	}
+
+
+	//Verify Business Key
+	public MemberFormPage verifyBusinessKeyvalue() throws InterruptedException {
+		Thread.sleep(2000);
+
+		getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Business Key']")), "BK Field");
+		return this;
+	}
 
 	//input supplier record
 	public MemberFormPage typeSupplierRecord(String supplierRecord) throws InterruptedException {
@@ -3154,16 +3199,16 @@ public MemberFormPage verifyLOBEndDate() throws IOException {
 		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='ix_dpexceptionreason.fieldControl-text-box-text']")),dPReason, "DP Exception Reason");
 		return this;
 	}
-	
-	
-	//Select Direct Parent details
-		public MemberFormPage selectDriectParent() throws InterruptedException {
-			//DP
-			click(getDriver().findElement(By.xpath("//div[contains(text(),'Direct Parent')]/preceding-sibling::div")), "Direct Parent");
-			return this;
-		}
 
-	
+
+	//Select Direct Parent details
+	public MemberFormPage selectDriectParent() throws InterruptedException {
+		//DP
+		click(getDriver().findElement(By.xpath("//div[contains(text(),'Direct Parent')]/preceding-sibling::div")), "Direct Parent");
+		return this;
+	}
+
+
 	//Disabled Top Parent details
 	public MemberFormPage verifyTopParentDetailsIsNotEditable(String topParent,String crmNumber1, String tPReason) throws InterruptedException {
 		//TP

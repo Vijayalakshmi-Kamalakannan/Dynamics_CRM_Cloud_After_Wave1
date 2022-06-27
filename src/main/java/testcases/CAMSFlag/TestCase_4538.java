@@ -248,7 +248,7 @@ public class TestCase_4538 {
 
 		//Verify entity code
 		.entityCodeIsDisplayed()		
-		.clickGoBackButton()
+		.clickGoBackandDiscardChanges()
 		
 		.clickNewAccountInSubAccount()
 		.chooseMemberEntryForm()

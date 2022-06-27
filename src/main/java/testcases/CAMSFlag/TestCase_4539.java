@@ -1,3 +1,4 @@
+
 package testcases.CAMSFlag;
 
 import org.testng.annotations.Test;
@@ -179,14 +180,12 @@ public class TestCase_4539 {
 		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
 
 		//Top Parent Relation =  OLM
-		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
+		.selectTopParentRelation("Affiliate")
 
 		// Top Parent Relation Date = Today's Date
 		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 
-		//Click on Save 
-		.clickSave() 
-
+		
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
 
@@ -202,48 +201,8 @@ public class TestCase_4539 {
 		//Click on Save 
 		.clickSave() 
 
-		//Click add new membership
-		.clickMembershipAndAddNewMembership()
 
-		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-
-		//Provide any start date and click on save
-		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
-
-		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
-
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
-
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
-
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		.clickLOBSaveAndClose()
-
-		//Click on Save 
-		.clickSave() 
-
-
-		//Change the Record status as Published
-		.chooseRecordStatusPublished()
-
-		//Click Save
-		.clickSave()
-
-		.verifyErrorMessage("Member's or Non-GPO Member's CAMS Flag cannot be checked if it's Parent's CAMS Flag is unchecked");
+		.verifyErrorMessage_contains_Sinlgequote("Member's or Non-GPO Member's CAMS Flag cannot be checked if it's Parent's CAMS Flag is unchecked");
 
 		;
 
