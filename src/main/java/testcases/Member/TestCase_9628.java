@@ -35,10 +35,14 @@ public class TestCase_9628 {
 
 		//10.Go to membership and Open the Premier National membership ***** Premier National membership should be opened 
 		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-		//.doubleClickOnNationalMembership()
+
 		.clickMembershipDeactivateButton()
+
+		//Click on membership save and close
+		.clickSaveAndCloseOnActivity()
+
 		.verifyDeactivateError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-		
+
 		;
 	}
 }

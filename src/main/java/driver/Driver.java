@@ -85,7 +85,12 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("BusinessClassification"))
 			{
 				sTestClassName="testcases.BusinessClassification.".concat(sTestClassName);
+			}else if(sCategory.equalsIgnoreCase("MemberFormChanges"))
+			{
+				sTestClassName="testcases.MemberFormChanges.".concat(sTestClassName);
 			}
+			
+			
 			
 			
 			//Create instance of the class during run time

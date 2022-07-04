@@ -172,6 +172,11 @@ public class TestCase_7140 {
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 		//10. Verify "IS Corporate account" field
 
+		.clickGoBackButton()
+		.changeMemberForm()
+		.clickSave()
+		
+		
 		/*
 		 * //16 Go to > and click on Membership entity and double click on the Top
 		 * parent membership entity

@@ -20,6 +20,7 @@ import org.w3c.dom.NodeList;
 
 import com.aventstack.extentreports.Status;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -55,6 +56,27 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-container']")),"Account name");
 		Thread.sleep(2000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")))),accountName,"Account name");
+		return this;
+	}
+
+
+	//Verify AccountType dropdown
+
+	public MemberFormPage verifyAccounttypedropdown() {
+
+		Select AccountType= new  Select(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")));		
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =AccountType.getOptions();		
+		assertTrue(!(mylist.contains("Non-GPO Member")), "Non GPO Member Option");
+		return this;
+	}
+
+	public MemberFormPage verifyParticipationTypedropdown() {
+
+		Select AccountType= new  Select(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")));		
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =AccountType.getOptions();		
+		assertTrue(!(mylist.contains("Standard")), "Premier choice Option");
 		return this;
 	}
 
@@ -350,7 +372,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Store the values
 
-	public MemberFormPage getDPData() {
+	public MemberFormPage getDPData() throws InterruptedException {
+		
+		changeMemberForm();
+		clickSave();
+		
 		String name=getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")).getAttribute("title");
 
 		Dpdata.put("DP_Name",name );	
@@ -726,6 +752,56 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	}
 
+	public MemberFormPage verifymembershipwidget() throws InterruptedException {
+		assertTrue(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid_outer']")).isDisplayed(), "Membership widget");
+		click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid_outer']//span[contains(text(),'Premier Memberships')]")),"Membership");
+		assertTrue(getDriver().findElement(By.xpath("//span[normalize-space()='All Memberships']")).isDisplayed(), "Premier Membership Option");
+		assertTrue(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='Premier Memberships']")).isDisplayed(), "All Membership Option");
+		click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid_outer']//span[contains(text(),'Premier Memberships')]")),"Membership");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	public MemberFormPage selectPremierMembership() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid_outer']//span[contains(text(),'Premier Memberships')]")),"Membership");
+
+		Thread.sleep(2000);
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='Premier Memberships']"))).click().build().perform();;
+		return this;
+	}
+	
+	
+	
+	public MemberFormPage selectAllMembership() throws InterruptedException {
+		
+		click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid_outer']//span[contains(text(),'Premier Memberships')]")),"Membership");
+		Thread.sleep(2000);
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='All Memberships']"))).click().build().perform();;
+		return this;
+	}
+
+	public MemberFormPage verifyPremierMembershipisDisplayed() {
+
+		List<WebElement> nonPremier= getDriver().findElements(By.xpath("//div[@class='ms-List-cell']//span[contains(text(),'Aggregation Affiliation')]"));
+
+		if(nonPremier.size()>0) {
+
+			assertFalse(getDriver().findElement(By.xpath("//div[@class='ms-List-cell']//span[contains(text(),'Aggregation Affiliation')]")).isDisplayed(), "Classification type");
+		}
+		assertTrue(nonPremier.size()==0,"Non premier membership details are displayed");
+
+		return this;
+	}
+
+	public MemberFormPage verifyAllMembershipisDisplayed() {
+		
+		assertTrue((getDriver().findElement(By.xpath("//div[@class='ms-List-cell']//span[contains(text(),'Aggregation Affiliation')]")).isDisplayed()),"Aggregation Affiliation is displayed");
+		return this;
+
+	}
+
 	//verify the LOB Enda date has todays Date
 
 	public MemberFormPage verifyLOBEndDate() throws IOException {
@@ -1049,11 +1125,22 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")))),lineOfClassification,"Line of classification");
 		Thread.sleep(3000);
 		Actions a = new Actions(getDriver());
-		for(int i=0;i<3;i++) {
-		a.sendKeys(Keys.TAB).build().perform();
+		
+		a.moveToElement(getDriver().findElement(By.xpath("//label[@data-id='ix_classificationtypenew.fieldControl-advlookup']"))).click().build().perform();
 		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Acurity')]")),"Acurity LOB");
+		
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Done')]")),"Done button");
+
+		
+		/*
+		for(int i=0;i<3;i++) {
+			a.sendKeys(Keys.TAB).build().perform();
+			Thread.sleep(3000);
 		}
 		a.sendKeys(Keys.ENTER).build().perform();
+		
+		*/
 		return this;
 	}
 
@@ -1398,6 +1485,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
+	//Click Confirm Deactivate Button
+	public MemberFormPage clickMembershipDeactivateButtonConfirm() throws InterruptedException {
+
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'dialogFooterContainer')]//button[@aria-label='Deactivate']")), "Deactivation button");
+		Thread.sleep(6000);
+		return this;
+	}
+
+
 
 	//Double Click On National Membership
 	public MemberFormPage doubleClickOnNationalMembership() throws InterruptedException {	
@@ -1683,6 +1779,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
+
+	//Choose member form
+	public MemberFormPage changeMemberForm() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
+		click(getDriver().findElement(By.xpath("//*[@title='Member Form']")),"Member Form");
+		Thread.sleep(2000);
+		return new MemberFormPage();
+	}
+
+
 	//Verify default account status in header
 	public MemberFormPage defaultAccountStatusHeader() {
 		try {
@@ -1894,10 +2000,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify premier start date
 	public MemberFormPage verifyPremierStartDate(String premierStartDate) throws InterruptedException {
-		System.out.println(getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),""));
 
+		System.out.println(getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),""));
 		Assert.assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date").equals(premierStartDate));
 		return this;
+
 	}
 
 	//Verify premier start date is null

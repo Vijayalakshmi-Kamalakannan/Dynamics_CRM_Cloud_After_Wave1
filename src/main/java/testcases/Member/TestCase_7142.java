@@ -154,7 +154,12 @@ public class TestCase_7142 {
 			
 			//FBO
 			.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-					
+			
+			.clickGoBackButton()
+			.changeMemberForm()
+			.clickSave()
+			
+			
 			//FBORD
 		/*
 		 * //16 Go to > and click on Membership entity and double click on the Top
