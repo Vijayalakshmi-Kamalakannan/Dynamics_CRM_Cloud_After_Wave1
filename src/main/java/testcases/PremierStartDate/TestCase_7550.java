@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.PremierStartDate;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -7,16 +7,17 @@ import driver.Driver;
 import pages.LoginPage;
 import pages.MemberFormPage;
 import utils.DataInputProvider;
-//Test Case 7214:Verify on updating "Premier Start Date" in an existing "Premier Memberships", Validate in Member form re calculation of Premier Start Date is getting triggered.
+//Test Case 7550:Verify whether "Premier Start Date" is getting recalculated when deactivating any existing membership.
 
-public class TestCase_7214 {
+
+public class TestCase_7550 {
 
 
 	@Test
 	public void premierstartdateverification(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
-		
+
 		new LoginPage()
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
@@ -136,7 +137,7 @@ public class TestCase_7214 {
 
 		//Click on Save 
 		.clickSave() 
-		
+
 		//17.Go to membership and add New membership **** Account should be saved successfully 
 		//Add Membership provider
 		//Click add new membership
@@ -178,19 +179,19 @@ public class TestCase_7214 {
 		.clickSave() 
 
 
+
+		// Click on the Ribbon bar of the Published Account. Go to Membership Entity.
+		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+
+		.clickMembershipDeactivateButton()
 		
-		  // Click on the Ribbon bar of the Published Account. Go to Membership Entity.
-		 .goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		.clickMembershipDeactivateButtonConfirm()
 		
-		 //Start date-12/31/2020 
-		 .typeMembershipStartDate("5/5/2021")
-		  
-		  //Click on membership save and close
-		  .clickSaveAndCloseOnActivity()
-		  
-		  //Verify
-		  .verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
-		 
+		.clickGoBack()
+
+		//Verify
+		.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
+
 		;
 	}
 }

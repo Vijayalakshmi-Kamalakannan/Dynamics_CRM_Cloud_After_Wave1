@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.AccountStatus;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;

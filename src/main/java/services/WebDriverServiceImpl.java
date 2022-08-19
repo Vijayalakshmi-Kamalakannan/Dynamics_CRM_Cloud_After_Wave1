@@ -189,6 +189,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			try {
 				Thread.sleep(3000);
 				ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
+				Thread.sleep(3000);
 				ele.sendKeys(Keys.BACK_SPACE);
 				Thread.sleep(2000);
 				ele.sendKeys(data);
@@ -794,6 +795,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		String bReturn=ele.getText();
 		//	String s=ele.getAttribute("title");
 		try {
+			System.out.println(bReturn);
 			if(bReturn.contains(expectedText)) {
 				setReport().log(Status.PASS, "The "+field+" contains "+expectedText,screenshotCapture());
 			}else {

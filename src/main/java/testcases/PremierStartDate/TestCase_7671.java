@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.PremierStartDate;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -7,15 +7,14 @@ import driver.Driver;
 import pages.LoginPage;
 import pages.MemberFormPage;
 import utils.DataInputProvider;
-//TFS ID_ 7545:Verify Premier Start Date is not calculated before adding any memberships to the account
+//TFS ID_ 7671:Verify Premier Start date is updated in member form when Premier Membership is created in Prospect.
 
 
-
-public class TestCase_7545 {
+public class TestCase_7671 {
 
 	  	
 	@Test
-	public void createMember(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyPremierStatrDate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 		
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -30,7 +29,7 @@ public class TestCase_7545 {
 	  	  	.clickNewOnAccountsPage()
 			.chooseMemberForm()
 		
-		//3.Fill in all the mandatory fields and save		
+		//3. Fill in All Mandatory Fields DP, DPR, DPRD, TP, TPR, TPRD, Address, Premier Membership's with Start date, Add corresponding LOB for the Created Premier Membership's  when account type is Prospect.
 			.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 		
 			//Click on save 			
@@ -92,11 +91,7 @@ public class TestCase_7545 {
 			
 			 //Click on Save 
 			.clickSave() 
-			
-		//4.Verify Premier start date field
-		 	.verifyPremierStartDateIsNull()
 		 	
-		//5.Go to membership and add Premier membership say National with any start date then save
 			//Click add new membership
 			.clickMembershipAndAddNewMembership()
 			
@@ -112,8 +107,21 @@ public class TestCase_7545 {
 			
 			//Click on Save 
 			.clickSave() 
-	
-		//6.Now verify the Premier start date
+			
+			//Click add new membership
+			.clickMembershipAndAddNewMembership()
+			
+			// Choose Membership type 
+		 	.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+			.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider2", sDataSheetName))
+			
+			//Provide any start date and click on save
+			.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
+			
+			//Click on membership save and close
+			.clickQuickCreateMembershipSaveAndClose()	
+		
+		//4.Verify whether Premier Start date calculation is happening when user fill Premier Membership's with start date in Prospect
 			.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 		
 		;

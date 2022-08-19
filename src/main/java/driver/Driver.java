@@ -88,9 +88,27 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("MemberFormChanges"))
 			{
 				sTestClassName="testcases.MemberFormChanges.".concat(sTestClassName);
+			}else if(sCategory.equalsIgnoreCase("Premier_StartDate"))
+			{
+				sTestClassName="testcases.PremierStartDate.".concat(sTestClassName);
+				
+			}else if(sCategory.equalsIgnoreCase("Activities"))
+			{
+				sTestClassName="testcases.Activities.".concat(sTestClassName);
+				
+			}else if(sCategory.equalsIgnoreCase("DoNotVerifyAddress"))
+			{
+				sTestClassName="testcases.DoNotVerifyAddress.".concat(sTestClassName);
+				
+			}else if(sCategory.equalsIgnoreCase("ExcludeFromRoaster"))
+			{
+				sTestClassName="testcases.ExcludeFromRoaster.".concat(sTestClassName);
+				
+			}else if(sCategory.equalsIgnoreCase("RebatePayment"))
+			{
+				sTestClassName="testcases.RebatePayment.".concat(sTestClassName);
+				
 			}
-			
-			
 			
 			
 			//Create instance of the class during run time

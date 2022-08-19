@@ -1,11 +1,13 @@
 package testcases.Member;
 
 import org.openqa.selenium.By;
+
 import org.testng.annotations.Test;
 import driver.Driver;
 import pages.LoginPage;
 import pages.MemberFormPage;
 import utils.DataInputProvider;
+
 //TFS_ID_10534-Verify Limited Member fields that are NOT editable
 
 public class TestCase_10534 {
@@ -21,6 +23,7 @@ public class TestCase_10534 {
 		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
 		.clicSignin()
 		.clicYesInStaySignedin()
+	
 
 		//2. Go to Work place >> Take Any Member Account 
 		.selectAccountsTab()		

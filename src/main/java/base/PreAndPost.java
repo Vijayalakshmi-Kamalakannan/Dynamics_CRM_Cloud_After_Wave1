@@ -22,6 +22,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -36,6 +37,7 @@ import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import events.WebDriverEvents;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import utils.DataInputProvider;
 
 public class PreAndPost extends WebDriverEvents
@@ -80,8 +82,13 @@ public class PreAndPost extends WebDriverEvents
 	public void beforeMethod() throws Exception { 
 		
 		properties.load(new FileInputStream(new File("./src/test/resources/environment.properties")));
-		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe"); 
-		webdriver = new ChromeDriver();
+		
+		webdriver = (RemoteWebDriver) WebDriverManager.chromedriver().create();
+		
+		/*
+		 * System.setProperty("webdriver.chrome.driver",
+		 * "src\\test\\resources\\chromedriver.exe"); webdriver = new ChromeDriver();
+		 */
 		driver = new EventFiringWebDriver(webdriver);
 		driver.register(this);
 		tlDriver.set(driver);		

@@ -49,7 +49,9 @@ public class TestCase_10516 {
 				.chooseOldPrimaryContactCAA(DataInputProvider.getCellData_ColName(iRowNumber,"verifyPrimaryContactValue",sDataSheetName))
 				
 				
-				.verifyNullinCaaRelationshipEndDate(DataInputProvider.getCellData_ColName(iRowNumber,"contactRelationshipEndDate",sDataSheetName));
+				.verifyNullinCaaRelationshipEndDate(DataInputProvider.getCellData_ColName(iRowNumber,"contactRelationshipEndDate",sDataSheetName))
+				
+				;
 				
 
 				

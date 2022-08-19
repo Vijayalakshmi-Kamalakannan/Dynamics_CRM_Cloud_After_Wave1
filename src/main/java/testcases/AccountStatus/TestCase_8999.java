@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.AccountStatus;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -7,14 +7,13 @@ import driver.Driver;
 import pages.LoginPage;
 import pages.MemberFormPage;
 import utils.DataInputProvider;
-//Test Case 7238:Verify whether "Premier Start Date" field should be Read Only in Member Forms.
+//Test Case 8999:Cloud - Verify whether Account should not get "Terminated" ,when any one of the Premier Membership is Active .
 
-
-public class TestCase_7238 {
+public class TestCase_8999 {
 
 
 	@Test
-	public void premierstartdatelocked(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyAccountStatus(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -29,7 +28,6 @@ public class TestCase_7238 {
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
-		.verifyPremierStartDateIsLocked()
 		//3.  Fill in All Mandatory Fields .
 
 		//Account Name = Any
@@ -82,6 +80,9 @@ public class TestCase_7238 {
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
 
+		//4.Observe Premier Start date Field  in a Member Form
+		.verifyPremierStartDateIsLocked()
+
 
 		//5.Click On Save ,Observe Premier Start date.
 
@@ -89,11 +90,6 @@ public class TestCase_7238 {
 		.clickSave() 
 
 		.verifyPremierStartDateIsNull()
-
-
-		//Click on Save 
-		.clickSave() 
-
 
 
 		//7. Try to Add one Premier Membership .       
@@ -121,7 +117,7 @@ public class TestCase_7238 {
 		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 
 		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
+		.selectLOBfClassificationTypeAcurity(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
 
 		// Start Date =Today's date
 		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
@@ -138,8 +134,102 @@ public class TestCase_7238 {
 		//Verify Entity code is generated 
 		.entityCodeIsDisplayed()
 
-		//4.Observe Premier Start date Field  in a Member Form
-		.verifyPremierStartDateIsLocked()
+		//9.Observe Premier Start Date after Publish.
+		.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+
+		//Move record status to draft from published
+		.chooseRecordStatusDraft()
+
+		//Click on Save 
+		.clickSave() 
+
+		//10.Add One or More Premier Membership. Observe Premier Start date. 			
+		//Membership Provider -2	
+		.clickMembershipAndAddNewMembership()
+
+		//Click and Choose option list  :Membership Type - Premier,  
+		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+
+		//Membership Provider -Advantage Health Partners
+		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider2", sDataSheetName))
+
+		//Start date-12/31/2020
+		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
+
+		//Click on membership save and close
+		.clickQuickCreateMembershipSaveAndClose()
+
+		//Membership Provider -3	
+		.clickMembershipAndAddNewMembership()
+		//Click and Choose option list  :Membership Type - Premier,  
+		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+
+		//Membership Provider -National
+		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider3", sDataSheetName))
+
+		//Start date-12/15/2020
+		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate3", sDataSheetName))
+
+		//Click on membership save and close
+		.clickQuickCreateMembershipSaveAndClose()
+
+
+		// Click the + icon on the Line of Business Grid
+		.clickLineOfBusiness()
+
+		//Click New Line Of Business
+		.clickAddNewLineOfBusiness()
+
+		// Line of Business =General GPO
+		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
+
+		// Classification Type = General GPO
+		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification2", sDataSheetName))
+
+		// Start Date =Today's date
+		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+
+		// Click on LOB Save 
+		.clickLOBSaveAndClose()
+
+
+		// Click the + icon on the Line of Business Grid
+		.clickLineOfBusiness()
+
+		//Click New Line Of Business
+		.clickAddNewLineOfBusiness()
+
+		// Line of Business =General GPO
+		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness3", sDataSheetName))
+
+		// Classification Type = General GPO
+		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification3", sDataSheetName))
+
+		// Start Date =Today's date
+		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+
+		// Click on LOB Save 
+		.clickLOBSaveAndClose()
+
+		.chooseRecordStatusPublished()
+
+		//Click on Save 
+		.clickSave() 
+
+		//4.Now go to the membership and end date any of the existing membership with any future date then save
+		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+
+		//Any future date
+		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
+
+		// End reason = Anything from dropdown,
+		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
+
+		// then save
+		.clickMembershipSaveAndClose()
+
+		.verifyTerminateStatus("Active")
+		.selectAccountStatus("Terminate")
 
 		;
 	}

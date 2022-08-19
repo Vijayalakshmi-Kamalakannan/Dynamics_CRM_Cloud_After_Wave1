@@ -1,4 +1,4 @@
-package testcases.Supplier;
+package testcases.CAMSFlag;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;

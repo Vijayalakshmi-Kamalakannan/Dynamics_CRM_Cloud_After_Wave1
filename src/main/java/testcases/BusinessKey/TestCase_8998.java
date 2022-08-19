@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.BusinessKey;
 
 import java.awt.AWTException;
 import pages.LoginPage;

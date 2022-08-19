@@ -1,8 +1,11 @@
 package pages;
 
 import java.awt.AWTException;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -40,7 +43,6 @@ public class LoginPage extends WebDriverServiceImpl{
 		return this;
 	}
 	
-	
 
 	//Enter Email Id to Login
 	public LoginPage typeEmail(String email) throws InterruptedException, AWTException {
@@ -54,6 +56,7 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Enter Password 
 	public LoginPage typePassword(String password) throws InterruptedException {
+		
 		type(getDriver().findElement(By.xpath("//*[@name='passwd']")),password,"Password");
 		Thread.sleep(2000);
 		return this;
@@ -92,6 +95,6 @@ public class LoginPage extends WebDriverServiceImpl{
 		switchToDefaultContent();
 	}	
 
-
+	
 
 }
