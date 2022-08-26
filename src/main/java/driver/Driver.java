@@ -64,7 +64,7 @@ public class Driver extends PreAndPost{
 			{
 				sTestClassName="testcases.Supplier.".concat(sTestClassName);
 			}	
-			else if(sCategory.equalsIgnoreCase("Contacts"))
+			else if(sCategory.equalsIgnoreCase("Contact"))
 			{
 				sTestClassName="testcases.Contacts.".concat(sTestClassName);
 			}else if(sCategory.equalsIgnoreCase("LOBFSC"))
@@ -108,7 +108,20 @@ public class Driver extends PreAndPost{
 			{
 				sTestClassName="testcases.RebatePayment.".concat(sTestClassName);
 				
+			}else if(sCategory.equalsIgnoreCase("PrescriptionData"))
+			{
+				sTestClassName="testcases.PrescriptionData.".concat(sTestClassName);
+				
+			}else if(sCategory.equalsIgnoreCase("PatientServices"))
+			{
+				sTestClassName="testcases.PatientServices.".concat(sTestClassName);
+				
+			}else if(sCategory.equalsIgnoreCase("SupplierAccountNumber"))
+			{
+				sTestClassName="testcases.SupplierAccountNumber.".concat(sTestClassName);
+				
 			}
+				
 			
 			
 			//Create instance of the class during run time

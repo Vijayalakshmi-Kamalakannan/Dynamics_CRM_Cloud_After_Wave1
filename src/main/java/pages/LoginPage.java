@@ -2,11 +2,13 @@ package pages;
 
 import java.awt.AWTException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -46,6 +48,10 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Enter Email Id to Login
 	public LoginPage typeEmail(String email) throws InterruptedException, AWTException {
+		List<WebElement> useanother=getDriver().findElements(By.xpath("//div[@id='otherTileText']"));
+		if(useanother.size()>0) {
+			click(getDriver().findElement(By.xpath("//div[@id='otherTileText']")),"User another Account");
+		}
 		System.out.println("Entering the User Id");
 		verifyNotificationpage();
 		Thread.sleep(2000);

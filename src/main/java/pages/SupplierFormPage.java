@@ -487,22 +487,22 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	//Select sub accounts from Related
-		public SupplierFormPage selectSubaccount() throws InterruptedException {	
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//*[contains(text(),'Sub-Accounts')]")),"Sub Accounts");
-			return this;
-		}
-		
-		//click new account in sub account
-		public SupplierFormPage clickNewAccountInSubAccount() throws InterruptedException {
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|SubGridAssociated|Mscrm.SubGrid.account.AddNewStandard']")),"New");
-			return this;
-		}
+	public SupplierFormPage selectSubaccount() throws InterruptedException {	
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Sub-Accounts')]")),"Sub Accounts");
+		return this;
+	}
 
-		
+	//click new account in sub account
+	public SupplierFormPage clickNewAccountInSubAccount() throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|SubGridAssociated|Mscrm.SubGrid.account.AddNewStandard']")),"New");
+		return this;
+	}
+
+
 	//Choose Old Primary Contact's  CAA				
 	public ContactsPage chooseOldPrimaryContactCAA(String verifyPrimaryContactValue) throws InterruptedException {
 
@@ -649,6 +649,33 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-ix_premierein')]")),"Direct Parent");
 		return this;		
+	}
+
+	public SupplierFormPage noMatchforDirectParent(String directParent) throws InterruptedException {	
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
+		Thread.sleep(5000);
+		List <WebElement> dp=getDriver().findElements(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-ix_premierein')]"));
+		verifyElementisNotDisplayed(dp.size(), "Direct Parent");
+		List <WebElement> nodp=getDriver().findElements(By.xpath("//*[contains(text(),'No records found. Create a new record.')]"));
+		verifyElementisDisplayed(nodp.size(), "No Direct Parent ");
+		return this;		
+	}
+
+
+	public SupplierFormPage searchDPinAdvanceLookup(String directParent) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")),"Street");
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//*[@aria-label='Search records for Direct Parent, Lookup field']"))).click().build().perform();
+		Thread.sleep(2000);
+		a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-advlookup']"))).click().build().perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//input[contains(@aria-labelledby,'advanced_lookup')]")),"Direct PArent");
+		type(getDriver().findElement(By.xpath("//input[contains(@aria-labelledby,'advanced_lookup')]")),directParent,"Direct Parent");
+		List<WebElement> dpmatch=getDriver().findElements(By.xpath("//span[contains(text(),\"We didn’t find a match\")]"));
+		verifyElementisDisplayed(dpmatch.size(), "Direct Parent");
+		return this;
 	}
 
 	public SupplierFormPage verifyDPValue(String verifyDPValue) throws InterruptedException {
@@ -917,7 +944,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"Yes","CAMS Flag"); 
 		return this;
 	}
-	
+
 	//Change the CAMS flag as No
 	public SupplierFormPage changeCAMSFlagAsNo() {
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"No","CAMS Flag"); 

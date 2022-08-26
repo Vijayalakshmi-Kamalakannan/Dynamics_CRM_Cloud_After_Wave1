@@ -51,21 +51,21 @@ public class ContactsPage extends WebDriverServiceImpl {
 	}
 
 	//Select Contact from search results
-		public  ContactsPage selectAccountFromContactSearchResults() throws InterruptedException {	
+	public  ContactsPage selectAccountFromContactSearchResults() throws InterruptedException {	
 
-			Thread.sleep(3000);
-			Actions a = new Actions(getDriver());
-			a.moveToElement(getDriver().findElement(By.xpath("(//div[contains(@col-id,'accountnumber')]//label)[2]"))).doubleClick().build().perform();
-			Thread.sleep(6000);
-			return this;
-		}	
+		Thread.sleep(3000);
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("(//div[contains(@col-id,'accountnumber')]//label)[2]"))).doubleClick().build().perform();
+		Thread.sleep(6000);
+		return this;
+	}	
 
-		//verify Contact End date
-		public ContactsPage verifyContactEndDate() throws InterruptedException {
-			Thread.sleep(3000);
-			verifyDisplayed(getDriver().findElement(By.xpath("//label[@title='Contact End Date']")), "Contact End Date");
-			return this;
-		}
+	//verify Contact End date
+	public ContactsPage verifyContactEndDate() throws InterruptedException {
+		Thread.sleep(3000);
+		verifyDisplayed(getDriver().findElement(By.xpath("//label[@title='Contact End Date']")), "Contact End Date");
+		return this;
+	}
 	//select view type
 
 	public ContactsPage selectAllContactView() throws InterruptedException {
@@ -254,6 +254,18 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//go back and selct the account
+
+	// to choose an existing Active contact
+	public ContactsPage goBackandSelectAccount() throws InterruptedException {
+
+		clickGoBack();
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+
+		Thread.sleep(6000);
+		return this;
+	}
 	// update primary account with a new account details
 	public ContactsPage addAnotherPrimaryAccount(String PrimaryAccount1) throws InterruptedException {
 		Thread.sleep(5000);

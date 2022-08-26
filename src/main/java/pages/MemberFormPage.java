@@ -1116,16 +1116,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
-	//Navigate to Exclude from roster
-		public MemberFormPage navigateTorosterMemberEntryForm() {
-			click(((getDriver().findElement(By.xpath("//label[contains(text(),'Premier Owner')]")))), "Premier Owner");
-			click(((getDriver().findElement(By.xpath("//label[contains(text(),'Corporate')]")))), "Corporate");
-			click(getDriver().findElement(By.xpath("//label[contains(text(),'CAMS Flag')]")),"CAMS Flag");
-		
-			return this;
 
-		}
+	//Navigate to Exclude from roster
+	public MemberFormPage navigateTorosterMemberEntryForm() {
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'Premier Owner')]")))), "Premier Owner");
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'Corporate')]")))), "Corporate");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'CAMS Flag')]")),"CAMS Flag");
+
+		return this;
+
+	}
 
 	public MemberFormPage setExcludeFromRoster(String roster) {
 
@@ -2069,13 +2069,52 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-	//Select TP Audit History
+	//Select Rebate Payment
 	public MemberFormPage selectRebatePayment() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[text()='Rebate Payments']")),"Related > Rebate Payments");
 		//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
 		Thread.sleep(2000);
+		return this;
+	}
+
+	//Select Prescription Data
+	public MemberFormPage selectPrescriptionData() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[text()='Prescription Data']")),"Related > Prescription Data");
+		//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Select Patient Serivces
+	public MemberFormPage selectPatientServices() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//*[text()='Patient Services'])[2]")),"Related > Patient Services");
+		//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	//Select Supplier Account Number
+	public MemberFormPage selectSupplierAccount() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[text()='Supplier Accounts']")),"Related > Supplier Accounts");
+		//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//click new Prescription data button
+	public MemberFormPage clickPrescritpionDataButton() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'New Prescription Data')]")),"New Rebate Button");
+		Thread.sleep(2000);
+		verifIsNoTNullWithText(getDriver().findElement(By.xpath("//div[@data-id='ix_accountid.fieldControl-LookupResultsDropdown_ix_accountid_selected_tag_text']")), "Account Name");
 		return this;
 	}
 
@@ -2087,6 +2126,188 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//click new 
+	public MemberFormPage clickNewPatientServices() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'New Patient Services')]")),"New Patient Services");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//click new 
+	public MemberFormPage clickNeSupplierAccount() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@aria-label='New Supplier Account. Add New Supplier Account']")),"New Aupplier Account");
+		verifIsNoTNullWithText(getDriver().findElement(By.xpath("//div[@data-id='ix_accountid.fieldControl-LookupResultsDropdown_ix_accountid_selected_tag_text']")),"Account Name");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Add Supplier Account
+	public MemberFormPage AddSupplierAccount(String supplier, String supplierRep, String purchasingPreference,String memberLevel, String startdate) throws InterruptedException {
+
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Supplier, Lookup']")),"Supplier");
+		Thread.sleep(3000);
+		type(((getDriver().findElement(By.xpath("//input[@placeholder='Look for Supplier']")))),supplier,"Supplier");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_supplierid.fieldControl-ix_businessclassification')]")),"Supplier");
+
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Supplier Rep, Lookup']")),"Supplier Rep");
+		Thread.sleep(6000);
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Supplier Rep, Lookup']")))),supplierRep,"Supplier Rep");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//li[@data-id='ix_suppliercontact.fieldControl-LookupResultsDropdown_ix_suppliercontact_resultsContainer']")),"Supplier Rep");
+
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Purchasing Preference']")), purchasingPreference, "Purchasing Preference");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Member Level']")), memberLevel, "Member Level");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),startdate, "Start Date");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Pharmacy']")),"Pharmacy Check box");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Non-Pharmacy']")),"Non- Pharmacy Check box");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Food']")),"Food Check box");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Blood']")),"Blood Check box");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Vaccines']")),"Vaccines Check box");
+		return this;
+	}
+
+	//clickSavesupplierAccount
+	public MemberFormPage saveSupplierAccount() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+
+		Thread.sleep(10000);
+		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+
+		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+		Thread.sleep(5000);
+		return this;
+	}
+
+	//Navigate to Account number in the Supplier Account
+	public MemberFormPage navigateToAccountNumber() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//li[@aria-label='General']/following-sibling::li[@title='Account Numbers']")),"Account Numbers");
+		return this;
+
+	}
+	
+	//Navigate to Account number in the Supplier Account
+		public MemberFormPage navigateToAccountNumberTab() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//li[@aria-label='General']/following-sibling::li[@title='Account Numbers -   Note:  This record MUST be saved first to add an account number.']")),"Account Numbers");
+			return this;
+
+		}
+	
+	
+	
+	//Navigate to Supplier Account Tab
+		public MemberFormPage navigateToSupplierAccountTab() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//li[@aria-label='Supplier Account']")),"Supplier Account Tab");
+			
+			return this;
+
+		}
+	
+	//Add Supplier Account details
+		public MemberFormPage addSupplierAccount(String Memberlevel, String locationtype, String retailAccount, String portfolio, String Audit, String attachdate, String latestattachDate, String orderDate, String Description) throws InterruptedException {
+		
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Member Level']")), Memberlevel, "Memberlevel");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Supplier Account Location Type']")), locationtype, "location type");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Retail Account']")), retailAccount, "location type");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Load Pharmacy Portfolio']")), portfolio, "location type");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Audit']")), Audit, "location type");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_pharmacyportfolioattachdate.fieldControl-date-time-input']")),attachdate,"Attach Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_latestverifiedattachdate.fieldControl-date-time-input']")),latestattachDate,"Latest Attach Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_lastorderdate.fieldControl-date-time-input']")),orderDate,"Last order Date");
+		click(getDriver().findElement((By.xpath("//li[@title='Description']"))),"Description Tab");
+		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),Description,"Last order Date");
+		
+		
+		return this;
+		}
+
+	//Navigate to Account number in the Supplier Account
+	public MemberFormPage clickNewAccountNumber() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@aria-label='New Account Number. Add New Account Number']")),"New Account Numbers");
+		verifIsNoTNullWithText(getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")),"Account auto populate");
+		verifIsNoTNullWithTitleAttribute(getDriver().findElement(By.xpath("//select[@aria-label='Account Number Type']")),"Account Number Type");
+		return this;
+
+	}
+
+	//Add General Activities
+		public MemberFormPage AddGeneralAccountNumber(String number, String name) throws InterruptedException {
+			type(getDriver().findElement(By.xpath("//input[@data-id='ix_number.fieldControl-text-box-text']")),number,"Number");
+			type(getDriver().findElement(By.xpath("//input[@data-id='ix_accountnumbername.fieldControl-text-box-text']")),name,"NAme");
+			saveGeneralAccountnumber();
+			Thread.sleep(2000);
+			return this;
+		}
+
+	//Add General Activities
+	public MemberFormPage AddGeneralActivities(String noOfFacilities, String noOfPhysicians, String noOfPatientServices) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@aria-label='# of Facilities']")),noOfFacilities,"No Of Facilities");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='# of Physicians']")),noOfPhysicians,"No Of Physicians");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Patients Serviced per Month']")),noOfPatientServices,"No Of Patients Services per Month");
+		savePatientServices();
+		Thread.sleep(2000);
+		return this;
+	}
+	
+	//Save General Activities in Account number
+	public MemberFormPage saveGeneralAccountnumber() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+
+		Thread.sleep(10000);
+		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+
+		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+		return this;
+	}
+
+	//Navigate to senior Living tab
+	public MemberFormPage navigatetoSeniorLivingLTC() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//li[@title='Senior Living / LTC']")),"Navigate to Senior Living/LTC");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	//Add Senior Living LTC details
+	public MemberFormPage AddSeniorLivingData(String noOfNursingBeds, String livingBeds, String noOfPatientServices, String AssistedLivingBeds, String HospiceBeds, String LTAC, String MentalHealthBeds, String rehabilitation, String correctionalBeds, String MedicatrePartB, String censusBeds, String OtherBeds) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Skilled Nursing Beds']")),noOfNursingBeds,"Nursing Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Independent Living Beds']")),livingBeds,"Living Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Assisted Living Beds']")),AssistedLivingBeds,"Assisted Living Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Hospice Beds']")),HospiceBeds,"HospiceBeds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='LTAC Beds']")),LTAC,"LTAC Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Mental Health Beds']")),MentalHealthBeds,"Mental Health Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Rehabilitation Beds']")),rehabilitation,"Rehabilitation Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Correctional Beds']")),correctionalBeds,"Correctional Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Medicare Part B Beds']")),MedicatrePartB,"MedicatrePartB");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Census Beds']")),censusBeds,"Census Beds");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Other Beds']")),OtherBeds,"Other Beds");
+		savePatientServices();
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//li[@aria-label='General']")),"General Tab");
+		savePatientServices();
+		pageRefresh();
+		Thread.sleep(5000);
+		return this;
+	}
+	//Verify the No of Bed verify
+	public MemberFormPage verifyNoOfBeds(String count) {
+		System.out.println(getDriver().findElement(By.xpath("//input[@aria-label='Total # Beds']")).getAttribute("value"));
+		verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Total # Beds']")),count,"Total Beds");
+		return this;
+
+	}
+
+
+	//Save Patient Services
+	public MemberFormPage savePatientServices() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+
+		Thread.sleep(10000);
+		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+
+		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+		return this;
+	}
 	//Select Check Roll up
 	public MemberFormPage selectCheckRollUp(String Check_Roll_Up) throws InterruptedException {
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Check Roll-Up']")), Check_Roll_Up, "Check Roll Up");
@@ -2111,6 +2332,28 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//type the start date in the Prescription Data
+
+	public MemberFormPage selectPrescriptionstartDate(String StartDate) throws InterruptedException {
+
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),StartDate,"Rebate Start date");
+
+		return this;
+	}
+
+	//Save rebate
+	public MemberFormPage savePrescriptionData() throws InterruptedException {
+
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+
+		Thread.sleep(10000);
+		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+
+		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+		return this;
+
+	}
+
 	//type the start date in the rebate payment
 
 	public MemberFormPage selectRebatePaymentStartDate(String StartDate) throws InterruptedException {
@@ -2133,17 +2376,169 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	}
 
+	//Add Prescirption Data
+	public MemberFormPage AddPrescriptionData(String Contact, String PharmacyData, String DataSource, String collectionreason, String startdate) throws InterruptedException {
+
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Data Contact, Lookup']")),"Contact");
+		Thread.sleep(6000);
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Data Contact, Lookup']")))),Contact,"Contact");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_contactid.fieldControl-firstname')]")),"Contact");
+		SelectPharmacySystem(PharmacyData);
+		SelectDataSource(DataSource);
+		SelectCollectionReason(collectionreason);
+		selectPrescriptionstartDate(startdate);
+		savePrescriptionData();
+		return this;
+
+	}
+	
+	public MemberFormPage PharmacySystem() throws InterruptedException {
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select ACHStatusList= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Pharmacy System']")));		
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> statuList =ACHStatusList.getOptions();	
+
+		for(int i=0;i<statuList.size();i++) {
+
+			selectoptions.add(statuList.get(i).getText());
+
+		}
+		ArrayList<String> expectedOptions=new ArrayList<>(Arrays.asList("---","Abacus","ADL","Applied Micro Systems","Ascend-HI","Best RX","Brightree","Carepoint","CECS","Compusolur","Computer Rx","Cortex","CPR+","DAA Enterprises","Data Doc","DataScan","Daytec","DHS","Digital Rx","Etreby","Exactmed Pharmacy System","Foundation System","FrameworkLTC (SoftWriters)","FSI","HAI","Hannson","HBS","HCC","Healthcare Automations","IV Solutions (HAI)","Kalos Inc. (CIPS)","KeyCentrix","Liberty Computer Service","MBI","McKesson Pharmacy Rx","Medical Manager","Micromerchant","New tech","Opus/ISM","Pac Ware","Pacific Pharmacy","PC5","PDX","Pharmascan","Pharmed","Pioneer","Pk Software","Prime Rx","Prism","Prodigy (ProScript)","Propriety / Internal","QS1","Renlar","Rescot","RS Software","RNA","Rx 30","Speedscript","Suite RX","Tech Rx","VIP","Visual Superscripts/DAA Enterprises","Vital Care","Web Md","Zadall Pharmacy System"));
+		System.out.println(selectoptions);
+		System.out.println(expectedOptions);
+		assertTrue((selectoptions.equals(expectedOptions)), "Pharmacy Systems");
+		
+		return this;
+
+	}
+
+	//Verify Collection Status dropdown
+	public MemberFormPage verifyCollectionStatus() throws InterruptedException {
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select collectionStatus= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Collection Status']")));		
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> statuList =collectionStatus.getOptions();	
+
+		for(int i=0;i<statuList.size();i++) {
+
+			selectoptions.add(statuList.get(i).getText());
+
+		}
+		ArrayList<String> expectedOptions=new ArrayList<>(Arrays.asList("---","Pending","Collecting Data","Not Collecting","Declined","On Hold"));
+		System.out.println(selectoptions);
+		System.out.println(expectedOptions);
+		assertTrue((selectoptions.equals(expectedOptions)), "Collection Status");
+		
+		return this;
+
+	}
+
+	//Verify Collection Status dropdown
+		public MemberFormPage verifyCollectionreason() throws InterruptedException {
+			ArrayList<String> selectoptions=new ArrayList<String>();
+			Select collectionReason= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_collectionreason.fieldControl-option-set-select']")));		
+
+			//Create temp Array List > add  actual options  from DOM for comparison
+			List<WebElement> statuList =collectionReason.getOptions();	
+
+			for(int i=0;i<statuList.size();i++) {
+
+				selectoptions.add(statuList.get(i).getText());
+
+			}
+			ArrayList<String> expectedOptions=new ArrayList<>(Arrays.asList("---","HIPAA privacy concern","Data needs to be set up","Report Development cost concern","Lack of technical skill","Don’t buy rebated item","Software Vendor cannot/will not create report","Member is with another GPO","Member will not submit data","Denied for RX data rebates","No longer using Pharmacy Portfolio"));
+			System.out.println(selectoptions);
+			System.out.println(expectedOptions);
+			assertTrue((selectoptions.equals(expectedOptions)), "Collection Reason");
+			
+			return this;
+
+		}
+		
+		//Verify Collection Status dropdown
+				public MemberFormPage verifyDataSource() throws InterruptedException {
+					ArrayList<String> selectoptions=new ArrayList<String>();
+					Select collectionReason= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Data Source']")));		
+
+					//Create temp Array List > add  actual options  from DOM for comparison
+					List<WebElement> statuList =collectionReason.getOptions();	
+
+					for(int i=0;i<statuList.size();i++) {
+
+						selectoptions.add(statuList.get(i).getText());
+
+					}
+					ArrayList<String> expectedOptions=new ArrayList<>(Arrays.asList("---","Collecting from Pharmacy System","Collecting from Member"));
+					System.out.println(selectoptions);
+					System.out.println(expectedOptions);
+					assertTrue((selectoptions.equals(expectedOptions)), "Data Source");
+					
+					return this;
+
+				}
+
+
+	// Select and Mark Complete	a Open Task Activity			
+	public MemberFormPage deActivatePrescriptionData() throws InterruptedException   {
+		List<WebElement> beforecount=getDriver().findElements(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"));
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).click().build().perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Prescription Data");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Deactivate')]")),"Deactivate Button");
+		List<WebElement> afterCount=getDriver().findElements(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"));
+		assertTrue(beforecount.size()<=afterCount.size(),"Prescription Data is not deactivated");
+		return this;
+	}
+
+	// Select and Mark Complete	a Open Task Activity			
+	public MemberFormPage deActivatePatientServices() throws InterruptedException   {
+		List<WebElement> beforecount=getDriver().findElements(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"));
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).click().build().perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Patient Services");
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Deactivate')]")),"Deactivate Button");
+		List<WebElement> afterCount=getDriver().findElements(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"));
+		assertTrue(beforecount.size()<=afterCount.size(),"Patient Services is not deactivated");
+		return this;
+	}
+	//Select Pharmacy System
+	public MemberFormPage SelectPharmacySystem(String PharmacySystem) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Pharmacy System']")), PharmacySystem, "Pharmacy System");
+		return this;
+	}
+
+	//Select Collection Reason
+	public MemberFormPage SelectCollectionReason(String Collection_Reason) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Collection Reason']")), Collection_Reason, "Collection_Reason");
+		return this;
+	}
+
+	//Select Data Source
+	public MemberFormPage SelectDataSource(String DataSource) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Data Source']")), DataSource, "Data Source");
+		return this;
+	}
+
+
+
 	public MemberFormPage ACHStatusList() throws InterruptedException {
 		ArrayList<String> selectoptions=new ArrayList<String>();
 		Select ACHStatusList= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_premierachstatus.fieldControl-option-set-select']")));		
-		
+
 		//Create temp Array List > add  actual options  from DOM for comparison
 		List<WebElement> statuList =ACHStatusList.getOptions();	
-		
+
 		for(int i=0;i<statuList.size();i++) {
-			
+
 			selectoptions.add(statuList.get(i).getText());
-			
+
 		}
 		assertTrue((selectoptions.contains("Accepted - not confirmed")), "Accepted - Not Confirmed option");
 		assertTrue((selectoptions.contains("Accepted - confirmed")), "Accepted - Confirmed option");
