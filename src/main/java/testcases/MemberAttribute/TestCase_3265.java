@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.MemberAttribute;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -8,11 +8,9 @@ import pages.LoginPage;
 import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
-//Test Case 8763:Automation Cloud : Validate auto-generated CRM Number for Members, Suppliers
-//Test Case 8791:Cloud - Verify when selecting any "Class of trade" , "Not Found" Error window should not get displayed.
+//Test Case 3265:Member become a top parent and the member does not exist Check parent "General GPO rebate Rule" and Check Parent "Pharmacy Rebate rule"
 
-public class TestCase_7137 {
+public class TestCase_3265 {
 
 
 	@Test
@@ -32,10 +30,7 @@ public class TestCase_7137 {
 		.selectAccountsTab()
 
 
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
-		.getDPData()
-
+		
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
@@ -142,52 +137,22 @@ public class TestCase_7137 {
 
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
+		.chooseRecordStatusDraft()
+		.clickSave()
+		//Is Top parent = Yes
+		.changeTopParentAsYes()
 
-		//Verify Premier start date is auto populated
-		.verifyPremierStartDateIsAutoPopulated()
+		.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "TPExcpetion", sDataSheetName))
+		//Region = Any
+		.selectRegion(DataInputProvider.getCellData_ColName(iRowNumber, "region", sDataSheetName))
 
-		.verifyAffiliateGroupIsNotNull()
-		.verifyAgEffectiveDateIsNotNull()
-
-		//13. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
-
-		//14. Verify Corporate parent name in the form
-		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-
-		//15. Verify "Is Food Service parent" field 
-		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
-
-		//16 Verify Food Service parent name in the form 
-		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
-
-		//17 Verify Sponsor field 
-		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
-
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
-
-
-		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
-		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-		//FBORD
-		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName));
-
-
-		//commenting below block since we are not verifying Is Member Add mail sent in the audit history due to the current changes in the application
-
-		/*	//16  Go to > and click on Membership entity and double click on the Top parent membership entity
-		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-		//.doubleClickOnNationalMembership()
-
-		//17 Click on > and go to Audit history 
-		.selectMembershipAuditHistory()
-
-		//18 Verify "Is Member Add mail sent" flag turned from No to Yes 
-		.verifyIsMemberAddMailSent()
-
-		//19 Verify the time-stamp on which the flag gets updated 
-		.verifyTimeStampInTPMembershipAuditHistory()
-		;*/
+		//Top parent classification = Any
+		.selectTopParentClassification(DataInputProvider.getCellData_ColName(iRowNumber, "topParentClassification", sDataSheetName))
+		.chooseRecordStatusPublished()
+		
+		.clickSave()
+		.selectRelatedMemberAttributesForLimMem()
+		.verifyPrepopulatedAttributes()
+		;
 	}
 }

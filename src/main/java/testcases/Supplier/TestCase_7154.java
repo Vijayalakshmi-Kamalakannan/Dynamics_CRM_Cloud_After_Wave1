@@ -6,7 +6,8 @@ import utils.DataInputProvider;
 public class TestCase_7154 {
 
 	//Automation-Create a supplier under a DP and save using Supplier Login
-	
+	//Test Case 8763:Automation Cloud : Validate auto-generated CRM Number for Members, Suppliers
+
 	@Test()
 
 	public void createSupplierWithSupplierLogin(int iRowNumber, String sDataSheetName) throws Exception {

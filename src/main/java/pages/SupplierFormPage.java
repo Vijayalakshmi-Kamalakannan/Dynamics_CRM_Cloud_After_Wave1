@@ -39,11 +39,12 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
 		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_tollfreeno.fieldControl-text-box-text']")),"Toll Free");
 		Thread.sleep(2000);
-		//click(getDriver().findElement(By.xpath("(//span[contains(@class,'pa-cs pa-cr')]//span)[3]")), "Diversity Information");
-		click(getDriver().findElement(By.xpath("(//span[contains(@class,'pa-cn pa-cm')]//span)[3]")), "Diversity Information");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Fax')]")), "Fax");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Receive Direct Mail')]")), "Recieve Direct Mail");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]")), "Do not Verify Address");
 		Thread.sleep(5000);
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='ix_diversityinformation|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_diversityinformation.AddNewStandard']"))).click().build().perform();				
+		a.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='DiversityInformation-pcf_grid_control_container']//button"))).click().build().perform();				
 		Thread.sleep(4000);
 		verifyExactText(getDriver().findElement(By.xpath("//label[text()='Account']")), "Account", "Account");
 		verifyExactText(getDriver().findElement(By.xpath("//label[text()='Diversity Type']")), "Diversity Type", "Diversity Type");
@@ -67,6 +68,26 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		return this;
 	}
 
+	
+	public SupplierFormPage verifyMinorityOwnedOption() throws InterruptedException {
+	
+		List<WebElement> ele=getDriver().findElements(By.xpath("//div[contains(@class,'last ag-after-created')]//div//label[@aria-label='Minority Owned']"));
+		verifyElementisDisplayed(ele.size(), "Minority Owned");
+		
+		return this;
+	}
+	
+	public SupplierFormPage deactivatenewlyaddedDiversity() throws InterruptedException {
+		
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//div[contains(@class,'last ag-after-created')]//i[@data-icon-name='StatusCircleCheckmark']"))).click().build().perform();
+		
+		click(getDriver().findElement(By.xpath("(//button//span[contains(text(),'Deactivate')])[2]")),"Deactivate");
+		click(getDriver().findElement(By.xpath("(//button//span[contains(text(),'Deactivate')])[3]")),"Deactivate Button");
+		return this;
+		
+	}
+	
 	//*********************************Diversity Information*****************
 
 	//Verify New Diversity Type Options 
@@ -143,6 +164,15 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		else {
 			setReport().log(Status.FAIL, "' Diveristy Information Associated View' doesn't match all the expected columns" + " " + actualcolumns,	screenshotCapture()); }
 
+		return this;
+	}
+	
+	public SupplierFormPage navigateToDiversity() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		click(getDriver().findElement(By.xpath("(//span[text()='Diversity Information'])[2]")),"Related > Diversity Information");
+		Thread.sleep(10000);
 		return this;
 	}
 
@@ -542,6 +572,17 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 	}
 
+	public SupplierFormPage clickDiversityInformation() {
+		click(getDriver().findElement(By.xpath("//h2[contains(text(),'DIVERSITY INFORMATION')]")),"Click Diversity information");
+		return this;
+	}
+	
+	public SupplierFormPage verifyMemberAttribute() {
+		List<WebElement> dpmatch=getDriver().findElements(By.xpath("//h3[contains(text(),'MEMBER ATTRIBUTES')]"));
+		verifyElementisNotDisplayed(dpmatch.size(), "Member Attributes");
+		return this;
+	}
+	
 	public SupplierFormPage clickVerticalButton() {
 		List<WebElement> count=getDriver().findElements(By.xpath("//span[contains(text(),'Refresh')]"));
 		if(count.size()>0)
@@ -574,6 +615,10 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		return this;
 	}
 
+	public SupplierFormPage verifyAccountTypeLocked() {
+		verifyDisplayed(getDriver().findElement(By.xpath("//select[@aria-label='Account Type' and @Disabled]")),"Account type lock");
+		return this;
+	}
 	public LoginPage clickLogout() {
 
 		click(getDriver().findElement(By.xpath("//*[@id='mectrl_headerPicture']")),"User Name button");

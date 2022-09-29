@@ -120,7 +120,14 @@ public class Driver extends PreAndPost{
 			{
 				sTestClassName="testcases.SupplierAccountNumber.".concat(sTestClassName);
 				
-			}
+			}else if(sCategory.equalsIgnoreCase("MemberAttribute"))
+			{
+				sTestClassName="testcases.MemberAttribute.".concat(sTestClassName);
+				
+			}	
+				
+				
+				
 				
 			
 			

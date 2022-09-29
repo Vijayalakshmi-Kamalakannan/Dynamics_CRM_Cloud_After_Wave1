@@ -15,6 +15,9 @@ public class NewAccountPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		return new MemberFormPage();
 	}
+
+	
+	
 		
 //Choose supplier form
 	public SupplierFormPage chooseSupplierForm() throws InterruptedException {
