@@ -1994,8 +1994,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage selectCurrentMemberShipt() throws InterruptedException {
-		Thread.sleep(1000);
+		Thread.sleep(2000);
+		
+		if((getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")).size()>0)){
+			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select View");
+		}else {
+		
 		click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select View");
+		}
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Current Memberships')]")),"Deactivated Portfolio");
 		Thread.sleep(2000);
 		return this;
@@ -2067,6 +2073,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Click on LOB SAve and close
 	public MemberFormPage clickLOBSaveAndClose() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[contains(@id,'quickCreateSaveAndCloseBtn')]//span[contains(text(),'Save')]")),"Save and Close");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
+		Thread.sleep(5000);
+		return this;	
+	}
+	
+	//save and Click in dev1
+	public MemberFormPage clickLOBSaveAndCloseDev() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 		Thread.sleep(5000);

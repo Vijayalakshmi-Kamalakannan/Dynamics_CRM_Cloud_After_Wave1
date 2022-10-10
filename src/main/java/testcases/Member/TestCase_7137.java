@@ -119,8 +119,8 @@ public class TestCase_7137 {
 		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
 
 		// Click on LOB Save 
-		.clickLOBSaveAndClose()
-
+		//.clickLOBSaveAndClose()
+		.clickLOBSaveAndCloseDev()
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
