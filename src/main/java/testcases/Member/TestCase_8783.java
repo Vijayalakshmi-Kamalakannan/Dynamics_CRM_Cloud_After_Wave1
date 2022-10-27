@@ -8,6 +8,8 @@ import pages.LoginPage;
 import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 8783:Cloud - Validate Account Type Transitions
+//Test Case 8766:Cloud : Validate Account Type Transitions
+
 
 public class TestCase_8783 {
 
@@ -130,6 +132,8 @@ public class TestCase_8783 {
 				.entityCodeIsDisplayed()
 				
 				.verifyAccountTypeLocked()
+				.clickLogout()
+				.refreshPage()
 		;
 				
 				

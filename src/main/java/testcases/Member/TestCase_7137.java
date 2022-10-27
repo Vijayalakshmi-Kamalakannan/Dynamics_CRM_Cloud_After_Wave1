@@ -120,7 +120,7 @@ public class TestCase_7137 {
 
 		// Click on LOB Save 
 		//.clickLOBSaveAndClose()
-		.clickLOBSaveAndCloseDev()
+		.clickLOBSaveAndClose()
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
