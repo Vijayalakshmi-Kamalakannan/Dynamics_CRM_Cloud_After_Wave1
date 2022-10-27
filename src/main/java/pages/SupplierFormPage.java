@@ -466,6 +466,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_textInputBox_with_filter_new']")),"Business Classification");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_textInputBox_with_filter_new']")))),businessClassification,"Business Classification");
 		Thread.sleep(4000);
+		System.out.println("(//span[normalize-space()='"+businessClassification+"'])[2]");
 		click(getDriver().findElement(By.xpath("(//span[normalize-space()='"+businessClassification+"'])[2]")),"Business Classification");
 		Thread.sleep(4000);
 		return this;
