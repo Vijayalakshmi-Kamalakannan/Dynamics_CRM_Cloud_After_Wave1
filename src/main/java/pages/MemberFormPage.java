@@ -249,7 +249,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		System.out.println("//h2[contains(@aria-label,'"+errorMessage+"')]");
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),"LOB Required");
-		click(getDriver().findElement(By.xpath("//span[@id='okButtonText']")),"Ok Button");
+		click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
 		return this;
 
 	}
@@ -1727,6 +1727,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		return this;
 	}
+	
+	public MemberFormPage selectFBOOverrideMemberEntryForm(String selectMemberOverride) throws InterruptedException {
+		NavigatetoMiscellaneousTab();
+	click(getDriver().findElement(By.xpath("//label[contains(text(),'FBO Manual Override')]")),"FBO Manual override");
+	selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='FBO Manual Override']")),selectMemberOverride,"MemberOverride");
+	Thread.sleep(2000);
+	return this;
+	}
 	//Verify Is FBO
 	public MemberFormPage verifyIsFBO(String verifyIsFBO) throws Exception { 
 
@@ -1877,6 +1885,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;
 	}
+	
+	//Select LOB Classification type
+		public MemberFormPage selectLOBfClassificationTypeIntersectta(String lineOfClassification) throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")),"Line of classification");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")))),lineOfClassification,"Line of classification");
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//span/span[contains(text(),'"+lineOfClassification+"')]")),lineOfClassification);
+
+
+			return this;
+		}
+	
+	
+	
 
 	//Select LOB Classification type
 	public MemberFormPage selectLOBfClassificationType2(String lineOfClassification) throws InterruptedException {
@@ -3109,7 +3131,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//search in sub account
 	public MemberFormPage searchinSubaccount(String subaccount) {
 
-		typeAndEnter(getDriver().findElement(By.xpath("//input[@aria-label='Account Search this view']")),subaccount,"Find Criteria" );
+		typeAndEnter(getDriver().findElement(By.xpath("//input[contains(@data-id,'quickFind_text')]")),subaccount,"Find Criteria" );
 
 		return this;
 	}
@@ -3345,6 +3367,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@title='MISCELLANEOUS']")),"MISCELLANEOUS");
 		Thread.sleep(5000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo.fieldControl-checkbox-container']")),verifyIsFBO, "Is FBO"); 
+		return this;
+	}
+	
+	public MemberFormPage NavigatetoMiscellaneousTab() throws InterruptedException { 
+		click(getDriver().findElement(By.xpath("//*[@title='MISCELLANEOUS']")),"MISCELLANEOUS");
+		Thread.sleep(5000);
+		verifyDisplayed(getDriver().findElement(By.xpath("//label[contains(text(),'FBO Manual Override')]")),"Miscellaneous Tab");
 		return this;
 	}
 
@@ -4661,6 +4690,31 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;
 	}
+	
+	//Click Related Membership
+		public MemberFormPage searchinMemberShip(String membership) throws InterruptedException   {
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//input[contains(@data-id,'quickFind_text')]")),"search textbox");
+			typeAndEnter(((getDriver().findElement(By.xpath("//input[contains(@data-id,'quickFind_text')]")))),membership,"Membership");
+			Thread.sleep(3000);
+			return this;
+		}
+		
+		//Click Related Membership
+				public MemberFormPage verifyMembership(Boolean isPresent, String membership) throws InterruptedException   {
+					if(isPresent) {
+						
+						verifyDisplayed(getDriver().findElement(By.xpath("//div[@col-id='ix_membershipprovider']//a//span[contains(text(),'"+membership+"')]")),"Membership");
+						
+					}else {
+						
+						verifyDisplayed(getDriver().findElement(By.xpath("//span[contains(text(),'No data available')]")),"Error Message");
+						
+					}
+					return this;
+				}
+				
+		
 
 
 	//Click Related Activities
