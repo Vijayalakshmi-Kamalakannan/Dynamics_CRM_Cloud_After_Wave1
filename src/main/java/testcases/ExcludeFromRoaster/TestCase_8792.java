@@ -27,7 +27,7 @@ public class TestCase_8792 {
 		.clicSignin()
 		.clicYesInStaySignedin()
 
-		//2.Go to Workplace > Accounts and search for  
+		//2.Go to Workplace > Accounts and search   
 		.selectAccountsTab()
 
 		//Search GPO Active Member

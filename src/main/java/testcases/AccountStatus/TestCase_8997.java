@@ -1,13 +1,8 @@
 package testcases.AccountStatus;
-
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
+
 //TFS ID_ 8997:Cloud: Verify user should not be allowed to change the account status to Active manually when Premier End date is present
 
 public class TestCase_8997 {

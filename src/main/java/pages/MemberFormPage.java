@@ -1198,7 +1198,6 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage setExcludeFromRoster(String roster) {
-
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Exclude from Roster']")), roster, "Roster Value");
 		return this;
 	}
