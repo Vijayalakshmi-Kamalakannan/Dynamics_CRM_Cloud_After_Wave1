@@ -444,8 +444,10 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 	//*****Method to verify Business Process Error when Supplier Account Status is made Inactive*****//	
 	public SupplierFormPage verifyInactiveAccountStatusError(String expectedAccountStatusErrorText) {
-		verifyPartialText((getDriver().findElement(By.xpath("//*[@id='subtitle']"))), expectedAccountStatusErrorText,"In Active Account Status Error");
-		click(getDriver().findElement(By.xpath("//*[@id='cancelButton']")),"Ok");
+		//Wave2 update- updated data-id=errorDialog_subtitle
+		verifyPartialText((getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']"))), expectedAccountStatusErrorText,"' Account Status Error' ");
+		//Wave2 update- updated data-id=errorOkButton
+		click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"Ok");
 		return this;
 	}
 
@@ -562,13 +564,16 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 			{
 				click(getDriver().findElement(By.xpath("//span[contains(text(),'Save and Continue')]")),"Save and continue");
 			}
+			else {
+				
+			}
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();	
+			//e.printStackTrace();	
 		}
-		Thread.sleep(10000);
-		Thread.sleep(10000);
+		Thread.sleep(3000);
+		Thread.sleep(5000);
 		return this;
 
 	}
@@ -789,7 +794,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage recordStatusDraft() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		selectDropDownUsingIndex(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),0,"Record Status");
 		Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-container']")),"Draft","Record Status"); 
@@ -862,7 +867,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage selectMembership() throws InterruptedException {
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
 		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
 		Thread.sleep(3000);
@@ -872,14 +877,17 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		//verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']")),"National","Membership Provider");
 		verifyExactText(getDriver().findElement(By.xpath("//*[@col-id='ix_membershipprovider']//span")),"National","Membership Provider");
 		//verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']")),membershipStartDate,"Membership Start Date");
-		verifyExactText(getDriver().findElement(By.xpath("(//*[@col-id='ix_startdate']//label)[2]")),membershipStartDate,"Membership Start Date");
+		//verifyExactText(getDriver().findElement(By.xpath("(//*[@col-id='ix_startdate']//label)[2]")),membershipStartDate,"Start Date");
+		//Wave2 update Start Locator Update		
+		verifyExactText(getDriver().findElement(By.xpath("//*[@col-id='ix_startdate']//label[contains(@class,'ms-Label labelRootStyles') and @aria-label]")),membershipStartDate,"Membership Start Date");
+		//verifyExactAttribute(getDriver().findElement(By.xpath("//*[@col-id='ix_startdate']//label[contains(@class,'ms-Label labelRootStyles') and @aria-label]")), "aria-label",membershipStartDate,"Membership Start Date");
 		Actions a = new Actions(getDriver());
 		// a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']"))).doubleClick().build().perform();
 		a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)[2]"))).doubleClick().build().perform();	    
 		Thread.sleep(3000);
 		return this;
 	}
-
+	
 	public SupplierFormPage verifyNationalMembership(String membershipStartDate) throws InterruptedException {	
 		//verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']")),"National","Membership Provider");
 		verifyExactText(getDriver().findElement(By.xpath("//*[@col-id='ix_membershipprovider']//span")),"National","Membership Provider");

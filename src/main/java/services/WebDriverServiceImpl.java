@@ -637,7 +637,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+	
 	public void selectDropDownUsingVisibleText(WebElement ele, String value,String field) {
 		try {
 			new Select(ele).selectByVisibleText(value);
@@ -757,11 +757,13 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void verifyExactText(WebElement ele, String expectedText,String field) {
 		//String bReturn=ele.getAttribute("title");
 		String bReturn=ele.getText();
+		
+		System.out.println(bReturn);
 		try {
 			if(bReturn.equalsIgnoreCase(expectedText)) {
-				setReport().log(Status.PASS, "The text :"+bReturn+" matches with the value in "+field+" field",screenshotCapture());
+				setReport().log(Status.PASS, "The text : ' "+bReturn+" ' matches with the value in  ' "+field+"  ' field",screenshotCapture());
 			}else {
-				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value in "+field+" field",screenshotCapture());
+				setReport().log(Status.FAIL, "The text : ' " + bReturn +  " '  did not match with the value in ' " +field+" 'field",screenshotCapture());
 				Driver.failCount++;
 			}
 		} catch (WebDriverException e) {
@@ -813,9 +815,10 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void verifyExactAttribute(WebElement ele, String attribute, String value,String field) {
 		try {
 			if(getAttribute(ele, attribute,field).equals(value)) {
-				setReport().log(Status.PASS, "The "+field+ " contains "+ ": "+value,screenshotCapture());
+				System.out.println(attribute);
+				setReport().log(Status.PASS, "The ' "+field+ "  ' contains "+ ": "+value,screenshotCapture());
 			}else {
-				setReport().log(Status.FAIL, "The "+field+ "doen not contains "+ ": "+value,screenshotCapture());
+				setReport().log(Status.FAIL, "The  '"+field+ " ' does not contains "+ ": "+value,screenshotCapture());
 			}
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL, "Unknown exception occured while verifying the attribute",screenshotCapture());
