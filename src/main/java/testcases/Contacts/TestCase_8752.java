@@ -16,119 +16,119 @@ public class TestCase_8752 {
 
 		// 1. Login to CRM using member supervisor / member credentials
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
-				.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
-				.clicSignin().clicYesInStaySignedin()
+		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
+		.clicSignin().clicYesInStaySignedin()
 
-				// 2. Go to Contacts and Click on New
-				.selectContacts().clickNewOnContactsPage()
+		// 2. Go to Contacts and Click on New
+		.selectContacts().clickNewOnContactsPage()
 
-				// Add contact account association with any member and create Job
-				// func/Communication records for it
+		// Add contact account association with any member and create Job
+		// func/Communication records for it
 
-				// Provide First name = Any & Last name = Any
-				.typeContactName((DataInputProvider.getCellData_ColName(iRowNumber, "firstName", sDataSheetName)),
-						(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
+		// Provide First name = Any & Last name = Any
+		.typeContactName((DataInputProvider.getCellData_ColName(iRowNumber, "firstName", sDataSheetName)),
+				(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
 
-				// Primary Account = 1000155094
-				.selectPrimaryAccount(
-						DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+		// Primary Account = 1000155094
+		.selectPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
 
-				// Save the record
-				.clickSave()
+		// Save the record
+		.clickSave()
 
-				// Observe the Innovatix Contact ID field
-				.isInnovatixContactIDDisplayed()
+		// Observe the Innovatix Contact ID field
+		.isInnovatixContactIDDisplayed()
 
-				// Change the record start from Draft to Published then save
-				.chooseRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
+		// Change the record start from Draft to Published then save
+		.chooseRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
 
-				// Click on Save
-				.clickSave()
+		// Click on Save
+		.clickSave()
 
-				// Click on Contact Account association record created
-				.doubleClickOnCAARecord()
+		// Click on Contact Account association record created
+		.doubleClickOnCAARecord()
 
-				// Click on Add new Job function
-				.clickAddJobFunction()
+		// Click on Add new Job function
+		.clickAddJobFunction()
 
-				// Select "Bid Proposal Team" as Job function and click on Save
-				.typeJobFunction(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
+		// Select "Bid Proposal Team" as Job function and click on Save
+		.typeJobFunction(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
 
-				// Click on Save
-				.clickSaveInJobFunction()
+		// Click on Save
+		.clickSaveInJobFunction()
 
-				// Verify created job function
-				.verifyJobFunctionIsCreated(
-						DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
+		// Verify created job function
+		.verifyJobFunctionIsCreated(
+				DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
 
-				.doubleClickOnCAARecord()
+		.doubleClickOnCAARecord()
 
-				// Click on add new Communication/Publications
-				.clickAddContactCommunication()
+		// Click on add new Communication/Publications
+		.clickAddContactCommunication()
 
-				// Select "Roster-Hierarchy Roster" as Communication then save
-				.typeContactCommunication(
-						DataInputProvider.getCellData_ColName(iRowNumber, "communicationPublication", sDataSheetName))
+		// Select "Roster-Hierarchy Roster" as Communication then save
+		.typeContactCommunication(
+				DataInputProvider.getCellData_ColName(iRowNumber, "communicationPublication", sDataSheetName))
 
-				// Click on Save
-				.clickSaveInContactCommunication()
+		// Click on Save
+		.clickSaveInContactCommunication()
 
-				// Verify created communication publications
-				.verifyContactCommunicationIsCreated()
+		// Verify created communication publications
+		.verifyContactCommunicationIsCreated()
 
-				.clickSummaryTab()
+		.clickSummaryTab()
 
-				// 3. Now end date the contact with today's or future date and save the record
-				.typeContactEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "contactEndDate", sDataSheetName))
+		// 3. Now end date the contact with today's or future date and save the record
+		.typeContactEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "contactEndDate", sDataSheetName))
 
-				// SAve the record
-				.clickSave()
+		// SAve the record
+		.clickSave()
 
-				// 4. Check the record status - published
-				.verifyRecordStatus(
-						DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
+		// 4. Check the record status - published
+		.verifyRecordStatus(
+				DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
 
-				.clickCAAFromRelated()
+		.clickCAAFromRelated()
 
-				// 5. Check the Contact account association status as Terminated inside "Contact
-				// Subgrid view"
+		// 5. Check the Contact account association status as Terminated inside "Contact
+		// Subgrid view"
 
-				// Select contact sub grid view
-				.clickContactSubGridViewInCAA()
+		// Select contact sub grid view
+		.clickContactSubGridViewInCAA()
 
-				// Verify termination status
-				.verifyCAATerminationReasonInSubGridView(
-						DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		// Verify termination status
+		.verifyCAATerminationReasonInSubGridView(
+				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
-				// Verify relationship end date
-				.verifyCAARelationEndDateInSubGridView(
-						DataInputProvider.getCellData_ColName(iRowNumber, "contactEndDate", sDataSheetName))
+		// Verify relationship end date
+		.verifyCAARelationEndDateInSubGridView(
+				DataInputProvider.getCellData_ColName(iRowNumber, "contactRelationshipEndDate", sDataSheetName))
 
-				// 6. Check the Job function and communication record status
-				.doubleClickOnCAARecordInSubGridView()
+		// 6. Check the Job function and communication record status
+		.doubleClickOnCAARecordInSubGridView()
 
-				// Verify termination status in contact account association
-				.verifyStatusInCAA(
-						DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
+		// Verify termination status in contact account association
+		.verifyStatusInCAA(
+				DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
 
-				.clickContactJobFunctionFromRelated()
+		.clickContactJobFunctionFromRelated()
 
-				.doubleClickOnJobFunction()
+		.doubleClickOnJobFunction()
 
-				// Verify job function termination status
-				.verifyJobFunctionTerminationReason(
-						DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		// Verify job function termination status
+		.verifyJobFunctionTerminationReason(
+				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
-				.clickCAArecordFromJobFunction()
+		.clickCAArecordFromJobFunction()
 
-				.clickContactCommunicationFromRelated()
+		.clickContactCommunicationFromRelated()
 
-				.doubleClickOnContactCommunication()
+		.doubleClickOnContactCommunication()
 
-				// Verify contact communication termination status
-				.verifyContactCommunicationTerminationReason(
-						DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		// Verify contact communication termination status
+		.verifyContactCommunicationTerminationReason(
+				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
-				.clickSignout();
+		.clickSignout();
 	}
 }

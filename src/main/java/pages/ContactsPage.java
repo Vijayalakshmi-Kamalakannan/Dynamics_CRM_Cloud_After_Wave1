@@ -71,10 +71,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage selectAllContactView() throws InterruptedException {
 		Thread.sleep(3000);
 		// Click Drop down
-		click(getDriver().findElement(
-				By.xpath("//span/i[@data-icon-name='ChevronDown']")),
-				"Drop down");
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'All Contacts')]")), "All Contacts");
+		click(getDriver().findElement(By.xpath("//span/i[@data-icon-name='ChevronDown']")),"Drop down");
+		Thread.sleep(3000);
+		//Wave2 Update
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'All Contacts')]")), "All Contacts");
 		Thread.sleep(10000);
 		return this;
 
@@ -248,8 +248,9 @@ public class ContactsPage extends WebDriverServiceImpl {
 				"Find Criteria");
 		Thread.sleep(6000);
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
-
+		//Wave2 Update
+		//a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//label[@aria-label]"))).doubleClick().build().perform();
 		Thread.sleep(6000);
 		return this;
 	}
@@ -258,11 +259,11 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// to choose an existing Active contact
 	public ContactsPage goBackandSelectAccount() throws InterruptedException {
-
 		clickGoBack();
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
-
+		//Wave2 Update 
+		//a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//label[@aria-label]"))).doubleClick().build().perform();
 		Thread.sleep(6000);
 		return this;
 	}
@@ -270,7 +271,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage addAnotherPrimaryAccount(String PrimaryAccount1) throws InterruptedException {
 		Thread.sleep(5000);
 		Actions action = new Actions(getDriver());
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag_text']"))).perform();
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag_text']"))).build().perform();
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_selected_tag_delete']")),"Delete"); 
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
@@ -370,9 +371,9 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Date date = new Date();
 		String curDate = formatter.format(date);
 
-		Thread.sleep(5000);
-
-		String endDate = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='ix_relationshipenddate']//label")), "title",
+		Thread.sleep(3500);
+		//Wave2 Update
+		String endDate = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='ix_relationshipenddate']//label")), "aria-label",
 				"Relationship End Date in Contact Account Association Inactive View");
 		Date diffdate = formatter.parse(endDate);
 		String finalDate = formatter.format(diffdate);
@@ -394,7 +395,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage doubleClickOnCAARecordInactiveView() throws InterruptedException {
 		Thread.sleep(3000);
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		//Wave2 update
+		a.moveToElement(getDriver().findElement(By.xpath("//label[@aria-label]"))).doubleClick().build().perform();
 		Thread.sleep(3000);
 		return this;
 	}
@@ -417,16 +419,17 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// verify CAA termination reason in Subgrid view
 	public ContactsPage verifyCAATerminationReasonInSubGridView(String terminationReason) {
-		String termReason = getAttribute(getDriver().findElement(By.xpath("(//div[@col-id='ix_terminationreason']//label)[2]")), "title",
+		//Wave2 Update aria-label
+		String termReason = getAttribute(getDriver().findElement(By.xpath("(//div[@col-id='ix_terminationreason']//label)[2]")), "aria-label",
 				"Termination Reason in Contact Account Association Sub Grid View");
 		if (termReason.equalsIgnoreCase(terminationReason)) {
 
 			setReport().log(Status.PASS, "Termination Reason in Contact Account Association Sub Grid View " + termReason
-					+ " is displayed right", screenshotCapture());
+					+ " is displayed as expected", screenshotCapture());
 
 		} else {
 			setReport().log(Status.FAIL, "Termination Reason in Contact Account Association Sub Grid View " + termReason
-					+ " is not displayed right", screenshotCapture());
+					+ " is NOT displayed as expected", screenshotCapture());
 			Driver.failCount++;
 		}
 		return this;
@@ -434,16 +437,17 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// validate CAA relation end date under subgrid view
 	public ContactsPage verifyCAARelationEndDateInSubGridView(String relatioshipEndDate) {
-		String endDate = getAttribute(getDriver().findElement(By.xpath("//label[contains(@class,'ms-Label labelRoot')]")), "title",
+		//Wave2 Update
+		String endDate = getAttribute(getDriver().findElement(By.xpath("(//div[@col-id='ix_relationshipenddate']//label)[2]")), "aria-label",
 				"Relationship End Date in Contact Account Association Sub Grid View");
 		if (endDate.equalsIgnoreCase(relatioshipEndDate)) {
 
 			setReport().log(Status.PASS, "Relationship End Date in Contact Account Association Sub Grid View " + endDate
-					+ " is displayed right", screenshotCapture());
+					+ " is displayed as expected ", screenshotCapture());
 
 		} else {
 			setReport().log(Status.FAIL, "Relationship End Date in Contact Account Association Sub Grid View " + endDate
-					+ " is not displayed right", screenshotCapture());
+					+ " is NOT displayed as expected", screenshotCapture());
 			Driver.failCount++;
 		}
 		return this;
@@ -452,7 +456,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// double click on the entry under CAA subgrid view
 	public ContactsPage doubleClickOnCAARecordInSubGridView() throws InterruptedException {
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		//Wave2 update
+		a.moveToElement(getDriver().findElement(By.xpath("(//i[@data-icon-name='CheckMark'])[2]"))).doubleClick().build().perform();
 		Thread.sleep(3000);
 		return this;
 	}
@@ -461,7 +466,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage doubleClickOnCAARecord() throws InterruptedException {
 		clickCAAFromRelated();
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//div[@class='ag-body-viewport ag-layout-normal ag-row-no-animation']//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		//a.moveToElement(getDriver().findElement(By.xpath("//div[@class='ag-body-viewport ag-layout-normal ag-row-no-animation']//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		//Wave2 Update
+		Thread.sleep(2000);
+		a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='grid-container']//div[@col-id='a_87bc6554cf2fe91180f1005056b97654.ix_innovatixcontactid']//label[contains(@class,'ms-Label labelRootStyles')]"))).doubleClick().build().perform();
 		Thread.sleep(3000);
 		return this;
 	}
@@ -490,7 +498,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	// Verify if status of CAA is Active/Inactive under Admininstration tab
+	// Verify if status of CAA is Active/Inactive under Administration tab
 	public ContactsPage verifyStatusInCAA(String status) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//li[contains(text(),'Administration')]")), "Administration tab");
 
@@ -499,11 +507,11 @@ public class ContactsPage extends WebDriverServiceImpl {
 				"Status under Admin tab ");
 		if (conRecordStatus.equalsIgnoreCase(status)) {
 
-			setReport().log(Status.PASS, "Status under Admin tab " + conRecordStatus + " is displayed right",
+			setReport().log(Status.PASS, "Status under Admin tab ' " + conRecordStatus + " 'is displayed right",
 					screenshotCapture());
 
 		} else {
-			setReport().log(Status.FAIL, "Status under Admin tab " + conRecordStatus + " is not displayed right",
+			setReport().log(Status.FAIL, "Status under Admin tab ' " + conRecordStatus + " ' is not displayed right",
 					screenshotCapture());
 			Driver.failCount++;
 		}
@@ -521,7 +529,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// Click ok on the duplicate CAA error msg popup
 	public ContactsPage clickOkErrorMsgForDuplicateCAA() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@id='cancelButton']")), "Ok");
+		//Wave2 Update
+		click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")), "OK");
 		Thread.sleep(3000);
 		return this;
 	}
@@ -603,7 +612,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// Click Related and Contact Job Function
 	public ContactsPage clickContactJobFunctionFromRelated() throws InterruptedException {
-		Thread.sleep(10000);
+		Thread.sleep(7000);
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related");
 		Thread.sleep(4000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Job Functions')]")),
@@ -776,7 +785,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage doubleClickOnJobFunction() throws InterruptedException {
 		Thread.sleep(3000);
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		//Wave2 Update
+		a.moveToElement(getDriver().findElement(By.xpath("//label[@aria-label]"))).doubleClick().build().perform();
 		Thread.sleep(3000);
 		return this;
 	}
@@ -829,12 +839,12 @@ public class ContactsPage extends WebDriverServiceImpl {
 				"title", "Termination Reason");
 		if (jobFunction.equalsIgnoreCase(terminationReason)) {
 			setReport().log(Status.PASS,
-					"Termination reason for the job Function " + jobFunction + " is displayed right",
+					"Termination reason for the job Function  ' " + jobFunction + " ' matches with expected reason",
 					screenshotCapture());
 
 		} else {
 			setReport().log(Status.FAIL,
-					"Termination reason for the job Function " + jobFunction + " is not displayed right",
+					"Termination reason for the job Function ' " + jobFunction + " ' does not match with expected reason",
 					screenshotCapture());
 			Driver.failCount++;
 		}
@@ -875,17 +885,18 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// verify Job function termination reason in Inactive view
 	public ContactsPage verifyJobFunctTerminationReasonInInactiveView(String terminationReason) {
-		String termReason = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='ix_terminationreason']//label")), "title",
+		//Wave2 Update aria-label
+		String termReason = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='ix_terminationreason']//label")), "aria-label",
 				"Termination Reason in Inactive Contact Job Function View");
 		if (termReason.equalsIgnoreCase(terminationReason)) {
 
 			setReport().log(Status.PASS,
-					"Termination Reason in Inactive Contact Job Function View " + termReason + " is displayed right",
+					"Termination Reason in Inactive Contact Job Function View ' " + termReason + "  ' matches the expected reason",
 					screenshotCapture());
 
 		} else {
-			setReport().log(Status.FAIL, "Termination Reason in Inactive Contact Job Function View " + termReason
-					+ " is not displayed right", screenshotCapture());
+			setReport().log(Status.FAIL, "Termination Reason in Inactive Contact Job Function View ' " + termReason
+					+ " does NOT  match the expected reason", screenshotCapture());
 			Driver.failCount++;
 		}
 		return this;
@@ -893,7 +904,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// verify Job function status in Inactive view
 	public ContactsPage verifyJobFunctStatusInInactiveView(String jobStatus) {
-		String status = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='statecode']//label")), "title",
+		//Wave2 Update aria-label
+		String status = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='statecode']//label")), "aria-label",
 				"Status in Inactive Contact Job Function View");
 		if (status.equalsIgnoreCase(jobStatus)) {
 
@@ -978,7 +990,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// Verify if Contact Communication is created by validating the created date
 	// with the current date
 	public ContactsPage verifyContactCommunicationIsCreated() throws InterruptedException, ParseException {
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[@title='ADMINISTRATION']")), "ADMINISTRATION");
 		Thread.sleep(2000);
 
@@ -1011,7 +1023,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage doubleClickOnContactCommunication() throws InterruptedException {
 		Thread.sleep(3000);
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
+		//Wave2 Update
+		a.moveToElement(getDriver().findElement(By.xpath("//label[@aria-label]"))).doubleClick().build().perform();
 		Thread.sleep(3000);
 		return this;
 	}
@@ -1098,7 +1111,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// verify Contact Communication status in Inactive view
 	public ContactsPage verifyContactCommunicationStatusInInactiveView(String contactCommStatus) {
-		String status = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='statecode']//label")), "title",
+		//Wave2 Update
+		String status = getAttribute(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row')]//div[@col-id='statecode']//label")), "aria-label",
 				"Status in Inactive Contact Communication View");
 		if (status.equalsIgnoreCase(contactCommStatus)) {
 

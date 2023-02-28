@@ -30,15 +30,14 @@ public class TestCase_7149 {
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
-		//3. Account  Type = Member
-		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
-
+		
 		//Account name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
-
+		// Account  Type = Member
+		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
-
+		
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
@@ -47,12 +46,12 @@ public class TestCase_7149 {
 
 		//Store/Location type = Shipto
 		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))
+		
+		//Direct Parent Relation = Managed
+		.selectDirectParentRelationManaged()  
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-
-		//Direct Parent Relation = Managed
-		.selectDirectParentRelationManaged()  
 
 		//Direct Parent Relation date = Today's Date
 		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName)) 
@@ -89,8 +88,8 @@ public class TestCase_7149 {
 
 		.verifyAgEffectiveDateIsNull()
 		.verifyAffiliateGroupIsNull()
-		
-		
+
+
 		.pageRefresh()
 		.clickSave() 
 
@@ -100,25 +99,25 @@ public class TestCase_7149 {
 		//Verify Premier start date is auto populated
 		.verifyPremierStartDateIsAutoPopulated()
 
-		
+
 
 		//13. Verify "IS Corporate account" field
-				.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
+		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 
-				//14. Verify Corporate parent name in the form
-				.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
+		//14. Verify Corporate parent name in the form
+		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
 
-				//15. Verify "Is Food Service parent" field 
-				.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
+		//15. Verify "Is Food Service parent" field 
+		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
 
-				//16 Verify Food Service parent name in the form 
-				.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
+		//16 Verify Food Service parent name in the form 
+		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
 
-				//17 Verify Sponsor field 
-				.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+		//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
 
-				//16 Verify "Is Sponsor" field 
-				.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 
 		//Data Reset
 

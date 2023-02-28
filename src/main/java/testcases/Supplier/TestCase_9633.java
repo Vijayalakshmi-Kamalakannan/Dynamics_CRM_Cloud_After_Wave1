@@ -43,6 +43,8 @@ public class TestCase_9633 {
 				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
 
 		.verifyMinorityOwnedOption()
+		
+		//Data Reset
 		.deactivatenewlyaddedDiversity()
 		;
 

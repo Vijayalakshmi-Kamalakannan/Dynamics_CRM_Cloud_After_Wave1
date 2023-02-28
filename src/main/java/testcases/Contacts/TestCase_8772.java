@@ -22,11 +22,11 @@ public class TestCase_8772 {
 		.selectContacts()
 
 		//Navigate to All Account
-		
+
 		.selectAllContactView()
 		// 2. Go to any active contact which has an active contact account association
 		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
-		
+
 		// Primary Account = 1000155094
 		.addAnotherPrimaryAccount(
 				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
@@ -36,150 +36,150 @@ public class TestCase_8772 {
 
 		// Observe the Innovatix Contact ID field
 		.isInnovatixContactIDDisplayed()
-		
+
 		.goBackandSelectAccount()
 		// Primary Account = 1000155094
-				.addAnotherPrimaryAccount(
-						DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
 
-				// Save the record
-				.clickSave()
-		
+		// Save the record
+		.clickSave()
+
 		.clickSignout();
-		
-		
+
+
 		//1. Login to CRM using member supervisor / member credentials 
-				new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email1", sDataSheetName))
-				.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
-				.clicSignin().clicYesInStaySignedin()
+		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email1", sDataSheetName))
+		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
+		.clicSignin().clicYesInStaySignedin()
 
-				// Go to Contacts
-				.selectContacts()
+		// Go to Contacts
+		.selectContacts()
 
-				//Navigate to All Account
-				
-				.selectAllContactView()
-				// 2. Go to any active contact which has an active contact account association
-				.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
-				
-				// Primary Account = 1000155094
-				.addAnotherPrimaryAccount(
-						DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+		//Navigate to All Account
 
-				// Save the record
-				.clickSave()
+		.selectAllContactView()
+		// 2. Go to any active contact which has an active contact account association
+		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
 
-				// Observe the Innovatix Contact ID field
-				.isInnovatixContactIDDisplayed()
-				
-				.goBackandSelectAccount()
-				// Primary Account = 1000155094
-						.addAnotherPrimaryAccount(
-								DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
 
-						// Save the record
-						.clickSave()
-				
-				.clickSignout();
-				
-				//1. Login to CRM using member supervisor / member credentials 
-				new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
-				.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
-				.clicSignin().clicYesInStaySignedin()
+		// Save the record
+		.clickSave()
 
-				// Go to Contacts
-				.selectContacts()
+		// Observe the Innovatix Contact ID field
+		.isInnovatixContactIDDisplayed()
 
-				//Navigate to All Account
-				
-				.selectAllContactView()
-				// 2. Go to any active contact which has an active contact account association
-				.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
-				
-				// Primary Account = 1000155094
-				.addAnotherPrimaryAccount(
-						DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+		.goBackandSelectAccount()
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
 
-				// Save the record
-				.clickSave()
+		// Save the record
+		.clickSave()
 
-				// Observe the Innovatix Contact ID field
-				.isInnovatixContactIDDisplayed()
-				
-				.goBackandSelectAccount()
-				// Primary Account = 1000155094
-						.addAnotherPrimaryAccount(
-								DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
+		.clickSignout();
 
-						// Save the record
-						.clickSave()
-				
-				.clickSignout();
-				//1. Login to CRM using member supervisor / member credentials 
-				new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email3", sDataSheetName))
-				.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
-				.clicSignin().clicYesInStaySignedin()
+		//1. Login to CRM using member supervisor / member credentials 
+		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
+		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
+		.clicSignin().clicYesInStaySignedin()
 
-				// Go to Contacts
-				.selectContacts()
+		// Go to Contacts
+		.selectContacts()
 
-				//Navigate to All Account
-				
-				.selectAllContactView()
-				// 2. Go to any active contact which has an active contact account association
-				.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
-				
-				// Primary Account = 1000155094
-				.addAnotherPrimaryAccount(
-						DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+		//Navigate to All Account
 
-				// Save the record
-				.clickSave()
+		.selectAllContactView()
+		// 2. Go to any active contact which has an active contact account association
+		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
 
-				// Observe the Innovatix Contact ID field
-				.isInnovatixContactIDDisplayed()
-				
-				.goBackandSelectAccount()
-				// Primary Account = 1000155094
-						.addAnotherPrimaryAccount(
-								DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
 
-						// Save the record
-						.clickSave()
-				
-				.clickSignout();
-				//1. Login to CRM using member supervisor / member credentials 
-				new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email4", sDataSheetName))
-				.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
-				.clicSignin().clicYesInStaySignedin()
+		// Save the record
+		.clickSave()
 
-				// Go to Contacts
-				.selectContacts()
+		// Observe the Innovatix Contact ID field
+		.isInnovatixContactIDDisplayed()
 
-				//Navigate to All Account
-				
-				.selectAllContactView()
-				// 2. Go to any active contact which has an active contact account association
-				.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
-				
-				// Primary Account = 1000155094
-				.addAnotherPrimaryAccount(
-						DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+		.goBackandSelectAccount()
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
 
-				// Save the record
-				.clickSave()
+		// Save the record
+		.clickSave()
 
-				// Observe the Innovatix Contact ID field
-				.isInnovatixContactIDDisplayed()
-				
-				.goBackandSelectAccount()
-				// Primary Account = 1000155094
-						.addAnotherPrimaryAccount(
-								DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
+		.clickSignout();
+		//1. Login to CRM using member supervisor / member credentials 
+		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email3", sDataSheetName))
+		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
+		.clicSignin().clicYesInStaySignedin()
 
-						// Save the record
-						.clickSave()
-				
-				.clickSignout();
+		// Go to Contacts
+		.selectContacts()
+
+		//Navigate to All Account
+
+		.selectAllContactView()
+		// 2. Go to any active contact which has an active contact account association
+		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
+
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+
+		// Save the record
+		.clickSave()
+
+		// Observe the Innovatix Contact ID field
+		.isInnovatixContactIDDisplayed()
+
+		.goBackandSelectAccount()
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
+
+		// Save the record
+		.clickSave()
+
+		.clickSignout();
+		//1. Login to CRM using member supervisor / member credentials 
+		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email4", sDataSheetName))
+		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
+		.clicSignin().clicYesInStaySignedin()
+
+		// Go to Contacts
+		.selectContacts()
+
+		//Navigate to All Account
+
+		.selectAllContactView()
+		// 2. Go to any active contact which has an active contact account association
+		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
+
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+
+		// Save the record
+		.clickSave()
+
+		// Observe the Innovatix Contact ID field
+		.isInnovatixContactIDDisplayed()
+
+		.goBackandSelectAccount()
+		// Primary Account = 1000155094
+		.addAnotherPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
+
+		// Save the record
+		.clickSave()
+
+		.clickSignout();
 	}
 }

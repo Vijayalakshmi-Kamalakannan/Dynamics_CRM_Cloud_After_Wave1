@@ -34,7 +34,7 @@ public class TestCase_7147 {
 
 		//5. Verify Direct parent and Top parent are populated 
 		.verifyDirectParent(WebDriverServiceImpl.Dpdata.get("DP_Name"))
- 		.verifyTopParent(WebDriverServiceImpl.Dpdata.get("TopParent_Name"))
+		.verifyTopParent(WebDriverServiceImpl.Dpdata.get("TopParent_Name"))
 
 		//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
@@ -103,7 +103,7 @@ public class TestCase_7147 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickSave() 
+		//.clickSave() 
 
 
 		//11. Verify Entity code is same as DP's entity code 
@@ -118,21 +118,21 @@ public class TestCase_7147 {
 
 		//13. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
-	
-	//14. Verify Corporate parent name in the form
+
+		//14. Verify Corporate parent name in the form
 		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-	
-	//15. Verify "Is Food Service parent" field 
+
+		//15. Verify "Is Food Service parent" field 
 		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
-	
-	//16 Verify Food Service parent name in the form 
+
+		//16 Verify Food Service parent name in the form 
 		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
-	
-	//17 Verify Sponsor field 
+
+		//17 Verify Sponsor field 
 		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
-	
-	//16 Verify "Is Sponsor" field 
-	.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 		.verifySponsorLocked();
 
 	}

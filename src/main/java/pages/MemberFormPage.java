@@ -190,9 +190,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		Thread.sleep(15000);
+		Thread.sleep(8000);
 
-		Thread.sleep(20000);
+		Thread.sleep(2000);
 		return this;	
 	}
 
@@ -336,7 +336,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify business classification is auto populated
 	public MemberFormPage verifyBusinessClassification(String verifyBusinessClassification) throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification_selected_tag_text']")),verifyBusinessClassification,"Business Classification");
 		return this;
 	}
@@ -355,7 +355,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//verify default account status is active
-	public MemberFormPage verifyDefaultAccountStatus() {
+	public MemberFormPage verifyDefaultAccountStatus() throws InterruptedException {
+		Thread.sleep(2500);
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']"))),"Active","Account Status");
 		return this;
 	}
@@ -406,7 +407,6 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
 		Thread.sleep(6000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(5000);
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-ix_premierein')]")),"Direct Parent");
 		return this;
@@ -1587,7 +1587,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Verify Premier Start Date is Auto Populated
-	public MemberFormPage verifyPremierStartDateIsAutoPopulated()  {
+	public MemberFormPage verifyPremierStartDateIsAutoPopulated() throws InterruptedException  {
+		Thread.sleep(2500);
 		getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date");
 		return this;
 	}
@@ -1771,7 +1772,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click Related and line of business
 	public MemberFormPage clickLineOfBusiness() throws InterruptedException   {
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Line of Businesses')]")),"Line Of Businessess");
@@ -1859,9 +1860,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();	
+			//e.printStackTrace();	
 		}
-		Thread.sleep(6000);
+		Thread.sleep(3000);
 		return this;
 	}
 
@@ -2093,7 +2094,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click on LOB SAve and close
 	public MemberFormPage clickLOBSaveAndClose() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//button[contains(@id,'quickCreateSaveAndCloseBtn')]//span[contains(text(),'Save')]")),"Save and Close");
+		//click(getDriver().findElement(By.xpath("//button[contains(@id,'quickCreateSaveAndCloseBtn')]//span[contains(text(),'Save')]")),"Save and Close");
+		//Wave2 Fix
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 		Thread.sleep(5000);
@@ -3420,9 +3423,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;	
 	}
 
-	//Click on LOB SAve and close
+	//Click on LOB Save and close
 	public MemberFormPage clickLOBSaveAndCloseMEF() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save and Close')]")),"Save and Close");
+		//Wave2 Update
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")),"GENERAL DEMOGRAPHIC");
 		Thread.sleep(5000);
@@ -3828,7 +3832,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 		return this;
 	}
 

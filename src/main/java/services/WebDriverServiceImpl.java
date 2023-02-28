@@ -140,7 +140,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 						setReport().log(Status.PASS, field+" is displayed",screenshotCapture());
 						
 					}else {
-						setReport().log(Status.FAIL, field+"is not displayed",screenshotCapture());
+						setReport().log(Status.FAIL, field+" is not displayed",screenshotCapture());
 						Driver.failCount++;
 					}
 				} catch (WebDriverException e) {
@@ -779,10 +779,10 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 
 		try {
 			if(count>0) {
-				setReport().log(Status.FAIL, field+" is displayed",screenshotCapture());
+				setReport().log(Status.FAIL, field+"   is displayed",screenshotCapture());
 				Driver.failCount++;
 			}else {
-				setReport().log(Status.PASS, field+"is not displayed",screenshotCapture());
+				setReport().log(Status.PASS, field+"  is not displayed",screenshotCapture());
 			}
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());

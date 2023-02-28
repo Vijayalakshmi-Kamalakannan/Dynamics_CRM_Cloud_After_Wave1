@@ -31,11 +31,10 @@ public class TestCase_7141 {
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()				
 
-		//3. Account  Type = Member
-		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
-
 		//Account name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+		//3. Account  Type = Member
+		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
@@ -55,11 +54,11 @@ public class TestCase_7141 {
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
 
-		//Direct Parent Entity Code = 673415
-		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-
 		//Direct Parent Relation = Managed
 		.selectDirectParentRelationManaged() 
+		
+		//Direct Parent Entity Code = 673415
+		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
 		//Direct Parent Relation date = Today's Date
 		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
@@ -101,7 +100,10 @@ public class TestCase_7141 {
 		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
 
 		// Click on LOB Save 
-		.clickLOBSaveAndClose()
+		//.clickLOBSaveAndClose()
+		
+		//Click on LOB Save 
+		.clickLOBSaveAndCloseDev()
 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()

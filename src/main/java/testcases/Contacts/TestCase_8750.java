@@ -16,66 +16,66 @@ public class TestCase_8750 {
 
 		// 1. Login to CRM using member supervisor / member credentials
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
-				.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
-				.clicSignin().clicYesInStaySignedin()
+		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
+		.clicSignin().clicYesInStaySignedin()
 
-				// 2. Go to Contacts and Click on New
-				.selectContacts().clickNewOnContactsPage()
+		// 2. Go to Contacts and Click on New
+		.selectContacts().clickNewOnContactsPage()
 
-				// Provide First name = Any
-				// Last name = Any
-				.typeContactName((DataInputProvider.getCellData_ColName(iRowNumber, "firstName", sDataSheetName)),
-						(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
+		// Provide First name = Any
+		// Last name = Any
+		.typeContactName((DataInputProvider.getCellData_ColName(iRowNumber, "firstName", sDataSheetName)),
+				(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
 
-				// Primary Account = 1000155094
-				.selectPrimaryAccount(
-						DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
+		// Primary Account = 1000155094
+		.selectPrimaryAccount(
+				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
 
-				// Save the record
-				.clickSave()
+		// Save the record
+		.clickSave()
 
-				// Observe the Innovatix Contact ID field
-				.isInnovatixContactIDDisplayed()
+		// Observe the Innovatix Contact ID field
+		.isInnovatixContactIDDisplayed()
 
-				// Change the record start from Draft to Published then save
-				.chooseRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
+		// Change the record start from Draft to Published then save
+		.chooseRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
 
-				// Click on Save
-				.clickSave()
-
-
-				// 3. Add a new contact account association with any member for that contact
-
-				// Click on Add contact account association
-				.clickAddCAA()
-
-				// Enter account name CAA
-				.typeAccountInCAA(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
-
-				// Click on save
-				.clickSaveInCAA()
+		// Click on Save
+		.clickSave()
 
 
-				// 4.Try to add same account to the contact account association
+		// 3. Add a new contact account association with any member for that contact
 
-				.clickGoBack()
+		// Click on Add contact account association
+		.clickAddCAA()
 
-				// Click on Add contact account association
-				.clickAddCAA()
+		// Enter account name CAA
+		.typeAccountInCAA(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
-				// Enter account name CAA
-				.typeAccountInCAA(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+		// Click on save
+		.clickSaveInCAA()
 
-				// Click on save
-				.clickSaveInCAA()
 
-				// Verify error message
-				.verifyErrorMsgForDuplicateCAA(
-						DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage", sDataSheetName))
+		// 4.Try to add same account to the contact account association
 
-				// Click on ok
-				.clickOkErrorMsgForDuplicateCAA()
-				
-				.clickSignout();
+		.clickGoBack()
+
+		// Click on Add contact account association
+		.clickAddCAA()
+
+		// Enter account name CAA
+		.typeAccountInCAA(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+
+		// Click on save
+		.clickSaveInCAA()
+
+		// Verify error message
+		.verifyErrorMsgForDuplicateCAA(
+				DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage", sDataSheetName))
+
+		// Click on ok
+		.clickOkErrorMsgForDuplicateCAA()
+
+		.clickSignout();
 	}
 }

@@ -43,7 +43,8 @@ public class TestCase_8955 {
 				.selectCAA()
 				.gridRefresh()
 				.clickOnCAAandDeactivate()
-				.clickConfirmCAADeactivation();
+				.clickConfirmCAADeactivation()
+				;
 				
 	}
 }

@@ -47,7 +47,7 @@ public class PreAndPost extends WebDriverEvents
 	public static ExtentReports extent;
 	public static ExtentTest test;
 	public static Properties properties = new Properties();
-	private static String reportFileName = "Test-Automaton-Report";
+	private static String reportFileName = "Test-Automation-Report";
 	private static String fileSeperator = System.getProperty("file.separator");
 	private static String reportFilepath = System.getProperty("user.dir") +fileSeperator+ "TestReport";
 	static String timeStamp=new SimpleDateFormat("yyyy_MM_dd_hh_mm_a").format(new Date());

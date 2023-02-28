@@ -40,8 +40,13 @@ public class TestCase_8771 {
 		
 		
 		//Choose Direct Parent
-		.noMatchforDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))	
-		.searchDPinAdvanceLookup(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.noMatchforDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		
+		//Choose Direct Parent -Ship To -Added step at Wave2 review to match test steps
+		.noMatchforDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
+		
+		//Advanced Lookup -not required as per test case
+		//.searchDPinAdvanceLookup(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 		;
 		
 	}

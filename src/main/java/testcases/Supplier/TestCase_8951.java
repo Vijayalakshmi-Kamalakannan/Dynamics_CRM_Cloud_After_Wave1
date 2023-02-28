@@ -40,10 +40,12 @@ public class TestCase_8951 {
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 		// then save
 		.clickMembershipSave()
-		.verifyEndReasonCanNotBeBlankError(DataInputProvider.getCellData_ColName(iRowNumber, "expectedAccountStatusErrorText", sDataSheetName))
+		
+		//Req change. End Reason Auto populates to 'Change' by default
+		//.verifyEndReasonCanNotBeBlankError(DataInputProvider.getCellData_ColName(iRowNumber, "expectedAccountStatusErrorText", sDataSheetName))
 		
 		//6.Similar Verify by input , Premier End date < Premier Start date.  
-		.typeMembershipEndDate("10/20/2019")
+		.typeMembershipEndDate("7/3/1976")
 		
 		// then save
 		.clickMembershipSave()
@@ -53,7 +55,7 @@ public class TestCase_8951 {
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 		
 		// End reason = Anything from dropdown,
-		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
+		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "EndReason", sDataSheetName))
 		
 		// then save
 		.clickMembershipSaveAndClose()
