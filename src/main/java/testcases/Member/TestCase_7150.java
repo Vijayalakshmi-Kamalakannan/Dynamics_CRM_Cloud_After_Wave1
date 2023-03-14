@@ -32,7 +32,7 @@ public class TestCase_7150 {
 
 		//Account name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
-		
+
 		//Account  Type = Member
 		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
@@ -51,7 +51,7 @@ public class TestCase_7150 {
 
 		//Direct Parent Relation = Managed
 		.selectDirectParentRelationManaged() 
-		
+
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
@@ -136,17 +136,19 @@ public class TestCase_7150 {
 
 		//Store/Location type = Null	
 		.chooseLocationTypeNull()
+		
+		.clickSave()
 
 		//Click the + icon on the Line of Business Grid
 		.clickLineOfBusiness()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
-
+		
 		// Line of Business =General GPO
 		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 
-		// Classification Type = General GPO
+		// Classification3 Type = General GPO
 		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
 
 		// Start Date =Today's date

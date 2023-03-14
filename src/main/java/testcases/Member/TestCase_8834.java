@@ -31,9 +31,13 @@ public class TestCase_8834 {
 		//Account name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
+		
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
 
+		//Country =USA
+		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+				
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
@@ -215,14 +219,16 @@ public class TestCase_8834 {
 		.clickSave() 
 
 		//19.Verify the Account status ***** Account status should be Active 
-		.pageRefresh()
-		.verifyDefaultAccountStatus()
+		
+		//.verifyDefaultAccountStatus()
+		.verifyAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "accountStatus1", sDataSheetName))
 
 		//20.Verify the Premier start date **** Premier start date should be Acurity's start date 
 		.pageRefresh()
 		.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 
 		//21.Verify Premier end date ***** Premier end date should be blank 
+		.pageRefresh()
 		.verifyPremierEndDateIsNull()
 
 		//22.Verify DPRD ***** DPRD should be same as new Premier start date 

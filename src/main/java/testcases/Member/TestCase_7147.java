@@ -102,13 +102,13 @@ public class TestCase_7147 {
 
 		//Click on Save 
 		.clickSave() 
-
-		//.clickSave() 
-
-
+		.pageRefresh()
+		
 		//11. Verify Entity code is same as DP's entity code 
 		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-
+         
+		
+		
 		//Verify Premier start date is auto populated
 		.verifyPremierStartDateIsAutoPopulated()
 

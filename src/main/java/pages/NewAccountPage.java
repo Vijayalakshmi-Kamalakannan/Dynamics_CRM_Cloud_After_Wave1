@@ -1,8 +1,11 @@
 package pages;
 
-import java.util.concurrent.TimeUnit;
+
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import services.WebDriverServiceImpl;
 
 public class NewAccountPage extends WebDriverServiceImpl {
@@ -11,7 +14,10 @@ public class NewAccountPage extends WebDriverServiceImpl {
 	public MemberFormPage chooseMemberForm() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
 		click(getDriver().findElement(By.xpath("//*[@title='Member Form']")),"Member Form");
-		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+		List<WebElement> element=getDriver().findElements(By.xpath("//*[@data-id='cancelButton']"));
+		if(element.size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+		}
 		Thread.sleep(2000);
 		return new MemberFormPage();
 	}

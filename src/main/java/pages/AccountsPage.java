@@ -52,12 +52,13 @@ public class AccountsPage extends WebDriverServiceImpl {
   		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
-		Thread.sleep(15000);
-		Thread.sleep(15000);
-		WebDriverWait wait= new WebDriverWait(getDriver(),20);
-		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
-		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
+		Thread.sleep(8000);
 		Thread.sleep(5000);
+		WebDriverWait wait= new WebDriverWait(getDriver(),10);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
+		Thread.sleep(3000);
+		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
+		Thread.sleep(7000);
 		return this;
 	}
 
@@ -66,7 +67,7 @@ public class AccountsPage extends WebDriverServiceImpl {
   		//Actions action = new Actions(getDriver());
   		click(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Search Results");
   		//click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
-  		Thread.sleep(4000);
+  		Thread.sleep(6000);
   		return new MemberFormPage();
   	}	
   	
