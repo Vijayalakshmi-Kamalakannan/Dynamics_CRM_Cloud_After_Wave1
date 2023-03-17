@@ -13,6 +13,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -65,13 +66,15 @@ public class PreAndPost extends WebDriverEvents
 		DataInputProvider.setExcelFile(sExcelFilePath,properties.getProperty("DriverSheetName"));
 		URL=DataInputProvider.getCellData_ColName(1, "Environment",properties.getProperty("DriverSheetName"));
 		String fileName = getReportPath(reportFilepath);
+	
 
 		htmlReporter = new ExtentHtmlReporter(fileName);
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 
 		extent.setSystemInfo("OS", "Windows");
-		extent.setSystemInfo("Environment", URL);         
+		extent.setSystemInfo("Environment", URL); 
+		extent.setSystemInfo("Browser", "Chrome");  
 		htmlReporter.config().setChartVisibilityOnOpen(true);
 		htmlReporter.config().setReportName("CRM Automation Test Results");
 		htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);

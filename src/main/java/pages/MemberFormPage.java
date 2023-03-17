@@ -3205,6 +3205,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Choose member form
 	public MemberFormPage chooseMemberForm() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
+		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@title='Member Form']")),"Member Form");
 		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
 		Thread.sleep(2000);
